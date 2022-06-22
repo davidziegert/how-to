@@ -6,9 +6,10 @@
 - ### [Backup](vmware/BACKUP.md)
 - ### [Ports](vmware/PORTS.md)
 
-## Linux
+## Linux (Ubuntu)
 - ### [First Installation](linux/INSTALLATION.md)
 - ### [Security](linux/SECURITY.md)
+- ### [Disk Management](linux/DISK.md)
 - ### [Backup](linux/BACKUP.md)
 - ### Tools
   - #### [Apache](linux/APACHE.md)
