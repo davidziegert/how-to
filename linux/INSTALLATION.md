@@ -16,6 +16,7 @@
 ![Screenshot-14](/files/linux_install_14.png)
 ![Screenshot-15](/files/linux_install_15.png)
 ![Screenshot-16](/files/linux_install_16.png)
+![Screenshot-17](/files/linux_install_17.png)
 
 ## Updates
 
