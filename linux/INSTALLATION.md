@@ -7,44 +7,6 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 
-## Automatic Updates
-
-```
-sudo apt install unattended-upgrades
-sudo dpkg-reconfigure -plow unattended-upgrades
-sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
-```
-
-```
-// Unattended-Upgrade::Mail "me@example.com ";
-Unattended-Upgrade::Allowed-Origins
-{
-    "${distro_id} stable";"${distro_id} ${distro_codename}-security";
-    "${distro_id} ${distro_codename}-updates";
-    "${distro_id}ESMApps:${distro_codename}-apps-security";
-    "${distro_id}ESM:${distro_codename}-infra-security";
-};
-Unattended-Upgrade::DevRelease "false";
-Unattended-Upgrade::Remove-Unused-Dependencies "true";
-Unattended-Upgrade::Automatic-Reboot "true";
-Unattended-Upgrade::Automatic-Reboot-Time "02:00";
-```
-
-```
-sudo nano /etc/apt/apt.conf.d/20auto-upgrades
-```
-
-```
-APT::Periodic::Update-Package-Lists "1";
-APT::Periodic::Download-Upgradeable-Packages "1";
-APT::Periodic::AutocleanInterval "7";
-APT::Periodic::Unattended-Upgrade "1";
-```
-
-```
-sudo unattended-upgrades --dry-run --debug
-```
-
 ## Cleanup
 
 ```

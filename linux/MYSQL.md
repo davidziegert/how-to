@@ -1,1 +1,1 @@
-# How To - Linux - Tools - MySQL
+# How To - Linux - Tools - MySQL (Ubuntu)

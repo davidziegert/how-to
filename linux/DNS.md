@@ -1,1 +1,1 @@
-# How To - Linux - Tools - DNS
+# How To - Linux - Tools - DNS (Ubuntu)
