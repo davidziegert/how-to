@@ -1,5 +1,22 @@
 # How To - Linux - Installation (Ubuntu)
 
+![Screenshot-1](/how-to/files/linux_install_1.png)
+![Screenshot-2](/how-to/files/linux_install_2.png)
+![Screenshot-3](/how-to/files/linux_install_3.png)
+![Screenshot-4](/how-to/files/linux_install_4.png)
+![Screenshot-5](/how-to/files/linux_install_5.png)
+![Screenshot-6](/how-to/files/linux_install_6.png)
+![Screenshot-7](/how-to/files/linux_install_7.png)
+![Screenshot-8](/how-to/files/linux_install_8.png)
+![Screenshot-9](/how-to/files/linux_install_9.png)
+![Screenshot-10](/how-to/files/linux_install_10.png)
+![Screenshot-11](/how-to/files/linux_install_11.png)
+![Screenshot-12](/how-to/files/linux_install_12.png)
+![Screenshot-13](/how-to/files/linux_install_13.png)
+![Screenshot-14](/how-to/files/linux_install_14.png)
+![Screenshot-15](/how-to/files/linux_install_15.png)
+![Screenshot-16](/how-to/files/linux_install_16.png)
+
 ## Updates
 
 ```

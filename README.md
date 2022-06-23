@@ -26,16 +26,14 @@
 - ### [First Installation](macos/INSTALLATION.md)
 - ### [Security](macos/SECURITY.md)
 - ### [Backup](macos/BACKUP.md)
-- ### Tools
-  - #### XYZ
+- ### [Tools](macos/TOOLS.md)
 - ### [Ports](macos/PORTS.md)
 
 ## Windows
 - ### [First Installation](windows/INSTALLATION.md)
 - ### [Security](windows/SECURITY.md)
 - ### [Backup](windows/BACKUP.md)
-- ### Tools
-  - #### XYZ
+- ### [Tools](windows/TOOLS.md)
 - ### [Ports](windows/PORTS.md)
 
 ## HTML
