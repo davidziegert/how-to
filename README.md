@@ -10,7 +10,6 @@
 - ### [First Installation](linux/INSTALLATION.md)
 - ### [Security](linux/SECURITY.md)
 - ### [Disk Management](linux/DISK.md)
-- ### [Backup](linux/BACKUP.md)
 - ### Tools
   - #### [Apache](linux/APACHE.md)
   - #### [Nginx](linux/NGINX.md)
@@ -37,6 +36,12 @@
 - ### [Ports](windows/PORTS.md)
 
 ## HTML
+- ### [Skeleton](html/SKELETON.md)
+- ### [HEADER Examples](html/HEADER.md)
+- ### [NAV Examples](html/NAV.md)
+- ### [MAIN Examples](html/MAIN.md)
+- ### [ASIDE Examples](html/ASIDE.md)
+- ### [FOOTER Examples](html/FOOTER.md)
 
 ## CSS
 

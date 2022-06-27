@@ -29,6 +29,7 @@
 | O&O ShutUp | https://www.oo-software.com/de/shutup10 | Tweaking  |
 | OpenConnect | https://openconnect.github.io/openconnect-gui/ | VPN |
 | Paint.NET  | https://www.getpaint.net/  | Pixel |
+| PowerBi  | https://powerbi.microsoft.com/de-de/  | Data Visualization |
 | PuTTY  | https://www.putty.org/  | SSH  |
 | Python  | https://www.python.org/  | Runtime  |
 | R  | https://www.r-project.org/  | Runtime  |
