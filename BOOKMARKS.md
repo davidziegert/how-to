@@ -3,22 +3,102 @@
 ## IT-Stuff
 
 ### Linux
-- [Ein Link zur Wikipedia](https://www.wikipedia.de)
-
-### MacOS
-- [Ein Link zur Wikipedia](https://www.wikipedia.de)
-
-### Network
-- [Ein Link zur Wikipedia](https://www.wikipedia.de)
+- [BitForce.IO (EN)](https://www.bitforce.io/)
+- [Chmod Calculator (EN)](https://chmodcommand.com/)
+- [Contabo (DE)](https://contabo.com/blog/de/)
+- [crontab guru (EN)](https://crontab.guru/)
+- [devconnected (EN)](https://devconnected.com/)
+- [Dreessen Informatik (DE)](http://www.drs-informatik.de/blog/)
+- [IT Praxis: Notizblock (DE)](https://blog.wydler.eu/notizblock/)
+- [ITzGeek (EN)](https://www.itzgeek.com/)
+- [Linode Guides & Tutorials (EN)](https://www.linode.com/docs/guides/)
+- [LinOxide (EN)](https://linoxide.com/)
+- [Linux Audit (EN)](https://linux-audit.com/)
+- [LinuxBabe (EN)](https://www.linuxbabe.com/)
+- [LinuxConfig (EN)](https://linuxconfig.org/)
+- [linuxhint (EN)](https://linuxhint.com/)
+- [Linuxize (EN)](https://linuxize.com/)
+- [Linuxsecrets (EN)](https://www.linuxsecrets.com/)
+- [Marvin Menzerath (DE)](https://blog.marvin-menzerath.de/)
+- [nixCraft (EN)](https://www.cyberciti.biz/tips/)
+- [Server Admin for Programmers (EN)](https://serversforhackers.com/)
+- [Shell Befehle (DE)](https://www.shellbefehle.de/)
+- [Tech Knowledge Base (EN)](https://confluence.jaytaala.com/display/TKB/Tech+Knowledge+Base)
+- [tecmint (EN)](https://www.tecmint.com/)
+- [The Arda Network (EN)](http://www.arda.homeunix.net/)
+- [tonyteaches.tech (EN)](https://tonyteaches.tech/)
+- [Ubuntu Manpage (EN)](https://manpages.ubuntu.com/)
 
 ### Windows
-- [Ein Link zur Wikipedia](https://www.wikipedia.de)
+- [Active Directory - Komponenten (DE)](https://www.it-zeugs.de/active-directory-komponenten.html)
+- [All in One Runtimes Download (DE)](https://www.computerbase.de/downloads/systemtools/all-in-one-runtimes/)
+- [Chocolatey Software Manager (EN)](https://chocolatey.org/)
+- [Dr. Windows (DE)](https://www.drwindows.de/)
+- [Win-Admin-Passwort zurücksetzen (DE)](https://de.wikihow.com/Unter-Windows-7-das-Administrator-Passwort-zur%C3%BCcksetzen)
 
 ### GPU
-- [Ein Link zur Wikipedia](https://www.wikipedia.de)
+- [Building your own GPU Research Cluster using Open Source Software (EN)](https://on-demand.gputechconf.com/gtc/2013/presentations/S3516-Build-Your-Own-GPU-Research-Cluster.pdf)
+- [Build and Setup Your Own Deep Learning Server From Scratch (EN)](https://towardsdatascience.com/build-and-setup-your-own-deep-learning-server-from-scratch-e771dacaa252)
+- [Cluster Management (EN)](https://developer.nvidia.com/cluster-management)
+- [Clusters with GPUs under Linux and Windows HPC (EN)](https://www.nvidia.com/content/GTC/documents/1091_GTC09.pdf)
+- [GPU Cluster Configuration Notes (EN)](https://github.com/neurokernel/gpu-cluster-config)
+- [GPU Sensor Monitoring Plugin (DE)](https://www.thomas-krenn.com/de/wiki/GPU_Sensor_Monitoring_Plugin)
+- [How to Build a GPU-Accelerated Research Cluster (EN)](https://developer.nvidia.com/blog/how-build-gpu-accelerated-research-cluster/)
+- [HOWTOs for High Performance Computing (EN)](https://elwe.rhrk.uni-kl.de/howto/)
+- [Install NVIDIA Driver and CUDA on Ubuntu (EN)](https://gist.github.com/wangruohui/df039f0dc434d6486f5d4d098aa52d07)
+- [Install TensorFlow with pip (EN)](https://www.tensorflow.org/install/pip)
+- [Installing PyTorch (EN)](https://timoast.github.io/blog/installing-pytorch/)
+- [Job Script Generator (EN)](https://rc.byu.edu/documentation/slurm/script-generator)
+- [MUNGE (EN)](https://dun.github.io/munge/)
+- [PyTorch vs TensorFlow (EN)](https://realpython.com/pytorch-vs-tensorflow/)
+- [SLURM Job Script (EN)](https://hpc.nmsu.edu/home/tools/slurm-script-generator/)
+- [Slurm Job Script Generator for hpc-class (EN)](https://www.hpc.iastate.edu/guides/classroom-hpc-cluster/slurm-job-script-generator)
+- [Slurm Jobscript Generator (EN)](https://user.cscs.ch/access/running/jobscript_generator/#slurm-jobscript-generator)
+- [Slurm: Zero to Hero (EN)](https://docs.google.com/presentation/d/1_5j18Vm0mOhDiBw7lQIdKLvK8doe0oJEo64sLcwWKK0/edit#slide=id.p)
+- [slurm-auto-array (EN)](https://rc.byu.edu/wiki/?id=slurm-auto-array)
+- [Slurm-web (EN)](https://edf-hpc.github.io/slurm-web/)
+- [Tools and Tips for managing a GPU Cluster (EN)](https://on-demand.gputechconf.com/gtc/2014/presentations/S4253-tools-tips-for-managing-a-gpu-cluster.pdf)
 
 ### Random
-- [Ein Link zur Wikipedia](https://www.wikipedia.de)
+- [administrator.de (DE)](https://administrator.de/)
+- [AVAGO MegaRaid (EN)](https://ahelpme.com/hardware/lsi/avago-megaraid-sas-9361-4i-with-cachecade-and-cachevault-bios-configuration-utilities-review/)
+- [BIOS Tasten (DE)](https://www.heise.de/tipps-tricks/BIOS-starten-so-klappt-s-3949966.html)
+- [Broadcast IT Engineering (DE)](https://www.skgm.de/)
+- [BSI-GPO-Windows 10 (DE)](https://www.gp-pack.com/wp-content/uploads/2018/04/gp-pack.com-BSI-BPOL_Windows_10_Sicherheitsmodul_Bundespolizei.htm)
+- [Bundesamt für Sicherheit in der Informationstechnik (DE)](https://www.bsi.bund.de)
+- [com-magazin.de (DE)](https://www.com-magazin.de/)
+- [Creative Commons (EN)](https://creativecommons.org/licenses/?lang=en)
+- [Damn Vulnerable Web Application (EN)](https://dvwa.co.uk/)
+- [Docker Basics – Befehle und Life Hacks (DE)](http://www.anecon.com/blog/docker-basics-befehle-und-life-hacks/)
+- [Elektronik-Kompendium (DE)](https://www.elektronik-kompendium.de/)
+- [Forschung und Daten managen (DE)](https://www.forschungsdaten.info/)
+- [Golem.de (DE)](https://www.golem.de/)
+- [GovData (DE)](https://www.govdata.de/)
+- [Hiren’s BootCD PE (EN)](Tachtler's DokuWiki)
+- [IP Subnet Calculator  (EN)](https://www.subnet-calculator.com/)
+- [IP-Insider.de (DE)](ITIL)
+- [IPSHU (DE)](https://de.ipshu.com/)
+- [it-administrator.de (DE)](com-magazin.de)
+- [ITIL (DE)](it-administrator.de)
+- [IT-Kompendium  (DE)](https://kompendium.infotip.de/home.html)
+- [it-learner.de (DE)](https://it-learner.de/)
+- [it-zeugs.de (DE)](https://www.it-zeugs.de/)
+- [LSI WebBIOS (EN)](https://tinkertry.com/drive-accidentally-removed-from-raid-resolve-the-pd-missing-error-without-data-loss-using-lsi-webbios)
+- [Managing an MegaRAID Controller (DE)](https://www.thomas-krenn.com/en/wiki/Managing_an_MegaRAID_Controller)
+- [My-IT-Brain (DE)](https://www.my-it-brain.de/wordpress/)
+- [Ninite (EN)](https://ninite.com/)
+- [NirSoft (EN)](https://www.nirsoft.net/)
+- [NTLite (EN)](https://www.ntlite.com/)
+- [open source licenses (EN)](https://choosealicense.com/)
+- [RAID-Controller Rebuild (DE)](https://www.thomas-krenn.com/de/wiki/RAID-Controller_Rebuild_manuell_starten)
+- [SEO-Tutorial: Know How für Einsteiger (DE)](https://www.search-one.de/seo-tutorial/)
+- [Sysinternals Suite (EN)](https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)
+- [Tachtler's DokuWiki (DE)](IP-Insider.de)
+- [Tastenkombinationen für BIOS, Bootmenü und Recovery Partition (DE)](https://www.ionas.com/wissen/tastenkombinationen-bios-bootmenue-recovery-partition/)
+- [Thomas-Krenn-Wiki (DE)](https://www.thomas-krenn.com/de/wiki/Hauptseite)
+- [Ventoy (EN)](https://www.ventoy.net/en/index.html)
+- [Verbund Forschungsdaten Bildung (DE)](https://www.forschungsdaten-bildung.de/)
+- [VMwareArena (EN)](http://www.vmwarearena.com/)
 
 ## Design
 
@@ -106,7 +186,7 @@
 - [RIP Tutorial (EN)](https://riptutorial.com/)
 - [w3docs (EN)](https://www.w3docs.com/)
 - [w3schools (EN)](https://www.w3schools.com/)
-- 
+
 ### HTML & CSS
 
 #### Frameworks
@@ -120,7 +200,6 @@
 - [Font Awesome (EN)](https://fontawesome.com/)
 - [Fork Awesome (EN)](https://forkaweso.me/Fork-Awesome/)
 - [Foundation (EN)](https://get.foundation/)
-- [Google Charts (EN)](https://developers.google.com/chart)
 - [Halfmoon (EN)](https://www.gethalfmoon.com/)
 - [Materialize (EN)](https://materializecss.com/)
 - [Milligram (EN)](https://milligram.io/)
@@ -220,6 +299,7 @@
 ### JavaScript
 - [Chart.js (EN)](https://www.chartjs.org/)
 - [DataTables CDN (EN)](https://cdn.datatables.net/)
+- [Google Charts (EN)](https://developers.google.com/chart)
 - [JavaScript CHART DEMOS (EN)](https://apexcharts.com/javascript-chart-demos/)
 
 ### .Net C#
