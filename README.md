@@ -71,5 +71,4 @@
 - ### [First Installation](docker/INSTALLATION.md)
 
 ## GPU-Cluster
-- ### [Architecture](gpu-cluster/ARCHITECTURE.md)
 - ### [First Installation](gpu-cluster/INSTALLATION.md)
