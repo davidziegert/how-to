@@ -49,8 +49,14 @@ subnet xxx.xxx.xxx.0 netmask 255.255.255.0
 ```
 sudo mkdir -p /var/run/dhcp-server
 sudo chown dhcpd:dhcpd /var/run/dhcp-server
+```
+
+## Commands
+
+```
 sudo systemctl enable isc-dhcp-server.service
 sudo systemctl start isc-dhcp-server.service
 sudo systemctl status isc-dhcp-server.service
 sudo systemctl restart isc-dhcp-server.service
+sudo dhcp-lease-list
 ```
