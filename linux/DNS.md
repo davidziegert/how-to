@@ -12,7 +12,13 @@ sudo systemctl start bind9
 sudo systemctl restart bind9
 sudo systemctl reload bind9
 sudo systemctl status bind9
+```
 
+```
+
+```
+
+```
 sudo named-checkconf
 ```
 

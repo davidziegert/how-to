@@ -270,11 +270,6 @@ sudo a2enmod userdir
 sudo systemctl reload apache2
 ```
 
-
-
-
-
-
 [^1]: https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04
 [^2]: https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-18-04
 [^3]: https://www.tecmint.com/ubuntu-apache-mod_status/

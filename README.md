@@ -17,6 +17,7 @@
   - #### [DNS](linux/DNS.md)
   - #### [LDAP](linux/LDAP.md)
   - #### [MySQL](linux/MYSQL.md)
+  - #### [NFS](linux/NFS.md)
   - #### [SAMBA](linux/SAMBA.md)
   - #### [Rsync](linux/RSYNC.md)
 - ### [Ports](linux/PORTS.md)
