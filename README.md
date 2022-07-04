@@ -15,7 +15,7 @@
   - #### [Nginx](linux/NGINX.md)
   - #### [DHCP](linux/DHCP.md)
   - #### [DNS](linux/DNS.md)
-  - #### [LDAP](linux/LDAP.md)
+  - #### [OpenLDAP](linux/LDAP.md)
   - #### [MySQL](linux/MYSQL.md)
   - #### [NFS](linux/NFS.md)
   - #### [SAMBA](linux/SAMBA.md)
