@@ -11,7 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>TITEL</title>
+        <title>SKELETON</title>
 
         <meta name="author" content="AUTHOR">
         <meta name="description" content="DESCRIPTION">
@@ -207,7 +207,6 @@
     </body>
 
 </html>
-
 ```
 
 ## Folder Structure Example

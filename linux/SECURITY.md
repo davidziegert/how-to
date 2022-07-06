@@ -1,4 +1,4 @@
-# How To - Linux - Security (Ubuntu)
+# How To - Linux - Security (Ubuntu) [^12]
 
 ## Automatic Updates
 
@@ -38,9 +38,11 @@ APT::Periodic::Unattended-Upgrade "1";
 sudo unattended-upgrades --dry-run --debug
 ```
 
-## Login via SSH Keys [^1]
+## SSH 
 
-### Server
+### Login via Keys [^1] [^2]
+
+#### Server
 
 ```
 mkdir ~/.ssh
@@ -49,7 +51,7 @@ nano ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-### Client (Windows)
+#### Client (Windows)
 
 ```
 cd \Users\user
@@ -57,7 +59,7 @@ ssh-keygen -t rsa
 type .ssh\id_rsa.pub | ssh user@xxx.xxx.xxx.xxx "cat >> .ssh/authorized_keys"
 ```
 
-### Client (Mac/Linux)
+#### Client (Mac/Linux)
 
 ```
 ssh-keygen -t rsa
@@ -65,70 +67,42 @@ ssh-copy-id -i .ssh/id_rsa.pub user@xxx.xxx.xxx.xxx
 ssh -i .ssh/id_rsa user@xxx.xxx.xxx.xxx
 ```
 
-### Server
+### Configuration [^8] [^9] [^10]
 
 ```
+sudo cp /etc/ssh/sshd_confi /etc/ssh/sshd_config.original
+sudo sshd -T
 sudo nano /etc/ssh/sshd_config
 ```
 
 ```
-PasswordAuthentication no
-ChallengeResponseAuthentication no
-UsePAM no
-```
-
-```
-sudo service ssh restart
-```
-
-## No Root Login
-
-```
-sudo nano /etc/ssh/sshd_config
-```
-
-```
-PermitRootLogin no
-```
-
-```
-sudo service ssh restart
-```
-
-## SSH Access to User or Group 
-
-```
-sudo nano /etc/ssh/sshd_config
-```
-
-```
-AllowUsers user1 user2
+Include /etc/ssh/sshd_config.d/*.conf
+AcceptEnv LANG LC_*
 AllowGroups root
-
-DenyUsers user1 user2
+AllowUsers user1 user2
+AuthenticationMethods publickey
+ChallengeResponseAuthentication no
 DenyGroups group1
+DenyUsers user3 user4
+HostbasedAuthentication no
+IgnoreRhosts yes
+MaxAuthTries 3
+PasswordAuthentication no
+PermitEmptyPasswords no
+PermitRootLogin no
+Port 22 -> 54321
+PrintMotd no
+PubkeyAuthentication yes
+Subsystem sftp  /usr/lib/openssh/sftp-server
+UsePAM no
+X11Forwarding no
 ```
 
 ```
 sudo service ssh restart
 ```
 
-## Change SSH Port
-
-```
-sudo nano /etc/ssh/sshd_config
-```
-
-```
-FROM: Port 22
-TO: Port xxxxx
-```
-
-```
-sudo service ssh restart
-```
-
-## UFW Firewall [^2] [^3]
+## UFW Firewall [^3] [^4]
 
 ### UFW Status
 ```
@@ -138,6 +112,11 @@ sudo ufw status
 ```
 sudo ufw enable
 sudo ufw disable
+```
+
+```
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
 ```
 
 ### Allow an IP Address
@@ -187,7 +166,7 @@ sudo ufw deny 6000:6007/tcp
 sudo ufw deny 6000:6007/udp
 ```
 
-### Logs [^4]
+### Logs [^5]
 
 ```
 sudo ufw logging on
@@ -198,7 +177,7 @@ sudo ufw logging off
 sudo nano /var/log/uwf.log
 ```
 
-## Fail2ban [^5] [^6]
+## Fail2ban [^6] [^7]
 
 ```
 sudo apt install fail2ban
@@ -212,6 +191,9 @@ sudo nano /etc/fail2ban/jail.local
 ```
 [sshd]
 enabled = true
+port = 22
+filter = sshd
+logpath = /var/log/auth.log
 maxretry = 3
 findtime = 30m
 bantime = 1d
@@ -219,7 +201,9 @@ ignoreip = 127.0.0.1/8 ::1 xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx
 ```
 
 ```
+sudo systemctl start fail2ban
 sudo systemctl restart fail2ban
+sudo systemctl enable fail2ban
 sudo systemctl status fail2ban
 ```
 
@@ -230,11 +214,49 @@ sudo fail2ban-client set sshd unbanip xxx.xxx.xxx.xxx
 
 ```
 sudo fail2ban-client status sshd
+sudo nano /var/log/fail2ban.log
+```
+
+## Avoid Using FTP, Telnet, And Rlogin / Rsh Services on Linux
+
+```
+sudo apt-get --purge remove xinetd nis yp-tools tftpd atftpd tftpd-hpa telnetd rsh-server rsh-redone-server
+```
+
+## Linux Kernel /etc/sysctl.conf Hardening [^11]
+
+```
+sudo nano /etc/sysctl.conf
+```
+
+```
+# Turn on execshield
+kernel.exec-shield=1
+kernel.randomize_va_space=1
+
+# Enable IP spoofing protection
+net.ipv4.conf.all.rp_filter=1
+
+# Disable IP source routing
+net.ipv4.conf.all.accept_source_route=0
+
+# Ignoring broadcasts request
+net.ipv4.icmp_echo_ignore_broadcasts=1
+net.ipv4.icmp_ignore_bogus_error_messages=1
+
+# Make sure spoofed packets get logged
+net.ipv4.conf.all.log_martians = 1
 ```
 
 [^1]: https://kb.iu.edu/d/aews
-[^2]: https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
-[^3]: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04
-[^4]: https://fedingo.com/how-to-check-ufw-log-status/
-[^5]: https://linuxize.com/post/install-configure-fail2ban-on-ubuntu-20-04/
-[^6]: https://www.linuxcapable.com/de/how-to-install-fail2ban-on-ubuntu-20-04-with-configuration/
+[^2]: https://linux-audit.com/using-ssh-keys-instead-of-passwords/
+[^3]: https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
+[^4]: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04
+[^5]: https://fedingo.com/how-to-check-ufw-log-status/
+[^6]: https://linuxize.com/post/install-configure-fail2ban-on-ubuntu-20-04/
+[^7]: https://www.linuxcapable.com/de/how-to-install-fail2ban-on-ubuntu-20-04-with-configuration/
+[^8]: https://linux-audit.com/audit-and-harden-your-ssh-configuration/
+[^9]: https://www.linuxbabe.com/linux-server/fix-ssh-locale-environment-variable-error
+[^10]: https://www.kim.uni-konstanz.de/e-mail-und-internet/it-sicherheit/sicherer-server-it-dienst/linux-fernadministration-mit-pam-und-ssh/starke-authentifizierungsmethoden/
+[^11]: https://www.cyberciti.biz/tips/linux-security.html
+[^12]: https://www.informaticar.net/security-hardening-ubuntu-20-04/

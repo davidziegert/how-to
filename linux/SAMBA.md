@@ -90,7 +90,7 @@ password requisite pam_deny.so
 password required pam_permit.so
 ```
 
-## Samba Configuration
+## Samba Configuration [^4]
 
 ```
 sudo net getlocalsid
@@ -355,3 +355,4 @@ echo "SUCCESS"
 [^1]: https://kifarunix.com/install-and-configure-samba-file-server-on-ubuntu-20-04/
 [^2]: https://linuxconfig.org/how-to-configure-samba-server-share-on-ubuntu-20-04-focal-fossa-linux
 [^3]: https://computingforgeeks.com/install-and-configure-samba-server-share-on-ubuntu/
+[^4]: https://www.techgrube.de/tutorials/ordnerfreigaben-ubuntu-20-04-homeserver-nas-teil-4
