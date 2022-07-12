@@ -220,6 +220,7 @@
 - [MUI (EN)](https://www.muicss.com/)
 - [MVP (EN)](https://andybrewer.github.io/mvp/)
 - [NES (EN)](https://nostalgic-css.github.io/NES.css/)
+- [new-css-reset (EN)](https://elad2412.github.io/the-new-css-reset/)
 - [Normalize.css (EN)](https://necolas.github.io/normalize.css/)
 - [perry.css (EN)](https://www.cssscript.com/demo/tiny-responsive-framework-perry/)
 - [picnis.css (EN)](https://picnicss.com/)

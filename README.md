@@ -37,14 +37,14 @@
 - ### [Ports](windows/PORTS.md)
 
 ## HTML
-- ### [Skeleton](html/SKELETON.md)
-- ### [HEADER Examples](html/HEADER.md)
-- ### [NAV Examples](html/NAV.md)
-- ### [MAIN Examples](html/MAIN.md)
-- ### [ASIDE Examples](html/ASIDE.md)
-- ### [FOOTER Examples](html/FOOTER.md)
+- ### [Skeleton](html/SKELETON.md) - [(Preview)](http://htmlpreview.github.io/?https://github.com/davidziegert/how-to/blob/main/html/SKELETON.html)
 
 ## CSS
+- ### [HEADER Examples](css/HEADER.md) - [(Preview)](http://htmlpreview.github.io/?https://github.com/davidziegert/how-to/blob/main/css/HEADER.html)
+- ### [NAV Examples](css/NAV.md) - [(Preview)](http://htmlpreview.github.io/?https://github.com/davidziegert/how-to/blob/main/css/NAV.html)
+- ### [MAIN Examples](css/MAIN.md) - [(Preview)](http://htmlpreview.github.io/?https://github.com/davidziegert/how-to/blob/main/css/MAIN.html)
+- ### [ASIDE Examples](css/ASIDE.md) - [(Preview)](http://htmlpreview.github.io/?https://github.com/davidziegert/how-to/blob/main/css/ASIDE.html)
+- ### [FOOTER Examples](css/FOOTER.md) - [(Preview)](http://htmlpreview.github.io/?https://github.com/davidziegert/how-to/blob/main/css/FOOTER.html)
 
 ## PHP
 

@@ -1,3 +1,6 @@
+# How To - HTML - HEADER Examples
+
+```
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +10,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>HEADER</title>
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<!-- Styles -->
 	<style>
@@ -18,11 +24,11 @@
 
 		section {
 			height: 100vh;
-			width: 100vm;
+			width: 100vw;
 		}
 
 		hr {
-			border: 5px solid pink;
+			border: 5px solid yellow;
 		}
 
 		#header_1 {
@@ -43,13 +49,12 @@
 			text-align: center;
 			background-color: black;
 			color: white;
-			font-size: 3rem;
 			padding: 1rem;
 		}
 
 		#header_2 #header2_img {
 			height: 50vh;
-			width: 100vm;
+			width: 100vw;
 
 			background-image: url("https://picsum.photos/1921");
 			background-position: center;
@@ -66,9 +71,8 @@
 		#header_2 #header2_img h1 {
 			width: 50vw;
 			text-align: center;
-			background-color: grey;
-			color: black;
-			font-size: 3rem;
+			background-color: black;
+			color: white;
 			padding: 1rem;
 		}
 
@@ -82,7 +86,6 @@
 			justify-content: center;
 			align-items: center;
 
-			font-size: 1.5rem;
 			text-align: center;
 		}
 
@@ -109,9 +112,8 @@
 
 			width: 50vw;
 			text-align: center;
-			background-color: pink;
-			color: grey;
-			font-size: 3rem;
+			background-color: black;
+			color: white;
 			padding: 1rem;
 		}
 
@@ -147,9 +149,8 @@
 		#header_4 #container .frame .caption {
 			width: 33.333vw;
 			text-align: center;
-			background-color: white;
-			color: black;
-			font-size: 3rem;
+			background-color: black;
+			color: white;
 			padding: 1rem;
 
 			z-index: 2;
@@ -191,11 +192,10 @@
 			text-decoration: none;
 
 			font-weight: bold;
-			font-size: 3rem;
 			padding: 1rem;
 
-			background-color: white;
-			color: black;
+			background-color: black;
+			color: white;
 		}
 
 		#header_5 #wrapper {
@@ -230,9 +230,8 @@
 		#header_5 #wrapper .slider .caption {
 			width: 33.333vw;
 			text-align: center;
-			background-color: white;
-			color: black;
-			font-size: 3rem;
+			background-color: black;
+			color: white;
 			padding: 1rem;
 
 			z-index: 2;
@@ -373,3 +372,4 @@
 </body>
 
 </html>
+```
