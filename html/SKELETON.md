@@ -212,14 +212,12 @@
 ## Folder Structure Example
 
 ```
-Folder:
-
-- html
+- HTML
     - index.html
     - css
         - style.css
     - js
-        - script.js
+        - script.js 
     - img
         - logo.png
         - favicon.ico

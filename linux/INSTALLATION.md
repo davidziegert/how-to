@@ -33,6 +33,59 @@ sudo apt-get autoclean
 sudo apt-get autoremove
 ```
 
+## Cleanup via CronJob [^5]
+
+```
+sudo nano ucleaner.sh
+```
+
+```
+echo "\n\nSYSTEM CLEANUP\n\n"
+echo "-------------------------------------------------------\n\n"
+
+if [ $USER != root ]; then
+  echo "\nError: must be root"
+  echo "\nExiting..."
+  exit 0
+fi
+
+echo "\n\nBefore command execution:-"
+free -h 
+
+echo "\n\nClearing caches..."
+sync; echo 1 > /proc/sys/vm/drop_caches
+
+echo "\n\nRemoving old kernels..."
+echo "Current kernel:-"
+a=`uname -r|cut -f "2" -d "-"`
+a=$(($a-2))
+apt-get remove --purge linux-image-3.16.0-$a-generic
+
+echo "\n\nClearing swap space..."
+swapoff -a && swapon -a
+
+echo "\n\nClearing application dependencies..."
+apt-get clean
+apt-get autoclean
+apt-get autoremove
+
+echo "\n\nEmptying every trashes..."
+rm -rf /home/*/.local/share/Trash/*/** 
+rm -rf /root/.local/share/Trash/*/** 
+
+echo "\n\nAfter command execution:-"
+free -h
+```
+
+```
+sudo crontab -e
+```
+
+```
+# Every Monday on 05:00 AM  
+0 5 * * 1	/home/ucleaner.sh
+```
+
 ## Set Time Zone
 
 ```
@@ -215,3 +268,4 @@ sudo nano /etc/motd
 [^2]: https://www.cyberciti.biz/faq/setting-up-an-network-interfaces-file/
 [^3]: https://nebulab.com/blog/awesome-motds-with-ubuntu
 [^4]: https://www.asciiart.eu/
+[^5]: https://github.com/jenil777007/ucleaner
