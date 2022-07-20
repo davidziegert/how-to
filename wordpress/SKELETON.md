@@ -4,22 +4,22 @@
 
 ```
 - THEME_NAME
-    - header.php                                                                                                    // Header-Template
-    - nav.php                                                                                                       // Navigation-Template
-    - main.php                                                                                                      // Content-Template
-    - sidebar.php                                                                                                   // Sidebar-Template
-    - footer.php                                                                                                    // Footer-Template
-    - front-page.php                                                                                                // Home-Page
-    - index.php                                                                                                     // Standard-Page
-    - 404.php                                                                                                       // 404-Page
-    - search.php                                                                                                    // Search-Result-Page
-    - searchform.php                                                                                                // Search-Form-Template
-    - page.php                                                                                                      // Page-Template
-    - single.php                                                                                                    // Blog-Entry-Template
-    - comments.php                                                                                                  // Comments-Template
-    - functions.php                                                                                                 // WordPress-Functions
-    - style.css                                                                                                     // Default-Stylesheet
-    - screenshot.png                                                                                                // Default-Screenshot
+    - header.php			// Header-Template
+    - nav.php   			// Navigation-Template
+    - main.php  			// Content-Template
+    - sidebar.php           // Sidebar-Template
+    - footer.php			// Footer-Template
+    - front-page.php		// Home-Page
+    - index.php				// Standard-Page
+    - 404.php				// 404-Page
+    - search.php			// Search-Result-Page
+    - searchform.php		// Search-Form-Template
+    - page.php				// Page-Template
+    - single.php			// Blog-Entry-Template
+    - comments.php			// Comments-Template
+    - functions.php			// WordPress-Functions
+    - style.css				// Default-Stylesheet
+    - screenshot.png		// Default-Screenshot
     - css
         - custom.css
     - js
@@ -36,59 +36,84 @@
 ### html - head
 
 ```
-<?php language_attributes(); ?>                                                                                     <!-- Website-Language -->
-<?php bloginfo('charset'); ?>                                                                                       <!-- Website-Charset -->
-<?php echo get_bloginfo( 'template_directory' );?>                                                                  <!-- Path to Template-Folder --> 
-<?php wp_head(); ?>                                                                                                 <!-- WordPress-Specific-Elements -->
-<?php wp_footer(); ?>                                                                                               <!-- WordPress-Specific-Elements -->
+<!-- Website-Language -->
+<?php language_attributes(); ?>
+
+<!-- Website-Charset -->
+<?php bloginfo('charset'); ?>
+
+<!-- Path to Template-Folder -->
+<?php echo get_bloginfo( 'template_directory' );?>
+
+<!-- WordPress-Specific-Elements -->
+<?php wp_head(); ?>
+<?php wp_footer(); ?>
 ```
 
 ### header
 
 ```
-<?php bloginfo('name'); ?>                                                                                          <!-- Website-Name -->
-<?php bloginfo('description'); ?>                                                                                   <!-- Website-Description -->
+<!-- Website-Name -->
+<?php bloginfo('name'); ?>
+
+<!-- Website-Description -->
+<?php bloginfo('description'); ?>
 ```
 
 ### nav
 
 ```
-<?php get_breadcrumb(); ?>                                                                                          <!-- Breadcrumb-Navigation -->
-<?php wp_nav_menu(array('theme_location' => 'REGISTER-NAME', 'container_id' => 'ID-NAME')); ?>                      <!-- Custom-Navigation () from functions.php (WITH container_id OR container_class) -->
+<!-- Breadcrumb-Navigation -->
+<?php get_breadcrumb(); ?>
+
+<!-- Custom-Navigation () from functions.php (WITH container_id OR container_class) -->
+<?php wp_nav_menu(array('theme_location' => 'REGISTER-NAME', 'container_id' => 'ID-NAME')); ?>
 ```
 
 ### sidebar
 
 ```
-<?php get_search_form(); ?>                                                                                         <!-- Includes searchform.php -->
+<!-- Includes searchform.php -->
+<?php get_search_form(); ?>
 ```
 
 ### footer
 
 ```
-<?php wp_list_categories('orderby=name&order=ASC&title_li='); ?>                                                    <!-- List of all Post-Categories -->
-<?php wp_get_archives('type=monthly'); ?>                                                                           <!-- List the monthly Archive -->
-<?php wp_list_pages('title_li=' . __('')); ?>                                                                       <!-- List all Pages -->
+<!-- List of all Post-Categories -->
+<?php wp_list_categories('orderby=name&order=ASC&title_li='); ?>
+
+<!-- List the monthly Archive -->
+<?php wp_get_archives('type=monthly'); ?>
+
+ <!-- List all Pages -->
+ <?php wp_list_pages('title_li=' . __('')); ?>
 ```
 
 ### search
 
 ```
 <?php if (have_posts()) : ?>
-    <?php echo $s ?>                                                                                                <!-- Print Search-Term -->  
-    <?php $i=1; while (have_posts()) : the_post(); ?>                                                               <!-- Loop prints all Sites and Post including the Search-Term -->
-        <?php the_title(); ?>                                                                                       <!-- Title of Site or Post -->
-        <?php echo wp_trim_words(get_the_content(), 20); ?> <a href="<?php the_permalink(); ?>">MORE</a>            <!-- Trimmed (20) Content of Site or Post and Link -->
+	<!-- Print Search-Term -->
+    <?php echo $s ?>
+	<!-- Loop prints all Sites and Post including the Search-Term -->
+    <?php $i=1; while (have_posts()) : the_post(); ?>
+		<!-- Title of Site or Post -->
+        <?php the_title(); ?>
+		<!-- Trimmed (20) Content of Site or Post and Link -->
+        <?php echo wp_trim_words(get_the_content(), 20); ?> <a href="<?php the_permalink(); ?>">MORE</a>
     <?php $i++; endwhile; ?>
 <?php else : ?>
-    <?php echo "SORYY" ?>                                                                                           <!-- If no match found -->
+	<!-- If no match found -->
+    <?php echo "SORYY" ?>
 <?php endif; ?>
 ```
 
 ### searchform
 
 ```
-<form class="search-menu" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">                          <!-- Search-Form-Template -->
+<!-- Search-Form-Template -->
+<form class="search-menu" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 	<input type="text" placeholder="PLACEHOLDER" name="s" value="<?php echo get_search_query(); ?>">
 	<button type="submit">SEARCH</button>
 </form>
@@ -97,53 +122,79 @@
 ### page
 
 ```
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>                                                     <!-- If Content exists then post -->
-    <?php the_title(); ?>                                                                                           <!-- Page-Title -->
-    <?php the_content(); ?>                                                                                         <!-- Page-Content -->
-    <?php the_modified_date() ?>
+ <!-- If Content exists then post -->
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>   
+	<!-- Page-Title -->
+	<?php the_title(); ?>
+	<!-- Page-Content -->
+	<?php the_content(); ?>
+	<!-- Page-Last-Update -->
+	<?php the_modified_date() ?>
 <?php endwhile; endif; ?>
 ```
 
 ### single
 
 ```
-<?php $the_query = new WP_Query( 'posts_per_page=20' ); ?>                                                          <!-- Show 20 Post per Page -->
-<?php while ($the_query -> have_posts()) : $the_query -> the_post(); ?>                                             <!-- Loop through every Post -->
-    <?php the_title(); ?>                                                                                           <!-- Post-Title -->
-    <?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>                                                <!-- Post-Thumbnail -->
-    <?php echo wp_trim_words(get_the_content(), 10); ?> <a href="<?php the_permalink(); ?>">MORE</a>                <!-- Post-Content (10 words with link) -->
-    <?php the_date('d.m.Y'); ?>                                                                                     <!-- Post-Date -->
-    <?php the_category(', '); ?>                                                                                    <!-- Post-Category -->
+<!-- Show 20 Post per Page -->
+<?php $the_query = new WP_Query( 'posts_per_page=20' ); ?>   
+
+<!-- Loop through every Post -->
+<?php while ($the_query -> have_posts()) : $the_query -> the_post(); ?>
+	<!-- Post-Title -->
+	<?php the_title(); ?>
+	<!-- Post-Thumbnail -->
+	<?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>
+	<!-- Post-Content (10 words with link) -->
+	<?php echo wp_trim_words(get_the_content(), 10); ?> <a href="<?php the_permalink(); ?>">MORE</a>
+	<!-- Post-Date -->
+	<?php the_date('d.m.Y'); ?>
+	<!-- Post-Category -->
+	<?php the_category(', '); ?>
 <?php endwhile; wp_reset_postdata(); ?>
-<?php comments_template(); ?>                                                                                       <!-- Includes comments.php -->
+
+<!-- Includes comments.php -->
+<?php comments_template(); ?>                                                                                       
 ```
 
 ### comments
 
 ```
-<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post">                             <!-- Comment-Form-Template -->
-	<label for="author">AUTHOR</label>                                                                          
-	<input type="text" name="author" id="author" value="<?php echo $comment_author; ?>" size="20" tabindex="1">     <!-- Comment-Author-Name -->
-	<label for="email">EMAIL</label>                                                                    
-	<input type="text" name="email" id="email" value="<?php echo $comment_author_email; ?>" size="20" tabindex="2"> <!-- Comment-Author-EMail (not public) -->
-	<label for="url">URL</label>                                                                        
-	<input type="text" name="url" id="url" value="<?php echo $comment_author_url; ?>" size="20" tabindex="3">       <!-- Comment-Author-URL (not public) -->
-	<label for="comment">COMMENT</label>                                                               
-	<textarea name="comment" id="comment" rows="10" tabindex="4"></textarea>                                        <!-- Comment-Text -->
+<!-- Comment-Form-Template -->
+<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post">
+	<label for="author">AUTHOR</label>
+	<!-- Comment-Author-Name -->
+	<input type="text" name="author" id="author" value="<?php echo $comment_author; ?>" size="20" tabindex="1">
+	<label for="email">EMAIL</label>
+	<!-- Comment-Author-EMail (not public) -->
+	<input type="text" name="email" id="email" value="<?php echo $comment_author_email; ?>" size="20" tabindex="2">
+	<label for="url">URL</label>
+	<!-- Comment-Author-URL (not public) -->
+	<input type="text" name="url" id="url" value="<?php echo $comment_author_url; ?>" size="20" tabindex="3">
+	<label for="comment">COMMENT</label>
+	<!-- Comment-Text -->
+	<textarea name="comment" id="comment" rows="10" tabindex="4"></textarea>
 	<input name="submit" type="submit" id="submit" value="SUBMIT" tabindex="5">
 	<input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>">
 	<?php do_action('comment_form', $post->ID); ?>
 </form>
 
-<?php foreach ($comments as $comment) : ?>                                                                          <!-- Loop prints all Comments to this Post-ID -->
-    <div class="COMMENT" id="comment-<?php comment_ID() ?>">                                                        <!-- Comment-Template -->
-        <?php comment_author_link() ?>                                                                              <!-- Comment-Author-Name -->
-        <?php comment_date('j. F Y') ?>                                                                             <!-- Comment-Date -->
-        <?php comment_time('H:i') ?>                                                                                <!-- Comment-Time -->
-        <?php comment_text() ?>                                                                                     <!-- Comment-Text -->
-        <?php if ($comment->comment_approved == '0') : ?>                                                           <!-- If no Comment found -->
-            <?php echo "NO COMMENT" ?>
-        <?php endif; ?>
+<!-- Loop prints all Comments to this Post-ID -->
+<?php foreach ($comments as $comment) : ?>
+	<!-- Comment-Template -->
+	<div class="COMMENT" id="comment-<?php comment_ID() ?>">
+		<!-- Comment-Author-Name -->
+		<?php comment_author_link() ?>
+		<!-- Comment-Date -->
+		<?php comment_date('j. F Y') ?>
+		<!-- Comment-Time -->
+		<?php comment_time('H:i') ?>
+		<!-- Comment-Text -->
+		<?php comment_text() ?>
+		<!-- If no Comment found -->
+		<?php if ($comment->comment_approved == '0') : ?>
+			<?php echo "NO COMMENT" ?>
+		<?php endif; ?>
     </div>
 <?php endforeach; ?>
 ```
