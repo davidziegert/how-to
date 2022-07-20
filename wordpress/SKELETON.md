@@ -4,21 +4,21 @@
 
 ```
 - THEME_NAME
-    - header.php				// Header-Template
-    - nav.php					// Navigation-Template
-    - main.php					// Content-Template
-    - sidebar.php				// Sidebar-Template
-    - footer.php				// Footer-Template
+    - header.php			// Header-Template
+    - nav.php				// Navigation-Template
+    - main.php				// Content-Template
+    - sidebar.php			// Sidebar-Template
+    - footer.php			// Footer-Template
     - front-page.php			// Home-Page
-    - index.php					// Standard-Page
-    - 404.php					// 404-Page
-    - search.php				// Search-Result-Page
+    - index.php				// Standard-Page
+    - 404.php				// 404-Page
+    - search.php			// Search-Result-Page
     - searchform.php			// Search-Form-Template
-    - page.php					// Page-Template
-    - single.php				// Blog-Entry-Template
-    - comments.php				// Comments-Template
-    - functions.php				// WordPress-Functions
-    - style.css					// Default-Stylesheet
+    - page.php				// Page-Template
+    - single.php			// Blog-Entry-Template
+    - comments.php			// Comments-Template
+    - functions.php			// WordPress-Functions
+    - style.css				// Default-Stylesheet
     - screenshot.png			// Default-Screenshot
     - css
         - custom.css
