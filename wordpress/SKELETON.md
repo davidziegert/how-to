@@ -202,6 +202,13 @@
 ### functions
 
 ```
+<!-- Link to Random Page -->
+<?php get_randomsite(); ?>	
+```
+
+### functions
+
+```
 <?php 
 
 	/* ********************* */
@@ -279,6 +286,19 @@
 			echo the_search_query();
 			echo '</em>"';
 		}
+	}
+
+	/* *********** */
+	/* Random Site */
+	/* *********** */
+
+	function get_randomsite() 
+	{
+		$count_pages = wp_count_posts('page');
+		$total_pages = $count_pages->publish;
+		$random_page = rand(1, $total_pages);
+		$random_link = "?p=".$random_page;
+		echo "<a href=". $random_link .">Enter</a>";
 	}
 
 ?>
