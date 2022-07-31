@@ -60,7 +60,7 @@
 - ### [First Installation](wordpress/INSTALLATION.md)
 - ### [Security](wordpress/SECURITY.md)
 - ### [Backup](wordpress/BACKUP.md)
-- ### [Skeleton](wordpress/SKELETON.md)
+- ### [Theme](wordpress/THEME.md)
 - ### Plugins
   - #### [WPS Hide Login](https://de.wordpress.org/plugins/wps-hide-login/)
   - #### [wp_head() cleaner](https://de.wordpress.org/plugins/wp-head-cleaner/)
@@ -71,6 +71,12 @@
   - #### [Insert PHP Code Snippet](https://de.wordpress.org/plugins/insert-php-code-snippet/)
   - #### [Nested Pages](https://de.wordpress.org/plugins/wp-nested-pages/)
   - #### [Health Check & Troubleshooting](https://wordpress.org/plugins/health-check/)
+
+## Typo3
+- ### [First Installation](typo3/INSTALLATION.md)
+- ### [Security](typo3/SECURITY.md)
+- ### [Backup](typo3/BACKUP.md)
+- ### [Template](typo3/TEMPLATE.md)
 
 ## Monitoring
 - ### [Checkmk](monitoring/CHECKMK.md)

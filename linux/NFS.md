@@ -14,7 +14,7 @@ sudo nano /etc/fstab
 ```
 ############################## External Drives ###############################
 #<source-device>    <destination>   <type>  <options>           <dump>  <pass>
-/dev/data           /data           ext4    defaults   0       0
+/dev/data           /data           ext4    defaults            0       0
 
 ######################## Internal Exports (not needed) #######################
 #<source-device>    <destination>   <type>  <options>           <dump>  <pass>

@@ -1,4 +1,4 @@
-# How To - Wordpress - Skeleton [^1] [^2]
+# How To - Wordpress - Theme [^1] [^2]
 
 ## Folder Structure Example
 
@@ -304,7 +304,7 @@
 ?>
 ```
 
-## WordPress - Templates
+## WordPress - Themes
 
 - ### [Blog Example](/files/wordpress_blog.zip)
 - ### [Blog & Sites Example](/files/wordpress_complex.zip)

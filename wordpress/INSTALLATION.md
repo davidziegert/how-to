@@ -5,6 +5,7 @@
 ```
 sudo apt install apache2
 sudo systemctl enable apache2
+sudo a2enmod rewrite
 sudo systemctl status apache2
 ```
 
