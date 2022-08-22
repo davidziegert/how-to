@@ -13,7 +13,7 @@ sudo php --version
 
 ```
 sudo apt-cache search - names-only ^ php
-sudo apt install php-cgi php-cli php-common php-dev php-dom php-gd php-imap php-intl php-json php-ldap php-mbstring php-mcrypt php-opcache php-pear php-pspell php-readline php-soap php-xml php-xmlrpc php-zip
+sudo apt install php-cgi php-cli php-common php-dev php-dom php-gd php-imap php-intl php-json php-ldap php-mbstring php-opcache php-pear php-pspell php-readline php-soap php-xml php-xmlrpc php-zip
 ```
 
 ## Set User-Rights to Web-Folder

@@ -105,8 +105,8 @@ sudo nano /etc/systemd/timesyncd.conf
 
 ```
 [Time]
-NTP=times.tubit.tu-berlin.de
-FallbackNTP=ntp01.urz.uni-heidelberg.de
+NTP=time.uni-potsdam.de
+FallbackNTP=times.tubit.tu-berlin.de
 ```
 
 ```
