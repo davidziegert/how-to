@@ -76,26 +76,29 @@ sudo nano /etc/ssh/sshd_config
 ```
 
 ```
-Include /etc/ssh/sshd_config.d/*.conf
+Port 22 -> 54321
+PermitRootLogin no
+PermitEmptyPasswords no
+
+PasswordAuthentication yes
+PubkeyAuthentication yes
+
+MaxAuthTries 3
+
 AcceptEnv LANG LC_*
-AllowGroups root
-AllowUsers user1 user2
-AuthenticationMethods publickey
+Subsystem sftp /usr/lib/openssh/sftp-server
+PrintMotd no
 ChallengeResponseAuthentication no
-DenyGroups group1
-DenyUsers user3 user4
 HostbasedAuthentication no
 IgnoreRhosts yes
-MaxAuthTries 3
-PasswordAuthentication no
-PermitEmptyPasswords no
-PermitRootLogin no
-Port 22 -> 54321
-PrintMotd no
-PubkeyAuthentication yes
-Subsystem sftp  /usr/lib/openssh/sftp-server
-UsePAM no
 X11Forwarding no
+UsePAM yes -> no (if no LDAP)
+
+AllowGroups root
+AllowUsers user1 user2
+
+DenyGroups group1
+DenyUsers user3 user4
 ```
 
 ```
@@ -240,9 +243,9 @@ net.ipv4.conf.all.rp_filter=1
 # Disable IP source routing
 net.ipv4.conf.all.accept_source_route=0
 
-# Ignoring broadcasts request
-net.ipv4.icmp_echo_ignore_broadcasts=1
-net.ipv4.icmp_ignore_bogus_error_messages=1
+# Ignoring broadcasts request (not pingable)
+#net.ipv4.icmp_echo_ignore_broadcasts=1
+#net.ipv4.icmp_ignore_bogus_error_messages=1
 
 # Make sure spoofed packets get logged
 net.ipv4.conf.all.log_martians = 1
