@@ -2,9 +2,9 @@
 
 ## VMware
 - ### [First Installation](vmware/INSTALLATION.md)
+- ### [Setup](vmware/SETUP.md)
 - ### [Security](vmware/SECURITY.md)
 - ### [Backup](vmware/BACKUP.md)
-- ### [Ports](vmware/PORTS.md)
 
 ## Linux (Ubuntu)
 - ### [First Installation](linux/INSTALLATION.md)
