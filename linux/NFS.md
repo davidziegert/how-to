@@ -80,5 +80,9 @@ Domain = localdomain
 sudo mount -a
 ```
 
+```
+sudo findmnt --verify
+```
+
 [^1]: https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-ubuntu-18-04
 [^2]: https://vitux.com/install-nfs-server-and-client-on-ubuntu/
