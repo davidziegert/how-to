@@ -36,6 +36,9 @@
 - ### [Tools](windows/TOOLS.md)
 - ### [Ports](windows/PORTS.md)
 
+## Self-Hosted Software
+- ### [Overview](selfhosted/OVERVIEW.md)
+
 ## HTML
 - ### [Skeleton](html/SKELETON.md) - [(Preview)](http://htmlpreview.github.io/?https://github.com/davidziegert/how-to/blob/main/html/SKELETON.html)
 
