@@ -89,5 +89,8 @@
 ## Docker 
 - ### [First Installation](docker/INSTALLATION.md)
 
+## HPC
+- ### [First Installation](hpc/INSTALLATION.md)
+
 ## GPU-Cluster
 - ### [First Installation](gpu-cluster/INSTALLATION.md)
