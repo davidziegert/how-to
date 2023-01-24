@@ -6,39 +6,34 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SKELETON</title>
+    <title>skeleton.tmp</title>
 
-        <meta name="author" content="AUTHOR">
-        <meta name="description" content="DESCRIPTION">
-        <meta name="keywords" content="KEYWORD, KEYWORD">
-        <meta name="robots" content="index, follow">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="AUTHOR">
+    <meta name="description" content="DESCRIPTION">
+    <meta name="keywords" content="KEYWORD, KEYWORD">
+    <meta name="robots" content="index, follow">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="./css/style.css">
-        <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
-    </head>
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="apple-touch-icon" href="./img/touch.png" />
+</head>
 
-    <body>
-        <header>
-            <figure>
-                <img src="./img/logo.png" alt="logo"/>
-            </figure>
-        </header>
-
+<body>
+    <div class="wrapper">
         <nav>
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
-            <a href="about.html">About Us</a>
+            navigation ...
         </nav>
-
+        <header>
+            header content ...
+        </header>
         <main>
             <article>
                 <h1>Headline Level 1</h1>
@@ -49,162 +44,296 @@
                     <h4>Headline Level 4</h4>
                     <h5>Headline Level 5</h5>
                     <h6>Headline Level 6</h6>
-                </section>
 
-                <section>
+                    <h2>tags & lists</h2>
+
+                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                        invidunt ut <a href="#">labore</a> et dolore magna aliquyam erat, sed diam voluptua. At vero
+                        eos et
+                        accusam et
+                        justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+                        ipsum
+                        dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                        eirmod
+                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                        accusam
+                        et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+                        Lorem
+                        ipsum
+                        dolor sit amet.</p>
+
                     <ol>
                         <li>First Entry</li>
                         <li>Second Entry</li>
                         <li>Third Entry</li>
                     </ol>
+
                     <ul>
                         <li>First Entry</li>
                         <li>Second Entry</li>
                         <li>Third Entry</li>
                     </ul>
+
+                    <dl>
+                        <dt>metaphor</dt>
+                        <dd>a figure of speech in which a word or phrase is applied to an object or action to which
+                            it
+                            is
+                            not literally applicable.</dd>
+                    </dl>
                 </section>
 
+                <hr>
+
                 <section>
-                    <blockquote cite="http://developer.mozilla.org">
+                    <h2>blocks</h2>
+
+                    <blockquote class="blockquote_1" cite="http://developer.mozilla.org">
                         <p>That's a quote</p>
                         <cite>vom Mozilla Developer Center.</cite>
                     </blockquote>
 
-                    <dl>
-                        <dd>The state of being happy.</dd>
-                        <dt>rejoice</dt>
-                    </dl>
+                    <blockquote class="blockquote_2" cite="http://developer.mozilla.org">
+                        <p>That's another quote</p>
+                        <cite>vom Mozilla Developer Center.</cite>
+                    </blockquote>
 
                     <details>
                         <summary>Some details</summary>
                         <p>More info about the details.</p>
                     </details>
+
+                    <code>
+                        // This is a JS example<br>
+                        const test = "Hello";<br>
+                        console.log(test);<br>
+                    </code>
                 </section>
 
-                <section>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Header</th>
-                                <th>Header</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Content</td>
-                                <td>Content</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td>Footer</td>
-                                <td>Footer</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </section>
+                <hr>
 
                 <section>
+                    <h2>tables</h2>
+
+                    <div class="responsive_table">
+                        <table>
+                            <caption>Points Summary</caption>
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Points</th>
+                                    <th>Points</th>
+                                    <th>Points</th>
+                                    <th>Points</th>
+                                    <th>Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="First Name">Jill</td>
+                                    <td data-label="Last Name">Smith</td>
+                                    <td data-label="Points">50</td>
+                                    <td data-label="Points">50</td>
+                                    <td data-label="Points">50</td>
+                                    <td data-label="Points">50</td>
+                                    <td data-label="Points">50</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="First Name">Eve</td>
+                                    <td data-label="Last Name">Jackson</td>
+                                    <td data-label="Points">94</td>
+                                    <td data-label="Points">94</td>
+                                    <td data-label="Points">94</td>
+                                    <td data-label="Points">94</td>
+                                    <td data-label="Points">94</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="First Name">Adam</td>
+                                    <td data-label="Last Name">Johnson</td>
+                                    <td data-label="Points">67</td>
+                                    <td data-label="Points">67</td>
+                                    <td data-label="Points">67</td>
+                                    <td data-label="Points">67</td>
+                                    <td data-label="Points">67</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Points</th>
+                                    <th>Points</th>
+                                    <th>Points</th>
+                                    <th>Points</th>
+                                    <th>Points</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section>
+                    <h2>figures & media</h2>
+
                     <figure>
-                        <img src="./img/elephant.png" alt="logo"/>
-                        <figcaption>An elephant at sunset</figcaption>
+                        <img src="https://picsum.photos/seed/picsum/1024/768" alt="image loading" loading="lazy">
+                        <figcaption>A random Image</figcaption>
                     </figure>
 
-                    <audio controls src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3">Your browser does not support the element.</audio>
+                    <figure>
+                        <iframe id="youtube" src="https://www.youtube.com/embed/tgbNymZ7vqY"
+                            loading="lazy"></iframe>
+                        <figcaption>A random Youtube</figcaption>
+                    </figure>
 
-                    <video width="320" height="240" controls>
-                    <source src="https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                    </video>
+                    <figure>
+                        <audio controls>
+                            <source src="https://www.w3schools.com/tags/horse.mp3" type="audio/mp3">
+                            <p>Your browser does not support the element.</p>
+                        </audio>
+                        <figcaption>A random Audio</figcaption>
+                    </figure>
+
+                    <figure>
+                        <video controls>
+                            <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+                            <p>Your browser does not support the element.</p>
+                        </video>
+                        <figcaption>A random Video</figcaption>
+                    </figure>
                 </section>
+
+                <hr>
+
                 <section>
-                    <label for="fuel">Fuel level:</label>
-                    <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">at 50/100</meter>
-                    <progress value="70" max="100">70 %</progress>
-                </section>
-                <section>
-                    <form oninput="result.value=parseInt(a.value)+parseInt(b.value)">
-                        <input type="range" id="b" name="b" value="50" /> +
-                        <input type="number" id="a" name="a" value="10" /> =
-                        <output name="result" for="a b">60</output>
-                    </form>
-                </section>
-                <section>
-                    <form action="" method="">
+                    <h2>forms</h2>
+
+                    <form action="#" method="get">
                         <fieldset>
+                            <legend>fieldset legend</legend>
                             <select>
-                                    <optgroup label="Gruppe 1">
-                                        <option>Option 1.1</option>
-                                    </optgroup>
-                                    <optgroup label="Gruppe 2">
-                                        <option>Option 2.1</option>
-                                        <option>Option 2.2</option>
-                                    </optgroup>
-                                    <optgroup label="Gruppe 3" disabled>
-                                        <option>Option 3.1</option>
-                                        <option>Option 3.2</option>
-                                        <option>Option 3.3</option>
-                                    </optgroup>
-                                </select>
-                            <input type="radio" id="radio">
-                            <label for="radio">Click me</label>
-                            <input id="input1" type="text">
-                            <label for="input1">Type me</label>
+                                <optgroup label="Gruppe 1">
+                                    <option>Option 1.1</option>
+                                </optgroup>
+                                <optgroup label="Gruppe 2">
+                                    <option>Option 2.1</option>
+                                    <option>Option 2.2</option>
+                                </optgroup>
+                                <optgroup label="Gruppe 3" disabled>
+                                    <option>Option 3.1</option>
+                                    <option>Option 3.2</option>
+                                    <option>Option 3.3</option>
+                                </optgroup>
+                            </select>
+                            <textarea id="story" name="story" rows="5"
+                                cols="33">It was a dark and stormy night...</textarea>
+                            <button type="button">Button</button>
+                            <label for="fuel">Meter vs Progress</label>
+                            <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">at
+                                50/100</meter>
+                            <progress value="70" max="100">70 %</progress>
                         </fieldset>
                         <fieldset>
-                            <legend>Title</legend>
-                            <label for="story">Tell us your story:</label>
-                            <textarea id="story" name="story" rows="5" cols="33">It was a dark and stormy night...</textarea>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Title</legend>
-                            <button class="favorite styled" type="button">Add to favorites</button>
-                        </fieldset>
-                        <fieldset>
-                            <input type="button"></input>
-                            <input type="checkbox"></input>
-                            <input type="color"></input>
-                            <input type="date"></input>
-                            <input type="datetime-local"></input>
-                            <input type="email"></input>
-                            <input type="file"></input>
-                            <input type="hidden"></input>
-                            <input type="image"></input>
-                            <input type="month"></input>
-                            <input type="number"></input>
-                            <input type="password"></input>
-                            <input type="radio"></input>
-                            <input type="range"></input>
-                            <input type="reset"></input>
-                            <input type="search"></input>
-                            <input type="submit"></input>
-                            <input type="tel"></input>
-                            <input type="text"></input>
-                            <input type="time"></input>
-                            <input type="url"></input>
-                            <input type="week"></input>
+                            <legend>fieldset legend</legend>
+                            <input type="button" value="input button" onclick="function1()">
+
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="checkbox" name="checkbox" value="checkbox">
+                                <label class="checkbox-label" for="checkbox">Checkbox</label>
+                            </div>
+
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="checkbox-checked" name="checkbox-checked"
+                                    value="checkbox-checked" checked>
+                                <label class="checkbox-label" for="checkbox-checked">Checkbox - checked</label>
+                            </div>
+
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="checkbox-disabled" name="checkbox-disabled"
+                                    value="checkbox-disabled" disabled>
+                                <label class="checkbox-label" for="checkbox-disabled">Checkbox Disabled</label>
+                            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="checkbox-disabled-checked"
+                                    name="checkbox-disabled-checked" value="checkbox-disabled-checked" checked
+                                    disabled>
+                                <label class="checkbox-label" for="checkbox-disabled-checked">Checkbox Disabled -
+                                    checked</label>
+                            </div>
+
+                            <div class="color-container">
+                                <input type="color" id="color" name="color">
+                                <label class="color-label" for="color">Choose a color</label>
+                            </div>
+
+                            <input type="date" id="date" name="date">
+
+                            <input type="email" id="email" name="email"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+
+                            <input type="file" id="file" name="file">
+
+                            <input type="hidden" id="hidden" name="hidden" value="hidden">
+
+                            <input type="number" id="number" name="number" min="1" max="5">
+
+                            <input type="password" id="password" name="password" pattern=".{8,}"
+                                title="Eight or more characters">
+
+                            <div class="radio-container">
+                                <input type="radio" id="radio" name="radio" value="radio">
+                                <label class="radio-label" for="radio">Radio - unchecked</label>
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" id="radio-checked" name="radio" value="radio-checked" checked>
+                                <label class="radio-label" for="radio-checked">Radio - checked</label>
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" id="radio-disabled" name="radio" value="radio-disabled"
+                                    disabled>
+                                <label class="radio-label" for="radio-disabled">Radio - disabled</label>
+                            </div>
+
+                            <input type="range" id="range" name="range" min="0" max="10">
+
+                            <input type="reset">
+
+                            <input type="search" id="search" name="search">
+
+                            <input type="submit" id="submit" name="submit">
+
+                            <input type="tel" id="tel" name="tel">
+
+                            <input type="text" id="text" name="text">
+
+                            <input type="url" id="url" name="url">
                         </fieldset>
                     </form>
                 </section>
             </article>
-
-            <aside>
-                <address>
-                    Mozilla Foundation
-                    1981 Landings Drive
-                    Building K
-                    Mountain View, CA 94043-0801
-                    USA
-                </address>
-            </aside>
         </main>
-
+        <aside>
+            <iframe
+                src="https://maps.google.com/maps?q=1981%20Landings%20Drive&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                loading="lazy" scrolling="no" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+            <address>
+                Mozilla Foundation<br>
+                1981 Landings Drive<br>
+                Building K<br>
+                Mountain View, CA 94043-0801<br>
+                USA
+            </address>
+        </aside>
         <footer>
-
+            footer content ...
         </footer>
+    </div>
 
-        <script src="./js/script.js"></script>
-    </body>
+    <script src="./js/script.js"></script>
+</body>
 
 </html>
 ```
@@ -219,9 +348,7 @@
     - js
         - script.js 
     - img
-        - logo.png
         - favicon.ico
-        - elephant.png
 ```
 
 [^1]: https://www.pluralsight.com/guides/semantic-html
