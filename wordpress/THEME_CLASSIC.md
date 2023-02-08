@@ -11,7 +11,7 @@
     - sidebar.php			// Sidebar-Template
     - footer.php			// Footer-Template
 
-    - front-page.php		// Home-Page
+    - front-page.php			// Home-Page
     - index.php				// Standard-Page
     - 404.php				// 404-Page
     - search.php			// Search-Result-Page
@@ -22,7 +22,7 @@
 
     - functions.php			// WordPress-Functions
     - style.css				// Default-Stylesheet and Theme Information
-    - screenshot.png		// Default-Screenshot
+    - screenshot.png			// Default-Screenshot
 	
     - css
         - custom.css
