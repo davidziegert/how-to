@@ -1,15 +1,17 @@
-# How To - Wordpress - Theme [^1] [^2]
+# How To - Wordpress - Classic Theme [^1] [^2]
 
 ## Folder Structure Example
 
 ```
 - THEME_NAME
+
     - header.php			// Header-Template
     - nav.php				// Navigation-Template
     - main.php				// Content-Template
     - sidebar.php			// Sidebar-Template
     - footer.php			// Footer-Template
-    - front-page.php			// Home-Page
+
+    - front-page.php		// Home-Page
     - index.php				// Standard-Page
     - 404.php				// 404-Page
     - search.php			// Search-Result-Page
@@ -17,21 +19,24 @@
     - page.php				// Page-Template
     - single.php			// Blog-Entry-Template
     - comments.php			// Comments-Template
+
     - functions.php			// WordPress-Functions
-    - style.css				// Default-Stylesheet
-    - screenshot.png			// Default-Screenshot
+    - style.css				// Default-Stylesheet and Theme Information
+    - screenshot.png		// Default-Screenshot
+	
     - css
         - custom.css
-    - js
+    
+	- js
         - custom.js
-    - img
+    
+	- img
         - favicon.ico
         - logo.png
 ```
-
 ![Screenshot-17](/files/wordpress_structure.jpg)
 
-## WordPress - Functions
+## WordPress - Shortcodes
 
 ### html - head
 
@@ -199,14 +204,14 @@
 <?php endforeach; ?>
 ```
 
-### functions
+### random-page-link
 
 ```
 <!-- Link to Random Page -->
 <?php get_randomsite(); ?>	
 ```
 
-### functions
+### functions.php
 
 ```
 <?php 
@@ -301,13 +306,14 @@
 		echo "<a href=". $random_link .">Enter</a>";
 	}
 
-?>
 ```
 
 ## WordPress - Themes
 
-- ### [Blog Example](/files/wordpress_blog.zip)
-- ### [Blog & Sites Example](/files/wordpress_complex.zip)
+- ### [Blog Example](/files/wordpress_classic_blog.zip)
+- ### [Blog & Sites Example](/files/wordpress_classic_complex.zip)
+
+---
 
 [^1]: https://wphierarchy.com/
 [^2]: https://www.rarst.net/wordpress/front-page-logic/

@@ -56,7 +56,8 @@
 - ### [First Installation](wordpress/INSTALLATION.md)
 - ### [Security](wordpress/SECURITY.md)
 - ### [Backup](wordpress/BACKUP.md)
-- ### [Theme](wordpress/THEME.md)
+- ### [Theme: Classic](wordpress/THEME_CLASSIC.md)
+- ### [Theme: Blocks with Full Site Editing](wordpress/THEME_BLOCK.md)
 - ### Plugins
   - #### [WPS Hide Login](https://de.wordpress.org/plugins/wps-hide-login/)
   - #### [wp_head() cleaner](https://de.wordpress.org/plugins/wp-head-cleaner/)
