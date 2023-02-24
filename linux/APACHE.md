@@ -58,6 +58,34 @@ sudo apache2ctl configtest
 sudo systemctl reload apache2
 ```
 
+## Set Access only from subnet
+
+```
+cd /etc/apache2/sites-available
+sudo nano /etc/apache2/sites-available/000-default.conf
+```
+
+```
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName www.domain.com
+    DocumentRoot /var/www/html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    Order Deny,Allow
+    Deny from all
+    Allow from 141.89.0.0/16
+</VirtualHost>
+```
+
+```
+sudo a2dissite 000-default.conf
+sudo a2ensite 000-default.conf
+sudo apache2ctl configtest
+sudo systemctl reload apache2
+```
+
 ## Set Password Authentication [^2]
 
 ```
@@ -92,9 +120,6 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 sudo apache2ctl configtest
 sudo systemctl reload apache2
 ```
-
-
-
 
 ## Monitor Apache Performance Using "mod_status" Module [^3]
 

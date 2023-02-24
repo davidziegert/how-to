@@ -99,7 +99,6 @@ Deny from all
 ###### Nav.html
 
 ---
-
 <nav>
     <div class="row">
         <div>
@@ -140,13 +139,11 @@ Deny from all
         </div>
     </div>
 </nav>
-
 ---
 
 ###### Header.html
 
 ---
-
 <header>
     <div class="row">
         <div class="title">
@@ -172,13 +169,11 @@ Deny from all
         </div>
     </div>
 </header>
-
 ---
 
 ###### Main.html
 
 ---
-
 <main>
     <div class="row">
         <f:if condition="{breadcrumb}">
@@ -204,7 +199,6 @@ Deny from all
         </f:for>
     </div>
 </main>
-
 ---
 
 ###### Aside.html
@@ -214,7 +208,6 @@ Deny from all
 ### \Configuration\TCA\Overrides\sys_template.php
 
 ---
-
 <?php
 
 	defined('TYPO3') or die();
@@ -226,7 +219,6 @@ Deny from all
 		'Configuration/TypoScript/',
 		'Fluid Content Elements'
 	);
-
 ---
 
 ### \Configuration\TsConfig\
@@ -236,7 +228,6 @@ Deny from all
 #### constants.typoscript
 
 ---
-
 @import 'EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript'
 
 page {
@@ -246,22 +237,18 @@ page {
     templateRootPath = EXT:site_package/Resources/Private/Templates/Page/
   }
 }
-
 ---
 
 #### setup.typoscript
 
 ---
-
 @import 'EXT:fluid_styled_content/Configuration/TypoScript/setup.typoscript'
 @import 'EXT:site_package/Configuration/TypoScript/Setup/*.typoscript'
-
 ---
 
 ### \Configuration\TypoScript\Setup\Page.typoscript
 
 ---
-
 page = PAGE
 
 // Part 1: Global Site Configuration
@@ -385,13 +372,11 @@ page {
       file_01 = EXT:site_package/Resources/Public/JavaScript/custom.js
   }
 }
-
 ---
 
 ### composer.json
 
 ```
-
 {
 	"name": "brand/site-package",
 	"type": "typo3-cms-extension",
@@ -404,13 +389,11 @@ page {
 	"autoload": {"psr-4": {"Brand\\OwnPackage\\": "Classes/"}},
 	"extra": {"typo3/cms": {"extension-key": "site_package"}}
 }
-
 ```
 
 ### ext_emconf.php
 
 ```
-
 <?php
 	$EM_CONF[$_EXTKEY] = [
 		'title' => 'TYPO3 Site Package',
@@ -433,7 +416,6 @@ page {
 		'createDirs' => '',
 		'clearCacheOnLoad' => 1
 	];
-
 ```
 
 ### ext_localconf.php
@@ -442,7 +424,6 @@ page {
 <?php
     use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
     defined('TYPO3') or die();
-
 ```
 
 ## Extension installation without composer
