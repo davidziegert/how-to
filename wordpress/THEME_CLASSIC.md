@@ -3,37 +3,32 @@
 ## Folder Structure Example
 
 ```
-- THEME_NAME
-
-    - header.php			// Header-Template
-    - nav.php				// Navigation-Template
-    - main.php				// Content-Template
-    - sidebar.php			// Sidebar-Template
-    - footer.php			// Footer-Template
-
-    - front-page.php			// Home-Page
-    - index.php				// Standard-Page
-    - 404.php				// 404-Page
-    - search.php			// Search-Result-Page
-    - searchform.php			// Search-Form-Template
-    - page.php				// Page-Template
-    - single.php			// Blog-Entry-Template
-    - comments.php			// Comments-Template
-
-    - functions.php			// WordPress-Functions
-    - style.css				// Default-Stylesheet and Theme Information
-    - screenshot.png			// Default-Screenshot
-	
-    - css
-        - custom.css
-    
-	- js
-        - custom.js
-    
-	- img
-        - favicon.ico
-        - logo.png
+theme
+├── css
+│	└── custom.css
+├── js
+│	└── script.js
+├── img
+│	├── img/favicon.ico
+│	└── img/logo.png
+├── functions.php			// WordPress-Functions
+├── screenshot.png			// Default-Screenshot
+├── style.css				// Default-Stylesheet and Theme Information
+├── header.php				// Header Template-Part                    
+├── nav.php					// Navigation Template-Part
+├── main.php				// Content Template-Part
+├── sidebar.php				// Sidebar Template-Part
+├── footer.php				// Footer Template-Part
+├── searchform.php			// Search-Form Template-Part
+├── comments.php			// Comments Template-Part
+├── index.php				// Blog Page-Template
+├── 404.php					// 404 Page-Template
+├── front-page.php			// Home Page-Template
+├── page.php				// Site Page-Template
+├── single.php				// Blog-Entry Page-Template
+└── search.php				// Search-Result Page-Template     
 ```
+
 ![Screenshot-17](/files/wordpress_structure.jpg)
 
 ## WordPress - Shortcodes

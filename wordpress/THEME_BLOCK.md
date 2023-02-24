@@ -3,37 +3,36 @@
 ## Folder Structure Example
 
 ```
-- THEME_NAME
-
-    - functions.php             // WordPress-Functions
-    - screenshot.png            // Default-Screenshot
-    - style.css                 // Default-Stylesheet and Theme Information
-	- theme.json            // Default-JSON with Stylesheets
-
-	- assets
-        - img
-            - favicon.ico
-            - logo.png
-        - fonts
-            - font.woff2
-    - parts
-        - header.html           // Header Template-Part
-        - nav.html              // Navigation Template-Part
-        - main.html             // Content Template-Part
-        - sidebar.html          // Sidebar Template-Part
-        - footer.html           // Footer Template-Part
-        - searchform.html       // Search-Form Template-Part
-        - comments.html         // Comments Template-Part
-    - templates
-        - index.html            // Blog Page-Template
-        - 404.html              // 404 Page-Template
-        - front-page.html       // Home Page-Template
-        - page.html             // Site Page-Template
-        - single.html           // Blog-Entry Page-Template
-        - search.html           // Search-Result Page-Template
-        - privacy-policy.html   // Disclaimer and Privacy Policy Page-Template
-        - archive.html          // Archive Page-Template
+theme
+├── assets
+│   ├── fonts
+│   │   └── font.woff2
+│   └── img
+│       ├── favicon.ico
+│       └── logo.png
+├── parts
+│   ├── header.html             // Header Template-Part                    
+│   ├── nav.html                // Navigation Template-Part
+│   ├── main.html               // Content Template-Part
+│   ├── sidebar.html            // Sidebar Template-Part
+│   ├── footer.html             // Footer Template-Part
+│   ├── searchform.html         // Search-Form Template-Part
+|   └── comments.html           // Comments Template-Part
+├── templates
+│   ├── index.html              // Blog Page-Template
+│   ├── 404.html                // 404 Page-Template
+│   ├── front-page.html         // Home Page-Template
+│   ├── page.html               // Site Page-Template
+│   ├── single.html             // Blog-Entry Page-Template
+│   ├── search.html             // Search-Result Page-Template
+│   ├── privacy-policy.html     // Disclaimer and Privacy Policy Page-Template
+│   └── archive.html            // Blog-Archive Page-Template  
+├── functions.php               // WordPress-Functions
+├── screenshot.png              // Default-Screenshot
+├── style.css                   // Default-Stylesheet and Theme Information
+└── theme.json                  // Default-JSON with Stylesheets
 ```
+
 ## WordPress - Functions
 
 ### functions.php
