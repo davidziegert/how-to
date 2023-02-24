@@ -22,8 +22,14 @@ site_package
 │   │   │   └── Page
 │   │   ├── Partials
 │   │   │   └── Page
+│   │   │   	├── Header.html
+│   │   │   	├── Nav.html
+│   │   │   	├── Main.html
+│   │   │   	├── Aside.html
+│   │   │   	└── Footer.html
 │   │   ├── Templates
 │   │   │   └── Page
+│   │   │   	└── Default.html
 │   │   └── .htaccess
 │   └── Public
 │       ├── Css     
@@ -43,14 +49,7 @@ site_package
 └── ext_localconf.php
 ```
 
-### Private Folder
-
-#### .htaccess
-
-```
-Order deny,allow
-Deny from all
-```
+### \Resources\Private\
 
 #### Language
 - The directory Language/ may contain .xlf files that are used for the localization of labels and text strings (frontend as well as backend) by TYPO3. This topic is not strictly related to the Fluid template engine and is documented in section Internationalization and Localization.
@@ -74,6 +73,321 @@ Language
 
 - The directory Language/ may contain .xlf files that are used for the localization of labels and text strings (frontend as well as backend) by TYPO3. This topic is not strictly related to the Fluid template engine and is documented in section Internationalization and Localization.
 
+#### .htaccess
+
+```
+Order deny,allow
+Deny from all
+```
+
+#### \Resources\Private\Templates\Page\Default.html
+
+---
+
+<div class="wrapper">
+    <f:render partial="Nav.html" arguments="{_all}"/>
+    <f:render partial="Header.html" arguments="{_all}"/>
+    <f:render partial="Main.html" arguments="{_all}"/>
+    <f:render partial="Aside.html" arguments="{_all}"/>
+    <f:render partial="Footer.html" arguments="{_all}"/>
+</div>
+
+---
+
+##### \Resources\Private\Partials\Page\
+
+###### Nav.html
+
+---
+
+<nav>
+    <div class="row">
+        <div>
+            <button id="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <span>MENU</span>
+        </div>
+
+        <div id="menu">
+            <ul class="main-menu">
+                <f:for each="{mainMenu}" as="mainMenuItem">
+                    <li class="menu-item {f:if(condition:'{mainMenuItem.children}',then:'dropdown')} {f:if(condition: mainMenuItem.active, then:'active')}">
+                        <f:if condition="{mainMenuItem.children}">
+                            <f:then>
+                                <!-- Item has children -->
+                                <a class="menu-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{mainMenuItem.title}</a>
+                                <ul class="sub-menu">
+                                    <f:for each="{mainMenuItem.children}" as="subMenuItem">
+                                        <li class="sub-menu-item {f:if(condition: mainMenuItem.children.active, then:'active')}">
+                                            <a class="submenu-link" href="{subMenuItem.link}" target="{subMenuItem.target}" title="{subMenuItem.title}">{subMenuItem.title}</a>
+                                        </li>
+                                    </f:for>
+                                </ul> 
+                            </f:then>
+                    
+                            <f:else>
+                                <!-- Item has no children -->
+                                <a class="menu-link" href="{mainMenuItem.link}" target="{mainMenuItem.target}" title="{mainMenuItem.title}">{mainMenuItem.title}</a>
+                            </f:else>
+                        </f:if>
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+---
+
+###### Header.html
+
+---
+
+<header>
+    <div class="row">
+        <div class="title">
+            title not found
+        </div>
+        <div>
+            <f:if condition="{languageMenu}">
+                <ul id="language" class="language-menu">
+                    <f:for each="{languageMenu}" as="item">
+                    <li class="{f:if(condition: item.active, then: 'active')} {f:if(condition: item.available, else: ' text-muted')}">
+                        <f:if condition="{item.available}">
+                            <f:then>
+                                <a href="{item.link}" hreflang="{item.hreflang}" title="{item.navigationTitle}"><span>{item.navigationTitle}</span></a>
+                            </f:then>
+                            <f:else>
+                                <span>{item.navigationTitle}</span>
+                            </f:else>
+                        </f:if>
+                    </li>
+                    </f:for>
+                </ul>
+            </f:if>
+        </div>
+    </div>
+</header>
+
+---
+
+###### Main.html
+
+---
+
+<main>
+    <div class="row">
+        <f:if condition="{breadcrumb}">
+            <ol class="breadcrumb">
+                <f:for each="{breadcrumb}" as="item">
+                    <li class="breadcrumb-item{f:if(condition: item.current, then: ' active')}" >
+                        <f:if condition="{item.current}">
+                            <f:then>
+                                <span class="divider">&raquo;</span><span class="breadcrumb-text">{item.title}</span>
+                            </f:then>
+                            <f:else>
+                                <a class="breadcrumb-link" href="{item.link}" title="{item.title}"><span class="breadcrumb-text">{item.title}</span></a>
+                            </f:else>
+                        </f:if>
+                    </li>
+                </f:for>
+            </ol>
+        </f:if>   
+    </div>
+    <div class="row">
+        <f:for each="{mainContent}" as="contentElement">
+            <f:cObject typoscriptObjectPath="tt_content.{contentElement.data.CType}" data="{contentElement.data}" table="tt_content"/>
+        </f:for>
+    </div>
+</main>
+
+---
+
+###### Aside.html
+
+###### Footer.html
+
+### \Configuration\TCA\Overrides\sys_template.php
+
+---
+
+<?php
+
+	defined('TYPO3') or die();
+
+	$extensionKey = 'site_package';
+
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+		$extensionKey,
+		'Configuration/TypoScript/',
+		'Fluid Content Elements'
+	);
+
+---
+
+### \Configuration\TsConfig\
+
+### \Configuration\TypoScript\
+
+#### constants.typoscript
+
+---
+
+@import 'EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript'
+
+page {
+  fluidtemplate {
+    layoutRootPath = EXT:site_package/Resources/Private/Layouts/Page/
+    partialRootPath = EXT:site_package/Resources/Private/Partials/Page/
+    templateRootPath = EXT:site_package/Resources/Private/Templates/Page/
+  }
+}
+
+---
+
+#### setup.typoscript
+
+---
+
+@import 'EXT:fluid_styled_content/Configuration/TypoScript/setup.typoscript'
+@import 'EXT:site_package/Configuration/TypoScript/Setup/*.typoscript'
+
+---
+
+### \Configuration\TypoScript\Setup\Page.typoscript
+
+---
+
+page = PAGE
+
+// Part 1: Global Site Configuration
+
+config {
+   pageTitleSeparator = -
+   pageTitleSeparator.noTrimWrap = | | |
+
+   admPanel = 1
+}
+
+// Part 2: Meta Tags
+
+page {
+   meta {
+      X-UA-Compatible = IE=edge
+      X-UA-Compatible.attribute = http-equiv
+      author = AUTHORNAME
+      description = DESCRIPTION
+      keywords = KEYWORD
+   }
+}
+
+// Part 3: Open Graph Tags
+
+page {
+   meta {
+      og:title = OG-TITLE
+      og:title.attribute = property
+      og:site_name = OG-SITENAME
+      og:site_name.attribute = property
+      og:description = OG:DESCRIPTION
+      og:description.attribute = property
+      og:locale = en_GB
+      og:locale.attribute = property
+      og:image.cObject = IMG_RESOURCE
+      og:image.cObject.file = EXT:site_package/Resources/Public/Images/og_image.png
+      og:url = https://www.yourserver.url
+   }
+}
+
+// Part 4: CSS
+
+page {
+   includeCSS {
+      file_01 = EXT:site_package/Resources/Public/Css/reset.css
+      file_02 = EXT:site_package/Resources/Public/Css/custom.css
+      file_03 = https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
+      file_04 = https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css
+   }
+}
+
+// Part 5: Favicon
+
+page {
+   shortcutIcon = EXT:site_package/Resources/Public/Icons/favicon.ico
+}
+
+// Part 6: Fluid Template
+
+page {
+   10 = FLUIDTEMPLATE
+   10 {
+         templateName = Default
+		 
+         templateRootPaths {
+            0 = EXT:site_package/Resources/Private/Templates/Page/
+         }
+         partialRootPaths {
+            0 = EXT:site_package/Resources/Private/Partials/Page/
+         }
+         layoutRootPaths {
+            0 = EXT:site_package/Resources/Private/Layouts/Page/
+         }
+
+		dataProcessing {
+         // Part 6.1: Navigation Menu
+			10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+         10 {
+            levels = 2
+            expandAll = 1
+            includeSpacer = 1
+            as = mainMenu
+         }
+
+			// Part 6.2: Breadcrumbs
+         20 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+         20 {
+            special = rootline
+            special.range = 0|-1
+            includeNotInMenu = 0
+            begin = 2
+            as = breadcrumb
+         }
+
+			// Part 6.3: Language Menu
+         30 = TYPO3\CMS\Frontend\DataProcessing\LanguageMenuProcessor
+         30 {
+            languages = auto
+            as = languageMenu
+         }
+
+			// Part 6.4: Main Content
+			40 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+			40 {
+				table = tt_content
+				orderBy = sorting
+				where = colPos = 0
+				as = mainContent
+			}
+		}
+	}
+}
+
+// Part 7: JavaScript
+
+page {
+  includeJSFooter {
+      jquery = https://code.jquery.com/jquery-3.6.3.slim.min.js
+      jquery.external = 1
+      file_01 = EXT:site_package/Resources/Public/JavaScript/custom.js
+  }
+}
+
+---
+
 ### composer.json
 
 ```
@@ -87,7 +401,7 @@ Language
 	"homepage": "https://yourserver.url",
     "license": ["GPL-2.0-or-later"],
 	"keywords": ["typo3", "site package"],
-	"autoload": {"psr-4": {"Brand\\SitePackage\\": "Classes/"}},
+	"autoload": {"psr-4": {"Brand\\OwnPackage\\": "Classes/"}},
 	"extra": {"typo3/cms": {"extension-key": "site_package"}}
 }
 
@@ -99,8 +413,8 @@ Language
 
 <?php
 	$EM_CONF[$_EXTKEY] = [
-		'title' => 'site-package',
-		'description' => 'site-package',
+		'title' => 'TYPO3 Site Package',
+		'description' => 'TYPO3 Site Package',
 		'category' => 'templates',
 		'author' => 'your name',
 		'author_email' => 'your mail',
@@ -145,35 +459,9 @@ You can also create a ZIP file of the content of your site_package folder and na
 
 ---
 
-## Typo3 - Template Tools - Setup
-
----
-
-page = PAGE
-page {
-   // Part 1: Fluid template section
-   10 = FLUIDTEMPLATE
-   10 {
-      templateName = Default
-      templateRootPaths {
-         0 = EXT:site_package/Resources/Private/Templates/Page/
-      }
-      partialRootPaths {
-         0 = EXT:site_package/Resources/Private/Partials/Page/
-      }
-      layoutRootPaths {
-         0 = EXT:site_package/Resources/Private/Layouts/Page/
-      }
-   }
-}
-
----
-
-
-
 ## Typo3 - Templates
 
-- ### [xxxxxx](/files/xxxxxxx)
+- ### [First Try](/files/site_package.zip)
 
 ---
 
