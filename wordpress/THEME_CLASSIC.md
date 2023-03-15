@@ -136,25 +136,103 @@ theme
 ### single
 
 ```
-<!-- Show 20 Post per Page -->
-<?php $the_query = new WP_Query( 'posts_per_page=20' ); ?>   
-
-<!-- Loop through every Post -->
-<?php while ($the_query -> have_posts()) : $the_query -> the_post(); ?>
-	<!-- Post-Title -->
+ <!-- If Content exists then post -->
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>   
+	<!-- Page-Title -->
 	<?php the_title(); ?>
-	<!-- Post-Thumbnail -->
-	<?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>
-	<!-- Post-Content (10 words with link) -->
-	<?php echo wp_trim_words(get_the_content(), 10); ?> <a href="<?php the_permalink(); ?>">MORE</a>
-	<!-- Post-Date -->
-	<?php the_date('d.m.Y'); ?>
-	<!-- Post-Category -->
-	<?php the_category(', '); ?>
-<?php endwhile; wp_reset_postdata(); ?>
+	<!-- Page-Content -->
+	<?php the_content(); ?>
+	<!-- Page-Last-Update -->
+	<?php the_modified_date() ?>
+<?php endwhile; endif; ?>
 
 <!-- Includes comments.php -->
-<?php comments_template(); ?>                                                                                       
+<?php comments_template(); ?>
+```
+
+### index
+
+```
+<!-- Show Latest 6 Post -->
+<?php $args = array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 6 ); ?>
+
+<?php $the_query = new WP_Query( $args ); ?>
+
+<!-- Loop through every Post -->
+<?php if($the_query->have_posts()): ?>
+	<?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+		<!-- Post-Title -->
+		<?php the_title(); ?>
+		<!-- Post-Thumbnail -->
+		<?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>
+		<!-- Post-Content (10 words with link) -->
+		<?php echo wp_trim_words(get_the_content(), 10); ?>
+		<a href="<?php the_permalink(); ?>">MORE</a>
+		<!-- Post-Date -->
+		<?php the_date('d.m.Y'); ?>
+		<!-- Post-Category -->
+		<?php the_category(', '); ?>
+	<?php endwhile; ?>
+<?php else: ?>
+	<?php _e( 'There no posts to display.' ); ?>
+<?php endif; wp_reset_postdata(); ?>
+```
+
+```
+<!-- Show All Post from Category -->
+<?php $args = array( 'post_type' => 'post', 'post_status' => 'publish', 'category_name' => 'my_category', 'nopaging' => true ); ?>
+
+<?php $the_query = new WP_Query( $args ); ?>
+
+<!-- Loop through every Post -->
+<?php if($the_query->have_posts()): ?>
+	<?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+		<!-- Post-Title -->
+		<?php the_title(); ?>
+		<!-- Post-Thumbnail -->
+		<?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>
+		<!-- Post-Content (10 words with link) -->
+		<?php echo wp_trim_words(get_the_content(), 10); ?>
+		<a href="<?php the_permalink(); ?>">MORE</a>
+		<!-- Post-Date -->
+		<?php the_date('d.m.Y'); ?>
+		<!-- Post-Category -->
+		<?php the_category(', '); ?>
+	<?php endwhile; ?>
+<?php else: ?>
+	<?php _e( 'There no posts to display.' ); ?>
+<?php endif; wp_reset_postdata(); ?>
+```
+
+```
+<!-- NOT WORK ON index.php OR front-page.php -->
+<!-- Show 4 Post per Page with Pagination -->
+<?php $args = array( 'post_type' => 'post', 'posts_per_page' => 4, 'paged' => $paged ); ?>
+
+<?php $the_query = new WP_Query( $args ); ?>
+
+<!-- Loop through every Post -->
+<?php if($the_query->have_posts()): ?>
+	<?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+		<!-- Post-Title -->
+		<?php the_title(); ?>
+		<!-- Post-Thumbnail -->
+		<?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>
+		<!-- Post-Content (10 words with link) -->
+		<?php echo wp_trim_words(get_the_content(), 10); ?>
+		<a href="<?php the_permalink(); ?>">MORE</a>
+		<!-- Post-Date -->
+		<?php the_date('d.m.Y'); ?>
+		<!-- Post-Category -->
+		<?php the_category(', '); ?>
+	<?php endwhile; ?>
+
+	<!-- Add the pagination functions here. -->
+	<?php posts_nav_link(); ?>
+
+<?php else: ?>
+	<?php _e( 'There no posts to display.' ); ?>
+<?php endif; wp_reset_postdata(); ?>
 ```
 
 ### comments
