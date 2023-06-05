@@ -183,7 +183,7 @@ sudo nano /var/log/uwf.log
 ## Fail2ban [^6] [^7]
 
 ```
-sudo apt install fail2ban
+sudo apt install fail2ban -y
 ```
 
 ```
@@ -251,6 +251,94 @@ net.ipv4.conf.all.accept_source_route=0
 net.ipv4.conf.all.log_martians = 1
 ```
 
+## fail2ban [^13] [^14] [^15]
+
+### Installation
+
+```
+sudo apt install fail2ban -y
+```
+
+### Configuration
+
+```
+sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+sudo nano /etc/fail2ban/jail.local
+```
+
+```
+[INCLUDES]
+before = paths-debian.conf
+
+[DEFAULT]
+ignoreip = 127.0.0.1/8 ::1 141.89.97.0/24 141.89.100.0/24       # IGNORELIST
+maxretry = 3                                                    # NUMBER OF FAILED ATTEMPTS
+findtime = 10m                                                  # TIMESPAN BETWEEN FAILED ATTEMPTS
+bantime  = 1h                                                   # BANTIME
+banaction = ufw                                                 # JAIL VIA UFW
+backend = polling                                               # POLLING ALGORITHM (NO EXTERNAL LIBRARIES)
+logencoding = auto                                              # USE SYSTEM LOCAL ENCODING (UTF-8)
+enabled = true                                                  # ENABLE JAILS
+
+[sshd]
+enabled = true
+port = ssh
+filter	= sshd
+logpath	= /var/log/auth.log
+maxretry = 3
+findtime = 1h
+bantime  = 1d
+banaction = ufw
+backend = polling
+```
+
+### Commands
+
+```
+sudo systemctl enable fail2ban
+sudo systemctl start fail2ban
+sudo systemctl status fail2ban
+```
+
+```
+sudo fail2ban-client ping
+sudo fail2ban-client status
+sudo fail2ban-client status sshd
+```
+
+```
+sudo fail2ban-client get sshd bantime
+sudo fail2ban-client get sshd maxretry
+sudo fail2ban-client get sshd actions
+sudo fail2ban-client get sshd findtime
+sudo fail2ban-client get sshd ignoreip
+```
+
+```
+sudo fail2ban-client set sshd banip IP-ADDRESS
+sudo fail2ban-client set sshd unbanip IP-ADDRESS
+
+sudo fail2ban-client set sshd addignoreip IP-ADDRESS
+sudo fail2ban-client set sshd delignoreip IP-ADDRESS
+```
+
+### Reports
+
+```
+tail -100 /var/log/fail2ban.log.
+```
+
+or report via bash
+
+```
+sudo nano fail2banreport.sh
+```
+
+```
+awk '($(NF-1) == "Ban"){print $NF}' /var/log/fail2ban.log \
+  | sort | uniq -c | sort -n
+```
+
 [^1]: https://kb.iu.edu/d/aews
 [^2]: https://linux-audit.com/using-ssh-keys-instead-of-passwords/
 [^3]: https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
@@ -263,3 +351,6 @@ net.ipv4.conf.all.log_martians = 1
 [^10]: https://www.kim.uni-konstanz.de/e-mail-und-internet/it-sicherheit/sicherer-server-it-dienst/linux-fernadministration-mit-pam-und-ssh/starke-authentifizierungsmethoden/
 [^11]: https://www.cyberciti.biz/tips/linux-security.html
 [^12]: https://www.informaticar.net/security-hardening-ubuntu-20-04/
+[^13]: https://www.howtoforge.de/anleitung/so-installierst-und-konfigurierst-du-fail2ban-unter-ubuntu-22-04/
+[^14]: https://www.booleanworld.com/protecting-ssh-fail2ban/
+[^15]: https://www.the-art-of-web.com/system/fail2ban-log/
