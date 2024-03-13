@@ -18,79 +18,15 @@ allow_url_include => Off => Off
 ## Modify your PHP.ini
 
 ```
-sudo mv /etc/php/8.1/apache2/php.ini /etc/php/8.1/apache2/php.ini.original
-sudo grep -v ';' /etc/php/8.1/apache2/php.ini.original >/etc/php/8.1/apache2/php.ini
-sudo ex -s +'v/\S/d' -cwq /etc/php/8.1/apache2/php.ini
-sudo nano /etc/php/8.1/apache2/php.ini
-```
-
-add
-
-```
-;;;;;;;;;;;;;;;;;;;;;;
-; PHP error handling ;
-;;;;;;;;;;;;;;;;;;;;;;
-
-safe_mode_allowed_env_vars		= PHP_
-expose_php              		= Off
-error_reporting         		= E_ALL
-display_errors          		= Off
-display_startup_errors  		= Off
-log_errors              		= On
-error_log               		= /var/log/apache2/php_scripts_error.log
-ignore_repeated_errors  		= Off
-
-;;;;;;;;;;;;;;;;;;;;;;;;
-; PHP general settings ;
-;;;;;;;;;;;;;;;;;;;;;;;;
-
-allow_url_fopen         		= Off
-allow_url_include       		= Off
-variables_order         		= "GPCS"
-allow_webdav_methods    		= Off
-memory_limit 					= 128M
-max_execution_time 				= 30
-max_input_time 					= 60
-output_buffering        		= Off
-output_handler          		= ""
-zlib.output_compression 		= Off
-zlib.output_handler     		= ""
-magic_quotes_gpc        		= Off
-date.timezone 					= Europe/Berlin
-default_charset 				= "UTF-8"
-cgi.force_redirect				= On
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; PHP file upload handling ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-enable_dl               		= Off
-disable_functions 				= phpinfo, system, mail, exec, exec, passthru, shell_exec, system, proc_open, popen,curl_exec, curl_multi_exec, parse_ini_file, show_source
-file_uploads 					= On
-post_max_size 					= 25M
-upload_max_filesize 			= 25M
-max_file_uploads 				= 5
-
-;;;;;;;;;;;;;;;;;;;;;;;;
-; PHP session handling ;
-;;;;;;;;;;;;;;;;;;;;;;;;
-
-session.save_handler     		= files
-session.use_cookies      		= 1
-session.use_only_cookies 		= 1
-session.auto_start       		= 0
-session.cookie_lifetime  		= 0
-session.cookie_httponly  		= 1
-session.cookie_secure    		= 1
-```
-
-or
-
-```
 sudo cp /etc/php/8.1/apache2/php.ini /etc/php/8.1/apache2/php.ini.original
 sudo nano /etc/php/8.1/apache2/php.ini
 ```
 
 ```
+;;;;;;;;;;;
+; EXAMPLE ;
+;;;;;;;;;;;
+
 [PHP]
 
 ;;;;;;;;;;;;;;;;;;;;

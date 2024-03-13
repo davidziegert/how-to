@@ -180,46 +180,6 @@ sudo ufw logging off
 sudo nano /var/log/uwf.log
 ```
 
-## Fail2ban [^6] [^7]
-
-```
-sudo apt install fail2ban -y
-```
-
-```
-sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-sudo nano /etc/fail2ban/jail.local
-```
-
-```
-[sshd]
-enabled = true
-port = 22
-filter = sshd
-logpath = /var/log/auth.log
-maxretry = 3
-findtime = 30m
-bantime = 1d
-ignoreip = 127.0.0.1/8 ::1 xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx
-```
-
-```
-sudo systemctl start fail2ban
-sudo systemctl restart fail2ban
-sudo systemctl enable fail2ban
-sudo systemctl status fail2ban
-```
-
-```
-sudo fail2ban-client set sshd banip xxx.xxx.xxx.xxx
-sudo fail2ban-client set sshd unbanip xxx.xxx.xxx.xxx
-```
-
-```
-sudo fail2ban-client status sshd
-sudo nano /var/log/fail2ban.log
-```
-
 ## Avoid Using FTP, Telnet, And Rlogin / Rsh Services on Linux
 
 ```
@@ -251,7 +211,7 @@ net.ipv4.conf.all.accept_source_route=0
 net.ipv4.conf.all.log_martians = 1
 ```
 
-## fail2ban [^13] [^14] [^15]
+## fail2ban [^6] [^7] [^13] [^14] [^15]
 
 ### Installation
 

@@ -1,1 +1,0 @@
-# How To - Linux - Tools - Nginx (Ubuntu)
