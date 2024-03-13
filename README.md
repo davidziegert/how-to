@@ -1,5 +1,5 @@
 <div style="display:flex; flex-direction:column; gap: 1rem; align-items:center; justify-content:center;">
-    <img src="./files/avatar.png" alt="logo" width="200" height="auto" />
+    <img src="./icons/avatar.png" alt="logo" width="200" height="auto" />
     <h1>Take a look!</h1>
 </div>
 
