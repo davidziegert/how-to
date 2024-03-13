@@ -1,4 +1,4 @@
-# How To - Linux - Tools - Rsync (Ubuntu) [^1] [^2] [^3]
+# Linux - Service - Rsync (Ubuntu) [^1] [^2] [^3]
 
 ## Incremental Backups
 

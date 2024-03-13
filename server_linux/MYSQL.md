@@ -1,4 +1,4 @@
-# How To - Linux - Tools - MySQL (Ubuntu) [^1] [^2] [^3]
+# Linux - Service - MySQL (Ubuntu) [^1] [^2] [^3]
 
 ## Installation
 

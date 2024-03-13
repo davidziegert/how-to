@@ -1,4 +1,4 @@
-# How To - Linux - Tools - OpenLDAP (Ubuntu) [^1] [^2]
+# Linux - Service - OpenLDAP (Ubuntu) [^1] [^2]
 
 ## Installation (Host)
 

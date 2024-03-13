@@ -1,4 +1,4 @@
-# How To - VMware - Security
+# VMware - Security
 
 > **Note:**
 > The ESXi hypervisor is secured out of the box. You can further protect ESXi hosts by using lockdown mode and other built-in features. For consistency, you can set up a reference host and keep all hosts in sync with the host profile of the reference host. You can also protect your environment by performing scripted management, which ensures that changes apply to all hosts. You can enhance protection of ESXi hosts that are managed by vCenter Server with the following actions. See the Security of the VMware vSphere Hypervisor white paper for background and details.

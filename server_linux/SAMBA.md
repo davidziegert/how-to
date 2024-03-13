@@ -1,4 +1,4 @@
-# How To - Linux - Tools - SAMBA (Ubuntu) [^1] [^2] [^3]
+# Linux - Service - SAMBA (Ubuntu) [^1] [^2] [^3]
 
 ## Installation (with LDAP)
 

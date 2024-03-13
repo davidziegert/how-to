@@ -1,4 +1,4 @@
-# How To - Linux - Tools - Apache2 + PHP (Ubuntu) [^1]
+# Linux - Service - Apache2 + PHP (Ubuntu) [^1]
 
 ## Installation
 

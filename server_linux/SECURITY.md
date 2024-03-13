@@ -1,4 +1,4 @@
-# How To - Linux - Security (Ubuntu) [^12]
+# Linux - Security (Ubuntu) [^12]
 
 ## Automatic Updates
 

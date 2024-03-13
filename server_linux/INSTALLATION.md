@@ -1,4 +1,4 @@
-# How To - Linux - Installation (Ubuntu)
+# Linux - Installation (Ubuntu)
 
 ![Screenshot-1](/files/linux_install_1.png)
 ![Screenshot-2](/files/linux_install_2.png)

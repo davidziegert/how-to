@@ -1,4 +1,4 @@
-# How To - VMware - Setup [^1]
+# VMware - Setup [^1]
 
 ```
 Open your web browser and enter the IP address of your VMware vSphere Client. Enter your user name in the domain\username format and then enter your password. You can use an administrative account or another account that has enough permissions to create virtual machines in vCenter. Click Login.

@@ -1,4 +1,4 @@
-# How To - Linux - Disk Management (Ubuntu)
+# Linux - Disk Management (Ubuntu)
 
 ## FDISK (max. 2TB) [^1]
 

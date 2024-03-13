@@ -1,4 +1,4 @@
-# How To - Linux - Tools - DHCP (Ubuntu)
+# Linux - Service - DHCP (Ubuntu)
 
 ## Installation
 

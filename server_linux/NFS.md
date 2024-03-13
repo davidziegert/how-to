@@ -1,4 +1,4 @@
-# How To - Linux - Network File System (Ubuntu) [^1] [^2]
+# Linux - Network File System (Ubuntu) [^1] [^2]
 
 ## On the Host (Mount Preparation)
 

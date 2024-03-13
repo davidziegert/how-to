@@ -1,4 +1,4 @@
-# How To - Windows - Ports [^1]
+# macOS - Ports [^1]
 
 ## Well-known ports
 

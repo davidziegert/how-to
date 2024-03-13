@@ -1,4 +1,4 @@
-# How To - VMware - Installation
+# VMware - Installation
 
 ## Requirements for ESXi 7 [^1]
 

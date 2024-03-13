@@ -1,4 +1,4 @@
-# How To - Linux - Tools - DNS (Ubuntu) [^1] [^2] [^3] [^4] [^5] [^6] [^7] [^8] [^9] [^10]
+# Linux - Service - DNS (Ubuntu) [^1] [^2] [^3] [^4] [^5] [^6] [^7] [^8] [^9] [^10]
 
 ## Installation
 
