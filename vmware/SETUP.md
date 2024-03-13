@@ -211,8 +211,27 @@ When a snapshot is created for a database server or an Active Directory domain c
 VMware regularly releases updates for vSphere. These updates can either be installed via the update manager or installed manually on the individual hosts. This makes sense, for example, if no vCenter is in use. Manually updating vSphere hosts is particularly useful if only a manageable number of hosts are in use or only individual servers in a test environment need to be updated. As soon as VMware makes updates for vSphere available, they can be found in the VMware download portal.
 ```
 
+## Hostname & Certificates [^6]
+
+### Set Hostname and FQDN via SSH
+
+```
+esxcli system hostname set --host=NEWHOSTNAMEHERE
+esxcli system hostname set --fqdn=NEWHOSTNAMEHERE.domain.name
+```
+
+### Managing Certificates by Using the VMware Host Client [^7]
+
+- Click Manage in the VMware Host Client inventory and click Security & Users.
+- Click Certificates and click Import new certificate.
+- Generate a certificate signing request:
+    - Generate FQDN signing request
+    - Generate IP signing request
+
 [^1]: https://www.nakivo.com/blog/how-to-create-a-virtual-machine-using-vsphere-client-7/
 [^2]: https://www.windowspro.de/thomas-drilling/virtuelle-disk-controller-fuer-vms-esxi-lsi-logic-sas-vmware-paravirtual
 [^3]: https://www.nakivo.com/blog/thick-and-thin-provisioning-difference/
 [^4]: https://www.starwindsoftware.com/blog/vmware-esxi-disk-provision-work-difference-one-better
 [^5]: https://www.ip-insider.de/12-vmware-best-practices-a-722ae61d5e26bfac199075a4696f82eb/
+[^6]: https://kb.vmware.com/s/article/1010821
+[^7]: https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-esxi-host-client/GUID-42AAE815-90CF-4D13-A01C-596A345A33DE.html

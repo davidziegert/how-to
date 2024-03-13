@@ -82,8 +82,7 @@ Deny from all
 
 #### \Resources\Private\Templates\Page\Default.html
 
----
-
+```
 <div class="wrapper">
     <f:render partial="Nav.html" arguments="{_all}"/>
     <f:render partial="Header.html" arguments="{_all}"/>
@@ -91,14 +90,13 @@ Deny from all
     <f:render partial="Aside.html" arguments="{_all}"/>
     <f:render partial="Footer.html" arguments="{_all}"/>
 </div>
-
----
+```
 
 ##### \Resources\Private\Partials\Page\
 
 ###### Nav.html
 
----
+```
 <nav>
     <div class="row">
         <div>
@@ -139,11 +137,11 @@ Deny from all
         </div>
     </div>
 </nav>
----
+```
 
 ###### Header.html
 
----
+```
 <header>
     <div class="row">
         <div class="title">
@@ -169,11 +167,11 @@ Deny from all
         </div>
     </div>
 </header>
----
+```
 
 ###### Main.html
 
----
+```
 <main>
     <div class="row">
         <f:if condition="{breadcrumb}">
@@ -199,7 +197,7 @@ Deny from all
         </f:for>
     </div>
 </main>
----
+```
 
 ###### Aside.html
 
@@ -207,7 +205,7 @@ Deny from all
 
 ### \Configuration\TCA\Overrides\sys_template.php
 
----
+```
 <?php
 
 	defined('TYPO3') or die();
@@ -219,7 +217,7 @@ Deny from all
 		'Configuration/TypoScript/',
 		'Fluid Content Elements'
 	);
----
+```
 
 ### \Configuration\TsConfig\
 
@@ -227,7 +225,7 @@ Deny from all
 
 #### constants.typoscript
 
----
+```
 @import 'EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript'
 
 page {
@@ -237,18 +235,18 @@ page {
     templateRootPath = EXT:site_package/Resources/Private/Templates/Page/
   }
 }
----
+```
 
 #### setup.typoscript
 
----
+```
 @import 'EXT:fluid_styled_content/Configuration/TypoScript/setup.typoscript'
 @import 'EXT:site_package/Configuration/TypoScript/Setup/*.typoscript'
----
+```
 
 ### \Configuration\TypoScript\Setup\Page.typoscript
 
----
+```
 page = PAGE
 
 // Part 1: Global Site Configuration
@@ -372,7 +370,7 @@ page {
       file_01 = EXT:site_package/Resources/Public/JavaScript/custom.js
   }
 }
----
+```
 
 ### composer.json
 
@@ -428,23 +426,25 @@ page {
 
 ## Extension installation without composer
 
-- If TYPO3 has been installed the legacy way, by extracting the source package into the web directory without using PHP composer follow this tutorial for installation of the site-package extension:
+```
+If TYPO3 has been installed the legacy way, by extracting the source package into the web directory without using PHP composer follow this tutorial for installation of the site-package extension:
 By using this method, extensions (e.g. the sitepackage extension) can be installed using the Extension Manager, which is a module found in the backend of TYPO3.
 It is highly recommended that you work locally on your machine using for example ddev.
 Copy the directory site_package (including all files and sub-directories) to the following directory in your TYPO3 instance: typo3conf/ext/.
 You can also create a ZIP file of the content of your site_package folder and name it site_package.zip. It is important that the ZIP archive does not contain the directory site_package and its files and directories inside this folder. The files and folders must be directly located on the first level of ZIP archive.
+```
 
 ## Extension installation with Extension manager
 
-- First of all, login at the backend of TYPO3 as a user with administrator privileges. At the left side you find a section Admin Tools with a module Extensions. Open this module and make sure, the drop down box on the right hand side shows Installed Extensions. If you have already uploaded the site package extension, search for "Site Package". If you created a ZIP file, upload the ZIP'ed extension by clicking the upload icon. Once the site package extension appears in the list, you can activate it by clicking the "plus" icon.
+```
+First of all, login at the backend of TYPO3 as a user with administrator privileges. At the left side you find a section Admin Tools with a module Extensions. Open this module and make sure, the drop down box on the right hand side shows Installed Extensions. If you have already uploaded the site package extension, search for "Site Package". If you created a ZIP file, upload the ZIP'ed extension by clicking the upload icon. Once the site package extension appears in the list, you can activate it by clicking the "plus" icon.
+```
 
----
-
+```
 ## Typo3 - Templates
 
 - ### [First Try](/files/site_package.zip)
-
----
+```
 
 [^1]: https://docs.typo3.org/m/typo3/tutorial-sitepackage/main/en-us/
 [^2]: https://docs.typo3.org/m/typo3/tutorial-sitepackage/main/en-us/Summary/Index.html
