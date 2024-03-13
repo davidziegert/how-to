@@ -7,24 +7,24 @@
 
 # :card_index: Table of Contents
 
-- Virtualization
-    - VMware
+- ## Virtualization
+    - ### VMware
         - [First Installation](vmware/INSTALLATION.md)
         - [Setup](vmware/SETUP.md)
         - [Security](vmware/SECURITY.md)
         - Backups
-    - Hyper-V Manager
-    - Docker
+    - ### Hyper-V Manager
+    - ### Docker
 
-- Operating Systems
-    - Server
-        - Windows
+- ## Operating Systems
+    - ### Server
+        - #### Windows
             - First Installation
             - Security
             - Services
             - [Ports](server_windows/PORTS.md)
             - Backup
-        - Linux (Ubuntu)
+        - #### Linux (Ubuntu)
             - [First Installation](server_linux/INSTALLATION.md)
             - [Security](server_linux/SECURITY.md)
             - [Disk Management](server_linux/DISK.md)
@@ -40,25 +40,25 @@
                 - [Rsync](server_linux/RSYNC.md)
             - [Ports](server_linux/PORTS.md)
             - Backup
-        - macOS
+        - #### macOS
             - First Installation
             - Security
             - Services
             - [Ports](client_macos/PORTS.md)
             - Backup
-    - Client
+    - ### Client
         - Windows
         - Linux
         - macOS
 
-- Self-Hosted Software
-    - [Overview](selfhosted/OVERVIEW.md)
-    - Monitoring
+- ## Self-Hosted Software
+    - ### [Overview](selfhosted/OVERVIEW.md)
+    - ### Monitoring
         - Checkmk
         - Nagios
         - Grafana
-    - CMS
-        - WordPress
+    - ### CMS
+        - #### WordPress
             - [First Installation](wordpress/INSTALLATION.md)
             - [Security](wordpress/SECURITY.md)
             - [Backup](wordpress/BACKUP.md)
@@ -75,13 +75,13 @@
                 - [Insert PHP Code Snippet](https://de.wordpress.org/plugins/insert-php-code-snippet/)
                 - [Nested Pages](https://de.wordpress.org/plugins/wp-nested-pages/)
                 - [Health Check & Troubleshooting](https://wordpress.org/plugins/health-check/)
-        - Typo3
+        - #### Typo3
             - [First Installation](typo3/INSTALLATION.md)
             - [Security](typo3/SECURITY.md)
             - [Backup](typo3/BACKUP.md)
             - [Template](typo3/TEMPLATE.md)
             - Plugins
-        - Grav
+        - #### Grav
             - First Installation
             - Security
             - Backup
