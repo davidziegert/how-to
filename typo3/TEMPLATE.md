@@ -201,7 +201,15 @@ Deny from all
 
 ###### Aside.html
 
+```
+
+```
+
 ###### Footer.html
+
+```
+
+```
 
 ### \Configuration\TCA\Overrides\sys_template.php
 
@@ -221,7 +229,15 @@ Deny from all
 
 ### \Configuration\TsConfig\
 
+```
+
+```
+
 ### \Configuration\TypoScript\
+
+```
+
+```
 
 #### constants.typoscript
 
@@ -438,12 +454,6 @@ You can also create a ZIP file of the content of your site_package folder and na
 
 ```
 First of all, login at the backend of TYPO3 as a user with administrator privileges. At the left side you find a section Admin Tools with a module Extensions. Open this module and make sure, the drop down box on the right hand side shows Installed Extensions. If you have already uploaded the site package extension, search for "Site Package". If you created a ZIP file, upload the ZIP'ed extension by clicking the upload icon. Once the site package extension appears in the list, you can activate it by clicking the "plus" icon.
-```
-
-```
-## Typo3 - Templates
-
-- ### [First Try](/files/site_package.zip)
 ```
 
 [^1]: https://docs.typo3.org/m/typo3/tutorial-sitepackage/main/en-us/
