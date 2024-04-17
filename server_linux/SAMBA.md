@@ -129,6 +129,11 @@ unix password sync = No
 hide dot files = Yes
 hide files = /lost+found/desktop.ini/ntuser.ini/NTUSER.*/Thumbs.db/
 
+mangled names = no
+dos charset = CP850
+unix charset = UTF-8
+display charset = UTF-8
+
 passdb backend = ldapsam:ldap://xxx.xxx.xxx.xxx
 ldap suffix = dc=SUBDOMAIN,dc=DOMAIN,dc=TLD
 ldap admin dn = cn=admin,dc=SUBDOMAIN,dc=DOMAIN,dc=TLD
