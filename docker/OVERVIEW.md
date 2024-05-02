@@ -1,6 +1,6 @@
 # Docker - Overview
 
-## Docker - Installation  (using the apt repository)
+## Installation  (using the apt repository)
 
 ```
 Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker repository.
@@ -72,3 +72,36 @@ sudo docker run hello-world
 | Docker restart  | docker restart [OPTIONS] CONTAINER [CONTAINER…]    | This command is used to restart one or more Docker containers that are currently operating.                                   |
 | Docker search   | docker search [OPTIONS] TERM                       | This command searches for Docker images on Docker Hub, a public registry for Docker images.                                   |
 | Docker volume   | docker volume create my_volume                     | This command creates a new Docker volume named “my_volume” in the Docker container.                                           |
+
+## Configuration
+
+### Manage Docker as a non-root user
+
+```
+The Docker daemon binds to a Unix socket, not a TCP port. By default it's the root user that owns the Unix socket, and other users can only access it using sudo. The Docker daemon always runs as the root user.
+
+If you don't want to preface the docker command with sudo, create a Unix group called docker and add users to it. When the Docker daemon starts, it creates a Unix socket accessible by members of the docker group. On some Linux distributions, the system automatically creates this group when installing Docker Engine using a package manager. In that case, there is no need for you to manually create the group.
+
+Create the docker group and add your user to the docker group.
+```
+
+```
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo service docker restart
+```
+
+### Configure Docker to start on boot with systemd
+
+```
+Many modern Linux distributions use systemd to manage which services start when the system boots. On Debian and Ubuntu, the Docker service starts on boot by default. To automatically start Docker and containerd on boot for other Linux distributions using systemd, run the following commands:
+```
+
+```
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+
+sudo systemctl disable docker.service
+sudo systemctl disable containerd.service
+```
+
