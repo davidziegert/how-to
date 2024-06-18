@@ -28,6 +28,9 @@
       - [NFS](/how-to/server/ubuntu/services/nfs.md)
       - [SAMBA](/how-to/server/ubuntu/services/samba.md)
       - [Docker](/how-to/server/ubuntu/services/docker.md)  
+      - [RSync](/how-to/server/ubuntu/services/rsync.md)  
+      - [DiskManagement](/how-to/server/ubuntu/services/disk.md)  
+
 - ClientOS
   - [Windows](/how-to/client/windows/windows.md)
     - Tools
@@ -158,6 +161,119 @@
     <li><a href="https://contao.org/">Contao</a></li>
     <li><a href="https://www.drupal.de/">Drupal</a></li>
     <li><a href="https://www.joomla.de/">Joomla</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>Meetings</summary>
+  <ul>
+    <li><a href="https://bigbluebutton.org/">BigBlueButton</a></li>
+    <li><a href="https://www.braincert.com/">BrainCert</a></li>
+    <li><a href="https://www.goto.com/de/meeting">GoToMeeting</a></li>
+    <li><a href="https://meet.jit.si/">jitsi</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>Surveys</summary>
+  <ul>
+    <li><a href="https://www.global-assess.rwth-aachen.de/nrddt/testmaker/index.php?page=about">testMaker</a></li>
+    <li><a href="https://www.surveymonkey.de/">SurveyMonkey</a></li>
+    <li><a href="https://www.formstack.com/">Formstack</a></li>
+    <li><a href="https://www.limesurvey.org/de/">LimeSurvey</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>Chats</summary>
+  <ul>
+    <li><a href="https://mattermost.com/">Mattermost</a></li>
+    <li><a href="https://de.rocket.chat/">RocketChat</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>Tickets</summary>
+  <ul>
+    <li><a href="https://freescout.net/">FreeScout</a></li>
+    <li><a href="https://www.opensupports.com/">OpenSupport</a></li>
+    <li><a href="https://www.hesk.com/">Hesk</a></li>
+    <li><a href="https://zammad.com/ ">Zammad</a></li>
+    <li><a href="http://handesk.io/">Handesk</a></li>
+    <li><a href="https://trudesk.io/">Trudesk</a></li>
+    <li><a href="https://www.quickdesk.io/">QuickDesk</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>E-Learning</summary>
+  <ul>
+    <li><a href="https://www.sakailms.org">Sakai</a></li>
+    <li><a href="https://moodle.org/">Moodle</a></li>
+    <li><a href="https://www.ilias.de/">Ilias</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>Cloud</summary>
+  <ul>
+    <li><a href="https://nextcloud.com/">Nextcloud</a></li>
+    <li><a href="https://owncloud.com/">ownCloud</a></li>
+    <li><a href="https://www.seafile.com/en/home/">Seafile</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>Wiki</summary>
+  <ul>
+    <li><a href="https://www.bookstackapp.com/">BookStack</a></li>
+    <li><a href="https://www.dokuwiki.org/dokuwiki">DokuWiki</a></li>
+    <li><a href="https://bluespice.com/de/">BlueSpice</a></li>
+    <li><a href="https://js.wiki/">Wiki.js</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>NAS-OS</summary>
+  <ul>
+    <li><a href="https://www.truenas.com/">TrueNAS</a></li>
+    <li><a href="https://zentyal.com/">Zentyal</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>Python</summary>
+  <ul>
+    <li><a href="https://jupyter.org/">Jupyter Lab</a></li>
+    <li><a href="https://jupyter.org/">Jupyter Notebook</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>R</summary>
+  <ul>
+    <li><a href="https://www.rstudio.com/">R-Studio Server</a></li>
+    <li><a href="https://www.shinyapps.io/">ShinyApps</a></li>
   </ul>
 </details>
 
