@@ -73,13 +73,13 @@ sudo nano /etc/apache2/sites-available/wordpress.conf
 	DocumentRoot /var/www/html/wordpress
 	ServerName example.com
 	ServerAlias www.example.com
-	
+
 	<Directory /var/www/html/wordpress/>
 		Options FollowSymLinks
 		AllowOverride All
 		Require all granted
 	</Directory>
-	
+
 	ErrorLog ${APACHE_LOG_DIR}/error.log
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
@@ -296,30 +296,26 @@ soap.wsdl_cache_limit = 5
 ldap.max_links = -1
 ```
 
-### Block  Userlist in WP’s REST API
+### Block Userlist in WP’s REST API
 
 ```
-A list all of all is available at users https://example.com/wp-json/wp/v2/users and one can also get information about a specific user at https://example.com/wp-json/wp/v2/users/1, where 1 is a user’s ID. To disable these two endpoints, add this code snippet to your theme’s functions.php file or in the wp-config.php file.
+A list all of all is available at users https://example.com/wp-json/wp/v2/users and one can also get information about a specific user at https://example.com/wp-json/wp/v2/users/1, where 1 is a user’s ID. To disable these add this code snippet to your theme’s functions.php file.
 ```
 
 ```php
-// functions.php
+/* ******************* */
+/* Block WP-JSON-Users */
+/* ******************* */
 
-add_filter('rest_endpoints', function( $endpoints ) {
-    if ( isset( $endpoints['/wp/v2/users'] ) ) {
-        unset( $endpoints['/wp/v2/users'] );
+add_filter('rest_endpoints', function ($endpoints) {
+    if (isset($endpoints['/wp/v2/users'])) {
+        unset($endpoints['/wp/v2/users']);
     }
-    if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
-        unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+    if (isset($endpoints['/wp/v2/users/(?P<id>[\d]+)'])) {
+        unset($endpoints['/wp/v2/users/(?P<id>[\d]+)']);
     }
     return $endpoints;
 });
-```
-
-```php
-// wp-config.php
-
-remove_action('rest_api_init', 'create_initial_rest_routes', 99);
 ```
 
 ### Remove WP-Admin Login-Path
@@ -329,18 +325,6 @@ Are you looking for a simple, yet effective way to protect your admin page? If s
 The most popular method to break into a website is brute force (continually entering login information until it is right).
 Redirect the the login page to another URL with the WPS Hide Login Plugin.
 ```
-
-## Plugins
-
-- [WPS Hide Login](https://de.wordpress.org/plugins/wps-hide-login/)
-- [wp_head() cleaner](https://de.wordpress.org/plugins/wp-head-cleaner/)
-- [WP Fastest Cache](https://de.wordpress.org/plugins/wp-fastest-cache/)
-- [Very Simple Meta Description](https://wordpress.org/plugins/very-simple-meta-description/)
-- [Real Media Library](https://de.wordpress.org/plugins/real-media-library-lite/)
-- [Polylang](https://de.wordpress.org/plugins/polylang/)
-- [Insert PHP Code Snippet](https://de.wordpress.org/plugins/insert-php-code-snippet/)
-- [Nested Pages](https://de.wordpress.org/plugins/wp-nested-pages/)
-- [Health Check & Troubleshooting](https://wordpress.org/plugins/health-check/)
 
 ## Backup
 
@@ -380,6 +364,18 @@ sudo crontab -e
 
 ![Screenshot-1](./assets/wordpress_export.jpg)
 
+## Plugins
+
+- [WPS Hide Login](https://de.wordpress.org/plugins/wps-hide-login/)
+- [wp_head() cleaner](https://de.wordpress.org/plugins/wp-head-cleaner/)
+- [WP Fastest Cache](https://de.wordpress.org/plugins/wp-fastest-cache/)
+- [Very Simple Meta Description](https://wordpress.org/plugins/very-simple-meta-description/)
+- [Real Media Library](https://de.wordpress.org/plugins/real-media-library-lite/)
+- [Polylang](https://de.wordpress.org/plugins/polylang/)
+- [Insert PHP Code Snippet](https://de.wordpress.org/plugins/insert-php-code-snippet/)
+- [Nested Pages](https://de.wordpress.org/plugins/wp-nested-pages/)
+- [Health Check & Troubleshooting](https://wordpress.org/plugins/health-check/)
+
 ## Classic Theme [^1] [^2]
 
 ### Folder Structure Example
@@ -398,7 +394,7 @@ theme
 ├── functions.php			// WordPress-Functions
 ├── screenshot.png			// Default-Screenshot
 ├── style.css				// Default-Stylesheet and Theme Information
-├── header.php				// Header Template-Part                    
+├── header.php				// Header Template-Part
 ├── nav.php					// Navigation Template-Part
 ├── main.php				// Content Template-Part
 ├── sidebar.php				// Sidebar Template-Part
@@ -410,12 +406,181 @@ theme
 ├── front-page.php			// Home Page-Template
 ├── page.php				// Site Page-Template
 ├── single.php				// Blog-Entry Page-Template
-└── search.php				// Search-Result Page-Template     
+└── search.php				// Search-Result Page-Template
 ```
 
 ### Shortcodes
 
-#### html - head
+#### functions.php
+
+```php
+<?php
+
+/* ********************* */
+/* Register Custom Theme */
+/* ********************* */
+
+if (!function_exists('my_theme_setup')) :
+    function my_theme_setup()
+    {
+        /* Make theme available for translation. Translations can be placed in the /languages/ directory. */
+        load_theme_textdomain('myfirsttheme', get_template_directory() . '/languages');
+
+        /* Add default posts and comments RSS feed links */
+        add_theme_support('automatic-feed-links');
+
+        /* Enable support for post thumbnails and featured images. */
+        add_theme_support('post-thumbnails');
+
+        /* Enable support for the following post formats: aside, gallery, quote, image, and video */
+        add_theme_support('post-formats', array('aside', 'gallery', 'quote', 'image', 'video'));
+    }
+endif;
+
+add_action('after_setup_theme', 'my_theme_setup');
+
+/* ********************* */
+/* Register Custom Menus */
+/* ********************* */
+
+function insert_main_menu()
+{
+    register_nav_menu('REGISTER-NAME', __('main-menu'));
+}
+
+add_action('init', 'insert_main_menu');
+
+/* *********** */
+/* Breadcrumbs */
+/* *********** */
+
+function insert_breadcrumbs()
+{
+    echo '<div class="breadcrumbs">';
+    echo '<a href="' . home_url() . '" rel="nofollow">Home</a>';
+
+    if (is_category() || is_single()) {
+        echo '&nbsp;&nbsp;&#187;&nbsp;&nbsp;';
+        the_category(' &bull; ');
+
+        if (is_single()) {
+            echo '&nbsp;&nbsp;&#187;&nbsp;&nbsp;';
+            the_title();
+        }
+    } elseif (is_page()) {
+        echo '&nbsp;&nbsp;&#187;&nbsp;&nbsp;';
+        echo the_title();
+    } elseif (is_search()) {
+        echo '&nbsp;&nbsp;&#187;&nbsp;&nbsp;Search Results for... ';
+        echo '"<em>';
+        echo the_search_query();
+        echo '</em>"';
+    }
+
+    echo '</div>';
+}
+
+/* *********** */
+/* Random Page */
+/* *********** */
+
+function insert_random_link()
+{
+    $pages = get_pages();
+    $randomKey = (mt_rand(1, count($pages)) - 1);
+    $page = $pages[$randomKey];
+    $pageLink = get_page_link($page->ID);
+    echo '<a href="' . $pageLink . '">Random Page</a>';
+}
+
+/* ******************** */
+/* SEO Meta-Description */
+/* ******************** */
+
+function insert_meta_description()
+{
+    $post_id = get_the_ID();
+    $post = get_post($post_id);
+    setup_postdata($post);
+    $excerpt = esc_attr(strip_tags(get_the_excerpt()));
+    echo $excerpt;
+    wp_reset_postdata();
+}
+
+/* *********** */
+/* Page Author */
+/* *********** */
+
+function insert_author()
+{
+    if (have_posts()) : while (have_posts()) : the_post();
+            echo get_the_author();
+        endwhile;
+    endif;
+}
+
+/* ************************* */
+/* Blog-Post with Navigation */
+/* ************************* */
+
+function insert_blog_pagination($pages, $range)
+{
+    $showitems = ($range * 2) + 1;
+
+    global $paged;
+    if (empty($paged)) $paged = 1;
+
+    if ($pages == '') {
+        global $wp_query;
+        $pages = $wp_query->max_num_pages;
+        if (!$pages) {
+            $pages = 1;
+        }
+    }
+
+    if (1 != $pages) {
+        echo '<div class="post-pagination-wrapper">';
+        echo '<span class="post-pagination">&#187;';
+
+        for ($i = 1; $i <= $pages; $i++) {
+            if (1 != $pages && (!($i >= $paged + $range + 1 || $i <= $paged - $range - 1) || $pages <= $showitems)) {
+                echo ($paged == $i) ? '<span>' . $i . '</span>' : '<a href="' . get_pagenum_link($i) . '">' . $i . '</a>';
+            }
+        }
+
+        echo '&#171;</span>';
+        echo '<small>Page ' . $paged . ' of ' . $pages . '</small>';
+        echo '</div>';
+    }
+}
+
+/* ************************* */
+/* Excerpt Length of Words */
+/* ************************* */
+
+function my_excerpt_length($length)
+{
+    return 15;
+}
+
+add_filter('excerpt_length', 'my_excerpt_length');
+
+/* ******************* */
+/* Block WP-JSON-Users */
+/* ******************* */
+
+add_filter('rest_endpoints', function ($endpoints) {
+    if (isset($endpoints['/wp/v2/users'])) {
+        unset($endpoints['/wp/v2/users']);
+    }
+    if (isset($endpoints['/wp/v2/users/(?P<id>[\d]+)'])) {
+        unset($endpoints['/wp/v2/users/(?P<id>[\d]+)']);
+    }
+    return $endpoints;
+});
+```
+
+#### head
 
 ```php
 <!-- Website-Language -->
@@ -427,8 +592,23 @@ theme
 <!-- Path to Template-Folder -->
 <?php echo get_bloginfo( 'template_directory' );?>
 
+<!-- Page Author -->
+<?php insert_author(); ?>
+
+<!-- Page Title -->
+<?php the_title(); ?>
+
+<!-- Page Description -->
+<?php insert_meta_description(); ?>
+
 <!-- WordPress-Specific-Elements -->
 <?php wp_head(); ?>
+```
+
+#### body
+
+```php
+<!-- WordPress-Specific-Elements -->
 <?php wp_footer(); ?>
 ```
 
@@ -440,22 +620,25 @@ theme
 
 <!-- Website-Description -->
 <?php bloginfo('description'); ?>
+
+<!-- Website-URL -->
+<?php echo home_url(); ?>
 ```
 
 #### nav
 
 ```php
-<!-- Breadcrumb-Navigation -->
-<?php get_breadcrumb(); ?>
-
-<!-- Custom-Navigation () from functions.php (WITH container_id OR container_class) -->
-<?php wp_nav_menu(array('theme_location' => 'REGISTER-NAME', 'container_id' => 'ID-NAME')); ?>
+<!-- Main-Menu -->
+<?php wp_nav_menu(array('theme_location' => 'REGISTER-NAME', 'container_class' => 'main-menu')); ?>
 ```
 
 #### sidebar
 
 ```php
-<!-- Includes searchform.php -->
+<!-- Breadcrumb-Navigation -->
+<?php insert_breadcrumbs(); ?>
+
+<!-- Import Search-Form -->
 <?php get_search_form(); ?>
 ```
 
@@ -468,26 +651,32 @@ theme
 <!-- List the monthly Archive -->
 <?php wp_get_archives('type=monthly'); ?>
 
- <!-- List all Pages -->
- <?php wp_list_pages('title_li=' . __('')); ?>
+<!-- List all Pages -->
+<?php wp_list_pages('title_li=' . __('')); ?>
+
+<!-- Link to Random Page -->
+<?php insert_random_link(); ?>
 ```
 
 #### search
 
 ```php
+<!-- Search-Results -->
 <?php if (have_posts()) : ?>
-	<!-- Print Search-Term -->
-    <?php echo $s ?>
-	<!-- Loop prints all Sites and Post including the Search-Term -->
-    <?php $i=1; while (have_posts()) : the_post(); ?>
-		<!-- Title of Site or Post -->
-        <?php the_title(); ?>
-		<!-- Trimmed (20) Content of Site or Post and Link -->
-        <?php echo wp_trim_words(get_the_content(), 20); ?> <a href="<?php the_permalink(); ?>">MORE</a>
-    <?php $i++; endwhile; ?>
+  <!-- Print Search-Term -->
+  <?php echo $s ?>
+  <!-- Loop prints all Sites and Post including the Search-Term -->
+  <?php $i = 1;
+  while (have_posts()) : the_post(); ?>
+    <!-- Title of Site or Post -->
+    <?php the_title(); ?>
+    <!-- Trimmed (20) Content of Site or Post and Link -->
+    <?php echo wp_trim_words(get_the_content(), 20); ?> <a href="<?php the_permalink(); ?>">read more</a>
+  <?php $i++;
+  endwhile; ?>
 <?php else : ?>
-	<!-- If no match found -->
-    <?php echo "SORYY" ?>
+  <!-- If no match found -->
+  <?php echo "Sorry, nothing found matching your search criteria!" ?>
 <?php endif; ?>
 ```
 
@@ -495,812 +684,134 @@ theme
 
 ```php
 <!-- Search-Form-Template -->
-<form class="search-menu" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-	<input type="text" placeholder="PLACEHOLDER" name="s" value="<?php echo get_search_query(); ?>">
-	<button type="submit">SEARCH</button>
+<form class="search-menu" method="get" action="<?php echo esc_url(home_url('/')); ?>">
+  <input type="text" placeholder="What you looking for ?" name="s" value="<?php echo get_search_query(); ?>">
+  <button type="submit">Search</button>
 </form>
-```
-
-#### page
-
-```php
- <!-- If Content exists then post -->
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>   
-	<!-- Page-Title -->
-	<?php the_title(); ?>
-	<!-- Page-Content -->
-	<?php the_content(); ?>
-	<!-- Page-Last-Update -->
-	<?php the_modified_date() ?>
-<?php endwhile; endif; ?>
-```
-
-#### single
-
-```php
- <!-- If Content exists then post -->
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>   
-	<!-- Page-Title -->
-	<?php the_title(); ?>
-	<!-- Page-Content -->
-	<?php the_content(); ?>
-	<!-- Page-Last-Update -->
-	<?php the_modified_date() ?>
-<?php endwhile; endif; ?>
-
-<!-- Includes comments.php -->
-<?php comments_template(); ?>
 ```
 
 #### index
 
 ```php
-<!-- Show Latest 6 Post -->
-<?php $args = array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 6 ); ?>
+<!-- Show Posts with Pagination -->
+<?php if (get_query_var('paged')) {
+    $paged = get_query_var('paged');
+} elseif (get_query_var('page')) {
+    $paged = get_query_var('page');
+} else {
+    $paged = 1;
+} ?>
 
-<?php $the_query = new WP_Query( $args ); ?>
+<!-- Show defined public Posts -->
+<?php query_posts(array(
+    'post_type' => 'post',
+    'paged' => $paged,
+    'posts_per_page' => 4,
+    'post_status' => 'publish'
+)); ?>
 
 <!-- Loop through every Post -->
-<?php if($the_query->have_posts()): ?>
-	<?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-		<!-- Post-Title -->
-		<?php the_title(); ?>
-		<!-- Post-Thumbnail -->
-		<?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>
-		<!-- Post-Content (10 words with link) -->
-		<?php echo wp_trim_words(get_the_content(), 10); ?>
-		<a href="<?php the_permalink(); ?>">MORE</a>
-		<!-- Post-Date -->
-		<?php the_date('d.m.Y'); ?>
-		<!-- Post-Category -->
-		<?php the_category(', '); ?>
-	<?php endwhile; ?>
-<?php else: ?>
-	<?php _e( 'There no posts to display.' ); ?>
-<?php endif; wp_reset_postdata(); ?>
+<?php if (have_posts()) : ?>
+    <?php while (have_posts()) : the_post(); ?>
+      <!-- Post-Thumbnail -->
+      <?php if (has_post_thumbnail()) {
+            get_the_post_thumbnail(get_the_ID(), "thumbnail");
+        } else {
+            echo '<img src="https://picsum.photos/150" class="attachment-thumbnail size-thumbnail wp-post-image" decoding="async" loading="lazy">';
+        } ?>
+      <!-- Post-Title -->
+      <?php the_title(); ?>
+      <!-- Post-Content (10 words) -->
+      <?php the_excerpt(); ?
+      <!-- Post-Link -->
+      <?php the_permalink(); ?>
+    <?php endwhile; ?>
+</div>
+<?php endif; ?>
+
+<!-- Pagination for Posts -->
+<?php if (function_exists("insert_blog_pagination")) : ?>
+<?php insert_blog_pagination("", 4); ?>
+<?php endif; ?>
+<?php wp_reset_query(); ?>
 ```
 
+#### page
+
 ```php
-<!-- Show All Post from Category -->
-<?php $args = array( 'post_type' => 'post', 'post_status' => 'publish', 'category_name' => 'my_category', 'nopaging' => true ); ?>
-
-<?php $the_query = new WP_Query( $args ); ?>
-
-<!-- Loop through every Post -->
-<?php if($the_query->have_posts()): ?>
-	<?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-		<!-- Post-Title -->
-		<?php the_title(); ?>
-		<!-- Post-Thumbnail -->
-		<?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>
-		<!-- Post-Content (10 words with link) -->
-		<?php echo wp_trim_words(get_the_content(), 10); ?>
-		<a href="<?php the_permalink(); ?>">MORE</a>
-		<!-- Post-Date -->
-		<?php the_date('d.m.Y'); ?>
-		<!-- Post-Category -->
-		<?php the_category(', '); ?>
-	<?php endwhile; ?>
-<?php else: ?>
-	<?php _e( 'There no posts to display.' ); ?>
-<?php endif; wp_reset_postdata(); ?>
+<!-- If Content exists then post -->
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+    <!-- Page-Title -->
+    <?php the_title(); ?>
+    <!-- Page-Content -->
+    <?php the_content(); ?>
+    <!-- Page-Last-Update -->
+    <?php the_modified_date() ?>
+<?php endwhile;
+endif; ?>
 ```
 
+#### single
+
 ```php
-<!-- NOT WORK ON index.php OR front-page.php -->
-<!-- Show 4 Post per Page with Pagination -->
-<?php $args = array( 'post_type' => 'post', 'posts_per_page' => 4, 'paged' => $paged ); ?>
+<!-- If Content exists then post -->
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+  <!-- Post-Title -->
+  <?php the_title(); ?>
+  <!-- Post-Content -->
+  <?php the_content(); ?>
+  <!-- Post-Last-Update -->
+  <?php the_modified_date() ?>
+  <!-- Post-Category -->
+  <?php the_category(', ');
+<?php endwhile;
+endif; ?>
 
-<?php $the_query = new WP_Query( $args ); ?>
-
-<!-- Loop through every Post -->
-<?php if($the_query->have_posts()): ?>
-	<?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-		<!-- Post-Title -->
-		<?php the_title(); ?>
-		<!-- Post-Thumbnail -->
-		<?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail'); ?>
-		<!-- Post-Content (10 words with link) -->
-		<?php echo wp_trim_words(get_the_content(), 10); ?>
-		<a href="<?php the_permalink(); ?>">MORE</a>
-		<!-- Post-Date -->
-		<?php the_date('d.m.Y'); ?>
-		<!-- Post-Category -->
-		<?php the_category(', '); ?>
-	<?php endwhile; ?>
-
-	<!-- Add the pagination functions here. -->
-	<?php posts_nav_link(); ?>
-
-<?php else: ?>
-	<?php _e( 'There no posts to display.' ); ?>
-<?php endif; wp_reset_postdata(); ?>
+<!-- Includes comments.php -->
+<?php comments_template(); ?>
 ```
 
 #### comments
 
 ```php
-<!-- Comment-Form-Template -->
-<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post">
-	<label for="author">AUTHOR</label>
-	<!-- Comment-Author-Name -->
-	<input type="text" name="author" id="author" value="<?php echo $comment_author; ?>" size="20" tabindex="1">
-	<label for="email">EMAIL</label>
-	<!-- Comment-Author-EMail (not public) -->
-	<input type="text" name="email" id="email" value="<?php echo $comment_author_email; ?>" size="20" tabindex="2">
-	<label for="url">URL</label>
-	<!-- Comment-Author-URL (not public) -->
-	<input type="text" name="url" id="url" value="<?php echo $comment_author_url; ?>" size="20" tabindex="3">
-	<label for="comment">COMMENT</label>
-	<!-- Comment-Text -->
-	<textarea name="comment" id="comment" rows="10" tabindex="4"></textarea>
-	<input name="submit" type="submit" id="submit" value="SUBMIT" tabindex="5">
-	<input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>">
-	<?php do_action('comment_form', $post->ID); ?>
-</form>
+<!-- Block comments.php from direct calling -->
+<?php
+  if (!empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['SCRIPT_FILENAME'])) :
+  die('The "comments.php" file cannot be called directly.');
+  endif;
+?>
 
 <!-- Loop prints all Comments to this Post-ID -->
 <?php foreach ($comments as $comment) : ?>
-	<!-- Comment-Template -->
-	<div class="COMMENT" id="comment-<?php comment_ID() ?>">
-		<!-- Comment-Author-Name -->
-		<?php comment_author_link() ?>
-		<!-- Comment-Date -->
-		<?php comment_date('j. F Y') ?>
-		<!-- Comment-Time -->
-		<?php comment_time('H:i') ?>
-		<!-- Comment-Text -->
-		<?php comment_text() ?>
-		<!-- If no Comment found -->
-		<?php if ($comment->comment_approved == '0') : ?>
-			<?php echo "NO COMMENT" ?>
-		<?php endif; ?>
-    </div>
+  <!-- Comment-Template -->
+  <div class="comment-tag" id="comment-<?php comment_ID(); ?>">
+    <!-- Comment-Author-Name -->
+    <?php comment_author_link() ?>
+    <!-- Comment-Date -->
+    <?php comment_date('j. F Y') ?>
+    <!-- Comment-Time -->
+    <?php comment_time('H:i') ?>
+    <!-- Comment-Text -->
+    <?php comment_text() ?>
+  </div>
 <?php endforeach; ?>
+
+<!-- Comment-Form-Template -->
+<form class="comment-form" action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post">
+  <!-- Comment-Author-Name -->
+  <label for="author">Author</label>
+  <input type="text" name="author" id="author" value="<?php echo $comment_author; ?>" size="20" tabindex="1">
+  <!-- Comment-Author-EMail -->
+  <label for="email">E-Mail</label>
+  <input type="text" name="email" id="email" value="<?php echo $comment_author_email; ?>" size="20" tabindex="2">
+  <!-- Comment-Author-URL -->
+  <label for="url">URL</label>
+  <input type="text" name="url" id="url" value="<?php echo $comment_author_url; ?>" size="20" tabindex="3">
+  <!-- Comment-Text -->
+  <label for="comment">Comment</label>
+  <textarea name="comment" id="comment" rows="10" tabindex="4"></textarea>
+  <input name="submit" type="submit" id="submit" value="Post" tabindex="5">
+  <input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>">
+  <?php do_action('comment_form', $post->ID); ?>
+</form>
 ```
-
-#### random-page-link
-
-```php
-<!-- Link to Random Page -->
-<?php get_randomsite(); ?>	
-```
-
-#### functions.php
-
-```php
-<?php 
-
-	/* ********************* */
-	/* Register Custom Theme */
-	/* ********************* */
-
-	if ( ! function_exists( 'myfirsttheme_setup' ) ) :
-
-	function myfirsttheme_setup()
-	{
-
-		/* Make theme available for translation. Translations can be placed in the /languages/ directory. */
-			 
-		load_theme_textdomain( 'myfirsttheme', get_template_directory() . '/languages' );
-
-		/* Add default posts and comments RSS feed links */
-		 
-		add_theme_support( 'automatic-feed-links' );
-
-		/* Enable support for post thumbnails and featured images. */
-		 
-		add_theme_support( 'post-thumbnails' );
-
-		/* Enable support for the following post formats: aside, gallery, quote, image, and video */
-		
-		add_theme_support( 'post-formats', array ( 'aside', 'gallery', 'quote', 'image', 'video' ) );
-	}
-	
-	endif;
-
-	
-	add_action( 'after_setup_theme', 'myfirsttheme_setup' );
-
-	/* ********************* */
-	/* Register Custom Menus */
-	/* ********************* */
-
-	function wpb_main_menu()
-	{
-	  register_nav_menu('REGISTER-NAME',__( 'MENU-NAME' ));
-	}
-	
-	add_action( 'init', 'wpb_main_menu' );	
-
-	/* *********** */
-	/* Breadcrumbs */
-	/* *********** */
-
-	function get_breadcrumb() 
-	{
-		echo '<a href="'.home_url().'" rel="nofollow">Home</a>';
-						
-		if (is_category() || is_single()) 
-		{
-			echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
-			the_category(' &bull; ');
-			
-			if (is_single()) 
-			{
-				echo " &nbsp;&nbsp;&#187;&nbsp;&nbsp; ";
-				the_title();
-			}
-		} 
-		
-		elseif (is_page()) 
-		{
-			echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
-			echo the_title();
-		} 
-		
-		elseif (is_search()) 
-		{
-			echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;Search Results for... ";
-			echo '"<em>';
-			echo the_search_query();
-			echo '</em>"';
-		}
-	}
-
-	/* *********** */
-	/* Random Site */
-	/* *********** */
-
-	function get_randomsite() 
-	{
-		$count_pages = wp_count_posts('page');
-		$total_pages = $count_pages->publish;
-		$random_page = rand(1, $total_pages);
-		$random_link = "?p=".$random_page;
-		echo "<a href=". $random_link .">Enter</a>";
-	}
-
-    /* ************* */
-	/* WP-JSON-Users */
-	/* ************* */
-
-    add_filter('rest_endpoints', function( $endpoints ) {
-        if ( isset( $endpoints['/wp/v2/users'] ) ) {
-            unset( $endpoints['/wp/v2/users'] );
-        }
-        if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
-            unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
-        }
-        return $endpoints;
-    });
-```
-
-## Block/FSE Theme
-
-### Folder Structure Example
-
-```
-theme
-├── assets
-│   ├── fonts
-│   │   └── font.woff2
-│   └── img
-│       ├── favicon.ico
-│       └── logo.png
-├── parts
-│   ├── header.html             // Header Template-Part                    
-│   ├── nav.html                // Navigation Template-Part
-│   ├── main.html               // Content Template-Part
-│   ├── sidebar.html            // Sidebar Template-Part
-│   ├── footer.html             // Footer Template-Part
-│   ├── searchform.html         // Search-Form Template-Part
-|   └── comments.html           // Comments Template-Part
-├── templates
-│   ├── front-page.html         // Home Page-Template
-│   ├── 404.html                // 404 Page-Template
-│   ├── page.html               // Site Page-Template
-│   ├── search.html             // Search-Result Page-Template
-│   ├── privacy-policy.html     // Disclaimer and Privacy Policy Page-Template
-│   ├── index.html              // Blog Page-Template
-│   ├── single.html             // Blog-Entry Page-Template
-│   └── archive.html            // Blog-Archive Page-Template  
-├── functions.php               // WordPress-Functions
-├── screenshot.png              // Default-Screenshot
-├── style.css                   // Default-Stylesheet and Theme Information
-└── theme.json                  // Default-JSON with Stylesheets
-```
-
-### functions.php
-
-```php
-<?php
-
-    if ( ! function_exists( 'mytheme_styles' ) ) :
-        function mytheme_styles() 
-        {
-            // Register theme stylesheet.
-            $theme_version = wp_get_theme()->get( 'Version' );
-            $version_string = is_string( $theme_version ) ? $theme_version : false;
-            wp_register_style('mytheme-style', get_template_directory_uri() . '/style.css', array(), $version_string);  
-                
-            // Enqueue theme stylesheet.
-            wp_enqueue_style( 'mytheme-style' );
-        }
-
-        add_action( 'wp_enqueue_scripts', 'mytheme_styles' );
-    endif;
-
-    if ( ! function_exists( 'mytheme_support' ) ) :
-        function mytheme_support()  
-        {
-            // Adding support for core block visual styles.
-            add_theme_support( 'wp-block-styles' );
-
-            // Enqueue editor styles.
-            add_editor_style( 'style.css' );
-        }
-
-        add_action( 'after_setup_theme', 'mytheme_support' );
-    endif;
-```
-
-### header.html
-
-```
-<!-- wp:site-logo /-->
-<!-- wp:site-title /-->
-<!-- wp:site-tagline /-->
-```
-
-### nav.html
-
-```
-<!-- wp:navigation -->
-	<!-- wp:page-list /-->
-<!-- /wp:navigation -->
-```
-
-### main.html
-
-```
-<!-- wp:post-title /-->
-<!-- wp:post-content /-->
-```
-
-### sidebar.html
-
-```
-<!-- wp:query {"queryId":0,"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[]}} -->
-	<!-- wp:post-template -->
-		<!-- wp:post-featured-image {"isLink":true} /-->
-		<!-- wp:post-title {"isLink":true} /-->
-		<!-- wp:post-excerpt {"moreText":"read more","excerptLength":40} /-->
-		<!-- wp:post-author {"showAvatar":false,"showBio":false} /-->
-		<!-- wp:post-date /-->
-		<!-- wp:post-terms {"term":"category"} /-->
-	<!-- /wp:post-template -->
-<!-- /wp:query -->
-```
-
-### footer.html
-
-```
-
-```
-
-### searchform.html
-
-```
-<!-- wp:search {"label":"Search","showLabel":false,"buttonText":"Search","buttonUseIcon":true} /-->
-```
-
-### comments.html
-
-```
-<!-- wp:comments -->
-	<!-- wp:comments-title /-->
-	<!-- wp:comment-template -->
-		<!-- wp:comment-author-name /-->
-		<!-- wp:group -->
-			<!-- wp:comment-date  /-->
-			<!-- wp:comment-edit-link /-->
-		<!-- /wp:group -->
-		<!-- wp:comment-content /-->
-		<!-- wp:comment-reply-link /-->
-	<!-- /wp:comment-template -->
-	<!-- wp:comments-pagination -->
-		<!-- wp:comments-pagination-previous /-->
-		<!-- wp:comments-pagination-numbers /-->
-		<!-- wp:comments-pagination-next /-->
-	<!-- /wp:comments-pagination -->
-	<!-- wp:post-comments-form /-->
-<!-- /wp:comments -->
-```
-
-### front-page.html
-
-```
-<!-- wp:template-part {"slug":"header"} /-->
-<!-- wp:template-part {"slug":"nav"} /-->
-<!-- wp:template-part {"slug":"searchform"} /-->
-<!-- wp:template-part {"slug":"main"} /-->
-<!-- wp:template-part {"slug":"sidebar"} /-->
-<!-- wp:template-part {"slug":"footer"} /-->
-```
-
-### 404.html
-
-```
-
-```
-
-### page.html
-
-```
-<!-- wp:template-part {"slug":"header"} /-->
-<!-- wp:template-part {"slug":"nav"} /-->
-<!-- wp:template-part {"slug":"searchform"} /-->
-<!-- wp:template-part {"slug":"main"} /-->
-<!-- wp:template-part {"slug":"sidebar"} /-->
-<!-- wp:template-part {"slug":"footer"} /-->
-```
-
-### search.html
-
-```
-<!-- wp:query-title {"type":"search"} /-->
-<!-- wp:query {"queryId":2,"query":{"perPage":5,"pages":0,"offset":0,"postType":"page","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false}} -->
-	<!-- wp:post-template -->
-		<!-- wp:post-title {"isLink":true} /-->
-		<!-- wp:post-excerpt {"moreText":"read more","excerptLength":50} /-->
-	<!-- /wp:post-template -->
-	<!-- wp:query-pagination -->
-		<!-- wp:query-pagination-previous /-->
-		<!-- wp:query-pagination-numbers /-->
-		<!-- wp:query-pagination-next /-->
-	<!-- /wp:query-pagination -->
-	<!-- wp:query-no-results -->
-		<!-- wp:paragraph -->
-		<p>Unfortunately, there is no match for your search terms. Please try again with other keywords.</p>
-		<!-- /wp:paragraph -->
-	<!-- /wp:query-no-results -->
-<!-- /wp:query -->
-```
-
-### privacy-policy.html
-
-```
-
-```
-
-### index.html
-
-```
-<!-- wp:query-title {"type":"search"} /-->
-<!-- wp:query {"queryId":3,"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false}} -->
-	<!-- wp:post-template -->
-		<!-- wp:post-featured-image {"isLink":true} /-->
-		<!-- wp:post-title {"isLink":true} /-->
-		<!-- wp:post-excerpt {"moreText":"read more","excerptLength":25} /-->
-		<!-- wp:post-author {"showAvatar":false,"showBio":false} /-->
-		<!-- wp:post-date /-->
-		<!-- wp:post-terms {"term":"category"} /-->
-	<!-- /wp:post-template -->
-<!-- /wp:query -->
-```
-
-### single.html
-
-```
-<!-- wp:post-featured-image {"isLink":false} /-->
-<!-- wp:post-title {"isLink":false} /-->
-<!-- wp:post-content /-->
-<!-- wp:post-author {"showAvatar":false,"showBio":false} /-->
-<!-- wp:post-date /-->
-<!-- wp:post-terms {"term":"category"} /-->
-```
-
-### archive.html
-
-```
-<!-- wp:query-title {"type":"search"} /-->
-<!-- wp:query {"queryId":3,"query":{"perPage":1,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false}} -->
-	<!-- wp:post-template -->
-		<!-- wp:post-title {"isLink":true} /-->
-		<!-- wp:post-excerpt {"moreText":"read more","excerptLength":25} /-->
-		<!-- wp:post-date /-->
-	<!-- /wp:post-template -->
-	<!-- wp:query-pagination -->
-		<!-- wp:query-pagination-previous /-->
-		<!-- wp:query-pagination-numbers /-->
-		<!-- wp:query-pagination-next /-->
-	<!-- /wp:query-pagination -->
-<!-- /wp:query -->
-```
-
-### theme.json
-
-```json
-{
-	"$schema": "https://schemas.wp.org/trunk/theme.json",
-
-	"settings": {
-		"appearanceTools": true,
-		"layout": {
-			"contentSize": "",
-			"wideSize": ""
-		},
-		"color": {
-			"defaultPalette": false,
-			"palette": [
-				{
-					"color": "#000000",
-					"name": "Primary",
-					"slug": "primary"
-				},
-				{
-					"color": "#FFFFFF",
-					"name": "Secondary",
-					"slug": "secondary"
-				},
-				{
-					"color": "#444444",
-					"name": "Tertiary",
-					"slug": "tertiary"
-				}
-			]
-		},
-        "typography": {
-            "fluid": true,
-            "fontSizes": [
-                {
-                    "size": "0.67rem",
-                    "name": "Extra small",
-                    "slug": "extra-small"
-                },
-                {
-                    "size": "0.83rem",
-                    "name": "Small",
-                    "slug": "small"
-                },
-                {
-                    "size": "1.0rem",
-                    "name": "Medium",
-                    "slug": "medium"
-                },
-                {
-                    "size": "1.17rem",
-                    "name": "Large",
-                    "slug": "large"
-                },
-                {
-                    "size": "1.5rem",
-                    "name": "Extra large",
-                    "slug": "x-large"
-                },
-                {
-                    "size": "2rem",
-                    "name": "Extra-Extra large",
-                    "slug": "xx-large"
-                }
-            ],
-            "fontFamilies": [
-                {
-                    "fontFamily": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif",
-                    "slug": "system-fonts",
-                    "name": "System Fonts"
-                }
-            ]
-        },		
-		"spacing": {
-			"blockGap": null,
-			"padding": false,
-			"margin": false,
-			"units": [
-				"px",
-				"em",
-				"rem",
-				"vh",
-				"vw",
-				"%"
-			]
-		},
-		"useRootPaddingAwareAlignments": true
-	},
-	"styles": {
-        "color": {
-            "background": "var(--wp--preset--color--primary)",
-            "text": "var(--wp--preset--color--secondary)"
-        },
-        "border": {
-            "color": "none",
-            "radius": "0",
-            "style": "none",
-            "width": "0"
-        },
-        "spacing": {
-            "blockGap": "1rem",
-            "margin": {
-                "top": "1rem",
-                "right": "1rem",
-                "bottom": "1rem",
-                "left": "1rem"
-            },
-            "padding": {
-                "top": "1rem",
-                "right": "1rem",
-                "bottom": "1rem",
-                "left": "1rem"
-            }
-        },
-        "typography": {
-            "fontFamily": "var(--wp--preset--font-family--system-fonts)",
-            "fontSize": "var(--wp--preset--font-size--medium)",
-            "fontStyle": "",
-            "fontWeight": "",
-            "letterSpacing": "",
-            "lineHeight": "1.5",
-            "textDecoration": "",
-            "textTransform": ""
-        },
-        "blocks": {
-            "core/archives": {},
-            "core/audio": {},
-            "core/avatar": {},
-            "core/block": {},
-            "core/button": {},
-            "core/buttons": {},
-            "core/calendar": {},
-            "core/categories": {},
-            "core/code": {},
-            "core/column": {},
-            "core/columns": {},
-            "core/comment-author-name": {},
-            "core/comment-content": {},
-            "core/comment-date": {},
-            "core/comment-edit-link": {},
-            "core/comment-reply-link": {},
-            "core/comments": {},
-            "core/comments-pagination": {},
-            "core/comments-pagination-next": {},
-            "core/comments-pagination-numbers": {},
-            "core/comments-pagination-previous": {},
-            "core/comments-title": {},
-            "core/comment-template": {},
-            "core/cover": {},
-            "core/details": {},
-            "core/embed": {},
-            "core/file": {},
-            "core/footnotes": {},
-            "core/freeform": {},
-            "core/gallery": {},
-            "core/group": {},
-            "core/heading": {},
-            "core/home-link": {},
-            "core/html": {},
-            "core/image": {},
-            "core/latest-comments": {},
-            "core/latest-posts": {},
-            "core/legacy-widget": {},
-            "core/list": {},
-            "core/list-item": {},
-            "core/loginout": {},
-            "core/media-text": {},
-            "core/missing": {},
-            "core/more": {},
-            "core/navigation": {},
-            "core/navigation-link": {},
-            "core/navigation-submenu": {},
-            "core/nextpage": {},
-            "core/page-list": {},
-            "core/page-list-item": {},
-            "core/paragraph": {},
-            "core/pattern": {},
-            "core/post-author": {},
-            "core/post-author-biography": {},
-            "core/post-author-name": {},
-            "core/post-comments": {},
-            "core/post-comments-form": {},
-            "core/post-content": {},
-            "core/post-date": {},
-            "core/post-excerpt": {},
-            "core/post-featured-image": {},
-            "core/post-navigation-link": {},
-            "core/post-template": {},
-            "core/post-terms": {},
-            "core/post-title": {},
-            "core/preformatted": {},
-            "core/pullquote": {},
-            "core/query": {},
-            "core/query-no-results": {},
-            "core/query-pagination": {},
-            "core/query-pagination-next": {},
-            "core/query-pagination-numbers": {},
-            "core/query-pagination-previous": {},
-            "core/query-title": {},
-            "core/quote": {},
-            "core/read-more": {},
-            "core/rss": {},
-            "core/search": {},
-            "core/separator": {},
-            "core/shortcode": {},
-            "core/site-logo": {},
-            "core/site-tagline": {},
-            "core/site-title": {},
-            "core/social-link": {},
-            "core/social-links": {},
-            "core/spacer": {},
-            "core/table": {},
-            "core/tag-cloud": {},
-            "core/template-part": {},
-            "core/term-description": {},
-            "core/text-columns": {},
-            "core/verse": {},
-            "core/video": {},
-            "core/widget-group": {}
-        },
-        "elements": {
-            "button": {},
-            "caption": {},
-            "cite": {},
-            "h1": {},
-            "h2": {},
-            "h3": {},
-            "h4": {},
-            "h5": {},
-            "h6": {},
-            "heading": {},
-            "link": {
-                "color": {
-                    "text": "var(--wp--preset--color--primary)"
-                }
-            }
-        }
-    },
-	"templateParts": [
-		{
-			"area": "header",
-			"name": "header",
-			"title": "Header-Part"
-		},
-		{
-			"area": "nav",
-			"name": "nav",
-			"title": "Navigation-Part"
-		},
-		{
-			"area": "main",
-			"name": "main",
-			"title": "Main-Part"
-		},
-		{
-			"area": "sidebar",
-			"name": "sidebar",
-			"title": "Aside-Part"
-		},
-		{
-			"area": "footer",
-			"name": "footer",
-			"title": "Footer-Part"
-		},
-		{
-			"area": "searchform",
-			"name": "searchform",
-			"title": "Search-Form-Part"
-		},
-		{
-			"area": "comments",
-			"name": "comments",
-			"title": "Comments-Part"
-		}
-	],
-
-	"version": 2
-}
-```
-
----
-
-[^1]: https://wphierarchy.com/
-[^2]: https://www.rarst.net/wordpress/front-page-logic/
