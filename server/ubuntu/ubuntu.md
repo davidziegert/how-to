@@ -50,7 +50,7 @@ if [ $USER != root ]; then
 fi
 
 echo "\n\nBefore command execution:-"
-free -h 
+free -h
 
 echo "\n\nClearing caches..."
 sync; echo 1 > /proc/sys/vm/drop_caches
@@ -70,8 +70,8 @@ apt-get autoclean
 apt-get autoremove
 
 echo "\n\nEmptying every trashes..."
-rm -rf /home/*/.local/share/Trash/*/** 
-rm -rf /root/.local/share/Trash/*/** 
+rm -rf /home/*/.local/share/Trash/*/**
+rm -rf /root/.local/share/Trash/*/**
 
 echo "\n\nAfter command execution:-"
 free -h
@@ -82,7 +82,7 @@ sudo crontab -e
 ```
 
 ```
-# Every Monday on 05:00 AM  
+# Every Monday on 05:00 AM
 0 5 * * 1	/home/ucleaner.sh
 ```
 
@@ -110,7 +110,7 @@ FallbackNTP=times.tubit.tu-berlin.de
 ```
 
 ```bash
-sudo systemctl restart systemd-timesyncd 
+sudo systemctl restart systemd-timesyncd
 sudo systemctl status systemd-timesyncd
 ```
 
@@ -310,7 +310,7 @@ APT::Periodic::Unattended-Upgrade "1";
 sudo unattended-upgrades --dry-run --debug
 ```
 
-### SSH 
+### SSH
 
 #### Login via Keys [^6] [^7]
 
@@ -342,7 +342,7 @@ ssh -i .ssh/id_rsa user@xxx.xxx.xxx.xxx
 #### Configuration [^13] [^14] [^15]
 
 ```bash
-sudo cp /etc/ssh/sshd_confi /etc/ssh/sshd_config.original
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
 sudo sshd -T
 sudo nano /etc/ssh/sshd_config
 ```
@@ -598,11 +598,11 @@ sudo clamscan -r /path
 ClamAV has a number of switches that can be used to customize its behavior. Some of the most useful switches are:
 
 The –infected switch tells ClamAV to only report infected files. This is useful if you only want to know which files are infected, and you don’t want to remove them.
-–infected    
+–infected
 
 The –remove switch tells ClamAV to remove infected files. This is the default behavior, so you don’t need to use this switch unless you want to override the default behavior.
 –remove
-    
+
 The –recursive switch tells ClamAV to scan a directory and all of its subdirectories. This is useful for scanning large directories or directories that may contain infected files.
 –recursive
 ```
