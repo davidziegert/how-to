@@ -376,7 +376,7 @@ sudo crontab -e
 - [Nested Pages](https://de.wordpress.org/plugins/wp-nested-pages/)
 - [Health Check & Troubleshooting](https://wordpress.org/plugins/health-check/)
 
-## Classic Theme [^1] [^2]
+## Classic Theme
 
 ### Folder Structure Example
 
@@ -815,3 +815,298 @@ endif; ?>
   <?php do_action('comment_form', $post->ID); ?>
 </form>
 ```
+
+## FSE Theme [^1]
+
+### Folder Structure Example [^2]
+
+```
+theme
+├── parts
+│	├── footer.html                     // Global Footer Block-Part
+│	├── sidebar.html                    // Sidebar Block-Part
+│	└── header.html                     // Global Header Block-Part
+├── patterns
+│	└── example.php                     // Custom Blocks
+├── styles
+│	└── example.json                    // Alternative Settings and Styles
+├── templates
+│	├── 404.html                        // 404 Page-Template
+│	├── archive.html                    // To show list of posts
+│	├── category-uncategorized.html     // Template for specific category Page-Template
+│	├── front-page.html                 // Default-FrontPage Page-Template
+│	├── home.html                       // Default Page-Template
+│	├── index.html                      // Primary template to show page or post like index.php in classic themes
+│	├── page.html                       // Site Page-Template
+│	├── search.html                     // Search-Result Page-Template
+│	└── single.html                     // Template to show single page or post like single.php
+├── functions.php			            // WordPress-Functions
+├── screenshot.png			            // Default-Screenshot
+├── style.css				            // Default-Theme Information
+├── index.php				            // Required generic template file
+└── theme.json				            // Global Settings and Styles
+```
+
+### Shortcodes
+
+#### functions.php
+
+```php
+<?php
+
+/* *********************************** */
+/* Add theme support for block styles. */
+/* *********************************** */
+
+if (!function_exists('theme_block_styles')) :
+	function theme_block_styles()
+	{
+		add_theme_support('post-thumbnails');
+		add_theme_support('editor-styles');
+		add_theme_support('wp-block-styles');
+	}
+endif;
+
+add_action('init', 'theme_block_styles');
+
+/* ************************** */
+/* Enqueue the style.css file.*/
+/* ************************** */
+
+function wp_block_blog_styles()
+{
+	wp_enqueue_style(
+		'wp_block_blog-style',
+		get_stylesheet_uri(),
+		array(),
+		wp_get_theme()->get('Version')
+	);
+}
+add_action('wp_enqueue_scripts', 'wp_block_blog_styles');
+
+/* ***************************** */
+/*  Register pattern categories. */
+/* ***************************** */
+
+if (!function_exists('theme_pattern_categories')) :
+	function theme_pattern_categories()
+	{
+		register_block_pattern_category(
+			'theme_page',
+			array(
+				'label'       => _x('Pages', 'Block pattern category', 'theme'),
+				'description' => __('A collection of full page layouts.', 'theme'),
+			)
+		);
+	}
+endif;
+
+add_action('init', 'theme_pattern_categories');
+
+/* ******************* */
+/* Block WP-JSON-Users */
+/* ******************* */
+
+add_filter('rest_endpoints', function ($endpoints) {
+	if (isset($endpoints['/wp/v2/users'])) {
+		unset($endpoints['/wp/v2/users']);
+	}
+	if (isset($endpoints['/wp/v2/users/(?P<id>[\d]+)'])) {
+		unset($endpoints['/wp/v2/users/(?P<id>[\d]+)']);
+	}
+	return $endpoints;
+});
+```
+
+#### header.html
+
+```html
+<!-- wp:group  -->
+<!-- wp:site-logo /-->
+<!-- wp:site-title {"level":0} /-->
+<!-- wp:site-tagline /-->
+<!-- /wp:group -->
+
+<!-- wp:group  -->
+<!-- wp:navigation /-->
+<!-- /wp:group -->
+```
+
+#### footer.html
+
+```html
+<!-- wp:group  -->
+<!-- wp:columns -->
+<!-- wp:column -->
+<!-- wp:categories /-->
+<!-- wp:column -->
+<!-- wp:archives /-->
+<!-- /wp:column -->
+<!-- /wp:columns -->
+<!-- /wp:group -->
+```
+
+#### searchbar
+
+```html
+<!-- wp:group  -->
+<!-- wp:search {"label":"Search","showLabel":false,"buttonText":"Search","buttonUseIcon":true} /-->
+<!-- /wp:group -->
+```
+
+#### comments
+
+```html
+<!-- wp:group  -->
+<!-- wp:comments -->
+<!-- wp:comments-title /-->
+<!-- wp:comment-template -->
+<!-- wp:comment-author-name /-->
+<!-- wp:comment-date  /-->
+<!-- wp:comment-edit-link /-->
+<!-- wp:comment-content /-->
+<!-- wp:comment-reply-link /-->
+<!-- /wp:comment-template -->
+<!-- wp:comments-pagination -->
+<!-- wp:comments-pagination-previous /-->
+<!-- wp:comments-pagination-numbers /-->
+<!-- wp:comments-pagination-next /-->
+<!-- /wp:comments-pagination -->
+<!-- wp:post-comments-form /-->
+<!-- /wp:comments -->
+<!-- /wp:group -->
+```
+
+#### archive.html
+
+```html
+<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"searchbar","area":"searchbar","tagName":"div"} /-->
+<!-- wp:group -->
+<!-- wp:query {"queryId":0,"query":{"perPage":15,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"",inherit":false,"parents":[]}} -->
+<!-- wp:post-template -->
+<!-- wp:post-featured-image {"isLink":false} /-->
+<!-- wp:post-title {"isLink":false} /-->
+<!-- wp:post-author {"showAvatar":false,"showBio":false} /-->
+<!-- wp:post-date /-->
+<!-- wp:post-terms {"term":"category"} /-->
+<!-- wp:post-excerpt {"moreText":"read more","excerptLength":30} /-->
+<!-- /wp:post-template -->
+<!-- wp:query-pagination -->
+<!-- wp:query-pagination-previous /-->
+<!-- wp:query-pagination-numbers /-->
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination -->
+<!-- /wp:query -->
+<!-- /wp:group -->
+<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
+```
+
+#### category-NAME.html
+
+```html
+<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"searchbar","area":"searchbar","tagName":"div"} /-->
+<!-- wp:group -->
+<!-- wp:query {"queryId":0,"query":{"perPage":6,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"taxQuery":{"category":[1]}}} -->
+<!-- wp:post-template -->
+<!-- wp:post-featured-image {"isLink":false} /-->
+<!-- wp:post-title {"isLink":false} /-->
+<!-- wp:post-author {"showAvatar":false,"showBio":false} /-->
+<!-- wp:post-date /-->
+<!-- wp:post-terms {"term":"category"} /-->
+<!-- wp:post-excerpt {"moreText":"read more","excerptLength":30} /-->
+<!-- /wp:post-template -->
+<!-- wp:query-pagination -->
+<!-- wp:query-pagination-previous /-->
+<!-- wp:query-pagination-numbers /-->
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination -->
+<!-- /wp:query -->
+<!-- /wp:group -->
+<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
+```
+
+#### home.html
+
+```html
+<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"searchbar","area":"searchbar","tagName":"div"} /-->
+<!-- wp:group -->
+<!-- wp:query {"queryId":0,"query":{"perPage":6,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[]}} -->
+<!-- wp:post-template -->
+<!-- wp:post-featured-image {"isLink":false} /-->
+<!-- wp:post-title {"isLink":false} /-->
+<!-- wp:post-author {"showAvatar":false,"showBio":false} /-->
+<!-- wp:post-date /-->
+<!-- wp:post-terms {"term":"category"} /-->
+<!-- wp:post-excerpt {"moreText":"read more","excerptLength":30} /-->
+<!-- /wp:post-template -->
+<!-- wp:query-pagination -->
+<!-- wp:query-pagination-previous /-->
+<!-- wp:query-pagination-numbers /-->
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination -->
+<!-- /wp:query -->
+<!-- /wp:group -->
+<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
+```
+
+#### page.html
+
+```html
+<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"searchbar","area":"searchbar","tagName":"div"} /-->
+<!-- wp:group {"tagName":"main"} -->
+<!-- wp:post-title {"level":1} /-->
+<!-- wp:post-content /-->
+<!-- /wp:group -->
+<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
+```
+
+#### single.html
+
+```html
+<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"searchbar","area":"searchbar","tagName":"div"} /-->
+<!-- wp:group {"tagName":"main"} -->
+<!-- wp:post-title {"level":1} /-->
+<!-- wp:post-content /-->
+<!-- wp:post-author {"showAvatar":false,"showBio":false} /-->
+<!-- wp:post-date /-->
+<!-- wp:post-terms {"term":"category"} /-->
+<!-- /wp:group -->
+<!-- wp:template-part {"slug":"comments","area":"comments","tagName":"aside"} /-->
+<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
+```
+
+#### search.html
+
+```html
+<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"searchbar","area":"searchbar","tagName":"div"} /-->
+<!-- wp:group {"tagName":"main"} -->
+<!-- wp:query-title {"type":"search","showSearchTerm":true} /-->
+<!-- wp:group -->
+<!-- wp:query {"queryId":0,"query":{"perPage":6,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"}} -->
+<!-- wp:post-template -->
+<!-- wp:post-featured-image {"isLink":false} /-->
+<!-- wp:post-title {"isLink":false} /-->
+<!-- wp:post-author {"showAvatar":false,"showBio":false} /-->
+<!-- wp:post-date /-->
+<!-- wp:post-terms {"term":"category"} /-->
+<!-- wp:post-excerpt {"moreText":"read more","excerptLength":30} /-->
+<!-- /wp:post-template -->
+<!-- wp:query-pagination -->
+<!-- wp:query-pagination-previous /-->
+<!-- wp:query-pagination-numbers /-->
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination -->
+<!-- /wp:query -->
+<!-- /wp:group -->
+<!-- /wp:group -->
+<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
+```
+
+[^1]: https://fullsiteediting.com/lessons/creating-block-based-themes/
+[^2]: https://developer.wordpress.org/themes/core-concepts/theme-structure/
