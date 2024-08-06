@@ -87,3 +87,92 @@ strict_mode:          # Test your site before changing these. Removes backward c
   twig_compat: false
   blueprint_compat: false
 ```
+
+## Backup
+
+### Files
+
+```bash
+sudo systemctl enable cron
+sudo crontab -e
+```
+
+```
+# Every Monday on 02:00 AM
+0 2 * * 1   tar -cvf backup_grav_$(date "+%d-%b-%y").tar /var/www/html/grav
+```
+
+## Themes
+
+### The Content
+
+```
+The /user/pages folder is where all of the content pages live. Each page is placed in its own folder, and folder names should reflect the page’s name, and also be a valid slug.
+
+You can order pages by naming the page folders with a preceding number: 01.home, 02.blog. Page folders then contain a markdown file and media for the page. The name of the markdown file will reference the name of the theme’s template to be used to render the content, for example: home.md would look for a template named home.html.twig.
+```
+
+### The Theme
+
+```
+Themes can be found within the /user/themes folder. For a theme to function you’ll need:
+
+- blueprints.yaml – a file which contains information about the theme.
+- themename.php – a file which contains any logic your theme needs.
+- themename.yaml – a configuration file used by the plugin to set options the theme might use.
+- templates/ – a folder containing the Twig templates to render the pages.
+
+You should also include and these are required if you plan to release a theme:
+
+- CHANGELOG.md – a file that follows the Grav Changelog Format to show changes.
+- LICENSE – a file containing the license to the theme.
+- README.md – a file with documentation for the theme.
+- screenshot.jpg – a 1009px x 1009px screenshot of the theme.
+- thumbnail.jpg – a 300px x 300px screenshot of the theme.
+
+This is also where the css, sass, fonts, images, and js folders for the theme reside.
+```
+
+### The Templates
+
+```
+Templates can be found in the /user/themes/themename/templates folder. These templates are Twig templates and will be used to render your pages.
+```
+
+### The Blueprints
+
+```
+Blueprints are located in the /user/themes/themename/blueprints folder. The files within this folder are YAML files used to extend and modify the admin plugin with custom forms to make updating the website simpler.
+```
+
+### Folder Structure Example
+
+```
+themename
+├── css
+│	└── style.css
+├── js
+│	└── script.js
+├── images
+│	├── favicon.ico
+│	└── logo.png
+├── fonts
+│	└── font.woff2
+├── templates
+│	├── partials
+│ │	├── base.html.twig
+│ │	├── header.html.twig
+│ │	├── nav.html.twig
+│ │	├── aside.html.twig
+│ │	└── footer.html.twig
+│	├── home.html.twig
+│	├── default.html.twig
+│	└── error.html.twig
+├── blueprints.yaml
+├── themename.php
+├── themename.yaml
+├── screenshot.jpg
+└── thumbnail.jpg
+```
+
+### Shortcodes

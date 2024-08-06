@@ -391,8 +391,8 @@ theme
 ├── js
 │	└── script.js
 ├── img
-│	├── img/favicon.ico
-│	└── img/logo.png
+│	├── favicon.ico
+│	└── logo.png
 ├── functions.php			// WordPress-Functions
 ├── screenshot.png			// Default-Screenshot
 ├── style.css				// Default-Stylesheet and Theme Information
