@@ -1,6 +1,8 @@
 # WordPress
 
-## Requirements
+## Installation
+
+### Requirements
 
 ```bash
 sudo apt install apache2
@@ -43,7 +45,7 @@ FLUSH PRIVILEGES;
 EXIT;
 ```
 
-## Installation & Configuration
+### Configuration
 
 ```bash
 sudo apt install wget unzip
