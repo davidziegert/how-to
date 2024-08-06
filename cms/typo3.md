@@ -156,7 +156,7 @@ sudo chmod 640 /var/www/html/typo3/typo3/sysext/belog/Configuration/TypoScript/s
 
 ```bash
 php -i | grep allow_url_include
-allow_url_include => Off => Off
+    allow_url_include => Off => Off
 ```
 
 ### Modify your PHP.ini
