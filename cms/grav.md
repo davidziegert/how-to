@@ -54,35 +54,35 @@ sudo nano /var/www/html/grav/user/config/system.yaml
 ```
 
 ```yaml
-force_ssl: true       # Use HTTPS only (redirect from HTTP -> HTTPS)
+force_ssl: true # Use HTTPS only (redirect from HTTP -> HTTPS)
 
 cache:
-  enabled: true       # Greatly speeds up the site
+  enabled: true # Greatly speeds up the site
   check:
-    method: hash      # Optimization, disables file modification checks for pages
+    method: hash # Optimization, disables file modification checks for pages
 
 twig:
-  cache: true         # Greatly speeds up the site
-  debug: false        # We do not want to display debug messages
-  auto_reload: false  # Optimization, disables file modification checks for twig files
-  autoescape: true    # Protects from many XSS attacks, but requires twig updates if used in older sites/themes/plugins
+  cache: true # Greatly speeds up the site
+  debug: false # We do not want to display debug messages
+  auto_reload: false # Optimization, disables file modification checks for twig files
+  autoescape: true # Protects from many XSS attacks, but requires twig updates if used in older sites/themes/plugins
 
 errors:
-  display: 0          # Display only a simple error
-  log: true           # Log errors for later inspection
+  display: 0 # Display only a simple error
+  log: true # Log errors for later inspection
 
 debugger:
-  enabled: false      # Never keep debugger enabled in a live site.
-  censored: true      # In case if you happen to enable debugger, avoid displaying sensitive information
+  enabled: false # Never keep debugger enabled in a live site.
+  censored: true # In case if you happen to enable debugger, avoid displaying sensitive information
 
 session:
-  enabled: true       # NOTE: Disable sessions if you do not use user login and/or forms.
-  secure: true        # Use this as your site should be using HTTPS only
-  httponly: true      # Protects session cookies against client side scripts and XSS
-  samesite: Strict    # Prevent all cross-site scripting attacks
-  split: true         # Separate admin session from the site session for added security
+  enabled: true # NOTE: Disable sessions if you do not use user login and/or forms.
+  secure: true # Use this as your site should be using HTTPS only
+  httponly: true # Protects session cookies against client side scripts and XSS
+  samesite: Strict # Prevent all cross-site scripting attacks
+  split: true # Separate admin session from the site session for added security
 
-strict_mode:          # Test your site before changing these. Removes backward compatibility and improves site security.
+strict_mode: # Test your site before changing these. Removes backward compatibility and improves site security.
   yaml_compat: false
   twig_compat: false
   blueprint_compat: false
@@ -102,7 +102,7 @@ sudo crontab -e
 0 2 * * 1   tar -cvf backup_grav_$(date "+%d-%b-%y").tar /var/www/html/grav
 ```
 
-## Themes
+## Themes [^1] [^2]
 
 ### The Content
 
@@ -176,3 +176,6 @@ themename
 ```
 
 ### Shortcodes
+
+[^1]: https://www.developerdrive.com/how-to-build-your-own-theme-for-grav-cms/
+[^2]: https://www.tutorialspoint.com/grav/index.htm
