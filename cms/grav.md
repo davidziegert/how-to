@@ -160,14 +160,16 @@ themename
 │	└── font.woff2
 ├── templates
 │	├── partials
-│ │	├── base.html.twig
-│ │	├── header.html.twig
-│ │	├── nav.html.twig
-│ │	├── aside.html.twig
-│ │	└── footer.html.twig
-│	├── home.html.twig
-│	├── default.html.twig
-│	└── error.html.twig
+│ │	├── base.html.twig            // html & body Block-Part
+│ │	├── header.html.twig          // header Block-Part
+│ │	├── nav.html.twig             // nav Block-Part
+│ │	├── aside.html.twig           // aside Block-Part
+│ │	└── footer.html.twig          // footer Block-Part
+│	├── home.html.twig              // Home Page-Template
+│	├── default.html.twig           // Default Page-Template
+│	├── blog.html.twig              // Blog Page-Template
+│	├── item.html.twig              // Item Page-Template
+│	└── error.html.twig             // Error Page-Template
 ├── blueprints.yaml
 ├── themename.php
 ├── themename.yaml
@@ -177,5 +179,22 @@ themename
 
 ### Shortcodes
 
+#### Blog Page - Expert Mode - Content > Add
+
+```
+title: Blog
+admin: {  }
+content:
+  items: '@self.children'
+  order:
+    by: header.publish_date
+    dir: desc
+  pagination: true
+```
+
 [^1]: https://www.developerdrive.com/how-to-build-your-own-theme-for-grav-cms/
 [^2]: https://www.tutorialspoint.com/grav/index.htm
+[^3]: https://learn.getgrav.org/17/themes/theme-basics
+[^4]: https://learn.getgrav.org/17/cookbook/tutorials/create-a-blog
+[^5]: https://learn.getgrav.org/17/content/collections#collection-object
+[^6]: https://github.com/getgrav/grav-plugin-pagination
