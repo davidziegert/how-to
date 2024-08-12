@@ -179,17 +179,132 @@ themename
 
 ### Shortcodes
 
-#### Blog Page - Expert Mode - Content > Add
+#### themename.yaml
+
+```yaml
+enabled: true
+default_lang: en
+dropdown:
+  enabled: true
+```
+
+#### themename.php
+
+```php
+<?php
+namespace Grav\Theme;
+
+use Grav\Common\Theme;
+
+class Simple extends Theme
+{
+    // Access plugin events in this class
+}
+```
+
+#### blueprints.yaml
+
+```yaml
+name: Themename
+slug: themename
+type: theme
+version: 1.0.0
+description: "Default theme for Grav"
+icon: empire
+author:
+  name: Team
+  email: fake@mail.com
+  url: localhost
+homepage: localhost
+demo: localhost
+keywords: simple, theme, core, modern, fast, responsive, html5, css3
+bugs: localhost
+license: MIT
+
+dependencies:
+  - { name: grav, version: ">=1.7.0" }
+
+form:
+  validation: strict
+  fields:
+    dropdown.enabled:
+      type: toggle
+      label: Dropdown in Navigation
+      highlight: 1
+      default: 1
+      options:
+        1: Enabled
+        0: Disabled
+      validate:
+        type: bool
+```
+
+#### navigation
 
 ```
+{% for page in pages.children %}
+  {% if page.visible %}
+    {% set current_page = (page.active or page.activeChild) ? 'active' : '' %}
+    <li class="{{ current_page }}">
+      <a href="{{ page.url }}">{{ page.menu }}</a>
+    </li>
+  {% endif %}
+{% endfor %}
+```
+
+#### content
+
+```
+{% block content %}
+    {{ page.content|raw }}
+{% endblock content %}
+```
+
+#### blog-posts
+
+```
+{# blog post collection #}
+{% set collection = page.collection() %}
+{# date format #}
+{% set dateformat = admin.page.dateformat ?: config.system.pages.dateformat.short ?: "F d, Y" %}
+{# number of items per page #}
+{% set limit = 5 %}
+{# pagination #}
+{% do paginate( collection, limit ) %}
+
+{% for item in collection %}
+  {{ item.url }}"
+
+  {{ item.date|date(dateformat) }}
+
+  {{ item.title }}
+
+  {% set image = item.media.images|first %}
+  {# page media as thumbnail #}
+  {% if image %}
+    {{ image.html|raw }}
+  {% endif %}
+{% endfor %}
+
+{# include the pagination bar #}
+{% if config.plugins.pagination.enabled and collection.params.pagination %}
+  {% include 'modular/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
+{% endif %}
+```
+
+#### Blog Page - Expert Mode - Content > Add
+
+````
+
 title: Blog
-admin: {  }
+admin: { }
 content:
-  items: '@self.children'
-  order:
-    by: header.publish_date
-    dir: desc
-  pagination: true
+items: '@self.children'
+order:
+by: header.publish_date
+dir: desc
+pagination: true
+
 ```
 
 [^1]: https://www.developerdrive.com/how-to-build-your-own-theme-for-grav-cms/
@@ -198,3 +313,5 @@ content:
 [^4]: https://learn.getgrav.org/17/cookbook/tutorials/create-a-blog
 [^5]: https://learn.getgrav.org/17/content/collections#collection-object
 [^6]: https://github.com/getgrav/grav-plugin-pagination
+```
+````
