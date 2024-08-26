@@ -74,6 +74,7 @@ http://your-server-ip-address
 You can create a dedicated datastore to store virtual machine files.
 Attach a disk or disks to your ESXi server.
 ```
+
 > **Note:**
 > It is recommended that you use RAID 1 or RAID 10 in production environments to provide redundancy and reduce the probability of data loss in a case of disk damage. However, using RAID cannot replace data backups. Please perform VMware VM backup in production environments to protect data.
 
@@ -131,6 +132,7 @@ http://your-server-ip-address
 ![Screenshot-53](./assets/vcenter_host_10.jpg)
 
 [^2]: https://www.nakivo.com/blog/vmware-vsphere-7-installation-setup/
+
 [^3]: https://esxsi.com/2021/01/27/vsphere7-install-2/
 
 ## Security
@@ -145,7 +147,7 @@ TPM 2.0 is a hardware chip that most modern physical servers have. It allows the
 
 For the vSphere Attestation, there isn’t any specific configuration that needs to be set. If your ESXi hosts have active TPM 2.0 chips, vCenter Server will automatically display their attestation status in the ‘Monitor->Security’ tab of the clusters.
 
-In vSphere 7.0 U2 and newer, the TPM 2.0 chip is also used to encrypt the configuration of the ESXi host as well as protect some settings from tampering (called ‘enforcement’). 
+In vSphere 7.0 U2 and newer, the TPM 2.0 chip is also used to encrypt the configuration of the ESXi host as well as protect some settings from tampering (called ‘enforcement’).
 ```
 
 ![Screenshot-1](./assets/vmware_secure_1.png)
@@ -208,14 +210,14 @@ Keep your ESXi hosts up to date with the latest security patches and updates. Re
 ```
 
 > **Check VIB package integrity:**
-> Each VIB package has an associated acceptance level. You can add a VIB to an ESXi host only if the VIB acceptance level is the same or better than the acceptance level of the host. 
+> Each VIB package has an associated acceptance level. You can add a VIB to an ESXi host only if the VIB acceptance level is the same or better than the acceptance level of the host.
 > You cannot add a CommunitySupported or PartnerSupported VIB to a host unless you explicitly change the host's acceptance level.
 
 #### Offline Bundle via Command Line [^5]
 
 - Go to the Customer Connect Patch Downloads page: https://my.vmware.com/group/vmware/patch#search
 - Log in with your Customer Connect credentials.
-- Select a product from the list and then select the version.  
+- Select a product from the list and then select the version.
 - Click Search. You see the list of available patches.
 - Locate your patch and click Download.
 
@@ -231,6 +233,7 @@ Keep your ESXi hosts up to date with the latest security patches and updates. Re
 - After the reboot, exit maintenance mode: [root@localhost:~] esxcli system maintenanceMode set -e false
 
 #### Online Bundle via Command Line [^6]
+
 - Log into the host via SSH. You can use putty, the terminal, or your favorite SSH client.
 - Stop or migrate all virtual machines, and then put the host in maintenance mode: [root@localhost:~] esxcli system maintenanceMode set -e true
 - Check maintenance mode: [root@localhost:~] esxcli system maintenanceMode get
@@ -270,24 +273,24 @@ What does these placeholders mean?
 ```
 
 - 3
-    - an admin has three attempts to retry a password
+  - an admin has three attempts to retry a password
 - disabled
-    - Number of minimum characters required if the password contains only one character class
+  - Number of minimum characters required if the password contains only one character class
 - disabled
-    - Number of minimum characters required if the password contains characters from two character classes
+  - Number of minimum characters required if the password contains characters from two character classes
 - disabled
-    - Number of minimum characters required if the password contains a phrase
+  - Number of minimum characters required if the password contains a phrase
 - 7
-    - Number of minimum characters required if the password contains characters from three character classes
+  - Number of minimum characters required if the password contains characters from three character classes
 - 7
-    - Number of characters required if the password contains characters from four character classes
+  - Number of characters required if the password contains characters from four character classes
 
 ![Screenshot-2](./assets/vmware_secure_2.webp)
 
 #### ESXi Passphrase
 
 ```
-Instead of a password, you can also use a pass phrase. However, pass phrases are disabled by default. You can change the default setting and other settings by using the Security.PasswordQualityControl advanced option from the vSphere Client. 
+Instead of a password, you can also use a pass phrase. However, pass phrases are disabled by default. You can change the default setting and other settings by using the Security.PasswordQualityControl advanced option from the vSphere Client.
 
 retry=3 min=disabled,disabled,16,7,7
 
@@ -307,7 +310,7 @@ Secure Communication Protocols: Utilize secure communication protocols to protec
 ### Lockdown Mode [^7] [^8]
 
 ```
-In lockdown mode, ESXi hosts can be accessed only through vCenter Server by default. You can select strict lockdown mode or normal lockdown mode. You can define Exception Users to allow direct access to service accounts such as backup agents. 
+In lockdown mode, ESXi hosts can be accessed only through vCenter Server by default. You can select strict lockdown mode or normal lockdown mode. You can define Exception Users to allow direct access to service accounts such as backup agents.
 
 Normal-Mode: The host can be accessed through vCenter Server. Only users who are on the Exception Users list and have administrator privileges can log in to the Direct Console User Interface. If SSH or the ESXi Shell is enabled, access might be possible.
 
@@ -350,7 +353,7 @@ ESXi Shell and Direct Console User Interface (DCUI): , which provide direct acce
 ### Firewall
 
 ```
-ESXi includes a firewall that is enabled by default. At installation time, the ESXi firewall is configured to block incoming and outgoing traffic, except traffic for services that are enabled in the security profile of the host. As you open ports on the firewall, consider that unrestricted access to services running on an ESXi host can expose a host to outside attacks and unauthorized access. Reduce the risk by configuring the ESXi firewall to enable access only from authorized networks. 
+ESXi includes a firewall that is enabled by default. At installation time, the ESXi firewall is configured to block incoming and outgoing traffic, except traffic for services that are enabled in the security profile of the host. As you open ports on the firewall, consider that unrestricted access to services running on an ESXi host can expose a host to outside attacks and unauthorized access. Reduce the risk by configuring the ESXi firewall to enable access only from authorized networks.
 
 You can manage ESXi firewall ports as follows:
 - Use Configure > Firewall for each host in the vSphere Client.
@@ -420,14 +423,23 @@ esxcli network firewall ruleset allowedip add --ip-address=192.168.1.0/24 --rule
 ```
 
 [^4]: https://www.truesec.com/hub/blog/secure-your-vmware-esxi-hosts-against-ransomware#steps
+
 [^5]: https://www.thomas-krenn.com/de/wiki/VMware_ESXi_updaten
+
 [^6]: https://docs.macstadium.com/docs/update-standalone-esxi-host-via-online-bundle
+
 [^7]: https://blog.netwrix.com/2020/01/16/vmware-security-best-practices/
+
 [^8]: https://cloudnativejourney.wordpress.com/2023/06/07/a-comprehensive-guide-to-securing-esxi-hosts-safeguarding-virtual-infrastructure/
+
 [^9]: https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.security.doc/GUID-88B24613-E8F9-40D2-B838-225F5FF480FF.html#GUID-88B24613-E8F9-40D2-B838-225F5FF480FF
+
 [^10]: https://www.starwindsoftware.com/blog/how-to-secure-a-small-vmware-environment
+
 [^11]: https://www.starwindsoftware.com/blog/securing-vmware-esxi-hosts
+
 [^12]: https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.security.doc/GUID-E9B71B85-FBA3-447C-8A60-DEE2AE1A405A.html
+
 [^13]: https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.security.doc/GUID-7A8BEFC8-BF86-49B5-AE2D-E400AAD81BA3.html
 
 ## Setup [^14]
@@ -498,9 +510,9 @@ The available options are:
 - Harddisk: select the size of a virtual hard disk and the provisioning type.
 - Network: select the network to which a virtual network adapter of the VM must be connected.
 - CD/DVD Drive: You need to configure a CD/DVD drive to boot from the operating system installation media and install the operating system. There are multiple options.
-    - Client Device – an optical disc inserted into a CD/DVD drive on a client machine is used to boot the operating system installer. You need to insert an optical medium into the DVD-ROM of the computer on which you’re using VMware vSphere Client.
-    - Datastore ISO File. Upload an ISO image of the installation disc to the datastore attached to the ESXi host on which you are creating a new VM and are going to install an operating system. Then select the ISO file uploaded on the datastore.
-    - Content Library ISO File. Select the needed ISO image file from the Content Library. You should upload the ISO file to the Content Library before you can select the image.
+  - Client Device – an optical disc inserted into a CD/DVD drive on a client machine is used to boot the operating system installer. You need to insert an optical medium into the DVD-ROM of the computer on which you’re using VMware vSphere Client.
+  - Datastore ISO File. Upload an ISO image of the installation disc to the datastore attached to the ESXi host on which you are creating a new VM and are going to install an operating system. Then select the ISO file uploaded on the datastore.
+  - Content Library ISO File. Select the needed ISO image file from the Content Library. You should upload the ISO file to the Content Library before you can select the image.
 
 ![Screenshot-9](./assets/vm_create_09.webp)
 
@@ -523,7 +535,7 @@ ESXi offers several disk controllers to choose from in the virtual hardware, dep
 
 ![Screenshot-11](./assets/vm_create_11.png)
 
-#### Harddisk: Provision Types  [^16]  [^17]
+#### Harddisk: Provision Types [^16] [^17]
 
 When creating a new virtual hard disk, it is possible to configure disk provisioning. The three options “Thick-Provision Lazy-Zeroed”, “Thick-Provision Eager-Zeroed” and “Thin Provision” are available here.
 
@@ -657,13 +669,19 @@ esxcli system hostname set --fqdn=NEWHOSTNAMEHERE.domain.name
 - Click Manage in the VMware Host Client inventory and click Security & Users.
 - Click Certificates and click Import new certificate.
 - Generate a certificate signing request:
-    - Generate FQDN signing request
-    - Generate IP signing request
+  - Generate FQDN signing request
+  - Generate IP signing request
 
 [^14]: https://www.nakivo.com/blog/how-to-create-a-virtual-machine-using-vsphere-client-7/
+
 [^15]: https://www.windowspro.de/thomas-drilling/virtuelle-disk-controller-fuer-vms-esxi-lsi-logic-sas-vmware-paravirtual
+
 [^16]: https://www.nakivo.com/blog/thick-and-thin-provisioning-difference/
+
 [^17]: https://www.starwindsoftware.com/blog/vmware-esxi-disk-provision-work-difference-one-better
+
 [^18]: https://www.ip-insider.de/12-vmware-best-practices-a-722ae61d5e26bfac199075a4696f82eb/
+
 [^19]: https://kb.vmware.com/s/article/1010821
+
 [^20]: https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-esxi-host-client/GUID-42AAE815-90CF-4D13-A01C-596A345A33DE.html

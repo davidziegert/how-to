@@ -1,4 +1,5 @@
 <!-- HOW TO -->
+
 # :ledger: How-To´s
 
 - VPN
@@ -9,12 +10,14 @@
   - [Citrix](/how-to/hypervisor/citrix.md)
   - [Proxmox](/how-to/hypervisor/proxmox.md)
   - [Hyper-V](/how-to/hypervisor/hyperv.md)
+  - [Xen](/how-to/hypervisor/xen.md)
 - Monitoring
   - [Checkmk](/how-to/monitoring/checkmk.md)
   - [Zabbix](/how-to/monitoring/zabbix.md)
-- Automation 
+- Automation
   - [Ansible](/how-to/automation/ansible.md)
 - ServerOS
+
   - [Windows](/how-to/server/windows/windows.md)
     - Roles and Features
   - [Ubuntu](/how-to/server/ubuntu/ubuntu.md)
@@ -27,9 +30,9 @@
       - [MySQL](/how-to/server/ubuntu/services/mysql.md)
       - [NFS](/how-to/server/ubuntu/services/nfs.md)
       - [SAMBA](/how-to/server/ubuntu/services/samba.md)
-      - [Docker](/how-to/server/ubuntu/services/docker.md)  
-      - [RSync](/how-to/server/ubuntu/services/rsync.md)  
-      - [DiskManagement](/how-to/server/ubuntu/services/disk.md)  
+      - [Docker](/how-to/server/ubuntu/services/docker.md)
+      - [RSync](/how-to/server/ubuntu/services/rsync.md)
+      - [DiskManagement](/how-to/server/ubuntu/services/disk.md)
 
 - ClientOS
   - [Windows](/how-to/client/windows/windows.md)
