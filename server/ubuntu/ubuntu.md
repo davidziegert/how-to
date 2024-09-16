@@ -339,7 +339,7 @@ ssh-copy-id -i .ssh/id_rsa.pub user@xxx.xxx.xxx.xxx
 ssh -i .ssh/id_rsa user@xxx.xxx.xxx.xxx
 ```
 
-#### Configuration [^13] [^14] [^15]
+#### Configuration [^13] [^14] [^15] [^23]
 
 ```bash
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
@@ -348,7 +348,8 @@ sudo nano /etc/ssh/sshd_config
 ```
 
 ```
-Port 22 -> 54321
+Protocol 2
+Port 54321
 PermitRootLogin no
 PermitEmptyPasswords no
 
@@ -470,18 +471,74 @@ sudo nano /etc/sysctl.conf
 kernel.exec-shield=1
 kernel.randomize_va_space=1
 
-# Enable IP spoofing protection
-net.ipv4.conf.all.rp_filter=1
+# Disable forwarding
+net.ipv4.ip_forward = 0
+net.ipv6.conf.all.forwarding = 0
 
-# Disable IP source routing
-net.ipv4.conf.all.accept_source_route=0
+# Disable packet redirect
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
 
-# Ignoring broadcasts request (not pingable)
-#net.ipv4.icmp_echo_ignore_broadcasts=1
-#net.ipv4.icmp_ignore_bogus_error_messages=1
+# Do not accept routed packets
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv6.conf.all.accept_source_route = 0
+net.ipv6.conf.default.accept_source_route = 0
 
-# Make sure spoofed packets get logged
+# Do not accept ICMP redirects
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv6.conf.all.accept_redirects = 0
+net.ipv6.conf.default.accept_redirects = 0
+
+# Do not accept secure ICMP redirects
+net.ipv4.conf.all.secure_redirects = 0
+net.ipv4.conf.default.secure_redirects = 0
+
+# Suspicious packets must be logged
 net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.default.log_martians = 1
+
+# Broadcast ICMP requests must be ignored
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+
+# Bogus ICMP responses must be ignored
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+
+# Enable Reverse Path Filtering
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+
+# TCP SYN cookies must be enabled
+net.ipv4.tcp_syncookies = 1
+
+# Disable IPv6 Router Advertisements
+net.ipv6.conf.all.accept_ra = 0
+net.ipv6.conf.default.accept_ra = 0
+
+# Disable IPv6 completely
+net.ipv6.conf.all.disable_ipv6 = 1
+```
+
+### ACL
+
+```bash
+nano /etc/hosts.allow
+```
+
+```
+sshd : localhost : allow
+sshd : 141.89.97.0/24 : allow
+sshd : 141.89.100.0/24 : allow
+sshd : ALL : deny
+```
+
+```bash
+nano /etc/hosts.deny
+```
+
+```
+
 ```
 
 ### fail2ban [^11] [^12] [^18] [^19] [^20]
@@ -640,3 +697,4 @@ sudo service clamav-freshclam restart
 [^20]: https://www.the-art-of-web.com/system/fail2ban-log/
 [^21]: https://www.webhi.com/how-to/setup-config-clamav-on-ubuntu-debian/
 [^22]: https://manpages.ubuntu.com/manpages/focal/en/man5/clamd.conf.5.html
+[^23]: https://ittavern.com/ssh-server-hardening/
