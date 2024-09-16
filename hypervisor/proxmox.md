@@ -116,7 +116,7 @@ nano /etc/ssh/sshd_config
 ```
 Protocol 2
 Port 54321
-PermitRootLogin no
+PermitRootLogin yes
 PermitEmptyPasswords no
 PasswordAuthentication yes
 PubkeyAuthentication yes
