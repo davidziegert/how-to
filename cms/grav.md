@@ -1,4 +1,4 @@
-# WordPress
+# Grav
 
 ## Installation
 
@@ -39,9 +39,8 @@ sudo rm grav.zip
 sudo rm /var/www/html/index.html
 ```
 
-```
-http://your-server-ip-address
-```
+> **Note:**
+> http://your-server-ip-address
 
 ![Screenshot-1](./assets/grav_install_1.png)
 ![Screenshot-2](./assets/grav_install_2.png)
@@ -102,19 +101,16 @@ sudo crontab -e
 0 2 * * 1   tar -cvf backup_grav_$(date "+%d-%b-%y").tar /var/www/html/grav
 ```
 
-## Themes [^1] [^2]
+## Themes [^1] [^2] [^3] [^4] [^5] [^6]
 
 ### The Content
 
-```
 The /user/pages folder is where all of the content pages live. Each page is placed in its own folder, and folder names should reflect the page’s name, and also be a valid slug.
 
 You can order pages by naming the page folders with a preceding number: 01.home, 02.blog. Page folders then contain a markdown file and media for the page. The name of the markdown file will reference the name of the theme’s template to be used to render the content, for example: home.md would look for a template named home.html.twig.
-```
 
 ### The Theme
 
-```
 Themes can be found within the /user/themes folder. For a theme to function you’ll need:
 
 - blueprints.yaml – a file which contains information about the theme.
@@ -131,45 +127,40 @@ You should also include and these are required if you plan to release a theme:
 - thumbnail.jpg – a 300px x 300px screenshot of the theme.
 
 This is also where the css, sass, fonts, images, and js folders for the theme reside.
-```
 
 ### The Templates
 
-```
 Templates can be found in the /user/themes/themename/templates folder. These templates are Twig templates and will be used to render your pages.
-```
 
 ### The Blueprints
 
-```
 Blueprints are located in the /user/themes/themename/blueprints folder. The files within this folder are YAML files used to extend and modify the admin plugin with custom forms to make updating the website simpler.
-```
 
 ### Folder Structure Example
 
 ```
 themename
 ├── css
-│	└── style.css
+│ └── style.css
 ├── js
-│	└── script.js
+│ └── script.js
 ├── images
-│	├── favicon.ico
-│	└── logo.png
+│ ├── favicon.ico
+│ └── logo.png
 ├── fonts
-│	└── font.woff2
+│ └── font.woff2
 ├── templates
-│	├── partials
-│ │	├── base.html.twig            // html & body Block-Part
-│ │	├── header.html.twig          // header Block-Part
-│ │	├── nav.html.twig             // nav Block-Part
-│ │	├── aside.html.twig           // aside Block-Part
-│ │	└── footer.html.twig          // footer Block-Part
-│	├── home.html.twig              // Home Page-Template
-│	├── default.html.twig           // Default Page-Template
-│	├── blog.html.twig              // Blog Page-Template
-│	├── item.html.twig              // Item Page-Template
-│	└── error.html.twig             // Error Page-Template
+│ ├── partials
+│ │ ├── base.html.twig            // html & body Block-Part
+│ │ ├── header.html.twig          // header Block-Part
+│ │ ├── nav.html.twig             // nav Block-Part
+│ │ ├── aside.html.twig           // aside Block-Part
+│ │ └── footer.html.twig          // footer Block-Part
+│ ├── home.html.twig              // Home Page-Template
+│ ├── default.html.twig           // Default Page-Template
+│ ├── blog.html.twig              // Blog Page-Template
+│ ├── item.html.twig              // Item Page-Template
+│ └── error.html.twig             // Error Page-Template
 ├── blueprints.yaml
 ├── themename.php
 ├── themename.yaml
@@ -294,8 +285,7 @@ form:
 
 #### Blog Page - Expert Mode - Content > Add
 
-````
-
+```
 title: Blog
 admin: { }
 content:
@@ -304,7 +294,6 @@ order:
 by: header.publish_date
 dir: desc
 pagination: true
-
 ```
 
 [^1]: https://www.developerdrive.com/how-to-build-your-own-theme-for-grav-cms/
@@ -313,5 +302,3 @@ pagination: true
 [^4]: https://learn.getgrav.org/17/cookbook/tutorials/create-a-blog
 [^5]: https://learn.getgrav.org/17/content/collections#collection-object
 [^6]: https://github.com/getgrav/grav-plugin-pagination
-```
-````

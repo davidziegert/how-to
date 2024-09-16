@@ -94,9 +94,8 @@ sudo a2enmod rewrite
 sudo systemctl restart apache2
 ```
 
-```
-http://your-server-ip-address
-```
+> **Note:**
+> http://your-server-ip-address
 
 ![Screenshot-1](./assets/wordpress_install_1.jpg)
 ![Screenshot-2](./assets/wordpress_install_2.jpg)
@@ -300,9 +299,7 @@ ldap.max_links = -1
 
 ### Block Userlist in WP’s REST API
 
-```
 A list all of all is available at users https://example.com/wp-json/wp/v2/users and one can also get information about a specific user at https://example.com/wp-json/wp/v2/users/1, where 1 is a user’s ID. To disable these add this code snippet to your theme’s functions.php file.
-```
 
 ```php
 /* ******************* */
@@ -322,11 +319,9 @@ add_filter('rest_endpoints', function ($endpoints) {
 
 ### Remove WP-Admin Login-Path
 
-```
 Are you looking for a simple, yet effective way to protect your admin page? If so, you can use the WPS Hide Login plugin to change the location of the login page.
 The most popular method to break into a website is brute force (continually entering login information until it is right).
 Redirect the the login page to another URL with the WPS Hide Login Plugin.
-```
 
 ## Backup
 

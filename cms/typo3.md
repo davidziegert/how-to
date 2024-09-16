@@ -15,7 +15,7 @@ sudo systemctl status apache2
 ```bash
 sudo apt install -y php php-{apcu,bcmath,common,mysql,xml,xmlrpc,curl,gd,cli,mbstring,soap,zip,intl,json}
 sudo php -v
-```             
+```
 
 ```bash
 sudo apt install imagemagick
@@ -81,13 +81,13 @@ sudo nano /etc/apache2/sites-available/typo3.conf
 	DocumentRoot /var/www/html/typo3
 	ServerName example.com
 	ServerAlias www.example.com
-	
+
 	<Directory /var/www/html/typo3/>
 		Options FollowSymlinks
 		AllowOverride All
 		Require all granted
 	</Directory>
-	
+
 	ErrorLog ${APACHE_LOG_DIR}/error.log
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
@@ -99,9 +99,8 @@ sudo a2dissite 000-default.conf
 sudo systemctl restart apache2
 ```
 
-```
-http://your-server-ip-address
-```
+> **Note:**
+> http://your-server-ip-address
 
 ![Screenshot-1](./assets/typo3_install_1.jpg)
 ![Screenshot-2](./assets/typo3_install_2.jpg)
@@ -368,7 +367,7 @@ sudo crontab -e
 
 ### Folder Structure Example
 
-path:   typo3_installation/typo3conf/ext/site_package/
+path: typo3_installation/typo3conf/ext/site_package/
 
 ```
 site_package
@@ -398,7 +397,7 @@ site_package
 │   │   │   	└── Default.html
 │   │   └── .htaccess
 │   └── Public
-│       ├── Css     
+│       ├── Css
 │       │   └── custom.css
 │       ├── Images
 │       │   └── logo.png
@@ -416,6 +415,7 @@ site_package
 ```
 
 #### Language
+
 - The directory Language/ may contain .xlf files that are used for the localization of labels and text strings (frontend as well as backend) by TYPO3. This topic is not strictly related to the Fluid template engine and is documented in section Internationalization and Localization.
 
 #### Layouts
@@ -428,12 +428,12 @@ site_package
 
 #### Partials
 
-- The directory called Partials/ may contain small snippets of HTML template files. "Partials" are similar to templates, but their purpose is to represent small units, which are perfect to fulfil recurring tasks. A good example of a partial is a specially styled box with content that may appear on several pages. If this box would be part of a page layout, it would be implemented in one or more HTML files inside the Templates/ directory. If an adjustment of the box is required at one point in the future, this would mean that several template files need to be updated. However, if we store the HTML code of the box as a small HTML snippet into the Partials/ directory, we can include this snippet at several places. An adjustment only requires an update of the partial and therefore in one file only. 
+- The directory called Partials/ may contain small snippets of HTML template files. "Partials" are similar to templates, but their purpose is to represent small units, which are perfect to fulfil recurring tasks. A good example of a partial is a specially styled box with content that may appear on several pages. If this box would be part of a page layout, it would be implemented in one or more HTML files inside the Templates/ directory. If an adjustment of the box is required at one point in the future, this would mean that several template files need to be updated. However, if we store the HTML code of the box as a small HTML snippet into the Partials/ directory, we can include this snippet at several places. An adjustment only requires an update of the partial and therefore in one file only.
 
-- The use of partials is optional, whereas files in the Layouts/ and Templates/ directories are mandatory for a typical sitepackage extension. 
+- The use of partials is optional, whereas files in the Layouts/ and Templates/ directories are mandatory for a typical sitepackage extension.
 
 - The sitepackage extension described in this tutorial focuses on the implementation of pages, rather than specific content elements. Therefore, folders Layouts/, Templates/ and Partials/ all show a sub- directory Page/.
-Language
+  Language
 
 - The directory Language/ may contain .xlf files that are used for the localization of labels and text strings (frontend as well as backend) by TYPO3. This topic is not strictly related to the Fluid template engine and is documented in section Internationalization and Localization.
 
@@ -485,9 +485,9 @@ Deny from all
                                             <a class="submenu-link" href="{subMenuItem.link}" target="{subMenuItem.target}" title="{subMenuItem.title}">{subMenuItem.title}</a>
                                         </li>
                                     </f:for>
-                                </ul> 
+                                </ul>
                             </f:then>
-                    
+
                             <f:else>
                                 <!-- Item has no children -->
                                 <a class="menu-link" href="{mainMenuItem.link}" target="{mainMenuItem.target}" title="{mainMenuItem.title}">{mainMenuItem.title}</a>
@@ -551,7 +551,7 @@ Deny from all
                     </li>
                 </f:for>
             </ol>
-        </f:if>   
+        </f:if>
     </div>
     <div class="row">
         <f:for each="{mainContent}" as="contentElement">
@@ -677,7 +677,7 @@ page {
    10 = FLUIDTEMPLATE
    10 {
          templateName = Default
-		 
+
          templateRootPaths {
             0 = EXT:site_package/Resources/Private/Templates/Page/
          }
@@ -742,16 +742,16 @@ page {
 
 ```json
 {
-	"name": "brand/site-package",
-	"type": "typo3-cms-extension",
-	"description": "Example site package from the site package tutorial",
-	"authors": [{"name": "Your Name", "role": "Developer", "homepage": "https://yourserver.url"}],
-	"require": {"typo3/cms-core": "^12.0.0|dev-main", "typo3/cms-fluid-styled-content": "^12.0.0|dev-main"},
-	"homepage": "https://yourserver.url",
-    "license": ["GPL-2.0-or-later"],
-	"keywords": ["typo3", "site package"],
-	"autoload": {"psr-4": {"Brand\\OwnPackage\\": "Classes/"}},
-	"extra": {"typo3/cms": {"extension-key": "site_package"}}
+  "name": "brand/site-package",
+  "type": "typo3-cms-extension",
+  "description": "Example site package from the site package tutorial",
+  "authors": [{ "name": "Your Name", "role": "Developer", "homepage": "https://yourserver.url" }],
+  "require": { "typo3/cms-core": "^12.0.0|dev-main", "typo3/cms-fluid-styled-content": "^12.0.0|dev-main" },
+  "homepage": "https://yourserver.url",
+  "license": ["GPL-2.0-or-later"],
+  "keywords": ["typo3", "site package"],
+  "autoload": { "psr-4": { "Brand\\OwnPackage\\": "Classes/" } },
+  "extra": { "typo3/cms": { "extension-key": "site_package" } }
 }
 ```
 
@@ -794,10 +794,10 @@ page {
 
 ```
 If TYPO3 has been installed the legacy way, by extracting the source package into the web directory without using PHP composer follow this tutorial for installation of the site-package extension:
-By using this method, extensions (e.g. the sitepackage extension) can be installed using the Extension Manager, which is a module found in the backend of TYPO3.
-It is highly recommended that you work locally on your machine using for example ddev.
-Copy the directory site_package (including all files and sub-directories) to the following directory in your TYPO3 instance: typo3conf/ext/.
-You can also create a ZIP file of the content of your site_package folder and name it site_package.zip. It is important that the ZIP archive does not contain the directory site_package and its files and directories inside this folder. The files and folders must be directly located on the first level of ZIP archive.
+- By using this method, extensions (e.g. the sitepackage extension) can be installed using the Extension Manager, which is a module found in the backend of TYPO3.
+- It is highly recommended that you work locally on your machine using for example ddev.
+- Copy the directory site_package (including all files and sub-directories) to the following directory in your TYPO3 instance: typo3conf/ext/.
+- You can also create a ZIP file of the content of your site_package folder and name it site_package.zip. It is important that the ZIP archive does not contain the directory site_package and its files and directories inside this folder. The files and folders must be directly located on the first level of ZIP archive.
 ```
 
 ## Extension installation with Extension manager
