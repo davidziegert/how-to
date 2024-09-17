@@ -1,6 +1,12 @@
-# Prometheus
+# Prometheus [^1] [^2] [^3] [^4]
 
-## Installation [^1] [^2]
+Prometheus is an event monitoring and alerting application for cloud infrastructures. The project is written in Go and is one of the Graduate Projects in the Cloud Native Computing Foundation. It is considered the de-facto monitoring in the cloud.
+
+The idea with Prometheus is that a central node aggregates metrics and alerting information. The metrics are pulled from a previously declared number of nodes via HTTP pulling. These nodes, also called targets, expose this information. The Prometheus server aggregates these in a time series database, triggers push alerts if available, and can expose the data for further processing by data visualization tools such as Grafana.
+
+![Screenshot-1](./assets/prometheus_architecture.png)
+
+## Installation
 
 1. Update System Packages
 
@@ -143,3 +149,4 @@ With Prometheus running successfully, you can access it via your web browser usi
 [^1]: https://www.cherryservers.com/blog/install-prometheus-ubuntu
 [^2]: https://medium.com/@abdullah.eid.2604/prometheus-installation-on-linux-ubuntu-c4497e5154f6
 [^3]: https://ibrahims.medium.com/how-to-install-prometheus-and-grafana-on-ubuntu-22-04-lts-configure-grafana-dashboard-5d11e3cb3cfd
+[^4]: https://b-nova.com/home/content/getting-started-with-prometheus/

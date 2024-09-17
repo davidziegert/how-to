@@ -1,0 +1,3 @@
+# Checkmk
+
+## Installation
