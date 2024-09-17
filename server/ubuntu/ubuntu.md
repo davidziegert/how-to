@@ -1,4 +1,6 @@
-# Installation
+# Ubuntu Server
+
+## Installation
 
 ![Screenshot-1](./assets/linux_install_1.png)
 ![Screenshot-2](./assets/linux_install_2.png)
@@ -18,14 +20,14 @@
 ![Screenshot-16](./assets/linux_install_16.png)
 ![Screenshot-17](./assets/linux_install_17.png)
 
-## Updates
+### Updates
 
 ```bash
 sudo apt update
 sudo apt upgrade
 ```
 
-## Cleanup
+### Cleanup
 
 ```bash
 sudo apt clean
@@ -33,7 +35,7 @@ sudo apt autoclean
 sudo apt autoremove
 ```
 
-## Cleanup via CronJob [^5]
+### Cleanup via CronJob [^5]
 
 ```bash
 sudo nano ucleaner.sh
@@ -86,14 +88,14 @@ sudo crontab -e
 0 5 * * 1	/home/ucleaner.sh
 ```
 
-## Set Time Zone
+### Set Time Zone
 
 ```bash
 sudo timedatectl set-timezone Europe/Berlin
 sudo timedatectl
 ```
 
-## Set Time Synchronization
+### Set Time Synchronization
 
 ```bash
 sudo timedatectl set-ntp on
@@ -114,7 +116,7 @@ sudo systemctl restart systemd-timesyncd
 sudo systemctl status systemd-timesyncd
 ```
 
-## Set Hostname
+### Set Hostname
 
 ```bash
 sudo hostnamectl set-hostname XXX
@@ -139,15 +141,15 @@ sudo nano /etc/hosts
 sudo hostnamectl
 ```
 
-## Set IP-Address
+### Set IP-Address
 
-### Netplan (new) [^1]
+#### Netplan (new) [^1]
 
 ```bash
 sudo nano /etc/netplan/00-installer-config.yaml
 ```
 
-#### Fixed IP
+##### Fixed IP
 
 ```
 network:
@@ -170,7 +172,7 @@ network:
 sudo netplan apply
 ```
 
-#### DHCP
+##### DHCP
 
 ```
 network:
@@ -186,13 +188,13 @@ network:
 sudo netplan apply
 ```
 
-### Network Interfaces (old) [^2]
+#### Network Interfaces (old) [^2]
 
 ```bash
 sudo nano /etc/network/interfaces
 ```
 
-#### Fixed IP
+##### Fixed IP
 
 ```
 source /etc/network/interfaces.d/*
@@ -215,7 +217,7 @@ iface en01 inet static
 sudo service networking restart
 ```
 
-#### DHCP
+##### DHCP
 
 ```
 source /etc/network/interfaces.d/*
@@ -231,13 +233,13 @@ iface eth0 inet dhcp
 sudo service networking restart
 ```
 
-## Change Password
+### Change Password
 
 ```bash
 sudo passwd USERNAME
 ```
 
-## Message of the Day [^3] [^4]
+### Message of the Day [^3] [^4]
 
 ```bash
 sudo nano /etc/motd
@@ -270,9 +272,9 @@ sudo nano /etc/motd
 [^4]: https://www.asciiart.eu/
 [^5]: https://github.com/jenil777007/ucleaner
 
-## Security [^20]
+### Security [^20]
 
-### Automatic Updates
+#### Automatic Updates
 
 ```bash
 sudo apt install unattended-upgrades
@@ -315,11 +317,11 @@ APT::Periodic::Unattended-Upgrade "1";
 sudo unattended-upgrades --dry-run --debug
 ```
 
-### SSH
+#### SSH
 
-#### Login via Keys [^6] [^7]
+##### Login via Keys [^6] [^7]
 
-##### Server
+###### Server
 
 ```bash
 mkdir ~/.ssh
@@ -328,7 +330,7 @@ nano ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-##### Client (Windows)
+###### Client (Windows)
 
 ```bash
 cd \Users\user
@@ -336,7 +338,7 @@ ssh-keygen -t rsa
 type .ssh\id_rsa.pub | ssh user@xxx.xxx.xxx.xxx "cat >> .ssh/authorized_keys"
 ```
 
-##### Client (Mac/Linux)
+###### Client (Mac/Linux)
 
 ```bash
 ssh-keygen -t rsa
@@ -344,7 +346,7 @@ ssh-copy-id -i .ssh/id_rsa.pub user@xxx.xxx.xxx.xxx
 ssh -i .ssh/id_rsa user@xxx.xxx.xxx.xxx
 ```
 
-#### Configuration [^13] [^14] [^15] [^23]
+##### Configuration [^13] [^14] [^15] [^23]
 
 ```bash
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
@@ -381,9 +383,9 @@ DenyUsers user3 user4
 sudo service ssh restart
 ```
 
-### UFW Firewall [^8] [^9]
+#### UFW Firewall [^8] [^9]
 
-#### UFW Status
+##### UFW Status
 
 ```bash
 sudo ufw status
@@ -399,45 +401,45 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 ```
 
-#### Allow an IP Address
+##### Allow an IP Address
 
 ```bash
 sudo ufw allow from xxx.xxx.xxx.xxx
 ```
 
-#### Block an IP Address
+##### Block an IP Address
 
 ```bash
 sudo ufw deny from xxx.xxx.xxx.xxx
 ```
 
-#### Block a Subnet
+##### Block a Subnet
 
 ```bash
 sudo ufw deny from xxx.xxx.xxx.0/24
 ```
 
-#### List Available Applications
+##### List Available Applications
 
 ```bash
 sudo ufw app list
 ```
 
-#### Enable/Disable Applications
+##### Enable/Disable Applications
 
 ```bash
 sudo ufw allow ssh
 sudo ufw deny ssh
 ```
 
-#### Enable/Disable Ports
+##### Enable/Disable Ports
 
 ```bash
 sudo ufw allow 22
 sudo ufw deny 22
 ```
 
-#### Enable/Disable Specific Port Ranges
+##### Enable/Disable Specific Port Ranges
 
 ```bash
 sudo ufw allow 6000:6007/tcp
@@ -446,7 +448,7 @@ sudo ufw deny 6000:6007/tcp
 sudo ufw deny 6000:6007/udp
 ```
 
-#### Logs [^10]
+##### Logs [^10]
 
 ```bash
 sudo ufw logging on
@@ -457,13 +459,13 @@ sudo ufw logging off
 sudo nano /var/log/uwf.log
 ```
 
-### Avoid Using FTP, Telnet, And Rlogin / Rsh Services on Linux
+#### Avoid Using FTP, Telnet, And Rlogin / Rsh Services on Linux
 
 ```bash
 sudo apt --purge remove xinetd nis yp-tools tftpd atftpd tftpd-hpa telnetd rsh-server rsh-redone-server
 ```
 
-### Linux Kernel /etc/sysctl.conf Hardening [^16]
+#### Linux Kernel /etc/sysctl.conf Hardening [^16]
 
 ```bash
 sudo nano /etc/sysctl.conf
@@ -540,7 +542,7 @@ kernel.panic = 10
 sudo sysctl -p
 ```
 
-### ACL
+#### ACL
 
 ```bash
 sudo nano /etc/hosts.allow
@@ -561,15 +563,15 @@ sudo nano /etc/hosts.deny
 
 ```
 
-### fail2ban [^11] [^12] [^18] [^19] [^20]
+#### fail2ban [^11] [^12] [^18] [^19] [^20]
 
-#### Installation
+##### Installation
 
 ```bash
 sudo apt install fail2ban -y
 ```
 
-#### Configuration
+##### Configuration
 
 ```bash
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
@@ -602,7 +604,7 @@ banaction = ufw
 backend = polling
 ```
 
-#### Commands
+##### Commands
 
 ```bash
 sudo systemctl enable fail2ban
@@ -632,7 +634,7 @@ sudo fail2ban-client set sshd addignoreip IP-ADDRESS
 sudo fail2ban-client set sshd delignoreip IP-ADDRESS
 ```
 
-#### Reports
+##### Reports
 
 ```bash
 tail -100 /var/log/fail2ban.log.
@@ -649,27 +651,27 @@ awk '($(NF-1) == "Ban"){print $NF}' /var/log/fail2ban.log \
   | sort | uniq -c | sort -n
 ```
 
-### ClamAV [^21] [^22]
+#### ClamAV [^21] [^22]
 
-#### Installation
+##### Installation
 
 ```bash
 sudo apt install clamav
 ```
 
-#### Updates
+##### Updates
 
 ```bash
 sudo freshclam
 ```
 
-#### Scanning Folders (manually)
+##### Scanning Folders (manually)
 
 ```bash
 sudo clamscan -r /path
 ```
 
-##### Use Switches
+###### Use Switches
 
 ```
 ClamAV has a number of switches that can be used to customize its behavior. Some of the most useful switches are:
@@ -684,7 +686,7 @@ The –recursive switch tells ClamAV to scan a directory and all of its subdirec
 –recursive
 ```
 
-#### Scanning Folders (automatically)
+##### Scanning Folders (automatically)
 
 ```bash
 sudo nano /etc/clamav/clamd.conf
