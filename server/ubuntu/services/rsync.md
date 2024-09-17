@@ -3,7 +3,7 @@
 ## Incremental Backups
 
 ```bash
-sudo apt-get install rsync
+sudo apt install rsync
 
 sudo mkdir /var/scripts/
 sudo chmod -R 755 /var/scripts/
@@ -59,7 +59,7 @@ sudo rsync -aP ~/SourceDirectory/ user@xxx.xxx.xxx.xxx:~/FolderName
 ## rsnapshot [^5]
 
 ```bash
-sudo apt-get install rsnapshot
+sudo apt install rsnapshot
 ```
 
 ```
@@ -77,15 +77,15 @@ sudo nano /etc/rsnapshot.conf
 # PLEASE BE AWARE OF THE FOLLOWING RULE:        #
 # This file requires tabs between elements      #
 #################################################
- 
+
 #######################
 # CONFIG FILE VERSION #
 #######################
- 
+
 config_version  1.2
- 
+
 #####################################################################################################
-# SNAPSHOT ROOT DIRECTORY                                                                           #                                             
+# SNAPSHOT ROOT DIRECTORY                                                                           #
 # All snapshots will be stored under this root directory.                                           #
 # If no_create_root is enabled, rsnapshot will not automatically create the snapshot_root directory.#
 #####################################################################################################
@@ -117,13 +117,13 @@ retain      monthly 12
 # 5     Debug mode      Everything
 
 verbose     4
- 
+
 # Same as "verbose" above, but controls the amount of data sent to the
 # logfile, if one is being used. The default is 3.
 # If you want the rsync output, you have to set it to 4
 
 loglevel    4
- 
+
 # If you enable this, data will be written to the file you specify. The
 # amount of data written is controlled by the "loglevel" parameter.
 
@@ -138,10 +138,10 @@ exclude_file   /data/nobackup
 #################
 # BACKUP POINTS #
 #################
- 
+
 # LOCALHOST
 backup  /home/
-backup  /etc/ 
+backup  /etc/
 backup  /data/
 
 ########################################
@@ -150,11 +150,11 @@ backup  /data/
 ########################################
 
 cmd_ssh /usr/bin/ssh
-	
+
 ###############################
 ### BACKUP POINTS / SCRIPTS ###
 ###############################
- 
+
 backup  root@xxx.xxx.xxx.xxx:/data
 ```
 
@@ -174,7 +174,7 @@ sudo nano /etc/cron.d/rsnapshot
 # retain	weekly  4
 # retain	monthly 12
 
-# every day at 01:00 AM | every monday at 03:00 AM | ever 1th of month at 05:00 AM 
+# every day at 01:00 AM | every monday at 03:00 AM | ever 1th of month at 05:00 AM
 
 # 0 0       * * *       root    /usr/bin/rsnapshot hourly
 0 1         * * *       root    /usr/bin/rsnapshot daily

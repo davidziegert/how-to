@@ -21,16 +21,16 @@
 ## Updates
 
 ```bash
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt update
+sudo apt upgrade
 ```
 
 ## Cleanup
 
 ```bash
-sudo apt-get clean
-sudo apt-get autoclean
-sudo apt-get autoremove
+sudo apt clean
+sudo apt autoclean
+sudo apt autoremove
 ```
 
 ## Cleanup via CronJob [^5]
@@ -59,15 +59,15 @@ echo "\n\nRemoving old kernels..."
 echo "Current kernel:-"
 a=`uname -r|cut -f "2" -d "-"`
 a=$(($a-2))
-apt-get remove --purge linux-image-3.16.0-$a-generic
+apt remove --purge linux-image-3.16.0-$a-generic
 
 echo "\n\nClearing swap space..."
 swapoff -a && swapon -a
 
 echo "\n\nClearing application dependencies..."
-apt-get clean
-apt-get autoclean
-apt-get autoremove
+apt clean
+apt autoclean
+apt autoremove
 
 echo "\n\nEmptying every trashes..."
 rm -rf /home/*/.local/share/Trash/*/**
@@ -283,11 +283,15 @@ sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
 ```
 Unattended-Upgrade::Allowed-Origins
 {
-    "${distro_id} stable";"${distro_id} ${distro_codename}-security";
-    "${distro_id} ${distro_codename}-updates";
+    "${distro_id}:${distro_codename}-security";
     "${distro_id}ESMApps:${distro_codename}-apps-security";
     "${distro_id}ESM:${distro_codename}-infra-security";
 };
+
+Unattended-Upgrade::Package-Blacklist {
+
+};
+
 Unattended-Upgrade::DevRelease "false";
 Unattended-Upgrade::Remove-Unused-Dependencies "true";
 Unattended-Upgrade::Automatic-Reboot "true";
@@ -353,10 +357,8 @@ Protocol 2
 Port 54321
 PermitRootLogin no
 PermitEmptyPasswords no
-
 PasswordAuthentication yes
 PubkeyAuthentication yes
-
 MaxAuthTries 3
 
 AcceptEnv LANG LC_*
@@ -458,7 +460,7 @@ sudo nano /var/log/uwf.log
 ### Avoid Using FTP, Telnet, And Rlogin / Rsh Services on Linux
 
 ```bash
-sudo apt-get --purge remove xinetd nis yp-tools tftpd atftpd tftpd-hpa telnetd rsh-server rsh-redone-server
+sudo apt --purge remove xinetd nis yp-tools tftpd atftpd tftpd-hpa telnetd rsh-server rsh-redone-server
 ```
 
 ### Linux Kernel /etc/sysctl.conf Hardening [^16]

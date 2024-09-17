@@ -3,7 +3,7 @@
 ## Installation (Host)
 
 ```bash
-sudo apt-get install slapd ldap-utils ldapscripts smbldap-tools -y
+sudo apt install slapd ldap-utils ldapscripts smbldap-tools -y
 sudo systemctl status slapd
 ```
 
@@ -20,7 +20,7 @@ MDB
 NO
 YES
 NO
-```	
+```
 
 ```
 slapcat
@@ -119,7 +119,7 @@ http://xxx.xxx.xxx.xxx
 ```
 
 ```
-The following suffixes are missing from LDAP. LAM can create them for you. 
+The following suffixes are missing from LDAP. LAM can create them for you.
 You can set the LDAP suffixes for all account types in the LAM server profile on the Account Types tab.
 ou=users,dc=SUBDOMAIN,dc=DOMAIN,dc=TLDou=groups,dc=SUBDOMAIN,dc=DOMAIN,dc=TLD
 ```
@@ -416,7 +416,7 @@ sudo nano /usr/share/self-service-password/conf/config.inc.local.php
 ### Generate Self-Signed SSL Cerificates (Host)
 
 ```bash
-sudo mkdir ldap_ssl 
+sudo mkdir ldap_ssl
 cd ldap_ssl
 sudo openssl genrsa -aes128 -out ldap_server.key 4096
 ```
@@ -428,7 +428,7 @@ Verifying - Enter pass phrase for ldap_server.key: <Confirm passphrase>
 
 ```bash
 sudo openssl rsa -in ldap_server.key -out ldap_server.key
-sudo openssl req -new -days 3650 -key ldap_server.key -out ldap_server.csr 
+sudo openssl req -new -days 3650 -key ldap_server.key -out ldap_server.csr
 ```
 
 ```
@@ -441,7 +441,7 @@ Common Name (e.g. server FQDN or YOUR name) []:                     ldap.example
 Email Address []:                                                   admin@example.com
 
 Please enter the following 'extra' attributes to be sent with your certificate request
-A challenge password []:                                            -  
+A challenge password []:                                            -
 An optional company name []:                                        -
 ```
 
@@ -472,7 +472,7 @@ olcTLSCertificateKeyFile: /etc/ldap/sasl2/ldap_server.key
 ```
 
 ```bash
-sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f ldap_ssl.ldif 
+sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f ldap_ssl.ldif
 ```
 
 ```bash
@@ -482,7 +482,7 @@ sudo systemctl restart slapd
 ### Configure LDAP Client for TLS/SSL Connection (Client)
 
 ```
-echo "TLS_REQCERT allow" | sudo tee /etc/ldap/ldap.conf 
+echo "TLS_REQCERT allow" | sudo tee /etc/ldap/ldap.conf
 ```
 
 ```bash
@@ -498,7 +498,7 @@ ssl on
 ## Installation (Client) (with SAMBA)
 
 ```bash
-sudo apt-get -y install libnss-ldap libpam-ldap ldap-utils nscd
+sudo apt -y install libnss-ldap libpam-ldap ldap-utils nscd
 ```
 
 ```

@@ -41,6 +41,54 @@
 > **Note:**
 > http://your-server-ip-address
 
+## Create Network Bridge
+
+![Screenshot-7](./assets/proxmox_bridge_1.png)
+
+## Create a VM
+
+1. Click the Create VM button.
+
+![Screenshot-8](./assets/proxmox_vm_1.png)
+
+2. Provide general information about the VM:
+
+- Start by selecting the Node. If you are starting and have no nodes yet, Proxmox automatically selects node 1 (pve1).
+- Provide a VM ID. Each resource has to have a unique ID.
+- Finally, specify a name for the VM.
+
+![Screenshot-9](./assets/proxmox_vm_2.png)
+
+3. Next, switch to the OS tab and select the ISO image you want for your VM. Define the OS Type and kernel Version. Click Next to continue.
+
+![Screenshot-10](./assets/proxmox_vm_3.png)
+
+4. Modify system options (such as the Graphic card and SCSI controller) or leave the default settings.
+
+![Screenshot-11](./assets/proxmox_vm_4.png)
+
+5. Configure any Hard Disk options you want the VM to have. You can leave all the default settings. However, if the physical server uses an SSD, enable the Discard option.
+
+![Screenshot-12](./assets/proxmox_vm_5.png)
+
+6. The number of Cores the physical server has determines how many cores you can provide to the VM. The number of cores allocated also depends on the predicted workload.
+
+![Screenshot-13](./assets/proxmox_vm_6.png)
+
+7. Next, choose how much RAM Memory (MiB) you want to assign to the VM.
+
+![Screenshot-14](./assets/proxmox_vm_7.png)
+
+8. Move on to the Network tab. It is recommended to separate the management interface from the VM network. For now, leave the default setting and click Next.
+
+![Screenshot-15](./assets/proxmox_vm_8.png)
+
+9. Proxmox loads the Confirm tab that summarizes the selected VM options. To start the VM immediately, check the box under the listed information or start the VM manually later. Click Finish to create the VM.
+
+![Screenshot-16](./assets/proxmox_vm_9.png)
+
+10. The newly created VM appears in the resource tree on the left side of the screen. Click the VM to see its specifications and options.
+
 ## Security [^3]
 
 ### Differences between repositories [^1] [^2]
@@ -142,10 +190,6 @@ sshd : ALL : deny
 
 ```bash
 nano /etc/hosts.deny
-```
-
-```
-
 ```
 
 ### fail2ban
@@ -297,11 +341,11 @@ net.ipv6.conf.all.disable_ipv6 = 1
 To protect against potentially unprotected services running on other ports, the Proxmox Firewall should be activated.
 Make the following configuration in the navigation menu on the left under Datacenter > Firewall > Add:
 
-![Screenshot-7](./assets/proxmox_firewall_1.png)
+![Screenshot-17](./assets/proxmox_firewall_1.png)
 
-![Screenshot-8](./assets/proxmox_firewall_2.png)
+![Screenshot-18](./assets/proxmox_firewall_2.png)
 
-![Screenshot-9](./assets/proxmox_firewall_3.png)
+![Screenshot-19](./assets/proxmox_firewall_3.png)
 
 Then activate the firewall under Datacenter > Firewall > Options by setting Firewall to Yes.
 Now all incoming requests that are not directed to SSH or the Proxmox Web UI will be automatically blocked.

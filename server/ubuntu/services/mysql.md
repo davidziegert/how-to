@@ -171,7 +171,7 @@ mysql -u username -p mysql < backup_name.sql
 ### AutoBackup
 
 ```bash
-sudo apt-get install automysqlbackup
+sudo apt install automysqlbackup
 
 sudo mkdir /var/lib/automysqlbackup
 sudo nano /etc/default/automysqlbackup
@@ -228,8 +228,8 @@ sudo automysqlbackup
 #### Backup-Copy via rsync
 
 ```bash
-sudo apt-get install rsync
-sudo apt-get install sshpass
+sudo apt install rsync
+sudo apt install sshpass
 ```
 
 ```bash
@@ -253,5 +253,5 @@ crontab -e
 
 [^1]: https://gridscale.io/community/tutorials/mysql-benutzer-rechte-zuweisen/
 [^2]: https://linuxize.com/post/mysql-remote-access/
-[^3]: https://www.a2hosting.com/kb/developer-corner/mysql/restricting-mysql-port-access#Method-1.3A-Disable-MySQL-networking 
+[^3]: https://www.a2hosting.com/kb/developer-corner/mysql/restricting-mysql-port-access#Method-1.3A-Disable-MySQL-networking
 [^4]: https://hostadvice.com/how-to/how-to-backup-your-mysql-database-on-ubuntu-18-04-vps/
