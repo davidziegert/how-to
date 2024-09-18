@@ -138,15 +138,246 @@ After starting the Prometheus service, you may confirm that it is running or if 
 sudo systemctl status prometheus
 ```
 
-12. Access Prometheus Web Interface
+12. Allow access to Prometheus Web Interface in firewall
 
 ```bash
 sudo ufw allow 9090/tcp
 ```
 
-With Prometheus running successfully, you can access it via your web browser using localhost:9090 or <ip_address>:9090
+With Prometheus running successfully, you can access it via your web browser using:
+
+> **Note:**
+> http://your-server-ip-address:9090
+
+### Node Exporter [^5] [^6]
+
+The Node Exporter is an agent that gathers system metrics and exposes them in a format which can be ingested by Prometheus. The Node Exporter is a project that is maintained through the Prometheus project. This is a completely optional step and can be skipped if you do not wish to gather system metrics. The following will need to be performed on each server that you wish to monitor system metrics for.
+
+1. Download Node Exporter
+
+```bash
+wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
+```
+
+2. Create User and Folder
+
+```bash
+sudo groupadd --system node_exporter
+sudo useradd -s /sbin/nologin --system -g node_exporter node_exporter
+sudo mkdir /etc/node_exporter
+sudo chown node_exporter:node_exporter /etc/node_exporter
+```
+
+mv node_exporter-1.0.1.linux-amd64 node_exporter-files
+
+3. Unpack Node Exporter Binary
+
+```bash
+tar -xvf node_exporter-*
+mv node_exporter-* node_exporter-files
+```
+
+4. Install Node Exporter
+
+```bash
+sudo mv node_exporter-files/node_exporter /usr/local/bin/
+sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
+```
+
+5. Create Node Exporter Systemd Service
+
+```bash
+sudo nano /etc/systemd/system/node_exporter.service
+```
+
+```
+[Unit]
+Description=Node Exporter
+Documentation=https://prometheus.io/docs/guides/node-exporter/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+Restart=on-failure
+ExecStart=/usr/local/bin/node_exporter \
+  --web.listen-address=:9100
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+sudo chmod 664 /etc/systemd/system/node_exporter.service
+```
+
+6. Start the node_exporter daemon and check its status
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable node_exporter
+sudo systemctl start node_exporter
+sudo systemctl status node_exporter
+```
+
+7. Allow access to Node Exporter in firewall
+
+```bash
+sudo ufw allow 9100/tcp
+```
+
+8. Verify Node Exporter is Running
+
+> **Note:**
+> http://your-server-ip-address:9100/metrics
+
+### Node Importer to Prometheus [^7] [^8]
+
+Your locally running Prometheus instance needs to be properly configured in order to access Node Exporter metrics. The following prometheus.yml example configuration file will tell the Prometheus instance to scrape, and how frequently, from the Node Exporter via localhost:9100:
+
+```bash
+sudo nano /etc/prometheus/prometheus.yml
+```
+
+Add under scrape_configs:
+
+```
+  - job_name: "node_exporter"
+    static_configs:
+    - targets: ["ip-from-node_exporter:9100"]
+```
+
+```bash
+sudo systemctl restart prometheus
+```
+
+#### Example metrics:
+
+| Metric                                        | Meaning                                                                                                |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| node_os_info                                  | OS metrics - complete information on the operating system.                                             |
+| node_cpu_seconds_total                        | CPU metrics - the CPU has spent a cumulative total of seconds in each mode (user, system, idle, etc.). |
+| node_cpu_seconds_total{mode=system}           | CPU metrics - total CPU time spent in idle mode.                                                       |
+| node_memory_MemTotal_bytes                    | Memory metrics - the total system memory.                                                              |
+| node_memory_MemFree_bytes                     | Memory metrics - the amount of free system memory.                                                     |
+| node_memory_Cached_bytes                      | Memory metrics - the amount of memory used for caching data.                                           |
+| node_network_receive_bytes_total              | Network metrics - total bytes received on all network interfaces.                                      |
+| node_network_transmit_bytes_total             | Network metrics - total bytes transmitted on all network interfaces.                                   |
+| node_network_receive_bytes{device=”eth0″}     | Network metrics - bytes received on a specific network interface.                                      |
+| node_disk_io_time_seconds_total               | Disk I/O metrics - cumulative seconds spent doing I/Os.                                                |
+| node_disk_io_time_seconds_total{device=”sda”} | Disk I/O metrics - cumulative seconds spent doing I/Os on a specific disk.                             |
+| node_filesystem_size_bytes                    | Filesystem metrics - total size of the filesystem.                                                     |
+| node_filesystem_free_bytes                    | Filesystem metrics - free space on the filesystem.                                                     |
+| node_boot_time_seconds                        | Uptime metrics - the timestamp when the node was last booted.                                          |
+| node_load1                                    | System load metrics - the 1-minute load averages.                                                      |
+| node_load5                                    | System load metrics - the 5-minute load averages.                                                      |
+| node_load15                                   | System load metrics - the 15-minute load averages.                                                     |
+| node_filesystem_read_bytes_total              | Filesystem read/write metrics - total bytes read from all filesystems.                                 |
+| node_filesystem_write_bytes_total             | Filesystem read/write metrics - total bytes are written to all filesystems.                            |
+
+## Backup
+
+1. Back up the Prometheus configuration details and data
+
+To back up the Prometheus configuration details and data, use the following command:
+
+```bash
+sudo cp -r /etc/prometheus /etc/prometheus_backup
+```
+
+2. Stop the Prometheus service
+
+To stop the Prometheus service, use the following command:
+
+```bash
+sudo systemctl stop prometheus
+```
+
+3. Download and extract the new Prometheus version
+
+To download the new Prometheus version, use the following command:
+
+```bash
+wget https://github.com/prometheus/node_exporter/releases/download/*
+```
+
+To extract the new Prometheus version, use the following command:
+
+```bash
+tar -xf prometheus-*
+```
+
+4. Replace the binary and configuration files
+
+To replace the Prometheus binary files, use the following command:
+
+```bash
+mv prometheus-*/prometheus /usr/local/bin/
+```
+
+To replace the Prometheus configuration file, use the following command:
+
+```bash
+cp prometheus-*/prometheus.yml /etc/prometheus/
+```
+
+5. Start the Prometheus service
+
+To start the Prometheus service, use the following command:
+
+```bash
+sudo systemctl start prometheus
+```
+
+6. Back up Node Exporter configuration details and data
+
+To back up the Node Exporter configuration details and data, use the following command:
+
+```bash
+cp /etc/systemd/system/node_exporter.service /etc/systemd/system/node_exporter.service_backup
+```
+
+7. Download and extract the new Node Exporter version
+
+To download the new Node Exporter version, use the following command:
+
+```bash
+wget https://github.com/prometheus/node_exporter/releases/download/*
+```
+
+To extract the new Node Exporter version, use the following command:
+
+```bash
+tar -xf node_exporter-*
+```
+
+8. Replace the Node Exporter binary file
+
+To replace the Node Exporter binary file, use the following command:
+
+```bash
+mv node_exporter-*/node_exporter /usr/local/bin/
+```
+
+9. Start the Node Exporter service
+
+To start the Node Exporter service, use the following command:
+
+```bash
+sudo systemctl start node_exporter
+```
 
 [^1]: https://www.cherryservers.com/blog/install-prometheus-ubuntu
 [^2]: https://medium.com/@abdullah.eid.2604/prometheus-installation-on-linux-ubuntu-c4497e5154f6
 [^3]: https://ibrahims.medium.com/how-to-install-prometheus-and-grafana-on-ubuntu-22-04-lts-configure-grafana-dashboard-5d11e3cb3cfd
 [^4]: https://b-nova.com/home/content/getting-started-with-prometheus/
+[^5]: https://prometheus.io/docs/instrumenting/exporters/
+[^6]: https://developer.couchbase.com/tutorial-node-exporter-setup
+[^7]: https://prometheus.io/docs/guides/node-exporter/
+[^8]: https://www.stackhero.io/en/services/Prometheus/documentations/Using-Node-Exporter
+[^9]: https://geekflare.com/de/prometheus-grafana-intro/
+[^10]: https://nsrc.org/workshops/2021/pacnog29/nmm/netmgmt/en/prometheus/ex-node-exporter.htm
+[^11]: https://techannotation.wordpress.com/2021/07/19/irate-vs-rate-whatre-they-telling-you/
+[^12]: https://www.liquidweb.com/blog/install-prometheus-node-exporter-on-linux-almalinux/
