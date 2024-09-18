@@ -41,11 +41,11 @@
 > **Note:**
 > http://your-server-ip-address
 
-## Create Network Bridge
+### Create Network Bridge
 
 ![Screenshot-7](./assets/proxmox_bridge_1.png)
 
-## Create a VM
+### Create a VM
 
 1. Click the Create VM button.
 
@@ -88,6 +88,58 @@
 ![Screenshot-16](./assets/proxmox_vm_9.png)
 
 10. The newly created VM appears in the resource tree on the left side of the screen. Click the VM to see its specifications and options.
+
+### Add additional storages
+
+1. Click on the specific node where you want to add the storage
+2. Now choose "Disks" from the options.
+3. Select the disks you want to prepare for adding
+4. First "Wipe Disk" in the options menu, confirm with "Yes"
+
+![Screenshot-17](./assets/proxmox_storage_1.png)
+
+![Screenshot-18](./assets/proxmox_storage_2.png)
+
+5. Next "Initialize Disk with GPT"
+6. Now go to the "Disk > Directory" view
+7. Choose "Create Directory" from the options
+
+   - set "Disk"
+   - set "Filesystem" > ext4
+   - set "Name"
+   - activate "Add Storage"
+
+![Screenshot-19](./assets/proxmox_storage_3.png)
+
+8. The storage directory was created and added to the storage overview in the node.
+
+![Screenshot-20](./assets/proxmox_storage_4.png)
+
+### Moving VM disks [^4] [^5]
+
+Proxmox VE enables the addition of various storage types, such as NFS, iSCSI-LVM, and so forth. This raises the question: is it possible to move the virtual hard disk of a VM, previously created and running on local-lvm, to the newly added NFS or iSCSI-LVM storage? The answer is “Yes”.
+
+1. Select the VM where the virtual disk needs to be moved, stop the VM, and click Hardware > Hard Disk > Disk Action > Move Storage.
+
+![Screenshot-21](./assets/promox_disks_1.jpeg)
+
+2. Select target storage and format.
+
+![Screenshot-22](./assets/promox_disks_2.jpeg)
+
+If the Target Storage is on file level, the Format supports three types of virtual disk image formats: Raw disk image, QEMU image format (QCOW2), and VMware image format (VMDK). Proxmox VE suggests using the QEMU image format.
+
+Delete Source: This is the option to delete the original disk. For safety, if you are concerned about potential issues when migrating to new storage or if there’s a need to keep an extra copy for backup purposes, do not check this option.
+
+3. Click on Move Disk and wait for the completion of the disk migration.
+
+![Screenshot-23](./assets/promox_disks_3.jpeg)
+
+4. Check the Hard Disk again.
+
+![Screenshot-24](./assets/promox_disks_4.jpeg)
+
+You can find that it has been moved to a new disk, whereas the initial “local-lvm:vm-118-disk-0” has now transformed into “Unused Disk 0”. After confirming that the move was successful, you could proceed with the deletion of the original “Unused Disk”.
 
 ## Security [^3]
 
@@ -341,11 +393,11 @@ net.ipv6.conf.all.disable_ipv6 = 1
 To protect against potentially unprotected services running on other ports, the Proxmox Firewall should be activated.
 Make the following configuration in the navigation menu on the left under Datacenter > Firewall > Add:
 
-![Screenshot-17](./assets/proxmox_firewall_1.png)
+![Screenshot-25](./assets/proxmox_firewall_1.png)
 
-![Screenshot-18](./assets/proxmox_firewall_2.png)
+![Screenshot-26](./assets/proxmox_firewall_2.png)
 
-![Screenshot-19](./assets/proxmox_firewall_3.png)
+![Screenshot-27](./assets/proxmox_firewall_3.png)
 
 Then activate the firewall under Datacenter > Firewall > Options by setting Firewall to Yes.
 Now all incoming requests that are not directed to SSH or the Proxmox Web UI will be automatically blocked.
@@ -353,3 +405,5 @@ Now all incoming requests that are not directed to SSH or the Proxmox Web UI wil
 [^1]: https://pve.proxmox.com/wiki/Package_Repositories
 [^2]: https://johnscs.com/remove-proxmox51-subscription-notice/
 [^3]: https://bw-edv.de/blog/de-de/proxmox-ve-anleitung-zur-sicherheitshaertung
+[^4]: https://www.vinchin.com/vm-tips/proxmox-move-disk-to-another-storage.html
+[^5]: https://phoenixnap.com/kb/proxmox-delete-vm
