@@ -226,6 +226,8 @@ sudo systemctl status node_exporter
 
 ```bash
 sudo ufw allow 9100/tcp
+sudo ufw disable
+sudo ufw enable
 ```
 
 8. Verify Node Exporter is Running
