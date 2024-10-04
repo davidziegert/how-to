@@ -6,7 +6,7 @@ The idea with Prometheus is that a central node aggregates metrics and alerting 
 
 ![Screenshot-1](./assets/prometheus_architecture.png)
 
-## Installation
+## Installation (Server)
 
 1. Update System Packages
 
@@ -149,6 +149,8 @@ With Prometheus running successfully, you can access it via your web browser usi
 > **Note:**
 > http://your-server-ip-address:9090
 
+## Installation (Client)
+
 ### Node Exporter [^5] [^6]
 
 The Node Exporter is an agent that gathers system metrics and exposes them in a format which can be ingested by Prometheus. The Node Exporter is a project that is maintained through the Prometheus project. This is a completely optional step and can be skipped if you do not wish to gather system metrics. The following will need to be performed on each server that you wish to monitor system metrics for.
@@ -235,7 +237,7 @@ sudo ufw enable
 > **Note:**
 > http://your-server-ip-address:9100/metrics
 
-### Node Importer to Prometheus [^7] [^8]
+#### Node Importer to Prometheus [^7] [^8]
 
 Your locally running Prometheus instance needs to be properly configured in order to access Node Exporter metrics. The following prometheus.yml example configuration file will tell the Prometheus instance to scrape, and how frequently, from the Node Exporter via localhost:9100:
 
@@ -279,7 +281,7 @@ sudo systemctl restart prometheus
 | node_filesystem_read_bytes_total              | Filesystem read/write metrics - total bytes read from all filesystems.                                 |
 | node_filesystem_write_bytes_total             | Filesystem read/write metrics - total bytes are written to all filesystems.                            |
 
-## Backup
+## Backup (Server)
 
 1. Back up the Prometheus configuration details and data
 

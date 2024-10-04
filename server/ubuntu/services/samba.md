@@ -1,82 +1,181 @@
-# SAMBA (Ubuntu) [^1] [^2] [^3]
+# SAMBA (Ubuntu)
 
-## Installation (with LDAP)
+## Prerequisites
 
-```bash
-sudo apt install tasksel
-sudo tasksel install samba-server
-sudo apt install samba samba-common smbldap-tools ldapscripts smbclient slapd ldap-utils ldap-auth-client libnss-ldap libpam-ldap ldap-utils nscd
-```
-
-```
-ldap://xxx.xxx.xxx.xxx:389
-dc=SUBDOMAIN,dc=DOMAIN,dc=TLD
-3
-no
-no
-```
-
-## SAMBA-LDAP-Scheme (for LDAP)
+### Set Hostname
 
 ```bash
-sudo cp /usr/share/doc/samba/examples/LDAP/samba.ldif /etc/ldap/schema/
-sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/samba.ldif
-sudo nano /etc/ldap/schema/samba_indices.ldif
+sudo hostnamectl set-hostname samba
+sudo nano /etc/cloud/cloud.cfg
 ```
 
 ```
-dn: olcDatabase={1}hdb,cn=config
-changetype: modify
-add: olcDbIndex
-olcDbIndex: uidNumber eq
-olcDbIndex: gidNumber eq
-olcDbIndex: loginShell eq
-olcDbIndex: uid eq,pres,sub
-olcDbIndex: memberUid eq,pres,sub
-olcDbIndex: uniqueMember eq,pres
-olcDbIndex: sambaSID eq
-olcDbIndex: sambaPrimaryGroupSID eq
-olcDbIndex: sambaGroupType eq
-olcDbIndex: sambaSIDList eq
-olcDbIndex: sambaDomainName eq
-olcDbIndex: default sub
+FROM: preserve_hostname: false
+TO: preserve_hostname: true
 ```
 
 ```bash
-sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/samba_indices.ldif
+sudo nano /etc/hosts
 ```
 
-## Set Authentication (for LDAP)
+```
+127.0.0.1 localhost
+xxx.xxx.xxx.xxx samba
+```
 
 ```bash
-sudo cp /usr/share/doc/smbldap-tools/examples/smbldap.conf.gz /etc/smbldap-tools/
-sudo cp /usr/share/doc/smbldap-tools/examples/smbldap_bind.conf /etc/smbldap-tools/
-sudo gzip -d /etc/smbldap-tools/smbldap.conf.gz
-sudo pam-auth-update
-    *
-    *
-    *
-    *
-
-    *
+sudo hostnamectl
 ```
+
+### Shared Folders
+
+```bash
+sudo mkdir -p /srv/samba/shares
+sudo chown root:users /srv/samba/shares/
+sudo chmod -R 0770 /srv/samba/shares/
+```
+
+## Installation (Standalone)
+
+```bash
+sudo apt install samba samba-common samba-common-bin samba-vfs-modules smbclient
+```
+
+```bash
+sudo whereis samba
+sudo samba -V
+sudo systemctl status smbd nmbd
+```
+
+```bash
+sudo ufw allow samba
+```
+
+### Customize Configuration in smb.conf (File-Sharing)
+
+```bash
+sudo nano /etc/samba/smb.conf
+```
+
+```
+[global]
+dns proxy = no
+log file = /var/log/samba/log.%m
+logging = file
+map to guest = never
+max log size = 10000
+min protocol = SMB3
+obey pam restrictions = Yes
+pam password change = Yes
+panic action = /usr/share/samba/panic-action %d
+passwd chat = _Enter\snew\s_\spassword:* %n\n *Retype\snew\s*\spassword:* %n>
+passwd program = /usr/bin/passwd %u
+server role = standalone server
+server string = %h server (Samba, Ubuntu)
+unix password sync = Yes
+usershare allow guests = no
+workgroup = SUBDOMAIN
+# hosts allow = xxx.xxx.xxx. xxx.xxx.xxx. localhost
+
+[homes]
+browseable = no
+comment = Home Directories
+create mask = 0700
+directory mask = 0700
+force create mode = 0700
+force directory mode = 0700
+read only = no
+valid users = %S
+
+[shares]
+browseable = Yes
+comment = Shared Folder
+create mask = 2770
+directory mask = 2770
+force create mode = 2770
+force directory mode = 2770
+path = /srv/samba/shares
+read only = no
+valid users = @users
+
+[nobody]
+browseable = no
+```
+
+### Verify SMB Configuration
+
+```bash
+sudo testparm
+sudo systemctl restart smbd nmbd
+sudo systemctl status smbd nmbd
+```
+
+### Verify SMB Shared Folders
+
+```bash
+sudo smbclient -L localhost -U%
+```
+
+### Create testuser (File-Sharing)
+
+```bash
+sudo adduser testuser
+sudo smbpasswd -a testuser
+```
+
+### Verify SMB Authentification
+
+```bash
+sudo smbclient //localhost/shares -U testuser -c 'ls'
+```
+
+## Installation (with openLDAP)
+
+```bash
+sudo apt install nslcd nscd libpam-ldapd libnss-ldapd ldap-utils smbldap-tools
+```
+
+```
+ldap://xxx.xxx.xxx.xxx
+dc=subdomain,dc=domain,dc=local
+[*] passwd
+[*] group
+[*] shadow
+[ ] hosts
+[ ] networks
+[ ] ethers
+[ ] protocols
+[ ] services
+[ ] netgroup
+[ ] aliases
+```
+
+```bash
+sudo ufw allow ldap
+sudo ufw allow ldaps
+```
+
+### Check Authentification
 
 ```bash
 sudo nano /etc/nsswitch.conf
 ```
 
 ```
-passwd: files ldap systemd
-group: files ldap systemd
-shadow: files ldap
-gshadow: files
-hosts: files dns
-networks: files
-protocols: db files
-services: db files
-ethers: db files
-rpc: db files
-netgroup: nis
+passwd:         files systemd ldap
+group:          files systemd ldap
+shadow:         files systemd ldap
+gshadow:        files systemd
+
+hosts:          files dns
+networks:       files
+
+protocols:      db files
+services:       db files
+ethers:         db files
+rpc:            db files
+
+netgroup:       nis
 ```
 
 ```bash
@@ -84,163 +183,137 @@ sudo nano /etc/pam.d/common-password
 ```
 
 ```
-password [success=2 default=ignore] pam_unix.so obscure sha512
-password [success=1 user_unknown=ignore default=die] pam_ldap.so use_authtok try_first_pass
-password requisite pam_deny.so
-password required pam_permit.so
+password        [success=2 default=ignore]      pam_unix.so obscure yescrypt
+password        [success=1 default=ignore]      pam_ldap.so use_authtok try_first_pass
+password        requisite                       pam_deny.so
+password        required                        pam_permit.so
 ```
 
-## Samba Configuration [^4]
+### Test connection to openLDAP and import LDsamba.ldif into openLDAP
+
+```bash
+sudo ldapsearch ldap://xxx.xxx.xxx.xxx -H -x -b dc=subdomain,dc=domain,dc=local -D "cn=admin,dc=subdomain,dc=domain,dc=local" -W
+sudo ldapadd -x -D "cn=admin,dc=subdomain,dc=domain,dc=local" -W -H ldap://xxx.xxx.xxx.xxx -f /usr/share/doc/samba/examples/LDAP/samba.ldif
+```
+
+```
+If import not work copy and import locally !!!
+```
+
+### Get local domain SID
 
 ```bash
 sudo net getlocalsid
 ```
 
-```
-# Example
-
-S-1-5-21-2305295940-2782501175-1093577454
-```
+### Customize Configuration in smb.conf (File-Sharing)
 
 ```bash
 sudo nano /etc/samba/smb.conf
 ```
 
 ```
-#======================= Global Settings =======================
-
 [global]
-workgroup = WORKGROUP
-netbios name = NAME
-server string = NAME
-dns proxy = No
-domain logons = Yes
-domain master = Yes
-local master = Yes
-preferred master = Yes
-wins support = Yes
-os level = 200
-obey pam restrictions = Yes
+dns proxy = no
 log file = /var/log/samba/log.%m
-max log size = 1000
-panic action = /usr/share/samba/panic-action %d
+logging = file
+map to guest = never
+max log size = 10000
+min protocol = SMB3
+netbios name = %h
+obey pam restrictions = Yes
 pam password change = Yes
-unix password sync = No
-hide dot files = Yes
-hide files = /lost+found/desktop.ini/ntuser.ini/NTUSER.*/Thumbs.db/
+panic action = /usr/share/samba/panic-action %d
+passwd chat = _Enter\snew\s_\spassword:* %n\n *Retype\snew\s*\spassword:* %n>
+passwd program = /usr/bin/passwd %u
+server role = standalone server
+server string = %h server (Samba, Ubuntu)
+unix password sync = Yes
+usershare allow guests = no
+workgroup = SUBDOMAIN
+# hosts allow = xxx.xxx.xxx. xxx.xxx.xxx. localhost
 
-mangled names = no
-dos charset = CP850
-unix charset = UTF-8
-display charset = UTF-8
+# tls enabled  = Yes
+# tls keyfile  = tls/key.pem
+# tls certfile = tls/cert.pem
+# tls cafile   = tls/ca.pem
+# passdb backend = ldapsam:ldaps://xxx.xxx.xxx.xxx
+# ldap ssl = On
 
+tls enabled  = no
 passdb backend = ldapsam:ldap://xxx.xxx.xxx.xxx
-ldap suffix = dc=SUBDOMAIN,dc=DOMAIN,dc=TLD
-ldap admin dn = cn=admin,dc=SUBDOMAIN,dc=DOMAIN,dc=TLD
+ldap ssl = off
+
+ldap suffix = dc=subdomain,dc=domain,dc=local
+ldap admin dn = cn=admin,dc=subdomain,dc=domain,dc=local
 ldap user suffix = ou=users
 ldap group suffix = ou=groups
 ldap machine suffix = ou=computers
-ldap idmap suffix = ou=idmap
+ldap idmap suffix = ou=Idmap
 ldap passwd sync = Yes
-ldap ssl = No
 
-unix extensions = yes
-os level = 35
-syslog = 0
-idmap config * : backend = tdb
+idmap config _ : backend = tdb
+idmap config _ : range = 10001-20000
+idmap_ldb:use rfc2307 = Yes
 
-idmap config * : range = 1000000-1999999
+add user script = /usr/sbin/smbldap-useradd -m '%u'
+delete user script = /usr/sbin/smbldap-userdel %u
+add group script = /usr/sbin/smbldap-groupadd -p '%g'
+delete group script = /usr/sbin/smbldap-groupdel '%g'
+add user to group script = /usr/sbin/smbldap-groupmod -m '%u' '%g'
+delete user from group script = /usr/sbin/smbldap-groupmod -x '%u' '%g'
+set primary group script = /usr/sbin/smbldap-usermod -g '%g' '%u'
+add machine script = /usr/sbin/smbldap-useradd -w '%u'
+
+logon script = %U.logon.bat
 logon drive = H:
-logon home = \\%N\%U
-logon path = \\%N\profiles\%U\%a
-logon script = allusers.bat
-
-#======================= Share Definitions =======================
 
 [homes]
-
+browseable = no
 comment = Home Directories
+create mask = 0700
+directory mask = 0700
+force create mode = 0700
+force directory mode = 0700
+read only = no
 valid users = %S
-read only = No
-browseable = No
 
-[data]
+[shares]
+browseable = Yes
+comment = Shared Folder
+create mask = 2770
+directory mask = 2770
+force create mode = 2770
+force directory mode = 2770
+path = /srv/samba/shares
+read only = no
+valid users = @users
 
-comment = Data Directories
-path = /GROUPNAME
-valid users = @GROUPNAME
-browseable = yes
-writeable = yes
-create mask = 2660
-directory mask = 2770 
-force user = shareuser
+[nobody]
+browseable = no
 ```
 
 ```bash
-sudo smbpasswd -w 'PASSWORD'
-sudo testparm
 sudo smbldap-config
 ```
 
 ```
-workgroup name>                                                 ENTER
-netbios name>                                                   ENTER
-logon drive>                                                    ENTER
-logon home>                                                     ENTER
-logon path>                                                     ENTER
-home directory prefix>                                          ENTER
-default users>                                                  ENTER
-default user netlogon script>                                   ENTER
-default password validation time>                               365
-ldap suffix>                                                    ENTER
-ldap group suffix>                                              ENTER
-ldap user suffix>                                               ENTER
-ldap machine suffix>                                            ENTER
-Idmap suffix>                                                   ENTER
-sambaUnixIdPooldn object>                                       ENTER
-ldap master server>                                             ENTER
-ldap master port>                                               ENTER
-ldap master bind dn>                                            ENTER
-ldap master bind password>                                      PASSWORD
-ldap slave server>                                              ENTER
-ldap slave port>                                                ENTER
-ldap slave bind dn>                                             ENTER
-ldap slave bind password>                                       PASSWORD
-ldap tls support>                                               ENTER
-SID for domain>                                                 ENTER
-unix password encryption (CRYPT, MD5, SMD5, SSHA, SHA) [SSHA]>  ENTER
-default user gidNumber [513]>                                   ENTER
-default computer gidNumber [515]>                               ENTER
-default login shell [/bin/bash]>                                ENTER
-default skeleton directory [/etc/skel]>                         ENTER
-default domain name to append to mail address []>               ENTER
+
+default user netlogon script (use %U as username) [] > logon.bat
+SID for domain SUBDOMAIN [] > S-1-5-21-381531704-900572705-2834580447
 ```
 
-### Check whether entries have been made in the following files:
-
-```bash
+```
 sudo nano /etc/smbldap-tools/smbldap.conf
 sudo nano /etc/smbldap-tools/smbldap_bind.conf
 ```
 
-## Publish Samba
-
 ```bash
+sudo smbpasswd -w 'xxxxx'
 sudo smbldap-populate
-sudo reboot now
 ```
 
-## Commands
-
-```bash
-sudo service smbd start
-sudo service smbd stop
-sudo systemctl restart smb.service
-sudo systemctl restart nmb.service
-sudo smbstatus
-```
-
-### Accounts
+## Accounts
 
 ```
 Example ( smbldap-useradd -N "Susi" -S "Sorglos" -M "susi@test.de" -amP "susi.sorglos" )
@@ -352,7 +425,7 @@ echo "BESITZER SETZEN"
 chown -R root:GRUPPENNAME /GRUPPENNAME
 
 echo "RECHTE SETZEN"
-chmod -R 770 /GRUPPENNAME	
+chmod -R 770 /GRUPPENNAME
 
 echo "SUCCESS"
 ```
@@ -361,3 +434,10 @@ echo "SUCCESS"
 [^2]: https://linuxconfig.org/how-to-configure-samba-server-share-on-ubuntu-20-04-focal-fossa-linux
 [^3]: https://computingforgeeks.com/install-and-configure-samba-server-share-on-ubuntu/
 [^4]: https://www.techgrube.de/tutorials/ordnerfreigaben-ubuntu-20-04-homeserver-nas-teil-4
+[^1]: https://github.com/conankiz/Ubuntu-20.04/blob/main/AD/Create%20an%20Active%20Directory%20Infrastructure%20with%20Samba4%20on%20Ubuntu.md
+[^2]: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
+[^3]: https://github.com/nodiscc/xsrv/tree/master/roles/samba
+[^4]: https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Standalone_Server
+[^5]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/assembly_using-samba-as-a-server_deploying-different-types-of-servers#con_the-samba-security-services_assembly_understanding-the-different-samba-services-and-modes
+[^6]: https://phoenixnap.com/kb/ubuntu-samba
+[^7]: https://www.cyberciti.biz/
