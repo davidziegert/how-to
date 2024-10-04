@@ -26,9 +26,9 @@ sed -i 's/preserve_hostname: false/preserve_hostname: true/g' /etc/cloud/cloud.c
 > /etc/hosts
 cat <<EOT >> /etc/hosts
 
-127.0.0.1 localhost
-127.0.1.1 $_HOSTNAME
-$_IP $_HOSTNAME $_DOMAINNAME
+127.0.0.1	localhost
+127.0.1.1	$_HOSTNAME
+$_IP	$_HOSTNAME	$_DOMAINNAME
 
 EOT
 ###########################
