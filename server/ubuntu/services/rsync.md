@@ -1,5 +1,15 @@
 # Rsync (Ubuntu) [^1] [^2] [^3]
 
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
+
 ## Incremental Backups
 
 ```bash
@@ -52,8 +62,8 @@ sudo crontab -e
 ## Transfer Files with Rsync over SSH [^4]
 
 ```bash
-sudo rsync OPTION SourceDirectory_or_FilePath user@xxx.xxx.xxx.xxx:FolderName
-sudo rsync -aP ~/SourceDirectory/ user@xxx.xxx.xxx.xxx:~/FolderName
+sudo rsync OPTION SourceDirectory_or_FilePath [USER]@[IPADDRESS]:FolderName
+sudo rsync -aP ~/SourceDirectory/ [USER]@[IPADDRESS]:~/FolderName
 ```
 
 ## rsnapshot [^5]
@@ -155,7 +165,7 @@ cmd_ssh /usr/bin/ssh
 ### BACKUP POINTS / SCRIPTS ###
 ###############################
 
-backup  root@xxx.xxx.xxx.xxx:/data
+backup  root@[IPADDRESS]:/data
 ```
 
 ```bash

@@ -1,4 +1,14 @@
-# SAMBA (Ubuntu)
+# SAMBA (Ubuntu) [^1] [^2] [^3] [^4] [^5] [^6] [^7] [^8] [^9]
+
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
 
 ## Prerequisites
 
@@ -19,8 +29,9 @@ sudo nano /etc/hosts
 ```
 
 ```
-127.0.0.1 localhost
-xxx.xxx.xxx.xxx samba
+127.0.0.1	localhost
+127.0.1.1	samba
+[IPADDRESS]	samba samba.subdomain.domain.internal
 ```
 
 ```bash
@@ -110,23 +121,23 @@ sudo systemctl restart smbd nmbd
 sudo systemctl status smbd nmbd
 ```
 
+### Create user account (File-Sharing)
+
+```bash
+sudo adduser [USER]
+sudo smbpasswd -a [USER]
+```
+
 ### Verify SMB Shared Folders
 
 ```bash
 sudo smbclient -L localhost -U%
 ```
 
-### Create testuser (File-Sharing)
-
-```bash
-sudo adduser testuser
-sudo smbpasswd -a testuser
-```
-
 ### Verify SMB Authentification
 
 ```bash
-sudo smbclient //localhost/shares -U testuser -c 'ls'
+sudo smbclient //localhost/shares -U [USER] -c 'ls'
 ```
 
 ## Installation (with openLDAP)
@@ -313,7 +324,7 @@ sudo smbpasswd -w 'xxxxx'
 sudo smbldap-populate
 ```
 
-## Accounts
+### Accounts
 
 ```
 Example ( smbldap-useradd -N "Susi" -S "Sorglos" -M "susi@test.de" -amP "susi.sorglos" )
@@ -405,7 +416,7 @@ sudo nano create_LDAP_group.sh
 #!/bin/bash
 
 echo "CREATE GROUPS"
-sudo smbldap-groupadd -a GROUPNAME
+sudo smbldap-groupadd -a [GROUP]
 echo "SUCCESS"
 ```
 
@@ -421,23 +432,21 @@ sudo nano create_FOLDER.sh
 echo "CREATE FOLDERS"
 sudo mkdir /GROUPNAME/
 
-echo "BESITZER SETZEN"
-chown -R root:GRUPPENNAME /GRUPPENNAME
+echo "SET OWNER"
+chown -R root:[GROUP] /[GROUP]
 
-echo "RECHTE SETZEN"
-chmod -R 770 /GRUPPENNAME
+echo "SET RIGHTS"
+chmod -R 770 /[GROUP]
 
 echo "SUCCESS"
 ```
 
-[^1]: https://kifarunix.com/install-and-configure-samba-file-server-on-ubuntu-20-04/
-[^2]: https://linuxconfig.org/how-to-configure-samba-server-share-on-ubuntu-20-04-focal-fossa-linux
-[^3]: https://computingforgeeks.com/install-and-configure-samba-server-share-on-ubuntu/
-[^4]: https://www.techgrube.de/tutorials/ordnerfreigaben-ubuntu-20-04-homeserver-nas-teil-4
-[^1]: https://github.com/conankiz/Ubuntu-20.04/blob/main/AD/Create%20an%20Active%20Directory%20Infrastructure%20with%20Samba4%20on%20Ubuntu.md
-[^2]: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
+[^1]: https://computingforgeeks.com/install-and-configure-samba-server-share-on-ubuntu/
+[^2]: https://github.com/conankiz/Ubuntu-20.04/blob/main/AD/Create%20an%20Active%20Directory%20Infrastructure%20with%20Samba4%20on%20Ubuntu.md
 [^3]: https://github.com/nodiscc/xsrv/tree/master/roles/samba
-[^4]: https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Standalone_Server
-[^5]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/assembly_using-samba-as-a-server_deploying-different-types-of-servers#con_the-samba-security-services_assembly_understanding-the-different-samba-services-and-modes
-[^6]: https://phoenixnap.com/kb/ubuntu-samba
-[^7]: https://www.cyberciti.biz/
+[^4]: https://linuxconfig.org/how-to-configure-samba-server-share-on-ubuntu-20-04-focal-fossa-linux
+[^5]: https://phoenixnap.com/kb/ubuntu-samba
+[^6]: https://wiki.samba.org/index.php/Samba_Security_Documentation
+[^7]: https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Standalone_Server
+[^8]: https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
+[^9]: https://www.techgrube.de/tutorials/ordnerfreigaben-ubuntu-20-04-homeserver-nas-teil-4

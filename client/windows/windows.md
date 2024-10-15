@@ -1,6 +1,12 @@
-# Windows
+# Windows 11
 
 ## Installation
+
+https://hardware-helden.de/windows-11-ohne-internet-und-ohne-microsoft-konto-installieren
+https://www.gamingdeputy.com/gr/so-entfernen-sie-das-symbol-weitere-informationen-zu-diesem-bild-unter-windows-11/
+https://www.windowspage.de/tipps/024131.html
+https://www.windowspage.de/tipps/022065.html
+https://de.minitool.com/datentraegerverwaltung/tpm-loeschen.html
 
 ## Security
 

@@ -1,13 +1,24 @@
 # WordPress
 
-## Installation
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
 
-### Requirements
+## Requirements
+
+### Webserver
 
 ```bash
 sudo apt install apache2
-sudo systemctl enable apache2
 sudo a2enmod rewrite
+sudo systemctl enable apache2
+sudo systemctl restart apache2
 sudo systemctl status apache2
 ```
 
@@ -15,6 +26,8 @@ sudo systemctl status apache2
 sudo apt install -y php php-{bcmath,common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl}
 sudo php -v
 ```
+
+### Database
 
 ```bash
 sudo apt install mariadb-server mariadb-client
@@ -27,8 +40,8 @@ sudo mysql_secure_installation
 
 Enter current password for root (enter for none): Press ENTER
 Set root password? [Y/n]: Y
-New password: Set-your-new-password
-Re-enter new password: Set-your-new-password
+New password: [PASSWORD]
+Re-enter new password: [PASSWORD]
 Remove anonymous users? [Y/n] Y
 Disallow root login remotely? [Y/n] Y
 Remove test database and access to it? [Y/n] Y
@@ -38,14 +51,14 @@ Reload privilege tables now? [Y/n] Y
 ```bash
 sudo mysql -u root -p
 
-CREATE USER 'wp_user'@'localhost' IDENTIFIED BY 'your_password';
+CREATE USER '[USER]'@'localhost' IDENTIFIED BY '[PASSWORD]';
 CREATE DATABASE wordpress;
-GRANT ALL PRIVILEGES ON wordpress.* TO 'wp_user'@'localhost';
+GRANT ALL PRIVILEGES ON wordpress.* TO '[USER]'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```
 
-### Configuration
+## Installation & Configuration
 
 ```bash
 sudo apt install wget unzip
@@ -71,10 +84,9 @@ sudo nano /etc/apache2/sites-available/wordpress.conf
 
 ```
 <VirtualHost *:80>
-	ServerAdmin admin@example.com
+	ServerAdmin [EMAIL]
 	DocumentRoot /var/www/html/wordpress
-	ServerName example.com
-	ServerAlias www.example.com
+	ServerName [URL]
 
 	<Directory /var/www/html/wordpress/>
 		Options FollowSymLinks
@@ -91,11 +103,13 @@ sudo nano /etc/apache2/sites-available/wordpress.conf
 sudo a2ensite wordpress.conf
 sudo a2dissite 000-default.conf
 sudo a2enmod rewrite
+sudo apachectl configtest
 sudo systemctl restart apache2
+sudo systemctl status apache2
 ```
 
 > **Note:**
-> http://your-server-ip-address
+> http://[IPADDRESS]
 
 ![Screenshot-1](./assets/wordpress_install_1.jpg)
 ![Screenshot-2](./assets/wordpress_install_2.jpg)
@@ -105,7 +119,7 @@ sudo systemctl restart apache2
 ![Screenshot-6](./assets/wordpress_install_6.jpg)
 ![Screenshot-7](./assets/wordpress_install_7.jpg)
 
-## Security
+## Security & Performance
 
 ### Folder Accesss
 
@@ -115,18 +129,14 @@ sudo find /var/www/html/wordpress/ -type d -exec chmod 750 {} \;
 sudo find /var/www/html/wordpress/ -type f -exec chmod 640 {} \;
 ```
 
-### Limit PHP Functions
+### PHP
 
 ```bash
-php -i | grep allow_url_include
-allow_url_include => Off => Off
-```
+sudo cp /etc/php/8.*/apache2/php.ini /etc/php/8.*/apache2/php.ini.original
+sudo cp /etc/php/8.*/fpm/php.ini /etc/php/8.*/fpm/php.ini.original
 
-### Modify your PHP.ini
-
-```bash
-sudo cp /etc/php/8.1/apache2/php.ini /etc/php/8.1/apache2/php.ini.original
-sudo nano /etc/php/8.1/apache2/php.ini
+sudo nano /etc/php/8.*/apache2/php.ini
+sudo nano /etc/php/8.*/fpm/php.ini
 ```
 
 ```
@@ -144,7 +154,8 @@ engine = On
 short_open_tag = Off
 precision = 14
 output_buffering = Off
-zlib.output_compression = Off
+zlib.output_compression = On
+zlib.output_compression_level = 5
 implicit_flush = Off
 serialize_precision = -1
 disable_functions = allow_url_fopen,curl_exec,curl_multi_exec,exec,openlog,parse_ini_filew_source,passthru,phpinfo,popen,proc_open,shell_exec,show_source,syslog,system,highlight_file,fopen_with_path,dbmopen,dbase_open,putenv,chdir,filepro,filepro_rowcount,filepro_retrieve,posix_mkfifo
@@ -159,14 +170,19 @@ cgi.force_redirect= On
 
 expose_php = Off
 allow_webdav_methods = Off
+max_input_vars = 1500
+realpath_cache_size = 16M
+realpath_cache_ttl = 120
+opcache.enable = 1
+zend_extension = opcache
 
 ;;;;;;;;;;;;;;;;;;;
 ; Resource Limits ;
 ;;;;;;;;;;;;;;;;;;;
 
-max_execution_time = 30
+max_execution_time = 360
 max_input_time = 60
-memory_limit = 128M
+memory_limit = 512M
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Error handling and logging ;
@@ -191,7 +207,7 @@ variables_order = "GPCS"
 request_order = "GP"
 register_argc_argv = Off
 auto_globals_jit = On
-post_max_size = 25M
+post_max_size = 100M
 auto_prepend_file =
 auto_append_file =
 default_mimetype = "text/html"
@@ -203,7 +219,7 @@ default_charset = "UTF-8"
 
 enable_dl = Off
 file_uploads = On
-upload_max_filesize = 25M
+upload_max_filesize = 100M
 max_file_uploads = 5
 
 ;;;;;;;;;;;;;;;;;;
@@ -261,6 +277,7 @@ bcmath.scale = 0
 
 [Session]
 session.save_handler = files
+session.save_path = /var/lib/php/sessions
 session.use_strict_mode = 1
 session.use_cookies = 1
 session.use_only_cookies = 1
@@ -274,8 +291,8 @@ session.serialize_handler = php
 session.gc_probability = 0
 session.gc_divisor = 1000
 session.gc_maxlifetime  = 600
-session.cache_limiter = nocache
-session.cache_expire = 30
+session.cache_limiter = public
+session.cache_expire = 180
 session.use_trans_sid = 0
 session.sid_length = 256
 session.trans_sid_tags = "a=href,area=href,frame=src,form="
@@ -297,7 +314,9 @@ soap.wsdl_cache_limit = 5
 ldap.max_links = -1
 ```
 
-### Block Userlist in WP’s REST API
+### Wordpress
+
+#### Block Userlist in WP’s REST API
 
 A list all of all is available at users https://example.com/wp-json/wp/v2/users and one can also get information about a specific user at https://example.com/wp-json/wp/v2/users/1, where 1 is a user’s ID. To disable these add this code snippet to your theme’s functions.php file.
 
@@ -317,7 +336,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 });
 ```
 
-### Remove WP-Admin Login-Path
+#### Remove WP-Admin Login-Path
 
 Are you looking for a simple, yet effective way to protect your admin page? If so, you can use the WPS Hide Login plugin to change the location of the login page.
 The most popular method to break into a website is brute force (continually entering login information until it is right).
@@ -325,9 +344,7 @@ Redirect the the login page to another URL with the WPS Hide Login Plugin.
 
 ## Backup
 
-### Manually
-
-#### Files
+### Files
 
 ```bash
 sudo systemctl enable cron
@@ -338,6 +355,8 @@ sudo crontab -e
 # Every Monday on 02:00 AM
 0 2 * * 1   tar -cvf backup_wordpress_$(date "+%d-%b-%y").tar /var/www/html/wordpress
 ```
+
+### Database
 
 #### Database
 
@@ -361,21 +380,11 @@ sudo crontab -e
 
 ![Screenshot-1](./assets/wordpress_export.jpg)
 
-## Plugins
+## Themes
 
-- [WPS Hide Login](https://de.wordpress.org/plugins/wps-hide-login/)
-- [wp_head() cleaner](https://de.wordpress.org/plugins/wp-head-cleaner/)
-- [WP Fastest Cache](https://de.wordpress.org/plugins/wp-fastest-cache/)
-- [Very Simple Meta Description](https://wordpress.org/plugins/very-simple-meta-description/)
-- [Real Media Library](https://de.wordpress.org/plugins/real-media-library-lite/)
-- [Polylang](https://de.wordpress.org/plugins/polylang/)
-- [Insert PHP Code Snippet](https://de.wordpress.org/plugins/insert-php-code-snippet/)
-- [Nested Pages](https://de.wordpress.org/plugins/wp-nested-pages/)
-- [Health Check & Troubleshooting](https://wordpress.org/plugins/health-check/)
+### Classic Theme
 
-## Classic Theme
-
-### Folder Structure Example
+#### Folder Structure Example
 
 ![Screenshot-17](./assets/wordpress_structure.jpg)
 
@@ -406,9 +415,9 @@ theme
 └── search.php				// Search-Result Page-Template
 ```
 
-### Shortcodes
+#### Shortcodes
 
-#### functions.php
+###### functions.php
 
 ```php
 <?php
@@ -577,7 +586,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 });
 ```
 
-#### head
+###### head
 
 ```php
 <!-- Website-Language -->
@@ -602,14 +611,14 @@ add_filter('rest_endpoints', function ($endpoints) {
 <?php wp_head(); ?>
 ```
 
-#### body
+###### body
 
 ```php
 <!-- WordPress-Specific-Elements -->
 <?php wp_footer(); ?>
 ```
 
-#### header
+###### header
 
 ```php
 <!-- Website-Name -->
@@ -622,14 +631,14 @@ add_filter('rest_endpoints', function ($endpoints) {
 <?php echo home_url(); ?>
 ```
 
-#### nav
+###### nav
 
 ```php
 <!-- Main-Menu -->
 <?php wp_nav_menu(array('theme_location' => 'REGISTER-NAME', 'container_class' => 'main-menu')); ?>
 ```
 
-#### sidebar
+###### sidebar
 
 ```php
 <!-- Breadcrumb-Navigation -->
@@ -639,7 +648,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <?php get_search_form(); ?>
 ```
 
-#### footer
+###### footer
 
 ```php
 <!-- List of all Post-Categories -->
@@ -655,7 +664,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <?php insert_random_link(); ?>
 ```
 
-#### search
+###### search
 
 ```php
 <!-- Search-Results -->
@@ -677,7 +686,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <?php endif; ?>
 ```
 
-#### searchform
+###### searchform
 
 ```php
 <!-- Search-Form-Template -->
@@ -687,7 +696,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 </form>
 ```
 
-#### index
+###### index
 
 ```php
 <!-- Show Posts with Pagination -->
@@ -733,7 +742,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <?php wp_reset_query(); ?>
 ```
 
-#### page
+###### page
 
 ```php
 <!-- If Content exists then post -->
@@ -748,7 +757,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 endif; ?>
 ```
 
-#### single
+###### single
 
 ```php
 <!-- If Content exists then post -->
@@ -768,7 +777,7 @@ endif; ?>
 <?php comments_template(); ?>
 ```
 
-#### comments
+###### comments
 
 ```php
 <!-- Block comments.php from direct calling -->
@@ -813,9 +822,9 @@ endif; ?>
 </form>
 ```
 
-## FSE Theme [^1]
+### FSE Theme [^1]
 
-### Folder Structure Example [^2]
+#### Folder Structure Example [^2]
 
 ```
 theme
@@ -844,9 +853,9 @@ theme
 └── theme.json				            // Global Settings and Styles
 ```
 
-### Shortcodes
+#### Shortcodes
 
-#### functions.php
+###### functions.php
 
 ```php
 <?php
@@ -915,7 +924,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 });
 ```
 
-#### header.html
+###### header.html
 
 ```html
 <!-- wp:group  -->
@@ -929,7 +938,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <!-- /wp:group -->
 ```
 
-#### footer.html
+###### footer.html
 
 ```html
 <!-- wp:group  -->
@@ -943,7 +952,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <!-- /wp:group -->
 ```
 
-#### searchbar
+###### searchbar
 
 ```html
 <!-- wp:group  -->
@@ -951,7 +960,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <!-- /wp:group -->
 ```
 
-#### comments
+###### comments
 
 ```html
 <!-- wp:group  -->
@@ -974,7 +983,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <!-- /wp:group -->
 ```
 
-#### archive.html
+###### archive.html
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
@@ -999,7 +1008,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
 ```
 
-#### category-NAME.html
+###### category-NAME.html
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
@@ -1024,7 +1033,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
 ```
 
-#### home.html
+###### home.html
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
@@ -1049,7 +1058,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
 ```
 
-#### page.html
+###### page.html
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
@@ -1061,7 +1070,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
 ```
 
-#### single.html
+###### single.html
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
@@ -1077,7 +1086,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 <!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
 ```
 
-#### search.html
+###### search.html
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
@@ -1104,6 +1113,18 @@ add_filter('rest_endpoints', function ($endpoints) {
 <!-- /wp:group -->
 <!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
 ```
+
+## Plugins
+
+- [WPS Hide Login](https://de.wordpress.org/plugins/wps-hide-login/)
+- [wp_head() cleaner](https://de.wordpress.org/plugins/wp-head-cleaner/)
+- [WP Fastest Cache](https://de.wordpress.org/plugins/wp-fastest-cache/)
+- [Very Simple Meta Description](https://wordpress.org/plugins/very-simple-meta-description/)
+- [Real Media Library](https://de.wordpress.org/plugins/real-media-library-lite/)
+- [Polylang](https://de.wordpress.org/plugins/polylang/)
+- [Insert PHP Code Snippet](https://de.wordpress.org/plugins/insert-php-code-snippet/)
+- [Nested Pages](https://de.wordpress.org/plugins/wp-nested-pages/)
+- [Health Check & Troubleshooting](https://wordpress.org/plugins/health-check/)
 
 [^1]: https://fullsiteediting.com/lessons/creating-block-based-themes/
 [^2]: https://developer.wordpress.org/themes/core-concepts/theme-structure/

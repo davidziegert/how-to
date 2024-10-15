@@ -1,5 +1,15 @@
 # Apache2 + PHP (Ubuntu) [^1]
 
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
+
 ## Installation
 
 ```bash
@@ -43,8 +53,9 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 
 ```
 <VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    ServerName www.domain.com
+    ServerAdmin [EMAIL]
+    ServerName [URL]
+
     DocumentRoot /var/www/html
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -67,8 +78,9 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 
 ```
 <VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    ServerName www.domain.com
+    ServerAdmin [EMAIL]
+    ServerName [URL]
+
     DocumentRoot /var/www/html
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -100,8 +112,8 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 
 ```
 <VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    ServerName www.domain.com
+    ServerAdmin [EMAIL]
+    ServerName [URL]
 
     DocumentRoot /var/www/html
     ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -132,7 +144,7 @@ sudo a2enmod status
 ```
 
 ```bash
-sudo nano /etc/apache2/mods-available/status.conf 
+sudo nano /etc/apache2/mods-available/status.conf
 ```
 
 ```
@@ -167,7 +179,7 @@ sudo /usr/sbin/a2enmod substitute
 ```
 
 ```bash
-sudo nano /etc/apache2/mods-available/status.conf 
+sudo nano /etc/apache2/mods-available/status.conf
 ```
 
 ```
@@ -221,8 +233,9 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 
 ```
 <VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    ServerName www.domain.com
+    ServerAdmin [EMAIL]
+    ServerName [URL]
+
     DocumentRoot /var/www/html
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -236,8 +249,8 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 	<VirtualHost *:443>
 		SSLEngine on
         SSLCertificateFile /etc/apache2/ssl/your_domain.crt
-        SSLCertificateKeyFile /etc/apache2/ssl/your_private.key 
-        SSLCertificateChainFile /etc/apache2/ssl/your_chain.crt 
+        SSLCertificateKeyFile /etc/apache2/ssl/your_private.key
+        SSLCertificateChainFile /etc/apache2/ssl/your_chain.crt
 	</VirtualHost>
 </IfModule>
 ```
@@ -268,8 +281,9 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 
 ```
 <VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    ServerName www.domain.com
+    ServerAdmin [EMAIL]
+    ServerName [URL]
+
     DocumentRoot /var/www/html
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined

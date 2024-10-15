@@ -1,5 +1,16 @@
 # Prometheus [^1] [^2] [^3] [^4]
 
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+your-node-ip-address > [NODE]
+```
+
 Prometheus is an event monitoring and alerting application for cloud infrastructures. The project is written in Go and is one of the Graduate Projects in the Cloud Native Computing Foundation. It is considered the de-facto monitoring in the cloud.
 
 The idea with Prometheus is that a central node aggregates metrics and alerting information. The metrics are pulled from a previously declared number of nodes via HTTP pulling. These nodes, also called targets, expose this information. The Prometheus server aggregates these in a time series database, triggers push alerts if available, and can expose the data for further processing by data visualization tools such as Grafana.
@@ -147,7 +158,7 @@ sudo ufw allow 9090/tcp
 With Prometheus running successfully, you can access it via your web browser using:
 
 > **Note:**
-> http://your-server-ip-address:9090
+> http://[IPADDRESS]:9090
 
 ## Installation (Client)
 
@@ -235,7 +246,7 @@ sudo ufw enable
 8. Verify Node Exporter is Running
 
 > **Note:**
-> http://your-server-ip-address:9100/metrics
+> http://[IPADDRESS]:9100/metrics
 
 #### Node Importer to Prometheus [^7] [^8]
 
@@ -250,7 +261,7 @@ Add under scrape_configs:
 ```
   - job_name: "node_exporter"
     static_configs:
-    - targets: ["ip-from-node_exporter:9100"]
+    - targets: ["[NODE]:9100"]
 ```
 
 ```bash

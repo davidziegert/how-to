@@ -1,5 +1,15 @@
 # Proxmox
 
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
+
 ## Hardware Requirements
 
 - Intel EMT64 or AMD64 with Intel VT/AMD-V CPU flag.
@@ -39,7 +49,7 @@
 7. The installer summarizes the selected options. After confirming everything is in order, press Install.
 
 > **Note:**
-> http://your-server-ip-address
+> http://[IPADDRESS]
 
 ### Create Network Bridge
 

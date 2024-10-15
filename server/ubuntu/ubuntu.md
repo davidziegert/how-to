@@ -1,5 +1,15 @@
 # Ubuntu Server
 
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
+
 ## Installation
 
 ![Screenshot-1](./assets/linux_install_1.png)
@@ -119,7 +129,7 @@ sudo systemctl status systemd-timesyncd
 ### Set Hostname
 
 ```bash
-sudo hostnamectl set-hostname XXX
+sudo hostnamectl set-hostname [SERVER]
 sudo nano /etc/cloud/cloud.cfg
 ```
 
@@ -134,7 +144,8 @@ sudo nano /etc/hosts
 
 ```
 127.0.0.1 localhost
-127.0.1.1 xxx.xxx.xxx.xxx name.subdomain.sldomain.tldomain
+127.0.1.1 [SERVER]
+[IPADDRESS] name.subdomain.sldomain.tldomain
 ```
 
 ```bash
@@ -158,9 +169,9 @@ network:
     ethernets:
         en01:
             addresses:
-            - xxx.xxx.xxx.xxx/24
+            - [IPADDRESS]/24
             - "2001:1::1/64"
-            gateway4: xxx.xxx.xxx.xxx
+            gateway4: [IPADDRESS]
             gateway6: "2001:1::2"
             nameservers:
                 addresses:
@@ -204,7 +215,7 @@ iface lo inet loopback
 
 auto en01
 iface en01 inet static
-    address xxx.xxx.xxx.xxx
+    address [IPADDRESS]
     netmask 255.255.255.0
     network xxx.xxx.xxx.0
     broadcast xxx.xxx.xxx.255
@@ -236,7 +247,7 @@ sudo service networking restart
 ### Change Password
 
 ```bash
-sudo passwd USERNAME
+sudo passwd [USER]
 ```
 
 ### Message of the Day [^3] [^4]
@@ -335,15 +346,15 @@ chmod 600 ~/.ssh/authorized_keys
 ```bash
 cd \Users\user
 ssh-keygen -t rsa
-type .ssh\id_rsa.pub | ssh user@xxx.xxx.xxx.xxx "cat >> .ssh/authorized_keys"
+type .ssh\id_rsa.pub | ssh user@[IPADDRESS] "cat >> .ssh/authorized_keys"
 ```
 
 ###### Client (Mac/Linux)
 
 ```bash
 ssh-keygen -t rsa
-ssh-copy-id -i .ssh/id_rsa.pub user@xxx.xxx.xxx.xxx
-ssh -i .ssh/id_rsa user@xxx.xxx.xxx.xxx
+ssh-copy-id -i .ssh/id_rsa.pub user@[IPADDRESS]
+ssh -i .ssh/id_rsa user@[IPADDRESS]
 ```
 
 ##### Configuration [^13] [^14] [^15] [^23]
@@ -404,13 +415,13 @@ sudo ufw default allow outgoing
 ##### Allow an IP Address
 
 ```bash
-sudo ufw allow from xxx.xxx.xxx.xxx
+sudo ufw allow from xxx.xxx.xxx
 ```
 
 ##### Block an IP Address
 
 ```bash
-sudo ufw deny from xxx.xxx.xxx.xxx
+sudo ufw deny from xxx.xxx.xxx
 ```
 
 ##### Block a Subnet
@@ -550,8 +561,7 @@ sudo nano /etc/hosts.allow
 
 ```
 sshd : localhost : allow
-sshd : 141.89.97.0/24 : allow
-sshd : 141.89.100.0/24 : allow
+sshd : xxx.xxx.xxx.0/24 : allow
 sshd : ALL : deny
 ```
 
@@ -560,7 +570,7 @@ sudo nano /etc/hosts.deny
 ```
 
 ```
-
+sshd : xxx.xxx.xxx.0/24 : deny
 ```
 
 #### fail2ban [^11] [^12] [^18] [^19] [^20]
@@ -583,7 +593,7 @@ sudo nano /etc/fail2ban/jail.local
 before = paths-debian.conf
 
 [DEFAULT]
-ignoreip = 127.0.0.1/8 ::1 141.89.97.0/24 141.89.100.0/24       # IGNORELIST
+ignoreip = 127.0.0.1/8 ::1 xxx.xxx.xxx.0/24                     # IGNORELIST
 maxretry = 3                                                    # NUMBER OF FAILED ATTEMPTS
 findtime = 10m                                                  # TIMESPAN BETWEEN FAILED ATTEMPTS
 bantime  = 1h                                                   # BANTIME

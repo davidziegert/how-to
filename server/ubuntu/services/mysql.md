@@ -1,5 +1,15 @@
 # MySQL (Ubuntu) [^1] [^2] [^3]
 
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
+
 ## Installation
 
 ```bash
@@ -96,8 +106,8 @@ mysql -u root -p
 SHOW DATABASES;
 SHOW DATABASES LIKE pattern;
 
-CREATE DATABASE db_name;
-DROP DATABASE db_name;
+CREATE DATABASE [DATABASE];
+DROP DATABASE [DATABASE];
 ```
 
 ## User
@@ -107,21 +117,21 @@ SELECT * FROM mysql.user;
 ```
 
 ```
-CREATE USER 'admin'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON *.* TO 'admin' IDENTIFIED BY 'password';
+CREATE USER '[USER]'@'%' IDENTIFIED BY '[PASSWORD]';
+GRANT ALL PRIVILEGES ON *.* TO '[USER]' IDENTIFIED BY '[PASSWORD]';
 FLUSH PRIVILEGES;
 EXIT;
 ```
 
 ```
-CREATE USER 'user'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON db_name.* TO 'user' IDENTIFIED BY 'password';
+CREATE USER '[USER]'@'%' IDENTIFIED BY '[PASSWORD]';
+GRANT ALL PRIVILEGES ON [DATABASE].* TO '[USER]' IDENTIFIED BY '[PASSWORD]';
 FLUSH PRIVILEGES;
 EXIT;
 ```
 
 ```
-DROP USER 'user'@'%'
+DROP USER '[USER]'@'%'
 FLUSH PRIVILEGES;
 EXIT;
 ```
@@ -139,16 +149,16 @@ UPDATE - The user account is allowed to update table rows.
 ```
 
 ```
-GRANT permission1, permission2 ON db_name TO 'user'@'%';
-REVOKE permission1, permission2 ON db_name.* FROM 'user'@'%';
+GRANT permission1, permission2 ON [DATABASE] TO 'user'@'%';
+REVOKE permission1, permission2 ON [DATABASE].* FROM 'user'@'%';
 SHOW GRANTS FOR 'user'@'%';
 FLUSH PRIVILEGES;
 EXIT;
 ```
 
 ```
-GRANT ALL PRIVILEGES ON db_name.* TO 'user'@'%';
-REVOKE ALL PRIVILEGES ON db_name.* FROM 'user'@'%';
+GRANT ALL PRIVILEGES ON [DATABASE].* TO 'user'@'%';
+REVOKE ALL PRIVILEGES ON [DATABASE].* FROM 'user'@'%';
 SHOW GRANTS FOR 'user'@'%';
 FLUSH PRIVILEGES;
 EXIT;
@@ -159,7 +169,7 @@ EXIT;
 ### Dumps
 
 ```bash
-mysqldump -u username -p db_name > backup_name.sql
+mysqldump -u username -p [DATABASE] > backup_name.sql
 ```
 
 ### Restore
@@ -240,7 +250,7 @@ sudo chmod 755 /usr/local/bin/runmybackup.sh
 
 ```
 #!/bin/bash
-sshpass -p 'PASSWORD' rsync --ignore-existing -a /var/lib/automysqlbackup/ USER@xxx.xxx.xxx.xxx:/FOLDERNAME
+sshpass -p '[PASSWORD]' rsync --ignore-existing -a /var/lib/automysqlbackup/ [USER]@[IPADDRESS]:/FOLDERNAME
 ```
 
 ```bash

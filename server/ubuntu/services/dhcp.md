@@ -42,7 +42,7 @@ subnet xxx.xxx.xxx.0 netmask 255.255.255.0
 {
     range xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx;
 
-    host PC001 {hardware ethernet 00:00:00:00:00:00; fixed-address 000.000.000.000;}
+    host PC001 {hardware ethernet 00:00:00:00:00:00; fixed-address xxx.xxx.xxx.xxx;}
     host PC002 {hardware ethernet 00:00:00:00:00:00;}
     ...
 }

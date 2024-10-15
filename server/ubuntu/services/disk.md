@@ -56,14 +56,14 @@ sudo mount -a
 ### Disk Label
 
 ```bash
-sudo e2label /dev/sdb1 MYDISK
+sudo e2label /dev/sdb1 [DISKNAME]
 ```
 
 ### Storage Information
 
 ```bash
-sudo du -h /mnt/mynewdrive
-sudo df -h /mnt/mynewdrive
+sudo du -h /mnt/[DISKNAME]
+sudo df -h /mnt/[DISKNAME]
 ```
 
 ## Logical Volume Manager (2TB up) [^2]
@@ -102,37 +102,38 @@ sudo ls /dev/sd*
 sudo pvcreate /dev/sdc
 sudo pvdisplay
 ```
+
 ### Create Volume Group (1 VG = X PV)
 
 ```bash
-sudo vgcreate MYVGROUP /dev/sdc
-sudo vgdisplay MYVGROUP
+sudo vgcreate [GROUPNAME] /dev/sdc
+sudo vgdisplay [GROUPNAME]
 ```
 
 ### Logical Volumes
 
 ```bash
 sudo lvcreate -L size -n lvname vgname
-sudo lvcreate -l 100%FREE -n MYVOLUME MYVGROUP
-sudo lvdisplay /dev/MYVGROUP/MYVOLUME
+sudo lvcreate -l 100%FREE -n [VOLUMENAME] [GROUPNAME]
+sudo lvdisplay /dev/[GROUPNAME]/[VOLUMENAME]
 ```
 
 ### Formatting
 
 ```bash
-sudo mkfs.ext4 /dev/MYVGROUP/MYVOLUME
+sudo mkfs.ext4 /dev/[GROUPNAME]/[VOLUMENAME]
 ```
 
 ### Mount
 
 ```bash
-sudo mkdir /mnt/mynewvolume
+sudo mkdir /mnt/[VOLUMENAME]
 sudo nano -Bw /etc/fstab
 ```
 
 ```
-#<source-device>            <destination>       <type>  <options>  <dump>  <pass>
-/dev/MYVGROUP/MYVOLUME      /mnt/mynewvolume    ext4	defaults	0		0
+#<source-device>                    <destination>           <type>      <options>       <dump>      <pass>
+/dev/[GROUPNAME]/[VOLUMENAME]       /mnt/[VOLUMENAME]       ext4        defaults	    0           0
 ```
 
 ```bash
@@ -142,8 +143,8 @@ sudo mount -a
 ### Storage Information
 
 ```bash
-sudo du -h /mnt/mynewvolume
-sudo df -h /mnt/mynewvolume
+sudo du -h /mnt/[VOLUMENAME]
+sudo df -h /mnt/[VOLUMENAME]
 ```
 
 [^1]: https://man7.org/linux/man-pages/man8/fdisk.8.html

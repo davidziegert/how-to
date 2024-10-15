@@ -1,5 +1,15 @@
 # Network File System (Ubuntu) [^1] [^2]
 
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
+
 ## On the Host (Mount Preparation)
 
 ```bash
@@ -29,9 +39,9 @@ sudo nano /etc/exports
 ```
 
 ```
-# <source-folder>   <destination-client>    <options>
-/export             xxx.xxx.xxx.xxx			(rw,async,fsid=0,crossmnt,no_subtree_check)
-/export/data        xxx.xxx.xxx.xxx			(rw,async,no_subtree_check)
+# <source-folder>       <destination-client>        <options>
+/export                 [IPADDRESS]                 (rw,async,fsid=0,crossmnt,no_subtree_check)
+/export/data            [IPADDRESS]                 (rw,async,no_subtree_check)
 ```
 
 ```bash
@@ -48,8 +58,8 @@ sudo nano /etc/fstab
 
 ```
 ############################## Imports ###############################
-#<source-device>                <destination>   <type>  <options>   <dump>  <pass>
-xxx.xxx.xxx.xxx:/export/data    /mnt/data       nfs4    defaults    0       0
+#<source-device>                <destination>       <type>      <options>       <dump>      <pass>
+[IPADDRESS]:/export/data        /mnt/data           nfs4        defaults        0           0
 ```
 
 ```bash

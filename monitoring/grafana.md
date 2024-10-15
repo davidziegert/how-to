@@ -1,5 +1,15 @@
 # Grafana
 
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
+
 ## Installation
 
 1. Run the following command to add the Grafana repository to your system:
@@ -44,7 +54,7 @@ sudo systemctl start grafana-server
 With Grafana running successfully, open your web browser and go to:
 
 > **Note:**
-> http://your-server-ip-address:3000
+> http://[IPADDRESS]:3000
 
 ## Configuring the Data Source
 

@@ -1,5 +1,15 @@
 # vSphere
 
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
+
 ## Hardware Requirements for ESXi 7
 
 - Two-core x86_64 CPU on the computer where the ESXi host will run. Intel VT-x or AMD-v (RVI) features must be enabled in UEFI/BIOS.
@@ -45,7 +55,7 @@ In our walkthrough, we are going to install two ESXi servers, deploy vCenter Ser
 ![Screenshot-14](./assets/vmware_install_13.jpg)
 
 > **Note:**
-> http://your-server-ip-address
+> http://[IPADDRESS]
 
 ## Creating a Datastore
 
@@ -87,7 +97,7 @@ You can create a dedicated datastore to store virtual machine files. Attach a di
 ## Creating a Datacenter
 
 > **Note:**
-> http://your-server-ip-address
+> http://[IPADDRESS]
 
 ![Screenshot-41](./assets/vcenter_datacenter_1.jpg)
 ![Screenshot-42](./assets/vcenter_datacenter_2.jpg)

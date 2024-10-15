@@ -40,7 +40,7 @@ sudo nano /etc/bind/named.conf.options
 ```
 
 ```
-options 
+options
 {
     directory "/var/cache/bind";
     dnssec-validation auto;
@@ -51,7 +51,7 @@ options
     version "not currently available";
 
     // disable recursion on authoritative DNS server.
-    recursion no;           
+    recursion no;
     allow-recursion { none; };
     empty-zones-enable no;
 
@@ -79,7 +79,7 @@ sudo nano /etc/bind/named.conf.local
 // example for 192.168.1.0/24
 // example for subdomain.domain.tld
 
-zone "1.168.192.in-addr.arpa" 
+zone "1.168.192.in-addr.arpa"
 {
     type master;
     file "/etc/bind/192.168.1.zone";
@@ -104,7 +104,7 @@ sudo nano /etc/bind/named.conf.default-zones
 ```
 // prime the server with knowledge of the root servers
 
-zone "." 
+zone "."
 {
     type hint;
     file "/etc/bind/db.root";
@@ -113,7 +113,7 @@ zone "."
 // be authoritative for the localhost forward and reverse zones, and for
 // broadcast zones as per RFC 1912
 
-zone "localhost" 
+zone "localhost"
 {
     type master;
     file "/etc/bind/db.local";

@@ -1,25 +1,33 @@
 # Typo3
 
-## Installation
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
 
-### Requirements
+## Requirements
+
+### Webserver
 
 ```bash
 sudo apt install apache2
-sudo systemctl enable apache2
 sudo a2enmod deflate rewrite headers mime expires
+sudo systemctl enable apache2
 sudo systemctl restart apache2
 sudo systemctl status apache2
 ```
 
 ```bash
-sudo apt install -y php php-{apcu,bcmath,common,mysql,xml,xmlrpc,curl,gd,cli,mbstring,soap,zip,intl,json}
+sudo apt install -y php php-{apcu,bcmath,common,mysql,xml,xmlrpc,curl,gd,cli,mbstring,soap,zip,intl,json} imagemagick
 sudo php -v
 ```
 
-```bash
-sudo apt install imagemagick
-```
+### Database
 
 ```bash
 sudo apt install mariadb-server mariadb-client
@@ -32,8 +40,8 @@ sudo mysql_secure_installation
 
 Enter current password for root (enter for none): Press ENTER
 Set root password? [Y/n]: Y
-New password: Set-your-new-password
-Re-enter new password: Set-your-new-password
+New password: [PASSWORD]
+Re-enter new password: [PASSWORD]
 Remove anonymous users? [Y/n] Y
 Disallow root login remotely? [Y/n] Y
 Remove test database and access to it? [Y/n] Y
@@ -43,14 +51,14 @@ Reload privilege tables now? [Y/n] Y
 ```bash
 sudo mysql -u root -p
 
-CREATE USER 'typo3user'@'localhost' IDENTIFIED BY 'your_password';
+CREATE USER '[USER]'@'localhost' IDENTIFIED BY '[PASSWORD]';
 CREATE DATABASE typo3;
-GRANT ALL PRIVILEGES ON typo3.* TO 'typo3user'@'localhost';
+GRANT ALL PRIVILEGES ON typo3.* TO '[USER]'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```
 
-### Installation & Configuration
+## Installation & Configuration
 
 ```bash
 sudo apt install wget unzip
@@ -77,13 +85,12 @@ sudo nano /etc/apache2/sites-available/typo3.conf
 
 ```
 <VirtualHost *:80>
-	ServerAdmin admin@example.com
+	ServerAdmin [EMAIL]
 	DocumentRoot /var/www/html/typo3
-	ServerName example.com
-	ServerAlias www.example.com
+	ServerName [URL]
 
 	<Directory /var/www/html/typo3/>
-		Options FollowSymlinks
+		Options FollowSymLinks
 		AllowOverride All
 		Require all granted
 	</Directory>
@@ -96,11 +103,14 @@ sudo nano /etc/apache2/sites-available/typo3.conf
 ```bash
 sudo a2ensite typo3.conf
 sudo a2dissite 000-default.conf
+sudo a2enmod rewrite
+sudo apachectl configtest
 sudo systemctl restart apache2
+sudo systemctl status apache2
 ```
 
 > **Note:**
-> http://your-server-ip-address
+> http://[IPADDRESS]
 
 ![Screenshot-1](./assets/typo3_install_1.jpg)
 ![Screenshot-2](./assets/typo3_install_2.jpg)
@@ -109,7 +119,7 @@ sudo systemctl restart apache2
 ![Screenshot-5](./assets/typo3_install_5.jpg)
 ![Screenshot-6](./assets/typo3_install_6.jpg)
 
-## Security
+## Security & Performance
 
 ### Folder Accesss
 
@@ -118,8 +128,6 @@ sudo chown -R www-data:www-data /var/www/html/typo3/
 sudo find /var/www/html/typo3/ -type d -exec chmod 2775 {} \;
 sudo find /var/www/html/typo3/ -type f -exec chmod 0664 {} \;
 ```
-
-### Access Restrictions
 
 ```bash
 sudo chmod 750 /var/www/html/typo3/typo3temp/var/log/
@@ -152,18 +160,14 @@ sudo chmod 640 /var/www/html/typo3/typo3/sysext/belog/Configuration/TypoScript/s
 sudo chmod 640 /var/www/html/typo3/typo3/sysext/belog/Configuration/TypoScript/setup.typoscript
 ```
 
-### Limit PHP Functions
+### PHP
 
 ```bash
-php -i | grep allow_url_include
-    allow_url_include => Off => Off
-```
+sudo cp /etc/php/8.*/apache2/php.ini /etc/php/8.*/apache2/php.ini.original
+sudo cp /etc/php/8.*/fpm/php.ini /etc/php/8.*/fpm/php.ini.original
 
-### Modify your PHP.ini
-
-```bash
-sudo cp /etc/php/8.1/apache2/php.ini /etc/php/8.1/apache2/php.ini.original
-sudo nano /etc/php/8.1/apache2/php.ini
+sudo nano /etc/php/8.*/apache2/php.ini
+sudo nano /etc/php/8.*/fpm/php.ini
 ```
 
 ```
@@ -181,7 +185,8 @@ engine = On
 short_open_tag = Off
 precision = 14
 output_buffering = Off
-zlib.output_compression = Off
+zlib.output_compression = On
+zlib.output_compression_level = 5
 implicit_flush = Off
 serialize_precision = -1
 disable_functions = allow_url_fopen,curl_exec,curl_multi_exec,exec,openlog,parse_ini_filew_source,passthru,phpinfo,popen,proc_open,shell_exec,show_source,syslog,system,highlight_file,fopen_with_path,dbmopen,dbase_open,putenv,chdir,filepro,filepro_rowcount,filepro_retrieve,posix_mkfifo
@@ -197,12 +202,16 @@ cgi.force_redirect= On
 expose_php = Off
 allow_webdav_methods = Off
 max_input_vars = 1500
+realpath_cache_size = 16M
+realpath_cache_ttl = 120
+opcache.enable = 1
+zend_extension = opcache
 
 ;;;;;;;;;;;;;;;;;;;
 ; Resource Limits ;
 ;;;;;;;;;;;;;;;;;;;
 
-max_execution_time = 240
+max_execution_time = 360
 max_input_time = 60
 memory_limit = 512M
 
@@ -299,6 +308,7 @@ bcmath.scale = 0
 
 [Session]
 session.save_handler = files
+session.save_path = /var/lib/php/sessions
 session.use_strict_mode = 1
 session.use_cookies = 1
 session.use_only_cookies = 1
@@ -312,8 +322,8 @@ session.serialize_handler = php
 session.gc_probability = 0
 session.gc_divisor = 1000
 session.gc_maxlifetime  = 600
-session.cache_limiter = nocache
-session.cache_expire = 30
+session.cache_limiter = public
+session.cache_expire = 180
 session.use_trans_sid = 0
 session.sid_length = 256
 session.trans_sid_tags = "a=href,area=href,frame=src,form="
@@ -337,9 +347,7 @@ ldap.max_links = -1
 
 ## Backup
 
-### Manually
-
-#### Files
+### Files
 
 ```bash
 sudo systemctl enable cron
@@ -360,12 +368,14 @@ sudo crontab -e
 
 ```
 # Every Monday on 02:00 AM
-0 2 * * 1   mysqldump -u [USERNAME] -p [DATABASE] > backup_typo3_$(date "+%d-%b-%y").sql
+0 2 * * 1   mysqldump -u [USERNAME] -p [DATABASE] > backup_wordpress_$(date "+%d-%b-%y").sql
 ```
 
-## Fluid Template Sitepackage [^1] [^2]
+## Themes
 
-### Folder Structure Example
+### Fluid Template Sitepackage [^1] [^2]
+
+#### Folder Structure Example
 
 path: typo3_installation/typo3conf/ext/site_package/
 
@@ -414,19 +424,19 @@ site_package
 └── ext_localconf.php
 ```
 
-#### Language
+###### Language
 
 - The directory Language/ may contain .xlf files that are used for the localization of labels and text strings (frontend as well as backend) by TYPO3. This topic is not strictly related to the Fluid template engine and is documented in section Internationalization and Localization.
 
-#### Layouts
+###### Layouts
 
 - HTML files, which build the overall layout of the website, are stored in the Layouts/ folder. Typically this is only one construct for all pages across the entire website. Pages can have different layouts of course, but page layouts do not belong into the Layout/ directory. They are stored in the Templates/ directory (see below). In other words, the Layouts/ directory should contain the global layout for the entire website with elements which appear on all pages (e.g. the company logo, navigation menu, footer area, etc.). This is the skeleton of your website.
 
-#### Templates
+###### Templates
 
 - The most important fact about HTML files in the Templates/ directory has been described above already: this folder contains layouts, which are page- specific. Due to the fact that a website usually consists of a number of pages and some pages possibly show a different layout than others (e.g. number of columns), the Templates/ directory may contain one or multiple HTML files.
 
-#### Partials
+###### Partials
 
 - The directory called Partials/ may contain small snippets of HTML template files. "Partials" are similar to templates, but their purpose is to represent small units, which are perfect to fulfil recurring tasks. A good example of a partial is a specially styled box with content that may appear on several pages. If this box would be part of a page layout, it would be implemented in one or more HTML files inside the Templates/ directory. If an adjustment of the box is required at one point in the future, this would mean that several template files need to be updated. However, if we store the HTML code of the box as a small HTML snippet into the Partials/ directory, we can include this snippet at several places. An adjustment only requires an update of the partial and therefore in one file only.
 
@@ -437,14 +447,14 @@ site_package
 
 - The directory Language/ may contain .xlf files that are used for the localization of labels and text strings (frontend as well as backend) by TYPO3. This topic is not strictly related to the Fluid template engine and is documented in section Internationalization and Localization.
 
-#### .htaccess
+###### .htaccess
 
 ```
 Order deny,allow
 Deny from all
 ```
 
-#### Default.html
+###### Default.html
 
 ```
 <div class="wrapper">
@@ -456,7 +466,7 @@ Deny from all
 </div>
 ```
 
-#### Nav.html
+###### Nav.html
 
 ```
 <nav>
@@ -501,7 +511,7 @@ Deny from all
 </nav>
 ```
 
-#### Header.html
+###### Header.html
 
 ```
 <header>
@@ -531,7 +541,7 @@ Deny from all
 </header>
 ```
 
-#### Main.html
+###### Main.html
 
 ```
 <main>
@@ -561,19 +571,19 @@ Deny from all
 </main>
 ```
 
-#### Aside.html
+###### Aside.html
 
 ```
 
 ```
 
-#### Footer.html
+###### Footer.html
 
 ```
 
 ```
 
-#### sys_template.php
+###### sys_template.php
 
 ```
 <?php
@@ -589,7 +599,7 @@ Deny from all
 	);
 ```
 
-#### constants.typoscript
+###### constants.typoscript
 
 ```
 @import 'EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript'
@@ -603,14 +613,14 @@ page {
 }
 ```
 
-#### setup.typoscript
+###### setup.typoscript
 
 ```
 @import 'EXT:fluid_styled_content/Configuration/TypoScript/setup.typoscript'
 @import 'EXT:site_package/Configuration/TypoScript/Setup/*.typoscript'
 ```
 
-#### Page.typoscript
+###### Page.typoscript
 
 ```
 page = PAGE
@@ -738,16 +748,16 @@ page {
 }
 ```
 
-#### composer.json
+###### composer.json
 
 ```json
 {
   "name": "brand/site-package",
   "type": "typo3-cms-extension",
   "description": "Example site package from the site package tutorial",
-  "authors": [{ "name": "Your Name", "role": "Developer", "homepage": "https://yourserver.url" }],
+  "authors": [{ "name": "Your Name", "role": "Developer", "homepage": "https://[URL]" }],
   "require": { "typo3/cms-core": "^12.0.0|dev-main", "typo3/cms-fluid-styled-content": "^12.0.0|dev-main" },
-  "homepage": "https://yourserver.url",
+  "homepage": "https://[URL]",
   "license": ["GPL-2.0-or-later"],
   "keywords": ["typo3", "site package"],
   "autoload": { "psr-4": { "Brand\\OwnPackage\\": "Classes/" } },
@@ -755,7 +765,7 @@ page {
 }
 ```
 
-#### ext_emconf.php
+###### ext_emconf.php
 
 ```php
 <?php
@@ -782,7 +792,7 @@ page {
 	];
 ```
 
-### ext_localconf.php
+#### ext_localconf.php
 
 ```php
 <?php
@@ -790,7 +800,7 @@ page {
     defined('TYPO3') or die();
 ```
 
-## Extension installation without composer
+### Extension installation without composer
 
 ```
 If TYPO3 has been installed the legacy way, by extracting the source package into the web directory without using PHP composer follow this tutorial for installation of the site-package extension:
@@ -800,7 +810,7 @@ If TYPO3 has been installed the legacy way, by extracting the source package int
 - You can also create a ZIP file of the content of your site_package folder and name it site_package.zip. It is important that the ZIP archive does not contain the directory site_package and its files and directories inside this folder. The files and folders must be directly located on the first level of ZIP archive.
 ```
 
-## Extension installation with Extension manager
+### Extension installation with Extension manager
 
 ```
 First of all, login at the backend of TYPO3 as a user with administrator privileges. At the left side you find a section Admin Tools with a module Extensions. Open this module and make sure, the drop down box on the right hand side shows Installed Extensions. If you have already uploaded the site package extension, search for "Site Package". If you created a ZIP file, upload the ZIP'ed extension by clicking the upload icon. Once the site package extension appears in the list, you can activate it by clicking the "plus" icon.

@@ -1,5 +1,15 @@
 # Checkmk
 
+```
+your-server-ip-address > [IPADDRESS]
+your-server-url > [URL]
+your-server-name > [SERVER]
+your-user-name > [USER]
+your-user-password > [PASSWORD]
+your-user-database > [DATABASE]
+your-user-email > [EMAIL]
+```
+
 ## Installation Host
 
 1. Download Checkmk package
@@ -112,6 +122,9 @@ sudo ufw allow 6556/tcp
 sudo ufw disable
 sudo ufw enable
 ```
+
+> **Note:**
+> http://[IPADDRESS]
 
 3. How to add the host [^2]
 
