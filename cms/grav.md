@@ -452,14 +452,25 @@ form:
 #### navigation
 
 ```
-{% for page in pages.children %}
-  {% if page.visible %}
-    {% set current_page = (page.active or page.activeChild) ? 'active' : '' %}
-    <li class="{{ current_page }}">
-      <a href="{{ page.url }}">{{ page.menu }}</a>
-    </li>
-  {% endif %}
-{% endfor %}
+{% macro loop(pages) %}
+    {% for page in pages.children %}
+        {% if page.visible %}
+            {% set current_page = (page.active or page.activeChild) ? 'current_page_item' : '' %}
+            {% if page.children.count > 0 %}
+                <li class="menu-item menu-item-has-children {{ current_page }}"><a href="{{ page.url }}">{{ page.menu }}</a>
+                <ul class="sub-menu">
+                    {{ _self.loop(page) }}
+                </ul>
+            {% else %}
+                <li class="menu-item {{ current_page }}"><a href="{{ page.url }}">{{ page.menu }}</a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+<menu class="main-menu">
+    {{ _self.loop(pages) }}
+</menu>
 ```
 
 #### content
