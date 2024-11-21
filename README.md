@@ -2,38 +2,8 @@
 
 # :ledger: How-To´s
 
-- VPN
-- Proxy
-- Firewall
-- Hypervisor
-  - [vSphere](/how-to/hypervisor/vsphere.md)
-  - [Citrix](/how-to/hypervisor/citrix.md)
-  - [Proxmox](/how-to/hypervisor/proxmox.md)
-  - [Hyper-V](/how-to/hypervisor/hyperv.md)
-  - [Xen](/how-to/hypervisor/xen.md)
-- Monitoring
-  - [Checkmk](/how-to/monitoring/checkmk.md)
-  - [Zabbix](/how-to/monitoring/zabbix.md)
 - Automation
   - [Ansible](/how-to/automation/ansible.md)
-- ServerOS
-
-  - [Windows](/how-to/server/windows/windows.md)
-    - Roles and Features
-  - [Ubuntu](/how-to/server/ubuntu/ubuntu.md)
-    - Services
-      - [Apache](/how-to/server/ubuntu/services/apache.md)
-      - [Nginx](/how-to/server/ubuntu/services/nginx.md)
-      - [DHCP](/how-to/server/ubuntu/services/dhcp.md)
-      - [DNS](/how-to/server/ubuntu/services/dns.md)
-      - [LDAP](/how-to/server/ubuntu/services/ldap.md)
-      - [MySQL](/how-to/server/ubuntu/services/mysql.md)
-      - [NFS](/how-to/server/ubuntu/services/nfs.md)
-      - [SAMBA](/how-to/server/ubuntu/services/samba.md)
-      - [Docker](/how-to/server/ubuntu/services/docker.md)
-      - [RSync](/how-to/server/ubuntu/services/rsync.md)
-      - [DiskManagement](/how-to/server/ubuntu/services/disk.md)
-
 - ClientOS
   - [Windows](/how-to/client/windows/windows.md)
     - Tools
@@ -45,65 +15,39 @@
   - [WordPress](/how-to/cms/wordpress.md)
   - [Typo3](/how-to/cms/typo3.md)
   - [Grav](/how-to/cms/grav.md)
+- Firewall
+  - [OPNsense](/how-to/firewall/opnsense.md)
+  - [pfSense](/how-to/firewall/pfsense.md)
+  - [Ports](/how-to/firewall/ports.md)
+- Hypervisor
+  - [vSphere](/how-to/hypervisor/vsphere.md)
+  - [Citrix](/how-to/hypervisor/citrix.md)
+  - [Proxmox](/how-to/hypervisor/proxmox.md)
+  - [Hyper-V](/how-to/hypervisor/hyperv.md)
+- Monitoring
+  - [Checkmk](/how-to/monitoring/checkmk.md)
+  - [Cockpit](/how-to/monitoring/cockpit.md)
+  - [Grafana](/how-to/monitoring/grafana.md)
+  - [Portainer](/how-to/monitoring/portainer.md)
+  - [Prometheus](/how-to/monitoring/prometheus.md)
+- ServerOS
+  - [Windows](/how-to/server/windows/windows.md)
+    - Roles and Features
+  - [Ubuntu](/how-to/server/ubuntu/ubuntu.md)
+    - Services
+    - [Apache](/how-to/server/ubuntu/services/apache.md)
+    - [DHCP](/how-to/server/ubuntu/services/dhcp.md)
+    - [DiskManagement](/how-to/server/ubuntu/services/disk.md)
+    - [DNS](/how-to/server/ubuntu/services/dns.md)
+    - [Docker](/how-to/server/ubuntu/services/docker.md)
+    - [LDAP](/how-to/server/ubuntu/services/ldap.md)
+    - [MySQL](/how-to/server/ubuntu/services/mysql.md)
+    - [NFS](/how-to/server/ubuntu/services/nfs.md)
+    - [Nginx](/how-to/server/ubuntu/services/nginx.md)
+    - [RSync](/how-to/server/ubuntu/services/rsync.md)
+    - [SAMBA](/how-to/server/ubuntu/services/samba.md)
 
 # :bookmark: Bookmarks
-
-<details>
-  <summary>VPN</summary>
-  <ul>
-
-  </ul>
-</details>
-
-<br>
-
-<details>
-  <summary>Proxy</summary>
-  <ul>
-
-  </ul>
-</details>
-
-<br>
-
-<details>
-  <summary>Firewall</summary>
-  <ul>
-
-  </ul>
-</details>
-
-<br>
-
-<details>
-  <summary>Hypervisor</summary>
-  <ul>
-    <li><a href="https://www.vmware.com/products/vsphere-hypervisor.html.html">vSphere Hypervisor</a></li>
-    <li><a href="https://docs.xenserver.com/de-de/citrix-hypervisor/">Citrix Hypervisor</a></li>
-    <li><a href="https://www.proxmox.com/de/">Proxmox</a></li>
-    <li><a href="https://learn.microsoft.com/de-de/virtualization/hyper-v-on-windows/">Hyper-V</a></li>
-  </ul>
-</details>
-
-<br>
-
-<details>
-  <summary>Monitoring</summary>
-  <ul>
-    <li><a href="https://checkmk.com/">checkmk</a></li>
-  </ul>
-</details>
-
-<br>
-
-<details>
-  <summary>Automation</summary>
-  <ul>
-    <li><a href="https://www.redhat.com/de/technologies/management/ansible">Ansible</a></li>
-  </ul>
-</details>
-
-<br>
 
 <details>
   <summary>Windows</summary>
@@ -134,7 +78,7 @@
     <li><a href="https://linuxhint.com/">linuxhint (EN)</a></li>
     <li><a href="https://linuxize.com/">Linuxize (EN)</a></li>
     <li><a href="https://www.cyberciti.biz/tips/">nixCraft (EN)</a></li>
-    <li><a href="https://blog.desdelinux.net/de/pam-nis-ldap-kerberos-ds-samba-4-ad-dc-redes-pymes/">PAM-, NIS-, LDAP-, Kerberos-, DS- und Samba 4 AD-DC-SMB-Netzwerke (DE)</a></li>
+    <li><a href="https://blog.desdelinux.net/de/pam-nis-ldap-kerberos-ds-samba-4-ad-dc-redes-pymes/">PAM-, NIS-, LDAP-, Kerberos-, DS- und Samba 4 AD-DC-SMB-Netzwerk (DE)</a></li>
     <li><a href="https://serversforhackers.com/">Server Admin for Programmers (EN)</a></li>
     <li><a href="https://www.shellbefehle.de/">Shell Befehle (DE)</a></li>
     <li><a href="https://confluence.jaytaala.com/display/TKB/Tech+Knowledge+Base">Tech Knowledge Base (EN)</a></li>
@@ -156,6 +100,15 @@
 <br>
 
 <details>
+  <summary>Automation</summary>
+  <ul>
+    <li><a href="https://www.redhat.com/de/technologies/management/ansible">Ansible</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
   <summary>Content Management System</summary>
   <ul>
     <li><a href="https://typo3.org/">Typo3</a></li>
@@ -164,6 +117,36 @@
     <li><a href="https://contao.org/">Contao</a></li>
     <li><a href="https://www.drupal.de/">Drupal</a></li>
     <li><a href="https://www.joomla.de/">Joomla</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>Firewall</summary>
+  <ul>
+
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>Hypervisor</summary>
+  <ul>
+    <li><a href="https://www.vmware.com/products/vsphere-hypervisor.html.html">vSphere Hypervisor</a></li>
+    <li><a href="https://docs.xenserver.com/de-de/citrix-hypervisor/">Citrix Hypervisor</a></li>
+    <li><a href="https://www.proxmox.com/de/">Proxmox</a></li>
+    <li><a href="https://learn.microsoft.com/de-de/virtualization/hyper-v-on-windows/">Hyper-V</a></li>
+  </ul>
+</details>
+
+<br>
+
+<details>
+  <summary>Monitoring</summary>
+  <ul>
+    <li><a href="https://checkmk.com/">checkmk</a></li>
   </ul>
 </details>
 

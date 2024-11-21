@@ -415,19 +415,29 @@ sudo ufw default allow outgoing
 ##### Allow an IP Address
 
 ```bash
-sudo ufw allow from xxx.xxx.xxx
+sudo ufw allow from xxx.xxx.xxx.xxx
+sudo ufw allow from xxx.xxx.xxx.xxx to any port xxxx
+```
+
+##### Allow a Subnet
+
+```bash
+sudo ufw allow from xxx.xxx.xxx.0/24
+sudo ufw allow from xxx.xxx.xxx.0/24 to any port xxxx
 ```
 
 ##### Block an IP Address
 
 ```bash
-sudo ufw deny from xxx.xxx.xxx
+sudo ufw deny from xxx.xxx.xxx.xxx
+sudo ufw deny from xxx.xxx.xxx.xxx to any port xxxx
 ```
 
 ##### Block a Subnet
 
 ```bash
 sudo ufw deny from xxx.xxx.xxx.0/24
+sudo ufw deny from xxx.xxx.xxx.0/24 to any port xxxx
 ```
 
 ##### List Available Applications
