@@ -295,8 +295,57 @@ Strict-Mode: The host can only be accessed through vCenter Server. If SSH or the
 
 ### Certificates
 
-Upload a Certificate: https://www.filecloud.com/blog/2022/06/installing-an-ssl-certificate-on-an-esxi-server/
-Use a Self-Signed Certificate: https://www.starwindsoftware.com/blog/how-to-replace-your-default-esxi-ssl-certificate-with-a-self-signed-certificate
+- Upload a Certificate (Certificate (w/ chain), PEM encoded):
+  - https://www.filecloud.com/blog/2022/06/installing-an-ssl-certificate-on-an-esxi-server/
+  - https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.hostclient.doc/GUID-F2D5B646-2862-4E81-A827-A349A8124A03.html
+- Use a Self-Signed Certificate:
+  - https://www.starwindsoftware.com/blog/how-to-replace-your-default-esxi-ssl-certificate-with-a-self-signed-certificate
+
+#### Install or Refresh via SSH (Certificate only, PEM encoded)
+
+```bash
+cp /etc/vmware/rhttpproxy/
+cp config.xml config.xml.OLD
+vi config.xml
+```
+
+```
+  <!-- Remove the following node to disable SSL -->
+  <ssl>
+    <!-- The server private key file -->
+    <privateKey>/etc/vmware/ssl/rui.key</privateKey>
+
+    <!-- The server side certificate file -->
+    <certificate>/etc/vmware/ssl/rui.crt</certificate>
+
+    <!-- Client-side CAFile verify location -->
+    <!-- <keyStoreFile>/etc/vmware/ssl/castore.pem</keyStoreFile> -->
+  </ssl>
+```
+
+```bash
+cd /etc/vmware/ssl
+
+# Create backup
+cp rui.key rui.key_OLD
+cp rui.crt rui.crt_OLD
+
+# Copy and rename the certificates
+mv esxi.your.pem rui.key
+mv esxi.your.crt rui.crt
+
+# Adjust permissions
+chmod 400 rui.key
+chmod 444 rui.crt
+```
+
+```bash
+# Restart rhttpproxy service to update the certificates.
+/etc/init.d/rhttpproxy restart
+```
+
+> **Note:**
+> REBOOT HYPERVISOR !!!
 
 ### Shell
 
@@ -308,7 +357,7 @@ Limit SSH access to ESXi hosts to authorized administrators only. Disable SSH ac
 
 #### ESXi Shell and DCUI
 
-ESXi Shell and Direct Console User Interface (DCUI): , which provide direct access to the ESXi host’s command line interface. Limit access to these interfaces to authorized administrators only. Disable or restrict access to the ESXi Shell and DCUI when not needed for troubleshooting or maintenance.
+ESXi Shell and Direct Console User Interface (DCUI): Which provide direct access to the ESXi host’s command line interface. Limit access to these interfaces to authorized administrators only. Disable or restrict access to the ESXi Shell and DCUI when not needed for troubleshooting or maintenance.
 
 ### Firewall
 

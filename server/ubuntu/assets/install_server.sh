@@ -1,7 +1,6 @@
 #!/bin/sh
 
 
-
 ######## server-variables ########
 echo "Please enter Hostname:" 
 read _HOSTNAME
@@ -19,8 +18,7 @@ _IP=$(hostname -I)
 ##################################
 
 
-
-######## hostnames ########
+############ hostnames ###########
 hostnamectl set-hostname $_HOSTNAME
 sed -i 's/preserve_hostname: false/preserve_hostname: true/g' /etc/cloud/cloud.cfg
 > /etc/hosts
@@ -31,11 +29,11 @@ cat <<EOT >> /etc/hosts
 $_IP	$_HOSTNAME	$_DOMAINNAME
 
 EOT
-###########################
+echo "######## INSERT HOSTNAME - DONE! ########"
+##################################
 
 
-
-######## set timezones ########
+########## set timezones #########
 timedatectl set-timezone Europe/Berlin
 timedatectl
 timedatectl set-ntp on
@@ -48,8 +46,8 @@ FallbackNTP=times.tubit.tu-berlin.de
 
 EOT
 systemctl restart systemd-timesyncd
-###############################
-
+echo "######## SET NTP - DONE! ########"
+##################################
 
 
 ######## kernel hardening ########
@@ -302,17 +300,17 @@ net.core.bpf_jit_harden = 2
 kernel.panic = 60
 
 EOT
+echo "######## KERNEL HARDENING - DONE! ########"
 ##################################
 
 
-
-######## avoid using bad services ########
+#### avoid using bad services ####
 apt --purge remove xinetd nis yp-tools tftpd atftpd tftpd-hpa telnetd rsh-server rsh-redone-server
-##########################################
+echo "######## REMOVE BAD SERVICES - DONE! ########"
+##################################
 
 
-
-######## auto updates ########
+######## auto upgrades ########
 apt install unattended-upgrades -y
 dpkg-reconfigure -plow unattended-upgrades
 > /etc/apt/apt.conf.d/50unattended-upgrades
@@ -320,20 +318,17 @@ cat <<EOT >> /etc/apt/apt.conf.d/50unattended-upgrades
 
 Unattended-Upgrade::Allowed-Origins
 {
-"${distro_id}:${distro_codename}-security";
-"${distro_id}ESMApps:${distro_codename}-apps-security";
-"${distro_id}ESM:${distro_codename}-infra-security";
+	"\${distro_id}:\${distro_codename}";
+	"\${distro_id}:\${distro_codename}-security";
+	"\${distro_id}ESMApps:\${distro_codename}-apps-security";
+	"\${distro_id}ESM:\${distro_codename}-infra-security";
 };
 
-Unattended-Upgrade::Package-Blacklist {
-
-};
-
-Unattended-Upgrade::DevRelease "false";
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
 Unattended-Upgrade::Remove-Unused-Dependencies "true";
 Unattended-Upgrade::Automatic-Reboot "true";
-Unattended-Upgrade::Automatic-Reboot-Time "02:00";
-
+Unattended-Upgrade::Automatic-Reboot-Time "02:38";
 Unattended-Upgrade::Mail "$_EMAIL";
 
 EOT
@@ -342,18 +337,18 @@ EOT
 cat <<EOT >> /etc/apt/apt.conf.d/20auto-upgrades
 
 APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
 APT::Periodic::Download-Upgradeable-Packages "1";
 APT::Periodic::AutocleanInterval "7";
-APT::Periodic::Unattended-Upgrade "1";
 
 EOT
 
 unattended-upgrades --dry-run --debug
+echo "######## AUTO UPGRADE - DONE! ########"
 ##############################
 
 
-
-######## ssh ########
+######### ssh config #########
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
 > /etc/ssh/sshd_config
 cat <<EOT >> /etc/ssh/sshd_config
@@ -369,26 +364,21 @@ PasswordAuthentication yes
 PermitEmptyPasswords no
 PermitRootLogin no
 Port $_PORT
-PrintMotd no
+PrintMotd yes
 Protocol 2
 PubkeyAuthentication yes
-Subsystem       sftp    /usr/lib/openssh/sftp-server
+Subsystem sftp /usr/lib/openssh/sftp-server
 UsePAM yes
 X11Forwarding no
 
 EOT
 
-echo "######## CHECK SSH CONFIG ########"
-
 sshd -T
-
-echo "##################################"
-#####################
-
+echo "######## SSH CONFIG - DONE! ########"
+##############################
 
 
-######## firewall ########
-
+######## ufw firewall ########
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow ntp
@@ -397,32 +387,66 @@ ufw allow $_PORT
 > /var/log/uwf.log
 ufw logging on
 ufw enable
-##########################
+
+echo "######## ENABLE UFW - DONE! ########"
+##############################
 
 
+########## fail2ban ##########
+apt install fail2ban -y
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+> /etc/fail2ban/jail.conf
+cat <<EOT >> /etc/fail2ban/jail.conf
 
-######## updates ########
+[INCLUDES]
+before = paths-debian.conf
+
+[DEFAULT]
+backend = polling				# POLLING ALGORITHM (NO EXTERNAL LIBRARIES)
+banaction = ufw					# JAIL VIA UFW
+bantime  = 1h					# BANTIME
+enabled = true					# ENABLE JAILS
+findtime = 10m					# TIMESPAN BETWEEN FAILED ATTEMPTS
+ignoreip = 127.0.0.1/8 ::1		# IGNORELIST
+logencoding = auto				# USE SYSTEM LOCAL ENCODING (UTF-8)
+maxretry = 3					# NUMBER OF FAILED ATTEMPTS
+
+[sshd]
+backend = polling
+banaction = ufw
+bantime  = 1d
+enabled = true
+filter = sshd
+findtime = 1h
+logpath = /var/log/auth.log
+maxretry = 3
+port = ssh
+
+EOT
+
+echo "######## ENABLE FAIL2BAN - DONE! ########"
+##############################
+
+
+##### message of the day #####
+nano /etc/motd
+
+echo "######## SET MOTD - DONE! ########"
+##############################
+
+
+##### updates and cleanup ####
 apt update -y
 apt upgrade -y
-#########################
-
-
-
-########  cleanup ########
 apt clean
 apt autoclean
 apt autoremove
-##########################
+
+echo "######## CLEANUP - DONE! ########"
+##############################
 
 
-
-######## message of the day ########
-nano /etc/motd
-####################################
-
-
-
-######## reboot ########
+########### reboot ###########
 while true; do
 
 read -p "Do you want to reboot now? (y/n): " yn
@@ -436,4 +460,4 @@ case $yn in
 esac
 
 done
-########################
+##############################
