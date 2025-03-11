@@ -3,49 +3,49 @@
 # :ledger: How-To´s
 
 - Automation
-  - [Ansible](/how-to/automation/ansible.md)
+  - [Ansible](/automation/ansible.md)
 - ClientOS
-  - [Windows](/how-to/client/windows/windows.md)
+  - [Windows](/client/windows/windows.md)
     - Tools
-  - [Ubuntu](/how-to/client/ubuntu/ubuntu.md)
+  - [Ubuntu](/client/ubuntu/ubuntu.md)
     - Tools
-  - [macOS](/how-to/client/macos/macos.md)
+  - [macOS](/client/macos/macos.md)
     - Tools
 - ContentManagementSystem
-  - [WordPress](/how-to/cms/wordpress.md)
-  - [Typo3](/how-to/cms/typo3.md)
-  - [Grav](/how-to/cms/grav.md)
+  - [WordPress](/cms/wordpress.md)
+  - [Typo3](/cms/typo3.md)
+  - [Grav](/cms/grav.md)
 - Firewall
-  - [OPNsense](/how-to/firewall/opnsense.md)
-  - [pfSense](/how-to/firewall/pfsense.md)
-  - [Ports](/how-to/firewall/ports.md)
+  - [OPNsense](/firewall/opnsense.md)
+  - [pfSense](/firewall/pfsense.md)
+  - [Ports](/firewall/ports.md)
 - Hypervisor
-  - [vSphere](/how-to/hypervisor/vsphere.md)
-  - [Citrix](/how-to/hypervisor/citrix.md)
-  - [Proxmox](/how-to/hypervisor/proxmox.md)
-  - [Hyper-V](/how-to/hypervisor/hyperv.md)
+  - [vSphere](/hypervisor/vsphere.md)
+  - [Citrix](/hypervisor/citrix.md)
+  - [Proxmox](/hypervisor/proxmox.md)
+  - [Hyper-V](/hypervisor/hyperv.md)
 - Monitoring
-  - [Checkmk](/how-to/monitoring/checkmk.md)
-  - [Cockpit](/how-to/monitoring/cockpit.md)
-  - [Grafana](/how-to/monitoring/grafana.md)
-  - [Portainer](/how-to/monitoring/portainer.md)
-  - [Prometheus](/how-to/monitoring/prometheus.md)
+  - [Checkmk](/monitoring/checkmk.md)
+  - [Cockpit](/monitoring/cockpit.md)
+  - [Grafana](/monitoring/grafana.md)
+  - [Portainer](/monitoring/portainer.md)
+  - [Prometheus](/monitoring/prometheus.md)
 - ServerOS
-  - [Windows](/how-to/server/windows/windows.md)
+  - [Windows](/server/windows/windows.md)
     - Roles and Features
-  - [Ubuntu](/how-to/server/ubuntu/ubuntu.md)
+  - [Ubuntu](/server/ubuntu/ubuntu.md)
     - Services
-    - [Apache](/how-to/server/ubuntu/services/apache.md)
-    - [DHCP](/how-to/server/ubuntu/services/dhcp.md)
-    - [DiskManagement](/how-to/server/ubuntu/services/disk.md)
-    - [DNS](/how-to/server/ubuntu/services/dns.md)
-    - [Docker](/how-to/server/ubuntu/services/docker.md)
-    - [LDAP](/how-to/server/ubuntu/services/ldap.md)
-    - [MySQL](/how-to/server/ubuntu/services/mysql.md)
-    - [NFS](/how-to/server/ubuntu/services/nfs.md)
-    - [Nginx](/how-to/server/ubuntu/services/nginx.md)
-    - [RSync](/how-to/server/ubuntu/services/rsync.md)
-    - [SAMBA](/how-to/server/ubuntu/services/samba.md)
+    - [Apache](/server/ubuntu/services/apache.md)
+    - [DHCP](/server/ubuntu/services/dhcp.md)
+    - [DiskManagement](/server/ubuntu/services/disk.md)
+    - [DNS](/server/ubuntu/services/dns.md)
+    - [Docker](/server/ubuntu/services/docker.md)
+    - [LDAP](/server/ubuntu/services/ldap.md)
+    - [MySQL](/server/ubuntu/services/mysql.md)
+    - [NFS](/server/ubuntu/services/nfs.md)
+    - [Nginx](/server/ubuntu/services/nginx.md)
+    - [RSync](/server/ubuntu/services/rsync.md)
+    - [SAMBA](/server/ubuntu/services/samba.md)
 
 # :bookmark: Bookmarks
 
