@@ -10,7 +10,7 @@ your-user-database > [DATABASE]
 your-user-email > [EMAIL]
 ```
 
-## Installation Host
+## Installation (Server)
 
 1. Download Checkmk package
 
@@ -92,11 +92,11 @@ sudo ufw disable
 sudo ufw enable
 ```
 
-## Installation Agent
+## Installation Agent (Client)
 
-1. Install the agent on the node
+1. Install the agent on the client-node
 
-Before you can do anything, however, you must install the agent on your server. You can install the agent to any host on your network and then add the host to Checkmk. I’ll demonstrate by installing the agent to the hosting server and then adding the hosting server for monitoring.
+Before you can do anything, you have to install the agent on your server. You can install the agent to any host on your network and then add the host to Checkmk. Installing the agent to the host server and then adding the hosting server for monitoring.
 
 On the Checkmk main site, go to Setup | Agents | ...
 

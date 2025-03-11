@@ -10,7 +10,7 @@ your-user-database > [DATABASE]
 your-user-email > [EMAIL]
 ```
 
-## Installation
+## Installation (Server)
 
 1. Run the following command to add the Grafana repository to your system:
 

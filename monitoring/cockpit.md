@@ -10,7 +10,7 @@ your-user-database > [DATABASE]
 your-user-email > [EMAIL]
 ```
 
-## Installation
+## Installation (Server)
 
 ```bash
 sudo apt install cockpit
