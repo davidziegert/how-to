@@ -16,19 +16,14 @@
   - [Typo3](/cms/typo3.md)
   - [Grav](/cms/grav.md)
 - Firewall
-  - [OPNsense](/firewall/opnsense.md)
-  - [pfSense](/firewall/pfsense.md)
   - [Ports](/firewall/ports.md)
 - Hypervisor
   - [vSphere](/hypervisor/vsphere.md)
-  - [Citrix](/hypervisor/citrix.md)
   - [Proxmox](/hypervisor/proxmox.md)
-  - [Hyper-V](/hypervisor/hyperv.md)
 - Monitoring
   - [Checkmk](/monitoring/checkmk.md)
   - [Cockpit](/monitoring/cockpit.md)
   - [Grafana](/monitoring/grafana.md)
-  - [Portainer](/monitoring/portainer.md)
   - [Prometheus](/monitoring/prometheus.md)
 - ServerOS
   - [Windows](/server/windows/windows.md)
@@ -43,7 +38,6 @@
     - [LDAP](/server/ubuntu/services/ldap.md)
     - [MySQL](/server/ubuntu/services/mysql.md)
     - [NFS](/server/ubuntu/services/nfs.md)
-    - [Nginx](/server/ubuntu/services/nginx.md)
     - [RSync](/server/ubuntu/services/rsync.md)
     - [SAMBA](/server/ubuntu/services/samba.md)
 
