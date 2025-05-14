@@ -277,12 +277,6 @@ sudo nano /etc/motd
 
 ```
 
-[^1]: https://www.serverlab.ca/tutorials/linux/administration-linux/how-to-configure-networking-in-ubuntu-20-04-with-netplan/
-[^2]: https://www.cyberciti.biz/faq/setting-up-an-network-interfaces-file/
-[^3]: https://nebulab.com/blog/awesome-motds-with-ubuntu
-[^4]: https://www.asciiart.eu/
-[^5]: https://github.com/jenil777007/ucleaner
-
 ### Security [^20]
 
 #### Automatic Updates
@@ -394,92 +388,6 @@ DenyUsers user3 user4
 sudo service ssh restart
 ```
 
-#### UFW Firewall [^8] [^9]
-
-##### UFW Status
-
-```bash
-sudo ufw status
-```
-
-```bash
-sudo ufw enable
-sudo ufw disable
-```
-
-```bash
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-```
-
-##### Allow an IP Address
-
-```bash
-sudo ufw allow from xxx.xxx.xxx.xxx
-sudo ufw allow from xxx.xxx.xxx.xxx to any port xxxx
-```
-
-##### Allow a Subnet
-
-```bash
-sudo ufw allow from xxx.xxx.xxx.0/24
-sudo ufw allow from xxx.xxx.xxx.0/24 to any port xxxx
-```
-
-##### Block an IP Address
-
-```bash
-sudo ufw deny from xxx.xxx.xxx.xxx
-sudo ufw deny from xxx.xxx.xxx.xxx to any port xxxx
-```
-
-##### Block a Subnet
-
-```bash
-sudo ufw deny from xxx.xxx.xxx.0/24
-sudo ufw deny from xxx.xxx.xxx.0/24 to any port xxxx
-```
-
-##### List Available Applications
-
-```bash
-sudo ufw app list
-```
-
-##### Enable/Disable Applications
-
-```bash
-sudo ufw allow ssh
-sudo ufw deny ssh
-```
-
-##### Enable/Disable Ports
-
-```bash
-sudo ufw allow 22
-sudo ufw deny 22
-```
-
-##### Enable/Disable Specific Port Ranges
-
-```bash
-sudo ufw allow 6000:6007/tcp
-sudo ufw allow 6000:6007/udp
-sudo ufw deny 6000:6007/tcp
-sudo ufw deny 6000:6007/udp
-```
-
-##### Logs [^10]
-
-```bash
-sudo ufw logging on
-sudo ufw logging off
-```
-
-```bash
-sudo nano /var/log/uwf.log
-```
-
 #### Avoid Using FTP, Telnet, And Rlogin / Rsh Services on Linux
 
 ```bash
@@ -583,160 +491,17 @@ sudo nano /etc/hosts.deny
 sshd : xxx.xxx.xxx.0/24 : deny
 ```
 
-#### fail2ban [^11] [^12] [^18] [^19] [^20]
-
-##### Installation
-
-```bash
-sudo apt install fail2ban -y
-```
-
-##### Configuration
-
-```bash
-sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-sudo nano /etc/fail2ban/jail.local
-```
-
-```
-[INCLUDES]
-before = paths-debian.conf
-
-[DEFAULT]
-ignoreip = 127.0.0.1/8 ::1 xxx.xxx.xxx.0/24                     # IGNORELIST
-maxretry = 3                                                    # NUMBER OF FAILED ATTEMPTS
-findtime = 10m                                                  # TIMESPAN BETWEEN FAILED ATTEMPTS
-bantime  = 1h                                                   # BANTIME
-banaction = ufw                                                 # JAIL VIA UFW
-backend = polling                                               # POLLING ALGORITHM (NO EXTERNAL LIBRARIES)
-logencoding = auto                                              # USE SYSTEM LOCAL ENCODING (UTF-8)
-enabled = true                                                  # ENABLE JAILS
-
-[sshd]
-enabled = true
-port = ssh
-filter	= sshd
-logpath	= /var/log/auth.log
-maxretry = 3
-findtime = 1h
-bantime  = 1d
-banaction = ufw
-backend = polling
-```
-
-##### Commands
-
-```bash
-sudo systemctl enable fail2ban
-sudo systemctl start fail2ban
-sudo systemctl status fail2ban
-```
-
-```bash
-sudo fail2ban-client ping
-sudo fail2ban-client status
-sudo fail2ban-client status sshd
-```
-
-```bash
-sudo fail2ban-client get sshd bantime
-sudo fail2ban-client get sshd maxretry
-sudo fail2ban-client get sshd actions
-sudo fail2ban-client get sshd findtime
-sudo fail2ban-client get sshd ignoreip
-```
-
-```bash
-sudo fail2ban-client set sshd banip IP-ADDRESS
-sudo fail2ban-client set sshd unbanip IP-ADDRESS
-
-sudo fail2ban-client set sshd addignoreip IP-ADDRESS
-sudo fail2ban-client set sshd delignoreip IP-ADDRESS
-```
-
-##### Reports
-
-```bash
-tail -100 /var/log/fail2ban.log.
-```
-
-or report via bash
-
-```bash
-sudo nano fail2banreport.sh
-```
-
-```
-awk '($(NF-1) == "Ban"){print $NF}' /var/log/fail2ban.log \
-  | sort | uniq -c | sort -n
-```
-
-#### ClamAV [^21] [^22]
-
-##### Installation
-
-```bash
-sudo apt install clamav
-```
-
-##### Updates
-
-```bash
-sudo freshclam
-```
-
-##### Scanning Folders (manually)
-
-```bash
-sudo clamscan -r /path
-```
-
-###### Use Switches
-
-```
-ClamAV has a number of switches that can be used to customize its behavior. Some of the most useful switches are:
-
-The –infected switch tells ClamAV to only report infected files. This is useful if you only want to know which files are infected, and you don’t want to remove them.
-–infected
-
-The –remove switch tells ClamAV to remove infected files. This is the default behavior, so you don’t need to use this switch unless you want to override the default behavior.
-–remove
-
-The –recursive switch tells ClamAV to scan a directory and all of its subdirectories. This is useful for scanning large directories or directories that may contain infected files.
-–recursive
-```
-
-##### Scanning Folders (automatically)
-
-```bash
-sudo nano /etc/clamav/clamd.conf
-```
-
-```
-You can set ClamAV to scan automatically at regular intervals. This is a good way to ensure that your system is always protected from viruses.
-To set ClamAV to scan automatically, open the ClamAV configuration file.
-Find the ScanInterval directive.
-```
-
-```bash
-sudo service clamav-freshclam restart
-```
-
+[^1]: https://www.serverlab.ca/tutorials/linux/administration-linux/how-to-configure-networking-in-ubuntu-20-04-with-netplan/
+[^2]: https://www.cyberciti.biz/faq/setting-up-an-network-interfaces-file/
+[^3]: https://nebulab.com/blog/awesome-motds-with-ubuntu
+[^4]: https://www.asciiart.eu/
+[^5]: https://github.com/jenil777007/ucleaner
 [^6]: https://kb.iu.edu/d/aews
 [^7]: https://linux-audit.com/using-ssh-keys-instead-of-passwords/
-[^8]: https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
-[^9]: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04
 [^10]: https://fedingo.com/how-to-check-ufw-log-status/
-[^11]: https://linuxize.com/post/install-configure-fail2ban-on-ubuntu-20-04/
-[^12]: https://www.linuxcapable.com/de/how-to-install-fail2ban-on-ubuntu-20-04-with-configuration/
 [^13]: https://linux-audit.com/audit-and-harden-your-ssh-configuration/
 [^14]: https://www.linuxbabe.com/linux-server/fix-ssh-locale-environment-variable-error
 [^15]: https://www.kim.uni-konstanz.de/e-mail-und-internet/it-sicherheit/sicherer-server-it-dienst/linux-fernadministration-mit-pam-und-ssh/starke-authentifizierungsmethoden/
 [^16]: https://www.cyberciti.biz/tips/linux-security.html
 [^17]: https://www.informaticar.net/security-hardening-ubuntu-20-04/
-[^18]: https://www.howtoforge.de/anleitung/so-installierst-und-konfigurierst-du-fail2ban-unter-ubuntu-22-04/
-[^19]: https://www.booleanworld.com/protecting-ssh-fail2ban/
-[^20]: https://www.the-art-of-web.com/system/fail2ban-log/
-[^21]: https://www.webhi.com/how-to/setup-config-clamav-on-ubuntu-debian/
-[^22]: https://manpages.ubuntu.com/manpages/focal/en/man5/clamd.conf.5.html
 [^23]: https://ittavern.com/ssh-server-hardening/

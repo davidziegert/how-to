@@ -31,15 +31,18 @@
   - [Ubuntu](/server/ubuntu/ubuntu.md)
     - Services
     - [Apache](/server/ubuntu/services/apache.md)
+    - [ClamAV](/server/ubuntu/services/clamav.md)
     - [DHCP](/server/ubuntu/services/dhcp.md)
     - [DiskManagement](/server/ubuntu/services/disk.md)
     - [DNS](/server/ubuntu/services/dns.md)
     - [Docker](/server/ubuntu/services/docker.md)
+    - [Fail2Ban](/server/ubuntu/services/fail2ban.md)
     - [LDAP](/server/ubuntu/services/ldap.md)
     - [MySQL](/server/ubuntu/services/mysql.md)
     - [NFS](/server/ubuntu/services/nfs.md)
     - [RSync](/server/ubuntu/services/rsync.md)
     - [SAMBA](/server/ubuntu/services/samba.md)
+    - [UFW](/server/ubuntu/services/ufw.md)
 
 # :bookmark: Bookmarks
 

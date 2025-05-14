@@ -261,6 +261,10 @@ crontab -e
 0 0 * * * /usr/local/bin/runmybackup.sh
 ```
 
+```bash
+ssh-keyscan [IPADDRESS] >> ~/.ssh/known_hosts
+```
+
 [^1]: https://gridscale.io/community/tutorials/mysql-benutzer-rechte-zuweisen/
 [^2]: https://linuxize.com/post/mysql-remote-access/
 [^3]: https://www.a2hosting.com/kb/developer-corner/mysql/restricting-mysql-port-access#Method-1.3A-Disable-MySQL-networking
