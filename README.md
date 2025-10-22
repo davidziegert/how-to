@@ -4,7 +4,11 @@
 
 - Automation
   - [Ansible](/automation/ansible.md)
-- ClientOS
+- CLI
+  - [Windows](/cli/windows.md)
+  - [Linux](/cli/linux.md)
+  - [macOS](/cli/macos.md)
+- Client
   - [Windows](/client/windows/windows.md)
     - Tools
   - [Ubuntu](/client/ubuntu/ubuntu.md)
@@ -25,7 +29,7 @@
   - [Cockpit](/monitoring/cockpit.md)
   - [Grafana](/monitoring/grafana.md)
   - [Prometheus](/monitoring/prometheus.md)
-- ServerOS
+- Server
   - [Windows](/server/windows/windows.md)
     - Roles and Features
   - [Ubuntu](/server/ubuntu/ubuntu.md)
