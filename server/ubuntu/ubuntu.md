@@ -277,6 +277,30 @@ sudo nano /etc/motd
 
 ```
 
+### Message of the Day with FASTFETH or NEOFETCH
+
+```bash
+sudo apt install fastfetch
+sudo nano /etc/profile.d/motd.sh
+```
+
+```
+printf "\n"
+fastfetch
+```
+
+```bash
+sudo chmod +x /etc/profile.d/motd.sh
+```
+
+#### Configuration
+
+```bash
+sudo nano /usr/share/fastfetch/presets/myconfig.jsonc
+sudo chmod 644 /usr/share/fastfetch/presets/myconfig.jsonc
+sudo fastfetch --config myconfig.jsonc
+```
+
 ### Security [^20]
 
 #### Automatic Updates
