@@ -23,14 +23,14 @@ Use Switches
 ```
 ClamAV has a number of switches that can be used to customize its behavior. Some of the most useful switches are:
 
-The –infected switch tells ClamAV to only report infected files. This is useful if you only want to know which files are infected, and you don’t want to remove them.
-–infected
+The -infected switch tells ClamAV to only report infected files. This is useful if you only want to know which files are infected, and you don’t want to remove them.
+-infected
 
-The –remove switch tells ClamAV to remove infected files. This is the default behavior, so you don’t need to use this switch unless you want to override the default behavior.
-–remove
+The -remove switch tells ClamAV to remove infected files. This is the default behavior, so you don’t need to use this switch unless you want to override the default behavior.
+-remove
 
-The –recursive switch tells ClamAV to scan a directory and all of its subdirectories. This is useful for scanning large directories or directories that may contain infected files.
-–recursive
+The -recursive switch tells ClamAV to scan a directory and all of its subdirectories. This is useful for scanning large directories or directories that may contain infected files.
+-recursive
 ```
 
 ## Scanning Folders (automatically)

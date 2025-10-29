@@ -50,7 +50,7 @@ sudo docker run hello-world
 
 | Command         | Usage                                              | Explanation                                                                                                                 |
 | --------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| docker –version |                                                    | This command is used to get the currently installed version of docker.                                                      |
+| docker -version |                                                    | This command is used to get the currently installed version of docker.                                                      |
 | docker pull     | docker pull <image name>                           | This command is used to pull images from the docker repository(hub.docker.com).                                             |
 | docker run      | docker run -it -d <image name>                     | This command is used to create a container from an image.                                                                   |
 | docker ps       |                                                    | This command is used to list the running containers.                                                                        |

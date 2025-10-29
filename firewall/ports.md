@@ -55,7 +55,7 @@
 | 68 | X | X | Bootstrap Protocol (BOOTP) client; also used by Dynamic Host Configuration Protocol (DHCP) |
 | 69 | X | X | Trivial File Transfer Protocol (TFTP) |
 | 70 | X | X | Gopher protocol |
-| 71–74 | X | X | NETRJS protocol |
+| 71-74 | X | X | NETRJS protocol |
 | 76 | X | X | Distributed External Object Store |
 | 78 | X | X | vettcp |
 | 79 | X | X | Finger protocol |
@@ -224,7 +224,7 @@
 | 465 | X |  | URL Rendezvous Directory for Cisco SSM (primary usage assignment) |
 | 465 | X |  | Authenticated SMTP over TLS/SSL (SMTPS) (alternative usage assignment) |
 | 475 | X | X | tcpnethaspsrv, Aladdin Knowledge Systems Hasp services |
-| 476–490 | X | X | Centro Software ERP ports |
+| 476-490 | X | X | Centro Software ERP ports |
 | 491 | X |  | GO-Global remote access and application publishing software |
 | 497 | X | X | Retrospect |
 | 500 | X | X | Internet Security Association and Key Management Protocol (ISAKMP) / Internet Key Exchange (IKE) |
@@ -348,7 +348,7 @@
 | 994 | X | X | Previously assigned to Internet Relay Chat over TLS/SSL (IRCS), but was not used in common practice. |
 | 995 | X | X | Post Office Protocol 3 over TLS/SSL (POP3S) |
 | 1010 | X |  | ThinLinc web-based administration interface |
-| 1023 | X | X | z/OS Network File System (NFS) (potentially ports 991–1023) |
+| 1023 | X | X | z/OS Network File System (NFS) (potentially ports 991-1023) |
 
 ## Registered ports
 
@@ -419,10 +419,10 @@
 | 1547 | X | X | Laplink |
 | 1550 | X | X | 1C:Enterprise debug server |
 | 1550 | X |  | Gadu-Gadu (direct client-to-client) |
-| 1560–1590 | X | X | 1C:Enterprise cluster working processes |
+| 1560-1590 | X | X | 1C:Enterprise cluster working processes |
 | 1581 | X | X | MIL STD 2045-47001 VMF |
 | 1581 | X |  | IBM Tivoli Storage Manager web client |
-| 1582–1583 | X |  | IBM Tivoli Storage Manager server web interface |
+| 1582-1583 | X |  | IBM Tivoli Storage Manager server web interface |
 | 1583 | X |  | Pervasive PSQL |
 | 1589 | X | X | Cisco VLAN Query Protocol (VQP) |
 | 1604 | X | X | DarkComet remote administration tool (RAT) |
@@ -439,7 +439,7 @@
 | 1701 | X | X | Layer 2 Tunneling Protocol (L2TP) |
 | 1707 | X | X | Windward Studios games (vdmplay) |
 | 1707 |  | X | L2TP/IPsec, for establish an initial connection |
-| 1714–1764 | X | X | KDE Connect |
+| 1714-1764 | X | X | KDE Connect |
 | 1716 |  | X | America's Army, a massively multiplayer online game (MMO) |
 | 1719 | X | X | H.323 registration and alternate communication |
 | 1720 | X | X | H.323 call signaling |
@@ -496,7 +496,7 @@
 | 2221 | X |  | ESET anti-virus updates |
 | 2222 | X | X | EtherNet/IP implicit messaging for IO data |
 | 2222 | X |  | DirectAdmin Access |
-| 2222–2226 | X |  | ESET Remote administrator |
+| 2222-2226 | X |  | ESET Remote administrator |
 | 2240 | X | X | General Dynamics Remote Encryptor Configuration Information Protocol (RECIPe) |
 | 2261 | X | X | CoMotion master |
 | 2262 | X | X | CoMotion backup |
@@ -532,7 +532,7 @@
 | 2501 |  | X | NetFS probe |
 | 2535 | X | X | Multicast Address Dynamic Client Allocation Protocol (MADCAP). All standard messages are UDP datagrams. |
 | 2541 | X | X | LonTalk/IP |
-| 2546–2548 | X | X | EVault data protection services |
+| 2546-2548 | X | X | EVault data protection services |
 | 2593 | X | X | Ultima Online servers |
 | 2598 | X |  | Citrix Independent Computing Architecture (ICA) with Session Reliability; port 1494 without session reliability |
 | 2599 | X | X | Ultima Online servers |
@@ -547,7 +547,7 @@
 | 2944 | X | X | Megaco text H.248 |
 | 2945 | X | X | Megaco binary (ASN.1) H.248 |
 | 2947 | X | X | gpsd, GPS daemon |
-| 2948–2949 | X | X | WAP push Multimedia Messaging Service (MMS) |
+| 2948-2949 | X | X | WAP push Multimedia Messaging Service (MMS) |
 | 2967 | X | X | Symantec System Center agent (SSC-AGENT) |
 | 3000 | X |  | Ruby on Rails development default |
 | 3000 | X |  | Meteor development default |
@@ -558,7 +558,7 @@
 | 3020 | X | X | Common Internet File System (CIFS). See also port 445 for Server Message Block (SMB), a dialect of CIFS. |
 | 3050 | X | X | gds-db (Interbase/Firebird databases) |
 | 3052 | X | X | APC PowerChute Network |
-| 3074 | X | X | Xbox LIVE and Games for Windows – Live |
+| 3074 | X | X | Xbox LIVE and Games for Windows - Live |
 | 3101 | X |  | BlackBerry Enterprise Server communication protocol |
 | 3128 | X |  | Squid caching web proxy |
 | 3225 | X | X | Fibre Channel over IP (FCIP) |
@@ -661,7 +661,7 @@
 | 4201 | X |  | TinyMUD and various derivatives |
 | 4222 | X |  | NATS server default port |
 | 4226 | X | X | Aleph One, a computer game |
-| 4242 | X |  | Orthanc – DICOM server |
+| 4242 | X |  | Orthanc - DICOM server |
 | 4242 | X |  | Quassel distributed IRC client |
 | 4243 | X |  | Docker implementations, redistributions, and setups default |
 | 4243 | X |  | CrashPlan |
@@ -673,19 +673,19 @@
 | 4444 | X |  | Metasploit's default listener port |
 | 4444 | X | X | Xvfb X server virtual frame buffer service |
 | 4444 | X |  | OpenOCD (Telnet) |
-| 4444–4445 | X |  | I2P HTTP/S proxy |
+| 4444-4445 | X |  | I2P HTTP/S proxy |
 | 4486 | X | X | Integrated Client Message Service (ICMS) |
 | 4488 | X | X | Apple Wide Area Connectivity Service, used by Back to My Mac |
 | 4500 | X | X | IPSec NAT Traversal (RFC 3947, RFC 4306) |
-| 4502–4534 | X |  | Microsoft Silverlight connectable ports under non-elevated trust |
-| 4505–4506 | X |  | Salt master |
+| 4502-4534 | X |  | Microsoft Silverlight connectable ports under non-elevated trust |
+| 4505-4506 | X |  | Salt master |
 | 4534 |  | X | Armagetron Advanced server default |
 | 4560 | X |  | default Log4j socketappender port |
 | 4567 | X |  | Sinatra default server port in development mode (HTTP) |
 | 4569 |  | X | Inter-Asterisk eXchange (IAX2) |
 | 4604 | X |  | Identity Registration Protocol |
 | 4605 | X |  | Direct End to End Secure Chat Protocol |
-| 4610–4640 | X |  | QualiSystems TestShell Suite Services |
+| 4610-4640 | X |  | QualiSystems TestShell Suite Services |
 | 4662 | X | X | OrbitNet Message Service |
 | 4662 | X |  | Default for older versions of eMule |
 | 4664 | X |  | Google Desktop Search |
@@ -722,13 +722,13 @@
 | 5000 | X |  | 3CX Phone System Management Console/Web Client (HTTP) |
 | 5000 | X |  | RidgeRun GStreamer Daemon (GSTD)  |
 | 5000 | X |  | Apple's AirPlay Receiver |
-| 5000–5500 |  | X | League of Legends, a multiplayer online battle arena video game |
+| 5000-5500 |  | X | League of Legends, a multiplayer online battle arena video game |
 | 5001 | X |  | Slingbox and Slingplayer |
 | 5001 | X | X | Iperf (Tool for measuring TCP and UDP bandwidth performance) |
 | 5001 | X |  | Synology Inc. Secured Management Console, File Station, Audio Station |
 | 5001 | X |  | 3CX Phone System Management Console/Web Client (HTTPS) |
 | 5002 | X |  | ASSA ARX access control system |
-| 5003 | X | X | FileMaker – name binding and transport |
+| 5003 | X | X | FileMaker - name binding and transport |
 | 5004 | X | X | Real-time Transport Protocol media data (RTP) (RFC 3551, RFC 4571) |
 | 5005 | X | X | Real-time Transport Protocol control protocol (RTCP) (RFC 3551, RFC 4571) |
 | 5007 | X |  | Palo Alto Networks - User-ID agent |
@@ -851,8 +851,8 @@
 | 5984 | X | X | CouchDB database server |
 | 5985 | X |  | Windows PowerShell Default psSession Port Windows Remote Management Service (WinRM-HTTP) |
 | 5986 | X |  | Windows PowerShell Default psSession Port Windows Remote Management Service (WinRM-HTTPS) |
-| 5988–5989 | X |  | CIM-XML (DMTF Protocol) |
-| 6000–6063 | X | X | X11—used between an X client and server over the network |
+| 5988-5989 | X |  | CIM-XML (DMTF Protocol) |
+| 6000-6063 | X | X | X11—used between an X client and server over the network |
 | 6005 | X |  | Default for BMC Software Control-M/Server—Socket used for communication between Control-M processes—though often changed during installation |
 | 6005 | X |  | Default for Camfrog chat & cam client |
 | 6009 | X |  | JD Edwards EnterpriseOne ERP system JDENet messaging client listener |
@@ -893,7 +893,7 @@
 | 6443 | X |  | Kubernetes API server  |
 | 6444 | X | X | Sun Grid Engine Qmaster Service |
 | 6445 | X | X | Sun Grid Engine Execution Service |
-| 6463–6472 | X |  | Discord RPC |
+| 6463-6472 | X |  | Discord RPC |
 | 6464 | X | X | Port assignment for medical device communication in accordance to IEEE 11073-20701 |
 | 6502 | X | X | Netop Remote Control |
 | 6513 | X |  | NETCONF over TLS |
@@ -903,7 +903,7 @@
 | 6543 | X |  | Pylons project#Pyramid Default Pylons Pyramid web service port |
 | 6556 | X |  | Check MK Agent |
 | 6566 | X |  | SANE (Scanner Access Now Easy)—SANE network scanner daemon |
-| 6560–6561 | X |  | Speech-Dispatcher daemon |
+| 6560-6561 | X |  | Speech-Dispatcher daemon |
 | 6571 | X |  | Windows Live FolderShare client |
 | 6600 | X |  | Microsoft Hyper-V Live |
 | 6600 | X |  | Music Player Daemon (MPD) |
@@ -912,8 +912,8 @@
 | 6619 | X | X | odette-ftps, Odette File Transfer Protocol (OFTP) over TLS/SSL |
 | 6622 | X | X | Multicast FTP |
 | 6653 | X | X | OpenFlow |
-| 6660–6664 | X |  | Internet Relay Chat (IRC) |
-| 6665–6669 | X |  | Internet Relay Chat (IRC) |
+| 6660-6664 | X |  | Internet Relay Chat (IRC) |
+| 6665-6669 | X |  | Internet Relay Chat (IRC) |
 | 6679 | X | X | Osorno Automation Protocol (OSAUT) |
 | 6679 | X |  | Internet Relay Chat (IRC) SSL (Secure Internet Relay Chat)—often used |
 | 6690 | X |  | Synology Cloud station |
@@ -921,22 +921,22 @@
 | 6699 | X |  | WinMX (see also 6257) |
 | 6715 | X |  | AberMUD and derivatives default port |
 | 6771 |  | X | BitTorrent Local Peer Discovery |
-| 6783–6785 | X |  | Splashtop Remote server broadcast |
+| 6783-6785 | X |  | Splashtop Remote server broadcast |
 | 6801 | X | X | ACNET Control System Protocol |
-| 6881–6887 | X | X | BitTorrent beginning of range of ports used most often |
+| 6881-6887 | X | X | BitTorrent beginning of range of ports used most often |
 | 6888 | X | X | MUSE |
 | 6888 | X | X | BitTorrent continuation of range of ports used most often |
-| 6889–6890 | X | X | BitTorrent continuation of range of ports used most often |
-| 6891–6900 | X | X | BitTorrent continuation of range of ports used most often |
-| 6891–6900 | X | X | Windows Live Messenger (File transfer) |
+| 6889-6890 | X | X | BitTorrent continuation of range of ports used most often |
+| 6891-6900 | X | X | BitTorrent continuation of range of ports used most often |
+| 6891-6900 | X | X | Windows Live Messenger (File transfer) |
 | 6901 | X | X | Windows Live Messenger (Voice) |
 | 6901 | X | X | BitTorrent continuation of range of ports used most often |
-| 6902–6968 | X | X | BitTorrent continuation of range of ports used most often |
+| 6902-6968 | X | X | BitTorrent continuation of range of ports used most often |
 | 6924 | X | X | split-ping, ping with RX/TX latency/loss split |
 | 6969 | X | X | acmsoda |
 | 6969 | X |  | BitTorrent tracker |
-| 6970–6999 | X | X | BitTorrent end of range of ports used most often |
-| 6970–6999 |  | X | QuickTime Streaming Server |
+| 6970-6999 | X | X | BitTorrent end of range of ports used most often |
+| 6970-6999 |  | X | QuickTime Streaming Server |
 | 7000 | X |  | Default for Vuze's built-in HTTPS Bittorrent tracker |
 | 7000 | X |  | Avira Server Management Console |
 | 7001 | X |  | Avira Server Management Console |
@@ -973,13 +973,13 @@
 | 7624 | X | X | Instrument Neutral Distributed Interface |
 | 7631 | X |  | ERLPhase |
 | 7634 | X |  | hddtemp—Utility to monitor hard drive temperature |
-| 7652–7654 | X |  | I2P anonymizing overlay network |
+| 7652-7654 | X |  | I2P anonymizing overlay network |
 | 7655 |  | X | I2P SAM Bridge Socket API |
-| 7656–7660 | X |  | I2P anonymizing overlay network |
+| 7656-7660 | X |  | I2P anonymizing overlay network |
 | 7670 | X |  | BrettspielWelt BSW Boardgame Portal |
 | 7680 | X |  | Delivery Optimization for Windows 10 |
 | 7687 | X |  | Bolt database connection |
-| 7707–7708 |  | X | Killing Floor |
+| 7707-7708 |  | X | Killing Floor |
 | 7717 |  | X | Killing Floor |
 | 7777 | X |  | iChat server file transfer proxy |
 | 7777 | X |  | Oracle Cluster File System 2 |
@@ -988,7 +988,7 @@
 | 7777 | X |  | Terraria default server |
 | 7777 |  | X | San Andreas Multiplayer (SA-MP) default port server |
 | 7777 |  | X | SCP: Secret Laboratory Multiplayer Server |
-| 7777–7788 | X | X | Unreal Tournament series default server |
+| 7777-7788 | X | X | Unreal Tournament series default server |
 | 7831 | X |  | Default used by Smartlaunch Internet Cafe Administration software |
 | 7880 | X | X | PowerSchool Gradebook Server |
 | 7890 | X |  | Default that will be used by the iControl Internet Cafe Suite Administration software |
@@ -1014,7 +1014,7 @@
 | 8008 | X |  | Matrix homeserver federation over HTTP |
 | 8009 | X |  | Apache JServ Protocol (ajp13) |
 | 8010 | X |  | Buildbot web status page |
-| 8042 | X |  | Orthanc – REST API over HTTP |
+| 8042 | X |  | Orthanc - REST API over HTTP |
 | 8069 | X |  | OpenERP 5.0 XML-RPC protocol |
 | 8070 | X |  | OpenERP 5.0 NET-RPC protocol |
 | 8074 | X | X | Gadu-Gadu |
@@ -1044,7 +1044,7 @@
 | 8140 | X |  | Puppet (software) Master server |
 | 8172 | X |  | Microsoft Remote Administration for IIS Manager |
 | 8184 | X |  | NCSA Brown Dog Data Access Proxy |
-| 8194–8195 | X |  | Bloomberg Terminal |
+| 8194-8195 | X |  | Bloomberg Terminal |
 | 8200 | X |  | GoToMyPC |
 | 8200 | X |  | MiniDLNA media server Web Interface |
 | 8222 | X |  | VMware VI Web Access via HTTP |
@@ -1079,10 +1079,10 @@
 | 8580 | X |  | Freegate, an Internet anonymizer and proxy tool |
 | 8629 | X |  | Tibero database |
 | 8642 | X |  | Lotus Notes Traveler auto synchronization for Windows Mobile and Nokia devices |
-| 8691 | X |  | Ultra Fractal, a fractal generation and rendering software application – distributed calculations over networked computers |
+| 8691 | X |  | Ultra Fractal, a fractal generation and rendering software application - distributed calculations over networked computers |
 | 8765 | X |  | Default port of a local GUN relay peer that the Internet Archive and others use as a decentralized mirror for censorship resistance. |
 | 8767 |  | X | Voice channel of TeamSpeak 2, a proprietary Voice over IP protocol targeted at gamers |
-| 8834 | X |  | Nessus, a vulnerability scanner – remote XML-RPC web server |
+| 8834 | X |  | Nessus, a vulnerability scanner - remote XML-RPC web server |
 | 8840 | X |  | Opera Unite, an extensible framework for web applications |
 | 8880 | X |  | Alternate port of CDDB (Compact Disc Database) protocol, used to look up audio CD (compact disc) information over the Internet. See also port 888. |
 | 8880 | X |  | IBM WebSphere Application Server SOAP connector |
@@ -1118,7 +1118,7 @@
 | 9030 | X |  | Tor often used |
 | 9042 | X |  | Apache Cassandra native protocol clients |
 | 9043 | X |  | WebSphere Application Server Administration Console secure |
-| 9050–9051 | X |  | Tor (SOCKS-5 proxy client) |
+| 9050-9051 | X |  | Tor (SOCKS-5 proxy client) |
 | 9060 | X |  | WebSphere Application Server Administration Console |
 | 9080 | X | X | glrpc, Groove Collaboration software GLRPC |
 | 9080 | X |  | WebSphere Application Server HTTP Transport (port 1) default |
@@ -1159,11 +1159,11 @@
 | 9389 | X | X | adws, Microsoft AD DS Web Services, Powershell uses this port |
 | 9392 | X |  | OpenVAS Greenbone Security Assistant web interface |
 | 9418 | X | X | git, Git pack transfer service |
-| 9419 | X |  | MooseFS distributed file system – master control port |
-| 9420 | X |  | MooseFS distributed file system – master command port |
-| 9421 | X |  | MooseFS distributed file system – master client port |
-| 9422 | X |  | MooseFS distributed file system – Chunkservers |
-| 9425 | X |  | MooseFS distributed file system – CGI server |
+| 9419 | X |  | MooseFS distributed file system - master control port |
+| 9420 | X |  | MooseFS distributed file system - master command port |
+| 9421 | X |  | MooseFS distributed file system - master client port |
+| 9422 | X |  | MooseFS distributed file system - Chunkservers |
+| 9425 | X |  | MooseFS distributed file system - CGI server |
 | 9443 | X |  | VMware Websense Triton console (HTTPS port used for accessing and administrating a vCenter Server via the Web Management Interface) |
 | 9443 | X |  | NCSA Brown Dog Data Tilling Service |
 | 9535 | X | X | mngsuite, LANDesk Management Suite Remote Control |
@@ -1191,7 +1191,7 @@
 | 10000 | X | X | Network Data Management Protocol (NDMP) Control stream for network backup and restore. |
 | 10000 | X |  | BackupExec |
 | 10000 | X |  | Webmin, Web-based Unix/Linux system administration tool (default port) |
-| 10000–20000 |  | X | Used on VoIP networks for receiving and transmitting voice telephony traffic which includes Google Voice via the OBiTalk ATA devices as well as on the MagicJack and Vonage ATA network devices. |
+| 10000-20000 |  | X | Used on VoIP networks for receiving and transmitting voice telephony traffic which includes Google Voice via the OBiTalk ATA devices as well as on the MagicJack and Vonage ATA network devices. |
 | 10001 |  | X | Ubiquiti UniFi access points broadcast to 255.255.255.255:10001 (UDP) to locate the controller(s) |
 | 10009 | X | X | CrossFire, a multiplayer online First Person Shooter |
 | 10011 | X |  | TeamSpeak 3 ServerQuery |
@@ -1204,8 +1204,8 @@
 | 10172 | X |  | Intuit Quickbooks client |
 | 10200 | X |  | FRISK Software International's fpscand virus scanning daemon for Unix platforms |
 | 10200 | X |  | FRISK Software International's f-protd virus scanning daemon for Unix platforms |
-| 10201–10204 | X |  | FRISK Software International's f-protd virus scanning daemon for Unix platforms |
-| 10212 | X |  | GE Intelligent Platforms Proficy HMI/SCADA – CIMPLICITY WebView |
+| 10201-10204 | X |  | FRISK Software International's f-protd virus scanning daemon for Unix platforms |
+| 10212 | X |  | GE Intelligent Platforms Proficy HMI/SCADA - CIMPLICITY WebView |
 | 10308 | X |  | Digital Combat Simulator Dedicated Server  |
 | 10480 | X |  | SWAT 4 Dedicated Server |
 | 10505 |  | X | BlueStacks (android simulator) broadcast |
@@ -1243,7 +1243,7 @@
 | 12443 | X |  | IBM HMC web browser management access over HTTPS instead of default port 443 |
 | 12489 | X |  | NSClient/NSClient++/NC_Net (Nagios) |
 | 12975 | X |  | LogMeIn Hamachi (VPN tunnel software; also port 32976)—used to connect to Mediation Server (bibi.hamachi.cc); will attempt to use SSL (TCP port 443) if both 12975 & 32976 fail to connect |
-| 13000–13050 |  | X | Second Life, used for server UDP in-bound |
+| 13000-13050 |  | X | Second Life, used for server UDP in-bound |
 | 13008 | X | X | CrossFire, a multiplayer online First Person Shooter |
 | 13075 | X |  | Default for BMC Software Control-M/Enterprise Manager Corba communication, though often changed during installation |
 | 13400 | X | X | ISO 13400 Road vehicles — Diagnostic communication over Internet Protocol(DoIP) |
@@ -1277,10 +1277,10 @@
 | 16261 | X | X | Project Zomboid multiplayer. Additional sequential ports used for each player connecting to server. |
 | 16300 | X |  | Oracle WebCenter Content: Records Management (formerly known as Oracle Universal Records Management). Port though often changed during installation |
 | 16384 |  | X | CISCO Default RTP MIN |
-| 16384–16403 |  | X | Real-time Transport Protocol (RTP), RTP Control Protocol (RTCP), used by Apple's iChat for audio and video |
-| 16384–16387 |  | X | Real-time Transport Protocol (RTP), RTP Control Protocol (RTCP), used by Apple's FaceTime and Game Center |
-| 16393–16402 |  | X | Real-time Transport Protocol (RTP), RTP Control Protocol (RTCP), used by Apple's FaceTime and Game Center |
-| 16403–16472 |  | X | Real-time Transport Protocol (RTP), RTP Control Protocol (RTCP), used by Apple's Game Center |
+| 16384-16403 |  | X | Real-time Transport Protocol (RTP), RTP Control Protocol (RTCP), used by Apple's iChat for audio and video |
+| 16384-16387 |  | X | Real-time Transport Protocol (RTP), RTP Control Protocol (RTCP), used by Apple's FaceTime and Game Center |
+| 16393-16402 |  | X | Real-time Transport Protocol (RTP), RTP Control Protocol (RTCP), used by Apple's FaceTime and Game Center |
+| 16403-16472 |  | X | Real-time Transport Protocol (RTP), RTP Control Protocol (RTCP), used by Apple's Game Center |
 | 16400 | X |  | Oracle WebCenter Content: Capture (formerly known as Oracle Document Capture). Port though often changed during installation |
 | 16567 |  | X | Battlefield 2 and mods |
 | 16666 | X | X | SITC Port for mobile web traffic |
@@ -1360,26 +1360,26 @@
 | 26000 | X |  | EVE Online |
 | 26000 |  | X | Xonotic, an open-source arena shooter |
 | 26822 |  | X | MSI MysticLight |
-| 26900–26901 | X |  | EVE Online |
-| 26909–26911 | X |  | Action Tanks Online |
+| 26900-26901 | X |  | EVE Online |
+| 26909-26911 | X |  | Action Tanks Online |
 | 27000 | X |  | PowerBuilder SySAM license server |
-| 27000–27006 |  | X | id Software's QuakeWorld master server |
-| 27000–27009 | X | X | FlexNet Publisher's License server (from the range of default ports) |
-| 27000–27015 |  | X | Steam (game client traffic) |
+| 27000-27006 |  | X | id Software's QuakeWorld master server |
+| 27000-27009 | X | X | FlexNet Publisher's License server (from the range of default ports) |
+| 27000-27015 |  | X | Steam (game client traffic) |
 | 27015 |  | X | GoldSrc and Source engine dedicated server port |
-| 27015–27018 |  | X | Unturned, a survival game |
-| 27015–27030 |  | X | Steam (matchmaking and HLTV) |
-| 27015–27030 | X | X | Steam (downloads) |
+| 27015-27018 |  | X | Unturned, a survival game |
+| 27015-27030 |  | X | Steam (matchmaking and HLTV) |
+| 27015-27030 | X | X | Steam (downloads) |
 | 27016 | X |  | Magicka and Space Engineers server port |
 | 27017 | X |  | MongoDB daemon process (mongod) and routing service (mongos) |
-| 27031–27035 |  | X | Steam (In-Home Streaming) |
+| 27031-27035 |  | X | Steam (In-Home Streaming) |
 | 27036 | X | X | Steam (In-Home Streaming) |
 | 27374 | X |  | Sub7 default. |
-| 27500–27900 |  | X | id Software's QuakeWorld |
+| 27500-27900 |  | X | id Software's QuakeWorld |
 | 27888 |  | X | Kaillera server |
-| 27901–27910 |  | X | id Software's Quake II master server |
+| 27901-27910 |  | X | id Software's Quake II master server |
 | 27950 |  | X | OpenArena outgoing |
-| 27960–27969 |  | X | Activision's Enemy Territory and id Software's Quake III Arena, Quake III and Quake Live and some ioquake3 derived games, such as Urban Terror (OpenArena incoming) |
+| 27960-27969 |  | X | Activision's Enemy Territory and id Software's Quake III Arena, Quake III and Quake Live and some ioquake3 derived games, such as Urban Terror (OpenArena incoming) |
 | 28000 | X | X | Siemens Digital Industries Software license server |
 | 28001 | X |  | Starsiege: Tribes |
 | 28015 |  | X | Rust (video game) |
@@ -1388,14 +1388,14 @@
 | 28443 | X |  | Palo Alto Networks' Panorama-to-managed devices software updates, PAN-OS 8.0 and later. |
 | 28769 | X |  | Palo Alto Networks' Panorama HA unencrypted sync port. |
 | 28770 | X |  | Palo Alto Networks' Panorama HA-1 backup sync port. |
-| 28770–28771 |  | X | AssaultCube Reloaded, a video game based upon a modification of AssaultCube |
-| 28785–28786 |  | X | Cube 2: Sauerbraten |
+| 28770-28771 |  | X | AssaultCube Reloaded, a video game based upon a modification of AssaultCube |
+| 28785-28786 |  | X | Cube 2: Sauerbraten |
 | 28852 | X | X | Killing Floor |
 | 28910 | X | X | Nintendo Wi-Fi Connection |
 | 28960 | X | X | Call of Duty; Call of Duty: United Offensive; Call of Duty 2; Call of Duty 4: Modern Warfare Call of Duty: World at War (PC platform) |
 | 29000 | X |  | Perfect World, an adventure and fantasy MMORPG |
 | 29070 | X | X | Jedi Knight: Jedi Academy by Ravensoft |
-| 29900–29901 | X | X | Nintendo Wi-Fi Connection |
+| 29900-29901 | X | X | Nintendo Wi-Fi Connection |
 | 29920 | X | X | Nintendo Wi-Fi Connection |
 | 30000 |  | X | XLink Kai P2P |
 | 30000 |  | X | Minetest server default port |
@@ -1420,7 +1420,7 @@
 | 35357 | X |  | OpenStack Identity (Keystone) administration |
 | 36330 | X |  | Folding@home Control Port |
 | 37008 |  | X | TZSP intrusion detection |
-| 40000 | X | X | SafetyNET p – a real-time Industrial Ethernet protocol |
+| 40000 | X | X | SafetyNET p - a real-time Industrial Ethernet protocol |
 | 41121 | X | X | Tentacle Server - Pandora FMS |
 | 41794 | X | X | Crestron Control Port - Crestron Electronics |
 | 41795 | X | X | Crestron Terminal Port - Crestron Electronics |
@@ -1428,18 +1428,18 @@
 | 41797 | X |  | Crestron Secure Terminal Port - Crestron Electronics |
 | 42806 |  |  | Discord |
 | 43110 | X |  | ZeroNet web UI default port  |
-| 43594–43595 | X |  | RuneScape |
+| 43594-43595 | X |  | RuneScape |
 | 44405 | X |  | Mu Online Connect Server |
 | 44818 | X | X | EtherNet/IP explicit messaging |
-| 47808–47823 | X | X | BACnet Building Automation and Control Networks (4780810 = BAC016 to 4782310 = BACF16) |
+| 47808-47823 | X | X | BACnet Building Automation and Control Networks (4780810 = BAC016 to 4782310 = BACF16) |
 
 ## Dynamic, private or ephemeral ports
 | Port | TCP | UDP | Description |
 |------|:---:|:---:|:-----------:|
-| 49152–65535 | X |  | Certificate Management over CMS |
+| 49152-65535 | X |  | Certificate Management over CMS |
 | 49160 | X |  | Palo Alto Networks' Panorama. |
 | 49190 | X |  | Palo Alto Networks' Panorama. |
-| 60000–61000 |  | X | Range from which Mosh – a remote-terminal application similar to SSH – typically assigns ports for ongoing sessions between Mosh servers and Mosh clients. |
+| 60000-61000 |  | X | Range from which Mosh - a remote-terminal application similar to SSH - typically assigns ports for ongoing sessions between Mosh servers and Mosh clients. |
 | 64738 | X | X | Mumble |
 
 [^1]: Source: https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers

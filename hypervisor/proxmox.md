@@ -17,7 +17,7 @@ your-user-email > [EMAIL]
 - Fast and redundant storage, best results with SSD disks.
 - OS storage: Hardware RAID with batteries protected write cache (“BBU”) or non-RAID with ZFS and SSD cache.
 - VM storage: For local storage use a hardware RAID with battery backed write cache (BBU) or non-RAID for ZFS. Neither ZFS nor Ceph are compatible with a hardware RAID controller. Shared and distributed storage is also possible.
-- Redundant Gbit NICs, additional NICs depending on the preferred storage technology and cluster setup – 10 Gbit and higher is also supported.
+- Redundant Gbit NICs, additional NICs depending on the preferred storage technology and cluster setup - 10 Gbit and higher is also supported.
 - For PCI(e) passthrough a CPU with VT-d/AMD-d CPU flag is needed.
 
 ## Installation

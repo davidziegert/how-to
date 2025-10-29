@@ -332,18 +332,18 @@ You can order pages by naming the page folders with a preceding number: 01.home,
 
 Themes can be found within the /user/themes folder. For a theme to function you’ll need:
 
-- blueprints.yaml – a file which contains information about the theme.
-- themename.php – a file which contains any logic your theme needs.
-- themename.yaml – a configuration file used by the plugin to set options the theme might use.
-- templates/ – a folder containing the Twig templates to render the pages.
+- blueprints.yaml - a file which contains information about the theme.
+- themename.php - a file which contains any logic your theme needs.
+- themename.yaml - a configuration file used by the plugin to set options the theme might use.
+- templates/ - a folder containing the Twig templates to render the pages.
 
 You should also include and these are required if you plan to release a theme:
 
-- CHANGELOG.md – a file that follows the Grav Changelog Format to show changes.
-- LICENSE – a file containing the license to the theme.
-- README.md – a file with documentation for the theme.
-- screenshot.jpg – a 1009px x 1009px screenshot of the theme.
-- thumbnail.jpg – a 300px x 300px screenshot of the theme.
+- CHANGELOG.md - a file that follows the Grav Changelog Format to show changes.
+- LICENSE - a file containing the license to the theme.
+- README.md - a file with documentation for the theme.
+- screenshot.jpg - a 1009px x 1009px screenshot of the theme.
+- thumbnail.jpg - a 300px x 300px screenshot of the theme.
 
 This is also where the css, sass, fonts, images, and js folders for the theme reside.
 

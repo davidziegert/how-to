@@ -136,7 +136,7 @@ In vSphere 7.0 U2 and newer, the TPM 2.0 chip is also used to encrypt the config
 
 ### Secure Boot [^4]
 
-Secure Boot is a UEFI BIOS feature that strengthens the security of the operating system (ESXi in this case) by making sure that all code that is loaded at boot is digitally signed and has not been tampered with. It also adds the benefit of disallowing threat actors from circumventing your set VIB ‘Acceptance level’ by them simply adding ‘–force’ at the end of the installation command.
+Secure Boot is a UEFI BIOS feature that strengthens the security of the operating system (ESXi in this case) by making sure that all code that is loaded at boot is digitally signed and has not been tampered with. It also adds the benefit of disallowing threat actors from circumventing your set VIB ‘Acceptance level’ by them simply adding ‘-force’ at the end of the installation command.
 
 However, there might be some installation packages (‘VIBs’, in vSphere language) that are not approved/signed by VMware or partners. These will then have the wrong ‘Acceptance level’ and can prevent Secure Boot from working correctly. To check if your ESXi host already has Secure Boot enabled, and whether there are any obstacles to enabling it, run the following two commands from an ESXi command line (SSH or ESXi Shell):
 
@@ -172,7 +172,7 @@ In vSphere 7.0 U2, the execInstalledOnly setting can be protected from tampering
 ````
 
 ```bash
-esxcli system settings encryption set –require-exec-installed-only=TRUE
+esxcli system settings encryption set -require-exec-installed-only=TRUE
 ````
 
 #### Patching with execInstalledOnly [^4]
@@ -469,10 +469,10 @@ Once you have logged in to vCenter 7, click Hosts and Clusters, select your data
 
 The available options are:
 
-- Hardware version 16 – VMware Workstation 15 and ESXi 7.0
-- Hardware version 15 – ESXi 6.7 U2 and later
-- Hardware version 14 – ESXi 6.7 and later
-- Hardware version 13 – ESXi 6.5 and later
+- Hardware version 16 - VMware Workstation 15 and ESXi 7.0
+- Hardware version 15 - ESXi 6.7 U2 and later
+- Hardware version 14 - ESXi 6.7 and later
+- Hardware version 13 - ESXi 6.5 and later
 
 ![Screenshot-7](./assets/vm_create_07.webp)
 
@@ -487,7 +487,7 @@ The available options are:
 - Harddisk: select the size of a virtual hard disk and the provisioning type.
 - Network: select the network to which a virtual network adapter of the VM must be connected.
 - CD/DVD Drive: You need to configure a CD/DVD drive to boot from the operating system installation media and install the operating system. There are multiple options.
-  - Client Device – an optical disc inserted into a CD/DVD drive on a client machine is used to boot the operating system installer. You need to insert an optical medium into the DVD-ROM of the computer on which you’re using VMware vSphere Client.
+  - Client Device - an optical disc inserted into a CD/DVD drive on a client machine is used to boot the operating system installer. You need to insert an optical medium into the DVD-ROM of the computer on which you’re using VMware vSphere Client.
   - Datastore ISO File. Upload an ISO image of the installation disc to the datastore attached to the ESXi host on which you are creating a new VM and are going to install an operating system. Then select the ISO file uploaded on the datastore.
   - Content Library ISO File. Select the needed ISO image file from the Content Library. You should upload the ISO file to the Content Library before you can select the image.
 
@@ -521,7 +521,7 @@ Thick provisioning is a type of storage pre-allocation. With thick provisioning,
 
 ![Screenshot-12](./assets/vm_create_12.webp)
 
-For data security reasons, eager zeroing is more common than lazy zeroing with thick-provisioned virtual disks. Why? When you delete a VMDK, the data on the datastore is not totally erased; the blocks are simply marked as available, until the operating system overwrites them. If you create an eager zeroed virtual disk on this datastore, the disk area will be totally erased (i.e., zeroed), thus preventing anyone with bad intentions from being able to recover the previous data – even if they use specialized third-party software.
+For data security reasons, eager zeroing is more common than lazy zeroing with thick-provisioned virtual disks. Why? When you delete a VMDK, the data on the datastore is not totally erased; the blocks are simply marked as available, until the operating system overwrites them. If you create an eager zeroed virtual disk on this datastore, the disk area will be totally erased (i.e., zeroed), thus preventing anyone with bad intentions from being able to recover the previous data - even if they use specialized third-party software.
 
 **Thin Provisioning**
 
@@ -537,17 +537,17 @@ Thin-provisioned virtual disks are quick to create and useful for saving storage
 
 The “Configuration” tab is particularly interesting when a host is clicked in the client. There you can see numerous links on the left that can be used to adjust the host settings. Using the “Processors” menu item in the right area you can see how many sockets are installed in the server. This way, for example, it can be determined whether enough licenses are used for the vSphere hosts. Companies require a vSphere license for each processor. So if a vSphere host with four processors is used, then four licenses are required for this host.
 
-**2. Hardware-Assisted CPU Virtualization – VT-x and AMD-V enable**
+**2. Hardware-Assisted CPU Virtualization - VT-x and AMD-V enable**
 
 Small companies in particular often fail to activate the processor's virtualization functions. It is even more problematic when servers are used that are not enabled for virtualization. Therefore, only servers that support Intel VT-x or AMD-V should be used. Current Intel processors are superior to AMD processors in terms of performance. The virtualization functions of Intel processors can usually be activated via the BIOS/EFI. There is no need to configure this technology. Once activated, it will be available.
 
 If Intel VT-x is disabled on servers, virtualization solutions such as VMware vSphere 6 will no longer function optimally. For example, if VMs are to be moved between different hosts during operation, the CPU must support this. Since multiple operating systems run in parallel on a server with virtualization, outdated processors are not suitable. Especially when it comes to so-called ring-0 requests, the hypervisor has to intervene and rewrite the requests to the CPU. These processes are time-consuming and significantly slow down performance. Therefore, the virtualization features are important. You can also check whether the processor supports this function using the free CPU-Z tool.
 
-**3. Hardware BIOS Settings – Power Management and Turbo Mode**
+**3. Hardware BIOS Settings - Power Management and Turbo Mode**
 
 In addition to activating the virtualization functions, other settings should be made in the server's BIOS so that ESXi functions optimally. It is particularly important to set that power management is carried out by the operating system. This can also often be found as “OS Controlled Mode”. This ensures that ESXi itself can use power management. Turbo mode in the BIOS should also be activated. If there is an option “C1E” in the BIOS, this should also be activated. This power saving feature is also supported by ESXi and is necessary for power management.
 
-**4. Pay attention to general settings for VMs – protect guest operating systems**
+**4. Pay attention to general settings for VMs - protect guest operating systems**
 
 The first step in optimizing VMs is to correctly set permissions and roles in the vSphere infrastructure. It should be ensured that only the administrators who need this access have access to the VMs. If you want to prevent vSphere administrators from accessing the guest operating systems, a new role should be created and the “Guest Operations” privilege should be revoked. This prevents vSphere administrators from making administrative changes within the guest operating systems. The setting can be found via “All Rights\Virtual Machine\Guest Operations”.
 
@@ -555,7 +555,7 @@ The first step in optimizing VMs is to correctly set permissions and roles in th
 
 In general, any virtual hardware that is not necessary for a VM should be removed if possible. Serial interfaces or other outdated hardware in particular place a strain on the performance of the host and may also cause security gaps. But it's not just serial interfaces that cause problems, but also the connection of physical CD/DVD drives. If a virtual server no longer requires access to a specific ISO file or physical drive, then that connection should be severed.
 
-**6. Use the right network adapters – E1000 or VMXNET**
+**6. Use the right network adapters - E1000 or VMXNET**
 
 When configuring the virtual machines, you can also specify how many virtual network adapters are assigned to the VM and which virtual networks should be used. The virtual networks that were previously configured in vCenter or the vSphere Client are also displayed here. The type of virtual network adapter is also specified here. The most compatible card is the E1000, but it does not offer the performance of the two adapters VMXNET 2 and 3. If the virtual operating system supports these current adapters, they should also be used. These two types of adapters are paravirtualized and therefore significantly more powerful in most cases.
 

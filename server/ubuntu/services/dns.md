@@ -201,7 +201,7 @@ $TTL 86400
 mydns.subdomain.domain.tld.     IN  A   192.168.1.1
 otherdns.subdomain.domain.tld.  IN  A   192.168.2.1
 
-;A – Record HostName To Ip Address
+;A - Record HostName To Ip Address
 two     IN      A       192.168.1.2
 three   IN      A       192.168.1.3
 four    IN      A       192.168.1.4
