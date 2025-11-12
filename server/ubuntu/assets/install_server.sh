@@ -20,8 +20,9 @@ _IP=$(hostname -I)
 
 ############ hostnames ###########
 hostnamectl set-hostname $_HOSTNAME
-sed -i 's/preserve_hostname: false/preserve_hostname: true/g' /etc/cloud/cloud.cfg
+sed -i 's|preserve_hostname: false|preserve_hostname: true|g' /etc/cloud/cloud.cfg
 > /etc/hosts
+
 cat <<EOT >> /etc/hosts
 
 127.0.0.1	localhost
@@ -29,6 +30,7 @@ cat <<EOT >> /etc/hosts
 $_IP	$_HOSTNAME	$_DOMAINNAME
 
 EOT
+
 echo "######## INSERT HOSTNAME - DONE! ########"
 ##################################
 
@@ -38,6 +40,7 @@ timedatectl set-timezone Europe/Berlin
 timedatectl
 timedatectl set-ntp on
 > /etc/systemd/timesyncd.conf
+
 cat <<EOT >> /etc/systemd/timesyncd.conf
 
 [Time]
@@ -45,6 +48,7 @@ NTP=time.uni-potsdam.de
 FallbackNTP=times.tubit.tu-berlin.de
 
 EOT
+
 systemctl restart systemd-timesyncd
 echo "######## SET NTP - DONE! ########"
 ##################################
@@ -52,6 +56,7 @@ echo "######## SET NTP - DONE! ########"
 
 ######## kernel hardening ########
 > /etc/sysctl.conf
+
 cat <<EOT >> /etc/sysctl.conf
 
 ### NETWORKING
@@ -300,6 +305,7 @@ net.core.bpf_jit_harden = 2
 kernel.panic = 60
 
 EOT
+
 echo "######## KERNEL HARDENING - DONE! ########"
 ##################################
 
@@ -314,6 +320,7 @@ echo "######## REMOVE BAD SERVICES - DONE! ########"
 apt install unattended-upgrades -y
 dpkg-reconfigure -plow unattended-upgrades
 > /etc/apt/apt.conf.d/50unattended-upgrades
+
 cat <<EOT >> /etc/apt/apt.conf.d/50unattended-upgrades
 
 Unattended-Upgrade::Allowed-Origins
@@ -334,6 +341,7 @@ Unattended-Upgrade::Mail "$_EMAIL";
 EOT
 
 > /etc/apt/apt.conf.d/20auto-upgrades
+
 cat <<EOT >> /etc/apt/apt.conf.d/20auto-upgrades
 
 APT::Periodic::Update-Package-Lists "1";
@@ -351,6 +359,7 @@ echo "######## AUTO UPGRADE - DONE! ########"
 ######### ssh config #########
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
 > /etc/ssh/sshd_config
+
 cat <<EOT >> /etc/ssh/sshd_config
 
 Include /etc/ssh/sshd_config.d/*.conf
@@ -378,7 +387,7 @@ echo "######## SSH CONFIG - DONE! ########"
 ##############################
 
 
-######## ufw firewall ########
+############ ufw #############
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow ntp
@@ -396,6 +405,7 @@ echo "######## ENABLE UFW - DONE! ########"
 apt install fail2ban -y
 cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 > /etc/fail2ban/jail.conf
+
 cat <<EOT >> /etc/fail2ban/jail.conf
 
 [INCLUDES]
@@ -428,8 +438,74 @@ echo "######## ENABLE FAIL2BAN - DONE! ########"
 ##############################
 
 
+############ aide ############
+
+apt install aide -y
+aideinit
+cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db
+
+crontab -l|sed "\$a# EVERY DAY AT 2 AM - RUN AIDE CHECK"|crontab -
+crontab -l|sed "\$a0 2 * * * /usr/bin/aide -check > /var/log/aide/aide.log"|crontab -
+
+aide -check
+
+echo "######## ENABLE AIDE - DONE! ########"
+##############################
+
+
+########## rkhunter ##########
+
+apt install rkhunter -y
+cp /etc/rkhunter.conf /etc/rkhunter.conf.original
+
+sed -i 's|UPDATE_MIRRORS=0|UPDATE_MIRRORS=1|g' /etc/rkhunter.conf
+sed -i 's|MIRRORS_MODE=1|MIRRORS_MODE=0|g' /etc/rkhunter.conf
+sed -i 's|WEB_CMD=/bin/false|WEB_CMD=""|g' /etc/rkhunter.conf
+
+> /etc/default/rkhunter.conf
+
+cat <<EOT >> /etc/default/rkhunter.conf
+
+CRON_DAILY_RUN="true"
+CRON_DB_UPDATE="true"
+APT_AUTOGEN="true"
+
+EOT
+
+rkhunter -C
+rkhunter --update
+rkhunter --propupd
+rkhunter --check
+
+echo "######## SET RKHUNTER - DONE! ########"
+##############################
+
+
+########### lynis ############
+
+apt install lynis -y
+lynis audit system
+
+echo "######## SET LYNIS - DONE! ########"
+##############################
+
+
+###### apparmor-utils ########
+
+apt install apparmor apparmor-profiles apparmor-profiles-extra apparmor-utils apparmor-notify apparmor-easyprof -y
+aa-status
+systemctl enable apparmor
+systemctl start apparmor
+
+##############################
+
+
 ##### message of the day #####
-nano /etc/motd
+cat <<EOT >> /etc/motd
+
+MYMASSAGE
+
+EOT
 
 echo "######## SET MOTD - DONE! ########"
 ##############################

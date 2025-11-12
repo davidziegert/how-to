@@ -366,27 +366,27 @@ Include ports.conf
 # Sets the default security model of the Apache2 HTTPD server. It does not allow access to the root filesystem outside of /usr/share and /var/www.
 
 <Directory />
-Options FollowSymLinks
-AllowOverride None
-Require all denied
+    Options FollowSymLinks
+    AllowOverride None
+    Require all denied
 </Directory>
 
 <Directory /usr/share>
-AllowOverride None
-Require all granted
+    AllowOverride None
+    Require all granted
 </Directory>
 
 <Directory /var/www/>
-Options Indexes FollowSymLinks
-AllowOverride None
-Require all granted
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
 </Directory>
 
 # AccessFileName: The name of the file to look for in each directory for additional configuration directives.  See also the AllowOverride directive.
 AccessFileName .htaccess
 
 <FilesMatch "^\.ht">
-Require all denied
+    Require all denied
 </FilesMatch>
 
 # The following directives define some format nicknames for use with a CustomLog directive.
@@ -403,8 +403,42 @@ IncludeOptional conf-enabled/*.conf
 IncludeOptional sites-enabled/*.conf
 ```
 
+## ModSecurity [^6]
+
+```bash
+sudo apt install libapache2-mod-security2 -y
+sudo a2enmod security2
+sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf 
+sudo sed -i 's|SecRuleEngine DetectionOnly|SecRuleEngine On|g' /etc/modsecurity/modsecurity.conf 
+sudo sed -i 's|SecAuditLogParts ABDEFHIJZ|SecAuditLogParts ABCEFHJKZ|g' /etc/modsecurity/modsecurity.conf 
+sudo mkdir /etc/apache2/modsecurity/
+sudo wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v4.20.0.tar.gz
+sudo tar xvf v4.20.0.tar.gz -C /etc/apache2/modsecurity
+sudo cp /etc/apache2/modsecurity/coreruleset-4.20.0/crs-setup.conf.example /etc/apache2/modsecurity/coreruleset-4.20.0/crs-setup.conf
+sudo nano /etc/apache2/mods-enabled/security2.conf
+```
+
+```
+<IfModule security2_module>
+    # Default Debian dir for modsecurity's persistent data
+    SecDataDir /var/cache/modsecurity
+
+    # Include all the *.conf files in /etc/modsecurity.
+    IncludeOptional /etc/modsecurity/*.conf
+
+    # Include OWASP ModSecurity CRS rules if installed
+    Include /etc/apache2/modsecurity/coreruleset-4.20.0/crs-setup.conf
+    Include /etc/apache2/modsecurity/coreruleset-4.20.0/rules/*.conf
+</IfModule>
+```
+
+```bash
+sudo systemctl restart apache2
+```
+
 [^1]: https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04
 [^2]: https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-18-04
 [^3]: https://www.tecmint.com/ubuntu-apache-mod_status/
 [^4]: https://sourceforge.net/projects/pimpapachestat/
 [^5]: https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-20-04-de
+[^6]: https://linuxcapable.com/how-to-install-modsecurity-with-apache-on-ubuntu-linux/
