@@ -441,13 +441,51 @@ echo "######## ENABLE FAIL2BAN - DONE! ########"
 ############ aide ############
 
 apt install aide -y
-aideinit
+
+> /etc/aide/aide.conf.d/00_local_excludes 
+
+cat <<EOT >> /etc/aide/aide.conf.d/00_local_excludes 
+
+# Excluded folders
+
+!/backup*
+!/dev/disk/
+!/etc/aide/.aide.conf.swp
+!/etc/aide/aide.conf.d/00_local_excludes
+!/etc/ld.so.cache
+!/etc/lvm/archive
+!/etc/lvm/backup
+!/home
+!/media/*
+!/root/.*
+!/run
+!/var/backups/
+!/var/cache/
+!/var/lib/apt/daily_lock
+!/var/lib/apt/periodic/unattended-upgrades-stamp
+!/var/lib/apt/periodic/upgrade-stamp
+!/var/lib/clamav/
+!/var/lib/dpkg/triggers/Lock
+!/var/lib/fail2ban/fail2ban.sqlite3
+!/var/lib/logrotate
+!/var/lib/monit/state
+!/var/lib/systemd/timers/stamp-apt-daily-upgrade.timer
+!/var/lib/systemd/timers/stamp-apt-daily.timer
+!/var/lib/vnstat/*
+!/var/log.*
+!/var/log/
+!/var/spool/.*
+
+EOT
+
+aide --init
+
 cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db
 
 crontab -l|sed "\$a# EVERY DAY AT 2 AM - RUN AIDE CHECK"|crontab -
 crontab -l|sed "\$a0 2 * * * /usr/bin/aide -check > /var/log/aide/aide.log"|crontab -
 
-aide -check
+aide --check
 
 echo "######## ENABLE AIDE - DONE! ########"
 ##############################
