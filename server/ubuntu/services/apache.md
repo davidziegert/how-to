@@ -40,7 +40,7 @@ sudo find /var/www/html -type f -exec chmod 644 {} +
 sudo systemctl stop apache2
 sudo systemctl start apache2
 sudo systemctl restart apache2
-sudo systemctl reload apache2
+sudo systemctl restart apache2
 sudo systemctl disable apache2
 sudo systemctl enable apache2
 ```
@@ -67,7 +67,7 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 sudo a2dissite 000-default.conf
 sudo a2ensite 000-default.conf
 sudo apache2ctl configtest
-sudo systemctl reload apache2
+sudo systemctl restart apache2
 ```
 
 ## Set Access only from subnet
@@ -96,7 +96,7 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 sudo a2dissite 000-default.conf
 sudo a2ensite 000-default.conf
 sudo apache2ctl configtest
-sudo systemctl reload apache2
+sudo systemctl restart apache2
 ```
 
 ## Set Password Authentication [^2]
@@ -131,7 +131,7 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 
 ```bash
 sudo apache2ctl configtest
-sudo systemctl reload apache2
+sudo systemctl restart apache2
 ```
 
 ## Monitor Apache Performance Using "mod_status" Module [^3]
@@ -165,7 +165,7 @@ sudo nano /etc/apache2/mods-available/status.conf
 ```
 
 ```bash
-sudo systemctl reload apache2
+sudo systemctl restart apache2
 ```
 
 ```
@@ -209,7 +209,7 @@ sudo nano /var/www/html/other/status.css
 ```
 
 ```bash
-sudo systemctl reload apache2
+sudo systemctl restart apache2
 ```
 
 ```
@@ -260,7 +260,7 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 sudo a2enmod rewrite
 sudo a2enmod ssl
 sudo a2enmod headers
-sudo systemctl reload apache2
+sudo systemctl restart apache2
 ```
 
 ### with Letsencrypt [^5]
@@ -310,10 +310,63 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 sudo a2enmod rewrite
 sudo a2enmod ssl
 sudo a2enmod headers
-sudo systemctl reload apache2
+sudo systemctl restart apache2
 ```
 
-## Hardening
+### Self-Signed SSL [^7]
+
+```bash
+sudo mkdir /etc/apache2/ssl
+sudo apt install openssl
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/your_private.key -out /etc/apache2/ssl/your_domain.crt
+```
+
+```
+Country Name (2 letter code) [AU]:DE
+State or Province Name (full name) [Some-State]:STATE
+Locality Name (eg, city) []:CITY
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:COMPANY
+Organizational Unit Name (eg, section) []:IT
+Common Name (e.g. server FQDN or YOUR name) []:FQDN OR IP
+Email Address []:webmaster@example.internal
+```
+
+```bash
+cd /etc/apache2/sites-available
+sudo nano /etc/apache2/sites-available/000-default.conf
+```
+
+```
+<VirtualHost *:80>
+    ServerAdmin [EMAIL]
+    ServerName [URL]
+
+    DocumentRoot /var/www/html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    RewriteEngine on
+    RewriteCond %{SERVER_NAME} = www.domain.com
+    RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	<VirtualHost *:443>
+		SSLEngine on
+        SSLCertificateFile /etc/apache2/ssl/your_domain.crt
+        SSLCertificateKeyFile /etc/apache2/ssl/your_private.key
+	</VirtualHost>
+</IfModule>
+```
+
+```bash
+sudo a2enmod rewrite
+sudo a2enmod ssl
+sudo a2enmod headers
+sudo systemctl restart apache2
+```
+
+## Webserver Hardening
 
 ```bash
 sudo nano /etc/apache2/apache2.conf

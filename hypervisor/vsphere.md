@@ -304,7 +304,7 @@ Strict-Mode: The host can only be accessed through vCenter Server. If SSH or the
 #### Install or Refresh via SSH (Certificate only, PEM encoded)
 
 ```bash
-cp /etc/vmware/rhttpproxy/
+cd /etc/vmware/rhttpproxy/
 cp config.xml config.xml.OLD
 vi config.xml
 ```
@@ -318,7 +318,7 @@ vi config.xml
     <!-- The server side certificate file -->
     <certificate>/etc/vmware/ssl/rui.crt</certificate>
 
-    <!-- Client-side CAFile verify location -->
+    <!-- Client-side CA File verify location -->
     <!-- <keyStoreFile>/etc/vmware/ssl/castore.pem</keyStoreFile> -->
   </ssl>
 ```

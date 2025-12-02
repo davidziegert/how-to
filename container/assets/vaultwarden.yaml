@@ -1,0 +1,39 @@
+services:
+  vaultwarden:
+    image: "vaultwarden/server:latest"
+    container_name: "vaultwarden"
+    hostname: "vaultwarden"
+    restart: "unless-stopped"
+    ports:
+      - "3012:3012"
+      - "8081:80"
+      - "8082:443"
+    volumes:
+      - "./data:/data/"
+    environment:
+      # echo -n "MySecretPassword" | argon2 "$(openssl rand -base64 32)" -e -id -k 19456 -t 2 -p 1 | sed 's#\$#\$\$#g'
+      - "ADMIN_TOKEN=YourReallyStrongAdminTokenHere"
+      # "DOMAIN=https://subdomain.yourdomain.com"
+      - "LOGIN_RATELIMIT_MAX_BURST=10"
+      - "LOGIN_RATELIMIT_SECONDS=60"
+      - "ADMIN_RATELIMIT_MAX_BURST=10"
+      - "ADMIN_RATELIMIT_SECONDS=60"
+      - "SENDS_ALLOWED=true"
+      - "EMERGENCY_ACCESS_ALLOWED=true"
+      - "WEB_VAULT_ENABLED=true"
+      - "SIGNUPS_ALLOWED=false"
+      # "SIGNUPS_VERIFY=true"
+      # "SIGNUPS_VERIFY_RESEND_TIME=3600"
+      # "SIGNUPS_VERIFY_RESEND_LIMIT=5"
+      # "SIGNUPS_DOMAINS_WHITELIST=yourdomainhere.com,anotherdomain.com"
+      # "SMTP_HOST=smtp.youremaildomain.com"
+      # "SMTP_FROM=vaultwarden@youremaildomain.com"
+      # "SMTP_FROM_NAME=Vaultwarden"
+      # "SMTP_PORT=XXXX"
+      # "SMTP_USERNAME=vaultwarden@youremaildomain.com"
+      # "SMTP_PASSWORD=YourReallyStrongPasswordHere"
+      - "TZ=Europe/Berlin"
+
+networks:
+  default:
+    name: "vaultwarden_network"

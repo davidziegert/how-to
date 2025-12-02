@@ -1,0 +1,18 @@
+services:
+  portainer:
+    image: "portainer/portainer-ce:lts"
+    container_name: "portainer"
+    hostname: "portainer"
+    restart: "unless-stopped"
+    ports:
+      - "9443:9443"
+      - "8000:8000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./data:/data"
+    environment:
+      - "TZ=Europe/Berlin"
+
+networks:
+  default:
+    name: "portainer_network"

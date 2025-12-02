@@ -268,7 +268,7 @@ Add under scrape_configs:
 sudo systemctl restart prometheus
 ```
 
-#### Example metrics:
+#### Node Exporter Metrics:
 
 | Metric                                        | Meaning                                                                                                |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
@@ -277,10 +277,15 @@ sudo systemctl restart prometheus
 | node_cpu_seconds_total{mode=system}           | CPU metrics - total CPU time spent in idle mode.                                                       |
 | node_memory_MemTotal_bytes                    | Memory metrics - the total system memory.                                                              |
 | node_memory_MemFree_bytes                     | Memory metrics - the amount of free system memory.                                                     |
+| node_memory_Buffers_bytes                     | Memory metrics - the amount of memory used for buffers.                                                |
 | node_memory_Cached_bytes                      | Memory metrics - the amount of memory used for caching data.                                           |
 | node_network_receive_bytes_total              | Network metrics - total bytes received on all network interfaces.                                      |
 | node_network_transmit_bytes_total             | Network metrics - total bytes transmitted on all network interfaces.                                   |
 | node_network_receive_bytes{device=”eth0″}     | Network metrics - bytes received on a specific network interface.                                      |
+| node_network_receive_drop_total               | Total received packets dropped.                                                                        |
+| node_network_transmit_drop_total              | Total transmitted packets dropped.                                                                     |
+| node_network_receive_packets_total            | Total packets received.                                                                                |
+| node_network_transmit_packets_total           | Total packets transmitted.                                                                             |
 | node_disk_io_time_seconds_total               | Disk I/O metrics - cumulative seconds spent doing I/Os.                                                |
 | node_disk_io_time_seconds_total{device=”sda”} | Disk I/O metrics - cumulative seconds spent doing I/Os on a specific disk.                             |
 | node_filesystem_size_bytes                    | Filesystem metrics - total size of the filesystem.                                                     |
@@ -291,6 +296,20 @@ sudo systemctl restart prometheus
 | node_load15                                   | System load metrics - the 15-minute load averages.                                                     |
 | node_filesystem_read_bytes_total              | Filesystem read/write metrics - total bytes read from all filesystems.                                 |
 | node_filesystem_write_bytes_total             | Filesystem read/write metrics - total bytes are written to all filesystems.                            |
+
+##### Query Customization
+
+1. by instance
+
+- node_os_info{instance="node-exporter:9100"}
+
+2. by job
+
+- node_os_info{job="exporter"}
+
+### Altermanager
+
+https://samber.github.io/awesome-prometheus-alerts/rules.html
 
 ## Backup (Server)
 
