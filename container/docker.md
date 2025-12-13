@@ -150,10 +150,10 @@ Define and run multi-container applications with Docker
 
 ### YAML Examples
 
-- [Portainer](/assets/portainer.yaml)
-- [Vaultwarden](/assets/vaultwarden.yaml)
-- [Uptime Kuma](/assets/uptime-kuma.yaml)
-- [Checkmk](/assets/checkmk.yaml)
-- [Prometheus](/assets/prometheus.yaml)
-  - [Alertmanager](/assets/alertmanager.yaml)
-- [Graylog](/assets/graylog.yaml)
+- [Portainer](./assets/portainer.yaml)
+- [Vaultwarden](./assets/vaultwarden.yaml)
+- [Uptime Kuma](./assets/uptime-kuma.yaml)
+- [Checkmk](./assets/checkmk.yaml)
+- [Prometheus](./assets/prometheus.yaml)
+  - [Alertmanager](./assets/alertmanager.yaml)
+- [Graylog](./assets/graylog.yaml)
