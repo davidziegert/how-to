@@ -155,5 +155,5 @@ Define and run multi-container applications with Docker
 - [Uptime Kuma](/assets/uptime-kuma.yaml)
 - [Checkmk](/assets/checkmk.yaml)
 - [Prometheus](/assets/prometheus.yaml)
+  - [Alertmanager](/assets/alertmanager.yaml)
 - [Graylog](/assets/graylog.yaml)
-- [Logdy](/assets/logdy.yaml)
