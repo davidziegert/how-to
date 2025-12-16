@@ -128,9 +128,9 @@ sudo ansible [HOST_GROUP] -m ping
 ## Playbooks
 
 - [Updates on Ubuntu](./assets/updates.yml)
-- [Updates on Ubuntu](./assets/apache2.yml)
-- [Updates on Ubuntu](./assets/php.yml)
-- [Updates on Ubuntu](./assets/mariadb.yml)
+- [Apache2 on Ubuntu](./assets/apache2.yml)
+- [PHP on Ubuntu](./assets/php.yml)
+- [MariaDB on Ubuntu](./assets/mariadb.yml)
 
 ```bash
 sudo ansible-playbook /etc/ansible/updates.yml --syntax-check
