@@ -88,7 +88,7 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 
     Order Deny,Allow
     Deny from all
-    Allow from 141.89.0.0/16
+    Allow from xxx.xxx.xxx.0/16
 </VirtualHost>
 ```
 
@@ -188,7 +188,7 @@ sudo nano /etc/apache2/mods-available/status.conf
 	<Location /server-status>
 		SetHandler server-status
 		Require local
-		Require ip 141.89.100.168
+		Require ip xxx.xxx.xxx.xxx
 
 		AddOutputFilterByType SUBSTITUTE text/html
 		SetOutputFilter SUBSTITUTE;DEFLATE

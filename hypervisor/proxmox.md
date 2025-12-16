@@ -245,8 +245,8 @@ nano /etc/hosts.allow
 
 ```
 sshd : localhost : allow
-sshd : 141.89.97.0/24 : allow
-sshd : 141.89.100.0/24 : allow
+sshd : xxx.xxx.xxx.0/24 : allow
+sshd : xxx.xxx.xxx.0/24 : allow
 sshd : ALL : deny
 ```
 
