@@ -2,33 +2,31 @@
 
 - Programmierung & Softwareentwicklung
     - Web-Programmierung
-        - HTML & CSS
-        - JavaScript
-        - Node.js
-        - PHP
+        - [HTML & CSS](/coding/html/README.md)
+        - [JavaScript](/coding/js/README.md)
+        - [Node.js](/coding/nodejs/README.md)
+        - [PHP](/coding/php/README.md)
     - Content Management Systeme (CMS)
-        - WordPress
-        - TYPO3
-        - Grav
-        - Kirby
-    - Python
-    - C# (.NET)
+        - [WordPress](/coding/wordpress/README.md)
+        - [TYPO3](/coding/typo3/README.md)
+        - [Grav](/coding/grav/README.md)
+        - [Kirby](/coding/kirby/README.md)
+    - [Python](/coding/python/README.md)
+    - [C# (.NET)](/coding/c#/README.md)
 
 - Skripting
-    - Bash
-    - PowerShell
+    - [Bash](/skripting/bash/README.md)
+    - [PowerShell](/skripting/powershell/README.md)
 
 - Server & Infrastruktur
     - Virtualisierung
-        - VMware ESXi
-        - Microsoft Hyper-V
-        - Proxmox VE
+        - [VMware ESXi](/server/vmware/README.md)
+        - [Microsoft Hyper-V](/server/hyper-v/README.md)
+        - [Proxmox VE](/server/proxmox/README.md)
     - Betriebssysteme (Server)
         - Linux (Ubuntu)
             - Installation
-                - Partitionierung & Dateisysteme
-                - Benutzer- & Rechteverwaltung
-                - Netzwerkgrundkonfiguration
+            - Konfiguration
             - Systemdienste & Daemons
                 - systemd
                 - ssh
@@ -41,34 +39,38 @@
                     - Caddy
                 - PHP
         - Windows Server
+            - Installation
+            - Konfiguration
+            - Systemdienste & Daemons
+            - Web- & Anwendungsdienste
     - Containerisierung
-        - Docker
+        - [Docker](/server/docker/README.md)
     - Automatisierung & Konfigurationsmanagement
-        - Ansible
+        - [Ansible](/server/ansible/README.md)
     - Monitoring & Logging
-        - Checkmk
-        - Prometheus
-        - Grafana
+        - [Checkmk](/server/checkmk/README.md)
+        - [Prometheus](/server/prometheus/README.md)
+        - [Grafana](/server/grafana/README.md)
 
 - Desktop & Client-Systeme
-    - Linux (Ubuntu)
-    - Windows
-    - macOS
+    - [Linux (Ubuntu)](/desktop/linux/README.md)
+    - [Windows](/desktop/windows/README.md)
+    - [macOS](/desktop/macos/README.md)
 
 - Netzwerke
-    - Ports & Protokolle
-    - Firewalls
-    - Proxy-Server
-    - VPN
+    - [Ports & Protokolle](/network/ports/README.md)
+    - [Firewalls](/network/firewall/README.md)
+    - [Proxy-Server](/network/proxy/README.md)
+    - [VPN](/network/vpn/README.md)
 
 - Datenbanken
   - Relationale Datenbanken
-    - MySQL / MariaDB
+    - [MySQL / MariaDB](/database/mysql/README.md)
   - NoSQL-Datenbanken
-    - MongoDB
+    - [MongoDB](/database/mongodb/README.md)
 
 - IT-Recht, Datenschutz & Compliance
   - Datenschutz
-    - DSGVO
+    - [DSGVO](/compliance/dsgvo/README.md)
   - IT-Sicherheitsrecht
-    - NIS2
+    - [NIS2](/compliance/nis2/README.md)
