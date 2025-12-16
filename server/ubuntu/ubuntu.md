@@ -425,70 +425,261 @@ sudo nano /etc/sysctl.conf
 ```
 
 ```
-# IP Spoofing protection
-net.ipv4.conf.default.rp_filter = 1
-net.ipv4.conf.all.rp_filter = 1
-# Block SYN attacks
-net.ipv4.tcp_syncookies = 1
-# Controls IP packet forwarding
-net.ipv4.ip_forward = 0
-# Ignore ICMP redirects
+# Restricts loading TTY line disciplines to the CAP_SYS_MODULE capability to prevent unprivileged attackers from loading vulnerable line disciplines with the TIOCSETD ioctl, which has been abused in a number of exploits before.
+dev.tty.ldisc_autoload = 0
+
+# Increase size of file handles and inode cache
+fs.file-max = 2097152
+
+# avoid unintentional writes to an attacker-controlled FIFO, where a program expected to create a regular file.
+fs.protected_fifos = 2
+
+# prevent users from creating hardlinks if they do not already own the source file, or do not have read/write access to it.
+fs.protected_hardlinks = 1
+
+# prevent writes to an attacker-controlled regular file
+fs.protected_regular = 2
+
+# prevent following symlinks to files inside sticky world-writable directories, except when the uid of the symlink and follower match, or when the directory owner matches the symlink's owner.
+fs.protected_symlinks = 1
+
+# Prevent core dumps from SUID processes. These are usually only needed by developers and may contain sensitive information.
+fs.suid_dumpable = 0
+
+# Controls whether core dumps will append the PID to the core filename. Useful for debugging multi-threaded applications
+kernel.core_uses_pid = 1
+
+# When an attacker is trying to exploit the local kernel, it is often helpful to be able to examine where in memory the kernel, modules, and data structures live. As such, kernel addresses should be treated as sensitive information.
+# Many files and interfaces contain these addresses (e.g. /proc/kallsyms, /proc/modules, etc), and this setting can censor the addresses. A value of "0" allows all users to see the kernel addresses. A value of "1" limits visibility to the root user, and "2" blocks even the root user.
+kernel.kptr_restrict = 2
+
+# Number of seconds the kernel waits before rebooting on a panic. When you use the software watchdog, the recommended setting is 60. Setting this to 0 disables automatic reboot on panic.
+kernel.panic = 60
+
+# Allow for more PIDs 
+kernel.pid_max = 65536
+
+# Sets the time before the kernel considers migrating a proccess to another core
+kernel.sched_migration_cost_ns = 5000000
+
+# Disable the magic-sysrq key
+kernel.sysrq = 0
+
+# disable potentially exploitable unprivileged BPF
+kernel.unprivileged_bpf_disabled = 1
+
+# disable potentially exploitable unprivileged user namespaces
+kernel.unprivileged_userns_clone = 0
+
+# The PTRACE system is used for debugging. With it, a single user process can attach to any other dumpable process owned by the same user. In the case of malicious software, it is possible to use PTRACE to access credentials that exist in memory (re-using existing SSH connections, extracting GPG agent information, etc).
+# 0: all processes can be debugged, as long as they have same uid.
+# 1: only a parent process can be debugged.
+# 2: only administrators with the CAP_SYS_PTRACE capability can use ptrace
+# 3: no processes may be traced with ptrace. Once set, a reboot is needed to enable ptracing again.
+kernel.yama.ptrace_scope = 2
+
+# This enables hardening for the BPF JIT compiler. Supported are eBPF JIT backends. Enabling hardening trades off performance, but can mitigate JIT spraying. Values :
+# 0 - disable JIT hardening (default value)
+# 1 - enable JIT hardening for unprivileged users only
+# 2 - enable JIT hardening for all users
+net.core.bpf_jit_harden = 2
+
+# Increase number of incoming connections backlog
+net.core.netdev_max_backlog = 65536
+
+# Increase the maximum amount of option memory buffers
+net.core.optmem_max = 25165824
+
+# Default Socket Receive Buffer
+net.core.rmem_default = 33554432
+
+# Maximum Socket Receive Buffer
+net.core.rmem_max = 67108864
+
+# Increase number of incoming connections
+net.core.somaxconn = 65535
+
+# Default Socket Send Buffer
+net.core.wmem_default = 33554432
+
+# Maximum Socket Send Buffer
+net.core.wmem_max = 67108864
+
+# Accept Redirects? No, this is not router
 net.ipv4.conf.all.accept_redirects = 0
-net.ipv6.conf.all.accept_redirects = 0
-net.ipv4.conf.default.accept_redirects = 0
-net.ipv6.conf.default.accept_redirects = 0
-# Ignore send redirects
+
+# Accept packets with SRR option? No
+net.ipv4.conf.all.accept_source_route = 0
+
+# Define restrictions for announcing the local source IP address from IP packets in ARP requests sent on interface
+# 0 - (default) Use any local address, configured on any interface
+# 1 - Try to avoid local addresses that are not in the target's subnet for this interface.
+# 2 - Always use the best local address for this target.
+net.ipv4.conf.all.arp_announce = 2
+net.ipv4.conf.default.arp_announce = 2
+
+# Define mode for sending replies in response to received ARP requests
+# 0 - (default): reply for any local target IP address, configured on any interface
+# 1 - reply only if the target IP address is local address configured on the incoming interface
+# 2 - reply only if the target IP address is local address configured on the incoming interface AND is part of the sender's IP subnet
+# 3 - do not reply for local addresses configured with scope host, only resolutions for global and link addresses are replied
+# 4-7 - reserved
+# 8 - never reply
+net.ipv4.conf.all.arp_ignore = 1
+net.ipv4.conf.default.arp_ignore = 1
+
+# Don't relay BOOTP
+net.ipv4.conf.all.bootp_relay = 0
+net.ipv4.conf.default.bootp_relay = 0
+
+# Enable/disable packet forwarding between interfaces (routing) globally
+net.ipv4.conf.all.forwarding = 0
+net.ipv4.conf.default.forwarding = 0
+
+# log martian packets
+# This feature logs packets with un-routable source addresses to the kernel log. This allows an administrator to investigate the possibility that an attacker is sending spoofed packets to their system.
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.default.log_martians = 1
+
+# Enable/disable forwarding of multicast packets
+net.ipv4.conf.all.mc_forwarding = 0
+net.ipv4.conf.default.mc_forwarding = 0
+
+# Don't proxy ARP for anyone
+net.ipv4.conf.all.proxy_arp = 0
+net.ipv4.conf.default.proxy_arp = 0
+
+# Enable IP spoofing protection, turn on source route verification. If the return packet does not go out the same interface that the corresponding source packet came from, the packet is dropped (and logged if log_martians is set).
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+
+# Accepting redirects can lead to malicious networking behavior, so disable it if not needed. Attackers could use bogus ICMP redirect messages to maliciously alter the system routing tables and get them to send packets to incorrect networks and allow your system packets to be captured.
+# Setting net.ipv4.conf.all.secure_redirects to 0 protects the system from routing table updates by possibly compromised known gateways
+net.ipv4.conf.all.secure_redirects = 0
+net.ipv4.conf.default.secure_redirects = 0
 net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
-# Disable source packet routing
-net.ipv4.conf.all.accept_source_route = 0
-net.ipv6.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_redirects = 0
 net.ipv4.conf.default.accept_source_route = 0
-net.ipv6.conf.default.accept_source_route = 0
-# Log Martians
-net.ipv4.conf.all.log_martians = 1
-# Block SYN attacks
-net.ipv4.tcp_max_syn_backlog = 2048
-net.ipv4.tcp_synack_retries = 2
-net.ipv4.tcp_syn_retries = 5
-# Log Martians
-net.ipv4.icmp_ignore_bogus_error_responses = 1
-# Ignore ICMP broadcast requests
-net.ipv4.icmp_echo_ignore_broadcasts = 1
-# Ignore Directed pings
+
+# Accept/Ignore any ICMP ECHO requests (ping)
 net.ipv4.icmp_echo_ignore_all = 1
-kernel.exec-shield = 1
-kernel.randomize_va_space = 1
-# disable IPv6 if required (IPv6 might caus issues with the Internet connection being slow)
+
+# Ignore all ICMP ECHO and TIMESTAMP requests received via broadcast/multicast
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+
+# There is no reason to accept bogus error responses from ICMP, so ignore them instead.
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+
+# Limit the amount of traffic the system uses for ICMP.
+net.ipv4.icmp_ratelimit = 100
+
+# Adjust the ICMP ratelimit to include ping, dst unreachable, source quench, ime exceed, param problem, timestamp reply, information reply
+net.ipv4.icmp_ratemask = 88089
+
+# Controls IP packet forwarding
+net.ipv4.ip_forward = 0
+
+# Increase system IP port limits
+net.ipv4.ip_local_port_range = 2000 65535
+
+# Decrease the time default value for tcp_fin_timeout connection
+net.ipv4.tcp_fin_timeout = 15
+
+# Decrease the time default value for connections to keep alive
+net.ipv4.tcp_keepalive_intvl = 15
+net.ipv4.tcp_keepalive_probes = 5
+net.ipv4.tcp_keepalive_time = 300
+
+# Increase the tcp-time-wait buckets pool size to prevent simple DOS attacks
+net.ipv4.tcp_max_tw_buckets = 1440000
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_tw_reuse = 1
+
+# Protect Against TCP Time-Wait
+net.ipv4.tcp_rfc1337 = 1
+
+# Increase the read-buffer space allocatable
+net.ipv4.tcp_rmem = 4096 65536 67108864
+net.ipv4.udp_rmem_min = 16384
+
+# Turn off TCP SACK
+# Selective ACK computes/sends more precises ACKs and may be used for high-delay links
+# SACK allows an attacker to force the machine to keep/process long/complex retransmission queues (possible DoS)
+net.ipv4.tcp_sack = 0
+
+# Enable TCP SYN Cookies (SYN flood Protection)
+# Attackers use SYN flood attacks to perform a denial of service attack on a system by sending many SYN packets without completing the three way handshake.
+# This will quickly use up slots in the kernel's half-open connection queue and prevent legitimate connections from succeeding.
+# SYN cookies allow the system to keep accepting valid connections, even if under a denial of service attack. CIS Distro Independent 3.2.8.
+net.ipv4.tcp_syn_retries = 5
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_syncookies = 1
+
+# Turn off TCP timestamps
+net.ipv4.tcp_timestamps = 0
+
+# Increase the write-buffer-space allocatable
+net.ipv4.tcp_wmem = 4096 65536 67108864
+net.ipv4.udp_wmem_min = 16384
+
+# Increase the maximum total buffer-space allocatable
+net.ipv4.tcp_mem = 8388608 16777216 33554432
+net.ipv4.udp_mem = 8388608 16777216 33554432
+
+# Ignore Router Advertisements on IPv6
+net.ipv6.conf.all.accept_ra = 0
+net.ipv6.conf.default.accept_ra = 0
+
+# Ignore Default Router Preference in Router Advertisements
+net.ipv6.conf.all.accept_ra_defrtr = 0
+net.ipv6.conf.default.accept_ra_defrtr = 0
+
+# Ignore Prefix Information in Router Advertisement
+net.ipv6.conf.all.accept_ra_pinfo = 0
+net.ipv6.conf.default.accept_ra_pinfo = 0
+
+# Ignore Router Preference in Router Advertisements
+net.ipv6.conf.all.accept_ra_rtr_pref = 0
+net.ipv6.conf.default.accept_ra_rtr_pref = 0
+
+# Accepting redirects can lead to malicious networking behavior, so disable it if not needed. Attackers could use bogus ICMP redirect messages to maliciously alter the system routing tables and get them to send packets to incorrect networks and allow your system packets to be captured.
+net.ipv6.conf.all.accept_redirects = 0
+net.ipv6.conf.default.accept_redirects = 0
+
+# Disable IP Source Routing
+# Drop packets with Strict Source Route (SSR) or Loose Source Routing (LSR) option set
+net.ipv6.conf.all.accept_source_route = 0
+net.ipv6.conf.default.accept_source_route = 0
+
+# Do not autoconfigure addresses using Prefix Information in Router Advertisements
+net.ipv6.conf.all.autoconf = 0
+net.ipv6.conf.default.autoconf = 0
+
+# The amount of Duplicate Address Detection probes to send
+net.ipv6.conf.all.dad_transmits = 0
+net.ipv6.conf.default.dad_transmits = 0
+
+# Disable IPv6
 net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
-net.ipv6.conf.lo.disable_ipv6 = 1
-# Accept Redirects? No, this is not router
-net.ipv4.conf.all.secure_redirects = 0
-# Log packets with impossible addresses to kernel log? yes
-net.ipv4.conf.default.secure_redirects = 0
 
-# [IPv6] Number of Router Solicitations to send until assuming no routers are present.
-# This is host and not router.
-net.ipv6.conf.default.router_solicitations = 0
-# Accept Router Preference in RA?
-net.ipv6.conf.default.accept_ra_rtr_pref = 0
-# Learn prefix information in router advertisement.
-net.ipv6.conf.default.accept_ra_pinfo = 0
-# Setting controls whether the system will accept Hop Limit settings from a router advertisement.
-net.ipv6.conf.default.accept_ra_defrtr = 0
-# Router advertisements can cause the system to assign a global unicast address to an interface.
-net.ipv6.conf.default.autoconf = 0
-# How many neighbor solicitations to send out per address?
-net.ipv6.conf.default.dad_transmits = 0
-# How many global unicast IPv6 addresses can be assigned to each interface?
+# Disable IPv6 traffic forwarding.
+net.ipv6.conf.all.forwarding = 0
+net.ipv6.conf.default.forwarding = 0
+
+# Maximum number of autoconfigured addresses per interface
+net.ipv6.conf.all.max_addresses = 1
 net.ipv6.conf.default.max_addresses = 1
 
-# In rare occasions, it may be beneficial to reboot your server reboot if it runs out of memory.
-# This simple solution can avoid you hours of down time. The vm.panic_on_oom=1 line enables panic
-# on OOM; the kernel.panic=10 line tells the kernel to reboot ten seconds after panicking.
-vm.panic_on_oom = 1
-kernel.panic = 10
+# Ignore Router Solicitations on IPv6
+net.ipv6.conf.all.router_solicitations = 0
+net.ipv6.conf.default.router_solicitations = 0
+
+# Do less swapping
+vm.dirty_background_ratio = 2
+vm.dirty_ratio = 60
+vm.swappiness = 10
 ```
 
 ```bash
