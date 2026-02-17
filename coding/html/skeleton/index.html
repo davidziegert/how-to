@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="EN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <!-- Title Tag -->
+    <title>skeleton.tmp</title>
+
+    <!-- Site Meta Tags -->
+    <meta name="author" content="AUTHOR" />
+    <meta name="description" content="DESCRIPTION" />
+    <meta name="keywords" content="KEYWORD, KEYWORD" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="TITLE" />
+    <meta property="og:description" content="DESCRIPTION" />
+    <meta property="og:image" content="https://placehold.co/1200x630/" />
+    <meta property="og:site_name" content="SITENAME" />
+    <meta property="og:url" content="URL" />
+
+    <!-- FavIcons -->
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/images/favicon.svg" />
+    <link rel="apple-touch-icon" href="./assets/images/favicon.svg" />
+
+    <!-- BootrapIcons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./assets/css/print.css" media="print" />
+    <link rel="stylesheet" href="./assets/css/reset.css" media="screen" />
+    <link rel="stylesheet" href="./assets/css/skeleton.css" media="screen" />
+    <link rel="stylesheet" href="./assets/css/style.css" media="screen" />
+    <link rel="stylesheet" href="./assets/css/theme.css" media="screen" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <div class="row">
+          <div class="column">
+            <div class="box-logo">
+              <img class="header-logo" id="header-logo" src="./assets/images/logo_light.svg" alt="image loading" loading="lazy" />
+            </div>
+          </div>
+          <div class="column">
+            <div class="box-title">
+              <span class="header-title">Title</span>
+              <span class="header-subtitle">Subtitle</span>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box-hamburger">
+              <button class="header-hamburger" id="header-hamburger" onclick="openMenu()"><i class="bi bi-list"></i></button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <nav id="nav">
+        <div class="row">
+          <div class="column">
+            <menu class="main-menu">
+              <li class="menu-item"><a href="#">Menu-Item</a></li>
+              <li class="menu-item menu-item-has-children">
+                <a href="#">Sub-Menu</a>
+                <ul class="sub-menu">
+                  <li class="menu-item"><a href="#">Menu-Item</a></li>
+                  <li class="menu-item"><a href="#">Menu-Item</a></li>
+                  <li class="menu-item menu-item-has-children">
+                    <a href="#">Sub-Sub-Menu</a>
+                    <ul class="sub-menu">
+                      <li class="menu-item current-page-item"><a href="#">Current-Menu-Item</a></li>
+                      <li class="menu-item"><a href="#">Menu-Item</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item menu-item-has-children">
+                <a href="#">Sub-Menu</a>
+                <ul class="sub-menu">
+                  <li class="menu-item"><a href="#">Menu-Item</a></li>
+                  <li class="menu-item"><a href="#">Menu-Item</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a href="#">Menu-Item</a></li>
+            </menu>
+          </div>
+        </div>
+      </nav>
+      <main>
+        <div class="row">
+          <div class="column">
+            <article>
+              <section>
+                <h1>Headline Level 1</h1>
+                <h2>Headline Level 2</h2>
+                <h3>Headline Level 3</h3>
+                <h4>Headline Level 4</h4>
+                <h5>Headline Level 5</h5>
+                <h6>Headline Level 6</h6>
+                <hr />
+              </section>
+              <section>
+                <p><a href="URL" target="_blank" rel="noopener noreferrer" title="Linktitle">Defines a hyperlink</a></p>
+                <p><abbr title="World Health Organization">WHO</abbr> was founded in 1948. This defines an abbreviation or an acronym.</p>
+                <p><b>Defines bold text</b></p>
+                <p><del>Defines text that has been deleted from a document.</del></p>
+                <p><ins>Defines a text that has been inserted into a document.</ins></p>
+                <p><dfn>the "dfn" element</dfn> specifies a term that is going to be defined within the content.</p>
+                <p><em>Defines emphasized text</em></p>
+                <p><i>Defines a part of text in an alternate voice or mood</i></p>
+                <p>Defines keyboard input: Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy text (Windows).</p>
+                <p><mark>Defines marked/highlighted text</mark></p>
+                <p>Defines a paragraph</p>
+                <p><q>Defines a short quotation</q></p>
+                <p><s>Defines text that is no longer correct</s></p>
+                <p><samp>Defines sample output from a computer program</samp></p>
+                <p><small>Defines smaller text</small></p>
+                <p><strong>Defines important text</strong></p>
+                <p>Defines <sub>subscripted</sub> text</p>
+                <p>Defines <sup>superscripted</sup> text</p>
+                <p><u>Defines some text that is unarticulated and styled differently from normal text</u></p>
+              </section>
+              <section>
+                <dl>
+                  <dt>Defines a term/name in a description list</dt>
+                  <dd>Defines a description/value of a term in a description list</dd>
+                </dl>
+                <ol>
+                  <li>First Entry</li>
+                  <li>Second Entry</li>
+                  <li>Third Entry</li>
+                </ol>
+                <ul>
+                  <li>First Entry</li>
+                  <li>Second Entry</li>
+                  <li>Third Entry</li>
+                </ul>
+              </section>
+              <section>
+                <details open>
+                  <summary>Defines a visible heading for a "details" element</summary>
+                  <p>Defines additional details that the user can view or hide</p>
+                  <ul>
+                    <li>First Entry</li>
+                    <li>Second Entry</li>
+                    <li>Third Entry</li>
+                  </ul>
+                  <p>Defines additional details that the user can view or hide</p>
+                </details>
+                <blockquote cite="http://developer.mozilla.org">
+                  <p>Defines a section that is quoted from another source</p>
+                  <cite>Defines the title of a work</cite>
+                </blockquote>
+                <code>Defines a piece of computer code</code>
+              </section>
+              <section>
+                <figure>
+                  <audio controls>
+                    <source src="https://www.w3schools.com/tags/horse.mp3" type="audio/mp3" />
+                    <p>Your browser does not support the element.</p>
+                  </audio>
+                  <figcaption>Defines embedded sound content</figcaption>
+                </figure>
+                <figure>
+                  <iframe src="https://www.shutterstock.com/shutterstock/videos/11555858/preview/stock-footage-scrolling-newspaper-with-lorem-ipsum-text-seamless-loop-video-k-uhd.webm" frameborder="0" loading="lazy"></iframe>
+                  <figcaption>A random Shutterstock Video</figcaption>
+                </figure>
+                <figure>
+                  <picture>
+                    <source media="(max-width:768px)" srcset="https://placehold.co/640x360/D41C1C/FFFFFF" />
+                    <source media="(max-width:1280px)" srcset="https://placehold.co/640x360/D41C1C/FFFFFF" />
+                    <source media="(max-width:1920px)" srcset="https://placehold.co/640x360/D41C1C/FFFFFF" />
+                    <img src="https://placehold.co/640x360/D41C1C/FFFFFF" alt="image loading" loading="lazy" />
+                  </picture>
+                  <figcaption>A random Picture</figcaption>
+                </figure>
+                <figure>
+                  <video controls>
+                    <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4" />
+                    <p>Your browser does not support the element.</p>
+                  </video>
+                  <figcaption>Defines embedded video content</figcaption>
+                </figure>
+              </section>
+              <section>
+                <table>
+                  <caption>
+                    Defines a table caption
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th>Header</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Data 1</td>
+                    </tr>
+                    <tr>
+                      <td>Data 2</td>
+                    </tr>
+                    <tr>
+                      <td>Data 3</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>Groups the footer content in a table</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </section>
+              <section>
+                <form action="#" method="">
+                  <fieldset>
+                    <legend>Defines a caption for a "fieldset" element</legend>
+                    <label>Defines a label for an "input" element</label>
+                    <meter id="meter" name="meter" value="50" min="0" max="100" low="33" high="66" optimum="80"></meter>
+                    <progress id="progress" name="progress" value="70" max="100"></progress>
+                    <select id="select" name="select">
+                      <optgroup label="Group 1">
+                        <option value="1.1">Option 1.1</option>
+                      </optgroup>
+                      <optgroup label="Group 2">
+                        <option value="2.1">Option 2.1</option>
+                        <option value="2.2">Option 2.2</option>
+                      </optgroup>
+                      <optgroup label="Group 3" disabled>
+                        <option value="3.1">Option 3.1</option>
+                        <option value="3.2">Option 3.2</option>
+                        <option value="3.3">Option 3.3</option>
+                      </optgroup>
+                    </select>
+                    <textarea id="textarea" name="textarea" rows="5" cols="33">It was a dark and stormy night...</textarea>
+                    <input type="checkbox" id="checkbox" name="checkbox" value="checkbox" />
+                    <input type="checkbox" id="checkbox-checked" name="checkbox-checked" value="checkbox-checked" checked />
+                    <input type="checkbox" id="checkbox-disabled" name="checkbox-disabled" value="checkbox-disabled" disabled />
+                    <input type="checkbox" id="checkbox-disabled-checked" name="checkbox-disabled-checked" value="checkbox-disabled-checked" checked disabled />
+                    <input type="color" id="color" name="color" value="#865e3c" />
+                    <input type="date" id="date" name="date" />
+                    <input type="email" id="email" name="email" pattern="[*$&%^#@!\(\)\-_*+A-Za-z0-9]+" />
+                    <input type="file" id="file" name="file" />
+                    <input type="hidden" id="hidden" name="hidden" value="hidden" />
+                    <input type="number" id="number" name="number" min="1" max="5" />
+                    <input type="password" id="password" name="password" pattern=".{8,}" title="Eight or more characters" />
+                    <input type="radio" id="radio" name="radio" value="radio" />
+                    <input type="radio" id="radio-checked" name="radio" value="radio-checked" checked />
+                    <input type="radio" id="radio-disabled" name="radio" value="radio-disabled" disabled />
+                    <input type="range" id="range" name="range" min="0" max="10" />
+                    <input type="tel" id="tel" name="tel" />
+                    <input type="text" id="text" name="text" />
+                    <input type="url" id="url" name="url" />
+                    <output>Defines the result of a calculation</output>
+                    <input type="reset" id="reset" name="reset" />
+                    <input type="search" id="search" name="search" />
+                    <input type="submit" id="submit" name="submit" />
+                    <input type="button" value="Input-Button" onclick="" />
+                    <button>Defines a clickable button</button>
+                  </fieldset>
+                </form>
+              </section>
+            </article>
+          </div>
+        </div>
+      </main>
+      <aside>
+        <div class="row">
+          <div class="column">
+            <div class="box-map">
+              <iframe class="aside-map" src="https://www.openstreetmap.org/export/embed.html?bbox=-71.04481011629106%2C42.519315699832475%2C-71.03955298662187%2C42.52163260818937&amp;layer=mapnik"></iframe>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box-address">
+              <address>
+                World Wide Web Consortium, Inc.<br />
+                401 Edgewater Place, Suite 600<br />
+                Wakefield, MA 01880<br />
+                USA
+              </address>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <footer>
+        <div class="row">
+          <div class="column">
+            <div class="box-theme">
+              <span class="footer-theme">Theme: skeleton v.8</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <button class="body-scroller" id="body-scroller" onclick="goTop()"><i class="bi bi-chevron-double-up"></i></button>
+
+    <!-- Scripts -->
+    <script src="./assets/js/mode.js"></script>
+    <script src="./assets/js/hamburger.js"></script>
+    <script src="./assets/js/menu.js"></script>
+    <script src="./assets/js/scroller.js"></script>
+  </body>
+</html>

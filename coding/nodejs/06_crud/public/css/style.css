@@ -1,0 +1,125 @@
+/* GRID */
+
+html,
+body,
+.wrapper {
+  height: auto;
+  width: 100vw;
+
+  min-height: 100vh;
+  max-width: 100vw;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wrapper > header {
+  grid-area: header;
+}
+
+.wrapper > nav {
+  grid-area: nav;
+}
+
+.wrapper > main {
+  grid-area: main;
+}
+
+.wrapper > footer {
+  grid-area: footer;
+}
+
+/* ############# ELEMENTS ############# */
+
+.wrapper {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header nav"
+    "main main"
+    "footer footer";
+}
+
+/* header */
+
+.wrapper > header .row {
+  height: 100%;
+}
+
+.wrapper > header .row .column {
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper > header .row .column .box-logo .header-logo {
+  height: 50px;
+  width: auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* nav */
+
+.wrapper > nav .row {
+  height: 100%;
+}
+
+.wrapper > nav .row .column {
+  height: 100%;
+}
+
+.wrapper > nav .row .column .main-menu {
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.wrapper > nav .row .column .main-menu .menu-item {
+  display: inline-block;
+}
+
+.wrapper > nav .row .column .main-menu .menu-item a {
+  display: inline-block;
+}
+
+.wrapper > main .row .column form,
+.wrapper > main .row .column .box-json,
+.wrapper > main .row .column .box-mongodb,
+.wrapper > main .row .column .box-mysql {
+  max-width: 640px;
+}
+
+/* ############# SPACING ############# */
+
+.wrapper > header {
+  padding: 1rem 2rem;
+}
+
+.wrapper > nav {
+  padding: 1rem 2rem;
+}
+
+.wrapper > nav .row .column .main-menu {
+  gap: 1rem;
+}
+
+.wrapper > main {
+  padding: 2rem 2rem;
+}
+
+.wrapper > footer {
+  padding: 1rem 2rem;
+}

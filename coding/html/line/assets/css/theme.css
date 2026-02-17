@@ -1,0 +1,441 @@
+/* fonts  */
+
+body {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  letter-spacing: normal;
+  line-height: 150%;
+}
+
+@media (width >=1024px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+h6 {
+  font-size: 1.25rem;
+  letter-spacing: -0.75%;
+  line-height: 150%;
+  font-weight: bold;
+  margin: 1.25rem 0;
+  text-wrap: balance;
+}
+
+h5 {
+  font-size: 1.56rem;
+  letter-spacing: -1%;
+  line-height: 140%;
+  font-weight: bold;
+  margin: 1.25rem 0;
+  text-wrap: balance;
+}
+
+h4 {
+  font-size: 1.95rem;
+  letter-spacing: -1.25%;
+  line-height: 130%;
+  font-weight: bold;
+  margin: 1.25rem 0;
+  text-wrap: balance;
+}
+
+h3 {
+  font-size: 2.44rem;
+  letter-spacing: -1.5%;
+  line-height: 120%;
+  font-weight: bold;
+  margin: 1.5rem 0;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: 3.05rem;
+  letter-spacing: -1.75%;
+  line-height: 110%;
+  font-weight: bold;
+  margin: 1.5rem 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 3.81rem;
+  letter-spacing: -2%;
+  line-height: 100%;
+  font-weight: bold;
+  margin: 0 0 1.5rem 0;
+  text-wrap: balance;
+}
+
+a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+:root {
+  --brown-1: #a86652;
+  --brown-2: #eda452;
+  --brown-3: #fec97d;
+
+  --blue-1: #05a7e1;
+  --blue-2: #6ecff6;
+  --blue-3: #c7eafc;
+
+  --pink-1: #ee4c95;
+  --pink-2: #e7b8e4;
+
+  --black: #0a0508;
+  --white: #ffffff;
+}
+
+/* mobile */
+
+@media (0px <=width <=767px) {
+  html,
+  body {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  /* header */
+
+  .wrapper > header {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper > header .row .column .box-hamburger .header-hamburger {
+    color: var(--blue-1);
+  }
+
+  /* nav */
+
+  .wrapper > nav {
+    background-color: var(--brown-2);
+    color: var(--brown-1);
+  }
+
+  .wrapper > nav .row .column .main-menu .menu-item {
+    background-color: var(--brown-2);
+    color: var(--brown-1);
+  }
+
+  .wrapper > nav .row .column .main-menu > .menu-item:first-of-type a {
+    border-top: 1px solid var(--brown-1);
+  }
+
+  .wrapper > nav .row .column .main-menu .menu-item a {
+    border-bottom: 1px solid var(--brown-1);
+  }
+
+  /* main */
+
+  .wrapper > main {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper > main .row .column h1,
+  .wrapper > main .row .column h2,
+  .wrapper > main .row .column h3,
+  .wrapper > main .row .column h4,
+  .wrapper > main .row .column h5,
+  .wrapper > main .row .column h6 {
+    color: var(--white);
+  }
+
+  .wrapper > main .row .column a {
+    color: var(--pink-1);
+  }
+
+  /* aside */
+
+  .wrapper > aside {
+    background-color: var(--pink-2);
+    color: var(--pink-1);
+    border-top: 1px solid var(--pink-1);
+    border-bottom: 1px solid var(--pink-1);
+  }
+
+  .wrapper > aside .row .column .box-map .aside-map {
+    border: 1px solid var(--pink-1);
+  }
+
+  /* footer */
+
+  .wrapper > footer {
+    background-color: var(--pink-1);
+    color: var(--pink-2);
+  }
+
+  /* special */
+
+  .body-scroller {
+    color: var(--blue-1);
+  }
+}
+
+/* tablet */
+
+@media (768px <=width <=1023px) {
+  html,
+  body {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  /* header */
+
+  .wrapper > header {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper > header .row .column .box-hamburger .header-hamburger {
+    color: var(--blue-1);
+  }
+
+  /* nav */
+
+  .wrapper > nav {
+    background-color: var(--brown-2);
+    color: var(--brown-1);
+  }
+
+  .wrapper > nav .row .column .main-menu .menu-item {
+    background-color: var(--brown-2);
+    color: var(--brown-1);
+  }
+
+  .wrapper > nav .row .column .main-menu > .menu-item:first-of-type a {
+    border-top: 1px solid var(--brown-1);
+  }
+
+  .wrapper > nav .row .column .main-menu .menu-item a {
+    border-bottom: 1px solid var(--brown-1);
+  }
+
+  /* main */
+
+  .wrapper > main {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper > main .row .column h1,
+  .wrapper > main .row .column h2,
+  .wrapper > main .row .column h3,
+  .wrapper > main .row .column h4,
+  .wrapper > main .row .column h5,
+  .wrapper > main .row .column h6 {
+    color: var(--white);
+  }
+
+  .wrapper > main .row .column a {
+    color: var(--pink-1);
+  }
+
+  /* aside */
+
+  .wrapper > aside {
+    background-color: var(--pink-2);
+    color: var(--pink-1);
+    border-top: 1px solid var(--pink-1);
+    border-bottom: 1px solid var(--pink-1);
+  }
+
+  .wrapper > aside .row .column .box-map .aside-map {
+    border: 1px solid var(--pink-1);
+  }
+
+  /* footer */
+
+  .wrapper > footer {
+    background-color: var(--pink-1);
+    color: var(--pink-2);
+  }
+
+  /* special */
+
+  .body-scroller {
+    color: var(--blue-1);
+  }
+}
+
+/* laptop */
+
+@media (1024px <=width <=1279px) {
+  html,
+  body {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  /* header */
+
+  .wrapper > header {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  /* nav */
+
+  .wrapper > nav {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper > nav .row .column .main-menu .menu-item {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  /* main */
+
+  .wrapper > main {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper > main .row .column h1,
+  .wrapper > main .row .column h2,
+  .wrapper > main .row .column h3,
+  .wrapper > main .row .column h4,
+  .wrapper > main .row .column h5,
+  .wrapper > main .row .column h6 {
+    color: var(--white);
+  }
+
+  .wrapper > main .row .column a {
+    color: var(--pink-1);
+  }
+
+  /* aside */
+
+  .wrapper > aside {
+    background-color: var(--pink-2);
+    color: var(--pink-1);
+    border-top: 1px solid var(--pink-1);
+    border-bottom: 1px solid var(--pink-1);
+  }
+
+  .wrapper > aside .row .column .box-map .aside-map {
+    border: 1px solid var(--pink-1);
+  }
+
+  /* footer */
+
+  .wrapper > footer {
+    background-color: var(--pink-1);
+    color: var(--pink-2);
+  }
+
+  /* special */
+
+  .body-scroller {
+    color: var(--blue-1);
+  }
+}
+
+/* desktop */
+
+@media (width >=1280px) {
+  html,
+  body {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  /* header */
+
+  .wrapper > header {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  /* nav */
+
+  .wrapper > nav {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper > nav .row .column .main-menu .menu-item {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  /* main */
+
+  .wrapper > main {
+    background-color: var(--brown-3);
+    color: var(--brown-1);
+  }
+
+  .wrapper > main .row .column h1,
+  .wrapper > main .row .column h2,
+  .wrapper > main .row .column h3,
+  .wrapper > main .row .column h4,
+  .wrapper > main .row .column h5,
+  .wrapper > main .row .column h6 {
+    color: var(--white);
+  }
+
+  .wrapper > main .row .column a {
+    color: var(--pink-1);
+  }
+
+  /* aside */
+
+  .wrapper > aside {
+    background-color: var(--pink-2);
+    color: var(--pink-1);
+    border-top: 1px solid var(--pink-1);
+    border-bottom: 1px solid var(--pink-1);
+  }
+
+  .wrapper > aside .row .column .box-map .aside-map {
+    border: 1px solid var(--pink-1);
+  }
+
+  /* footer */
+
+  .wrapper > footer {
+    background-color: var(--pink-1);
+    color: var(--pink-2);
+  }
+
+  /* special */
+
+  .body-scroller {
+    color: var(--blue-1);
+  }
+}

@@ -2,27 +2,27 @@
 
 - Programmierung & Softwareentwicklung
     - Web-Programmierung
-        - [HTML & CSS](/coding/html/README.md)
-        - [JavaScript](/coding/js/README.md)
-        - [Node.js](/coding/nodejs/README.md)
-        - [PHP](/coding/php/README.md)
+        - [HTML & CSS](./coding/html/README.md)
+        - [JavaScript](./coding/js/README.md)
+        - [Node.js](./coding/nodejs/README.md)
+        - [PHP](./coding/php/README.md)
     - Content Management Systeme (CMS)
-        - [WordPress](/coding/wordpress/README.md)
-        - [TYPO3](/coding/typo3/README.md)
-        - [Grav](/coding/grav/README.md)
-        - [Kirby](/coding/kirby/README.md)
-    - [Python](/coding/python/README.md)
-    - [C# (.NET)](/coding/c#/README.md)
+        - [WordPress](./coding/wordpress/README.md)
+        - [TYPO3](./coding/typo3/README.md)
+        - [Grav](./coding/grav/README.md)
+        - [Kirby](./coding/kirby/README.md)
+    - [Python](./coding/python/README.md)
+    - [C# (.NET)](./coding/c#/README.md)
 
 - Skripting
-    - [Bash](/skripting/bash/README.md)
-    - [PowerShell](/skripting/powershell/README.md)
+    - [Bash](./skripting/bash/README.md)
+    - [PowerShell](./skripting/powershell/README.md)
 
 - Server & Infrastruktur
     - Virtualisierung
-        - [VMware ESXi](/server/vmware/README.md)
-        - [Microsoft Hyper-V](/server/hyper-v/README.md)
-        - [Proxmox VE](/server/proxmox/README.md)
+        - [VMware ESXi](./server/vmware/README.md)
+        - [Microsoft Hyper-V](./server/hyper-v/README.md)
+        - [Proxmox VE](./server/proxmox/README.md)
     - Betriebssysteme (Server)
         - Linux (Ubuntu)
             - Installation
@@ -32,45 +32,46 @@
                 - ssh
                 - cron
                 - ntpd
-            - Web- & Anwendungsdienste
-                - Webserver
-                    - Apache
-                    - Nginx
-                    - Caddy
-                - PHP
         - Windows Server
             - Installation
             - Konfiguration
             - Systemdienste & Daemons
             - Web- & Anwendungsdienste
     - Containerisierung
-        - [Docker](/server/docker/README.md)
+        - [Docker](./server/tools/docker/README.md)
     - Automatisierung & Konfigurationsmanagement
-        - [Ansible](/server/ansible/README.md)
+        - [Ansible](./server/tools/ansible/README.md)
     - Monitoring & Logging
-        - [Checkmk](/server/checkmk/README.md)
-        - [Prometheus](/server/prometheus/README.md)
-        - [Grafana](/server/grafana/README.md)
+        - [Checkmk](./server/tools/checkmk/README.md)
+        - [Prometheus](./server/tools/prometheus/README.md)
+        - [Grafana](./server/tools/grafana/README.md)
+    - Web- & Anwendungsdienste
+        - Webserver
+            - Apache
+            - Nginx
+            - Caddy
+        - PHP
 
 - Desktop & Client-Systeme
-    - [Linux (Ubuntu)](/desktop/linux/README.md)
-    - [Windows](/desktop/windows/README.md)
-    - [macOS](/desktop/macos/README.md)
+    - [Linux (Ubuntu)](./desktop/linux/README.md)
+    - [Windows](./desktop/windows/README.md)
+    - [macOS](./desktop/macos/README.md)
 
 - Netzwerke
-    - [Ports & Protokolle](/network/ports/README.md)
-    - [Firewalls](/network/firewall/README.md)
-    - [Proxy-Server](/network/proxy/README.md)
-    - [VPN](/network/vpn/README.md)
+    - [Ports & Protokolle](./network/ports/README.md)
+    - [Firewalls](./network/firewall/README.md)
+    - [Proxy-Server](./network/proxy/README.md)
+    - [VPN](./network/vpn/README.md)
 
 - Datenbanken
   - Relationale Datenbanken
-    - [MySQL / MariaDB](/database/mysql/README.md)
+    - [MySQL / MariaDB](./database/mysql/README.md)
   - NoSQL-Datenbanken
-    - [MongoDB](/database/mongodb/README.md)
+    - [MongoDB](./database/mongodb/README.md)
 
 - IT-Recht, Datenschutz & Compliance
   - Datenschutz
-    - [DSGVO](/compliance/dsgvo/README.md)
-  - IT-Sicherheitsrecht
-    - [NIS2](/compliance/nis2/README.md)
+    - [DSGVO](./compliance/dsgvo/README.md)
+  - IT-Sicherheit
+    - [BSI-Grundschutz++](./compliance/grundschutz++/README.md)
+    - [NIS2](./compliance/nis2/README.md)

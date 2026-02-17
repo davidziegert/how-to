@@ -1,0 +1,12 @@
+<%- include("./partials/head.ejs"); %> <%- include("./partials/header.ejs"); %> <%- include("./partials/nav.ejs"); %>
+
+<main>
+  <div class="row">
+    <div class="column">
+      <h1><%= txt_title %></h1>
+      <p>The <strong><%= txt_title %></strong> indicates that the origin server did not find a current representation for the target resource or is not willing to disclose that one exists. A 404 status code does not indicate whether this lack of representation is temporary or permanent; the 410 (Gone) status code is preferred over 404 if the origin server knows, presumably through some configurable means, that the condition is likely to be permanent.</p>
+    </div>
+  </div>
+</main>
+
+<%- include("./partials/footer.ejs"); %>

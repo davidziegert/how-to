@@ -1,0 +1,72 @@
+/* fonts  */
+
+body {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  letter-spacing: normal;
+  line-height: 150%;
+}
+
+@media (width >=1024px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+h1 {
+  font-size: 3.81rem;
+  letter-spacing: -2%;
+  line-height: 100%;
+  font-weight: bold;
+  margin: 0 0 1.5rem 0;
+  text-wrap: balance;
+}
+
+:root {
+  --background: #777bb3;
+  --headline: #0b0b0d;
+  --text: #0b0b0d;
+
+  --border: #474a56;
+  --box: #929aab;
+
+  --primary: #ffe9e3;
+}
+
+html,
+body {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.wrapper {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+/* main */
+
+.wrapper > main {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.wrapper > main .row .column h1 {
+  color: var(--headline);
+}
+
+.wrapper > main .row .column table {
+  background-color: var(--primary);
+  color: var(--text);
+}
+
+.wrapper > main .row .column table th {
+  padding: 8px;
+  border: 1px solid var(--border);
+}
+
+.wrapper > main .row .column table td {
+  padding: 8px;
+  border: 1px solid var(--border);
+}

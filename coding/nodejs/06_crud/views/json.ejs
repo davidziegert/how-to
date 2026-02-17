@@ -1,0 +1,26 @@
+<%- include("./partials/head.ejs"); %>
+<%- include("./partials/header.ejs"); %>
+<%- include("./partials/nav.ejs"); %>
+
+<main>
+  <div class="row">
+    <div class="column">
+      <h1><%= txt_title %></h1>
+      <p><a href="/json/add">Add</a></p>
+      <div class="box-json">
+        <% if (data.length) { for (let entry of data) { %>
+        <code>
+          <p><%= entry._year %></p>
+          <p><%= entry._title %></p>
+          <p><%= entry._description %></p>
+          <p><a href="/json/<%= entry._id %>">Edit</a></p>
+        </code>
+        <% } } else { %>
+        <p>No data found!</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include("./partials/footer.ejs"); %>

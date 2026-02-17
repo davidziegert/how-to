@@ -1,0 +1,52 @@
+/* GRID */
+
+html,
+body,
+.wrapper {
+  height: auto;
+  width: 100vw;
+
+  min-height: 100vh;
+  max-width: 100vw;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wrapper > nav {
+  grid-area: nav;
+}
+
+.wrapper > main {
+  grid-area: main;
+}
+
+/* ############# ELEMENTS ############# */
+
+.wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "nav"
+    "main";
+}
+
+/* nav */
+
+.wrapper > nav {
+  padding: 1rem 1rem;
+}
+
+.wrapper > nav .row .column .main-menu {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}

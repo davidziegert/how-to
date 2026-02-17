@@ -1,0 +1,160 @@
+/* fonts  */
+
+body {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  letter-spacing: normal;
+  line-height: 150%;
+}
+
+@media (width >=1024px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+h6 {
+  font-size: 1.25rem;
+  letter-spacing: -0.75%;
+  line-height: 150%;
+  font-weight: bold;
+  margin: 1.25rem 0;
+  text-wrap: balance;
+}
+
+h5 {
+  font-size: 1.56rem;
+  letter-spacing: -1%;
+  line-height: 140%;
+  font-weight: bold;
+  margin: 1.25rem 0;
+  text-wrap: balance;
+}
+
+h4 {
+  font-size: 1.95rem;
+  letter-spacing: -1.25%;
+  line-height: 130%;
+  font-weight: bold;
+  margin: 1.25rem 0;
+  text-wrap: balance;
+}
+
+h3 {
+  font-size: 2.44rem;
+  letter-spacing: -1.5%;
+  line-height: 120%;
+  font-weight: bold;
+  margin: 1.5rem 0;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: 3.05rem;
+  letter-spacing: -1.75%;
+  line-height: 110%;
+  font-weight: bold;
+  margin: 1.5rem 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 3.81rem;
+  letter-spacing: -2%;
+  line-height: 100%;
+  font-weight: bold;
+  margin: 0 0 1.5rem 0;
+  text-wrap: balance;
+}
+
+a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+:root {
+  --background: #0d121c;
+  --headline: #f1f8f0;
+  --text: #afd9a9;
+
+  --border: #1d3719;
+  --box: #0a1409;
+
+  --primary: #417e38;
+  --secondary: #2f5b28;
+  --tertiary: #1d3719;
+}
+
+html,
+body {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.wrapper {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+/* header */
+
+.wrapper > header {
+  background-color: var(--background);
+  color: var(--headline);
+  border-bottom: 1px solid var(--border);
+}
+
+/* nav */
+
+.wrapper > nav {
+  background-color: var(--background);
+  color: var(--headline);
+  border-bottom: 1px solid var(--border);
+}
+
+.wrapper > nav .row .column .main-menu .menu-item a:hover {
+  color: var(--primary);
+}
+
+/* main */
+
+.wrapper > main {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+/* main */
+
+.wrapper > main {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.wrapper > main .row .column h1,
+.wrapper > main .row .column h2,
+.wrapper > main .row .column h3,
+.wrapper > main .row .column h4,
+.wrapper > main .row .column h5,
+.wrapper > main .row .column h6 {
+  color: var(--headline);
+}
+
+.wrapper > main .row .column a {
+  color: var(--primary);
+}
+
+/* footer */
+
+.wrapper > footer {
+  background-color: var(--background);
+  color: var(--headline);
+  border-top: 1px solid var(--border);
+}

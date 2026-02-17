@@ -1,0 +1,58 @@
+[
+  {
+    "_id": {
+      "$oid": "6981c495212d5f37c21f4d8f"
+    },
+    "_title": "The Godfather: Part II",
+    "_year": 1974,
+    "_description": "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate."
+  },
+  {
+    "_id": {
+      "$oid": "6981c495212d5f37c21f4d90"
+    },
+    "_title": "Il no bueno",
+    "_year": 2000,
+    "_description": "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery."
+  },
+  {
+    "_id": {
+      "$oid": "6981c495212d5f37c21f4d91"
+    },
+    "_title": "Pups Fiction",
+    "_year": 1999,
+    "_description": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption."
+  },
+  {
+    "_id": {
+      "$oid": "6981c495212d5f37c21f4d92"
+    },
+    "_title": "Inception",
+    "_year": 2010,
+    "_description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster."
+  },
+  {
+    "_id": {
+      "$oid": "6981c495212d5f37c21f4d93"
+    },
+    "_title": "12 Angry Men",
+    "_year": 1957,
+    "_description": "The film tells the story of a jury of 12 men as they deliberate the conviction or acquittal of a teenager charged with murder on the basis of reasonable doubt."
+  },
+  {
+    "_id": {
+      "$oid": "6981c495212d5f37c21f4d94"
+    },
+    "_title": "Nosferatu",
+    "_year": 1922,
+    "_description": "Murnau and starring Max Schreck as Count Orlok, a vampire who preys on the wife (Greta Schröder) of his estate agent (Gustav von Wangenheim) and brings the plague to their town."
+  },
+  {
+    "_id": {
+      "$oid": "6981c495212d5f37c21f4d95"
+    },
+    "_title": "Metropolis",
+    "_year": 1927,
+    "_description": "Made in Germany during the Weimar period, Metropolis is set in a futuristic urban dystopia and follows the attempts of Freder, the wealthy son of the city master, and Maria, a saintly figure to the workers, to overcome the vast gulf separating the classes in their city and bring the workers together."
+  }
+]
