@@ -176,6 +176,8 @@ body {
   }
 }
 
+/* non-mobile */
+
 @media (width >=1280px) {
   /* header */
 

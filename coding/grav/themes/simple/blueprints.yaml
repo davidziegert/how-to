@@ -1,0 +1,32 @@
+name: Simple
+slug: simple
+type: theme
+version: 1.0.0
+description: "Simple theme for Grav CMS"
+icon: microchip
+author:
+  name: Team Simple
+  email: simple@example.com
+  url: localhost
+homepage: localhost
+demo: localhost
+keywords: simple, theme, core, modern, fast, responsive, html5, css3
+bugs: localhost
+license: MIT
+
+dependencies:
+  - { name: grav, version: ">=1.7.0" }
+
+form:
+  validation: strict
+  fields:
+    dropdown.enabled:
+      type: toggle
+      label: Dropdown in Navigation
+      highlight: 1
+      default: 1
+      options:
+        1: Enabled
+        0: Disabled
+      validate:
+        type: bool

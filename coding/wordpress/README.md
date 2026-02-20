@@ -9,30 +9,30 @@
 ```
 [WORDPRESS/WP-CONTENT/THEMES/THEMENAME]
 ├── assets
-│   ├── css
-│   ├── images
-│   └── js
-├── parts
-│   ├── footer.php			// Footer Template-Part
-│   ├── header.php			// Header Template-Part
-│   ├── main.php			// Content Template-Part
-│   ├── nav.php				// Navigation Template-Part
-│   └── sidebar.php			// Sidebar Template-Part
-├── 404.php					// 404 Page-Template
-├── archive.php				// Archive Page-Template
-├── author.php				// Author Page-Template
-├── category.php			// Category Page-Template
-├── comments.php		    // Comments Template-Part
-├── front-page.php			// Static Front-Page-Template
-├── functions.php			// WordPress-Functions
-├── home.php				// Blog Home Page-Template
-├── index.php				// Global Page-Template
-├── page.php				// Site Page-Template
-├── screenshot.png			// Default-Screenshot
-├── search.php				// Search-Result Page-Template
-├── searchform.php		    // Search-Form Template-Part
-├── single.php				// Blog-Entry Page-Template
-└── style.css				// Default-Stylesheet and Theme Information
+│   ├── css                 // Theme stylesheets
+│   ├── images              // Theme images (logo, thumbnails, etc.)
+│   └── js                  // JavaScript files
+├── parts                   // Reusable template parts (optional custom structure)
+│   ├── footer.php			// Footer template part
+│   ├── header.php			// Header template part
+│   ├── main.php			// Content wrapper template part
+│   ├── nav.php				// Navigation template part
+│   └── sidebar.php			// Sidebar template part
+├── 404.php					// 404 error template
+├── archive.php				// Archive template (date, category, tag, etc.)
+├── author.php				// Author archive template
+├── category.php			// Category archive template
+├── comments.php		    // Comments template (loaded via comments_template())
+├── front-page.php			// Static front page template
+├── functions.php			// Theme setup and custom functions
+├── home.php				// Blog posts index template
+├── index.php				// Fallback template (required)
+├── page.php				// Static page template
+├── screenshot.png			// Theme preview image (shown in admin)
+├── search.php				// Search results template
+├── searchform.php		    // Custom search form template
+├── single.php				// Single post template
+└── style.css				// Theme stylesheet + theme metadata (required)
 ```
 
 #### Snippets
@@ -72,34 +72,31 @@
 ##### TAG - head
 
 ```php
-/* HEAD meta charset attribute */
+/* Charset meta tag */
 <?php bloginfo('charset'); ?>
 
-/* HEAD title tag */
+/* Site name (not recommended for <title> if title-tag support is enabled) */
 <?php bloginfo('name'); ?>
 
-/* HEAD meta author attribute */
+/* Custom author output (your own function) */
 <?php bloginfo('insert_author'); ?>
 
-/* HEAD meta description attribute */
+/* Custom meta description (your own function) */
 <?php bloginfo('insert_meta_description'); ?>
 
-/* HEAD meta og:title" attribute */
-<?php bloginfo('the_title'); ?>
-
-/* HEAD meta og:description attribute */
-<?php bloginfo('insert_meta_description'); ?>
-
-/* HEAD meta og:image attribute */
+/* Open Graph Title */
 <?php bloginfo('name'); ?>
 
-/* HEAD meta og:url attribute */
-<?php echo the_permalink(); ?>
+/* Open Graph Description */
+<?php bloginfo('insert_meta_description'); ?>
 
-/* link to theme folder directory */
-<?php echo get_bloginfo('template_directory'); ?>
+/* Open Graph URL */
+<?php the_permalink(); ?>
 
-/* Wordpress specific elements */
+/* Theme directory URI */
+<?php echo get_template_directory_uri(); ?>
+
+/* Required hook for plugins + scripts */
 <?php wp_head(); ?>
 ```
 
@@ -107,37 +104,38 @@
 
 ```php
 <?php
-    /* Checks which Page is routed */
+    /* Conditional template routing logic */
     switch (true) {
-        case is_404():
-        break;
 
-        case is_search():
-        break;
+        case is_404():        // 404 error page
+            break;
 
-        case is_front_page():
-        break;
+        case is_search():     // Search results page
+            break;
 
-        case is_home():
-        break;
+        case is_front_page(): // Static front page
+            break;
 
-        case is_single():
-        break;
+        case is_home():       // Blog posts index
+            break;
 
-        case is_page():
-        break;
+        case is_single():     // Single post
+            break;
 
-        case is_category():
-        break;
+        case is_page():       // Static page
+            break;
 
-        case is_author():
-        break;
+        case is_category():   // Category archive
+            break;
 
-        case is_archive():
-        break;
+        case is_author():     // Author archive
+            break;
+
+        case is_archive():    // Generic archive
+            break;
 
         default:
-        break;
+            break;
     }
 ?>
 ```
@@ -145,7 +143,7 @@
 ##### TAG - body (end)
 
 ```php
-/* WordPress-Specific-Elements */
+/* Required footer hook for scripts and plugins */
 <?php wp_footer(); ?>
 ```
 
@@ -318,7 +316,7 @@ add_filter('rest_endpoints', function ($endpoints) {
 ##### archive.php
 
 ```php
-/* Archive Title */
+/* Output archive title (category, date, tag, etc.) */
 <?php the_archive_title(); ?>
 
 /* Archive Query */
@@ -502,16 +500,16 @@ add_filter('rest_endpoints', function ($endpoints) {
 <?php
     /* Show this Post */
     if (have_posts()) : while (have_posts()) : the_post();
-        the_title();
-        the_content();
-        echo esc_html(get_the_modified_date());
-        echo esc_url(get_author_posts_url(get_the_author_meta('ID')));
-        the_author();
-        the_category(', ');
+        the_title();             // Post title
+        the_content();           // Full content
+        echo get_the_modified_date(); // Last modified date
+        echo get_author_posts_url(get_the_author_meta('ID')); // Author archive link
+        the_author();            // Author name
+        the_category(', ');      // Post categories
     endwhile;
     endif;
 
-    /* Load comments.php */
+    /* Load comments template */
     comments_template();
 ?>
 ```
@@ -520,16 +518,15 @@ add_filter('rest_endpoints', function ($endpoints) {
 
 ```php
 <?php
-    /* Block comments.php from direct calling */
-    if (!defined('ABSPATH')) {
-        exit;
-    }
 
-    /* Loop all Comments to this Post-ID */
-    $comments = get_comments(array(
+    /* Prevent direct file access */
+    if (!defined('ABSPATH')) exit;
+
+    /* Retrieve approved comments for current post */
+    $comments = get_comments([
         'status'  => 'approve',
         'post_id' => get_the_ID(),
-    ));
+    ]);
 
     /* Prints all Comments */
     if ($comments):
@@ -548,21 +545,46 @@ add_filter('rest_endpoints', function ($endpoints) {
 ```html
 <?php if (comments_open()) : ?>
 <!-- Comment-Form-Template -->
-<form class="comment-form" action="<?php echo esc_url(site_url('/wp-comments-post.php')); ?>" method="post">
+<form
+  class="comment-form"
+  action="<?php echo esc_url(site_url('/wp-comments-post.php')); ?>"
+  method="post"
+>
   <fieldset>
     <!-- Comment-Author-Name -->
     <label for="author">Author</label>
-    <input type="text" name="author" id="author" size="20" tabindex="1" required />
+    <input
+      type="text"
+      name="author"
+      id="author"
+      size="20"
+      tabindex="1"
+      required
+    />
     <!-- Comment-Author-EMail -->
     <label for="email">E-Mail</label>
-    <input type="email" name="email" id="email" size="20" tabindex="2" required />
+    <input
+      type="email"
+      name="email"
+      id="email"
+      size="20"
+      tabindex="2"
+      required
+    />
     <!-- Comment-Author-URL -->
     <label for="url">URL</label>
     <input type="url" name="url" id="url" size="20" tabindex="3" />
     <!-- Comment-Text -->
     <label for="comment">Comment</label>
-    <textarea name="comment" id="comment" rows="10" tabindex="4" required></textarea>
-    <?php comment_id_fields(); ?> <?php do_action('comment_form', get_the_ID()); ?>
+    <textarea
+      name="comment"
+      id="comment"
+      rows="10"
+      tabindex="4"
+      required
+    ></textarea>
+    <?php comment_id_fields(); ?> <?php do_action('comment_form', get_the_ID());
+    ?>
     <input name="submit" type="submit" id="submit" value="Post" tabindex="5" />
   </fieldset>
 </form>
@@ -573,9 +595,26 @@ add_filter('rest_endpoints', function ($endpoints) {
 
 ```html
 <!-- Search-Form-Template -->
-<form class="search-menu" method="get" action="<?php echo esc_url(home_url('/')); ?>" role="search">
-  <input type="search" id="search-field" name="s" value="<?php echo esc_attr(get_search_query()); ?>" placeholder="<?php esc_attr_e('...', 'textdomain'); ?>" required />
-  <button type="submit" aria-label="<?php esc_attr_e('Submit search', 'textdomain'); ?>">Search</button>
+<form
+  class="search-menu"
+  method="get"
+  action="<?php echo esc_url(home_url('/')); ?>"
+  role="search"
+>
+  <input
+    type="search"
+    id="search-field"
+    name="s"
+    value="<?php echo esc_attr(get_search_query()); ?>"
+    placeholder="<?php esc_attr_e('...', 'textdomain'); ?>"
+    required
+  />
+  <button
+    type="submit"
+    aria-label="<?php esc_attr_e('Submit search', 'textdomain'); ?>"
+  >
+    Search
+  </button>
 </form>
 ```
 
@@ -583,11 +622,12 @@ add_filter('rest_endpoints', function ($endpoints) {
 
 ```php
 <?php
+    /* If search results exist */
     if (have_posts()) :
-    /* Print Search-Query */
+    /* Display search query */
     printf(esc_html__('Search Results for: %s', 'textdomain'), '<span>' . esc_html(get_search_query()) . '</span>');
     $i = 1;
-    /* Print Search-Results */
+    /* Loop through results */
     while (have_posts()) : the_post();
     echo the_ID();
     the_title();
@@ -606,17 +646,17 @@ add_filter('rest_endpoints', function ($endpoints) {
 ##### sidebar.php
 
 ```php
-    <?php
-    /* List Categories */
+<?php
+    /* List all categories alphabetically */
     wp_list_categories(array(
         'orderby'  => 'name',
         'order'    => 'ASC',
         'title_li' => '',
     ));
-    ?>
+?>
 
 <?php
-    /* Archive */
+    /* Yearly archives */
     wp_get_archives(array(
         'type' => 'yearly',
     ));
@@ -624,14 +664,14 @@ add_filter('rest_endpoints', function ($endpoints) {
 
 
 <?php
-    /* List Pages */
+    /* List static pages */
     wp_list_pages(array(
         'title_li' => '',
     ));
 ?>
 
 <?php
-    /* (CUSTOM FUNCTION) Link to a random Page */
+    /* Custom random page link */
     insert_random_link();
 ?>
 ```
@@ -640,12 +680,12 @@ add_filter('rest_endpoints', function ($endpoints) {
 
 ```php
 <?php
-    /* Load Menu */
-    wp_nav_menu(array(
+    /* Render registered navigation menu */
+    wp_nav_menu([
         'theme_location' => 'my-main-menu',
         'container'      => false,
         'menu_class'     => 'main-menu',
         'fallback_cb'    => false,
-    ));
+    ]);
 ?>
 ```

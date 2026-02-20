@@ -1,0 +1,322 @@
+/* GRID */
+
+html,
+body,
+.wrapper {
+  height: auto;
+  width: 100vw;
+
+  min-height: 100vh;
+  max-width: 100vw;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wrapper > header {
+  grid-area: header;
+}
+
+.wrapper > nav {
+  grid-area: nav;
+}
+
+.wrapper > main {
+  grid-area: main;
+}
+
+.wrapper > aside {
+  grid-area: aside;
+}
+
+.wrapper > footer {
+  grid-area: footer;
+}
+
+/* ############# ELEMENTS ############# */
+
+.wrapper {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 100vw;
+  grid-template-rows: auto auto 1fr auto auto;
+  grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "aside"
+    "footer";
+}
+
+@media (width >=1280px) {
+  .wrapper {
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "aside"
+      "footer";
+  }
+
+  .wrapper > * .row {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .wrapper > * .row.hero {
+    max-width: 100vw;
+    margin: 0 auto;
+  }
+}
+
+/* header */
+
+.wrapper > header .row .column {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper > header .row .column .box-logo .header-logo {
+  height: 40px;
+  width: auto;
+}
+
+.wrapper > header .row .column .box-title .header-title {
+  display: block;
+}
+
+/* nav */
+
+.wrapper > nav .row .column .main-menu .menu-item a {
+  display: block;
+  width: 100%;
+}
+
+@media (width >=1280px) {
+  .wrapper > nav .row .column .main-menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wrapper > nav .row .column .main-menu .menu-item a {
+    display: block;
+  }
+}
+
+/* main */
+
+.wrapper > main .row .column .box-hero {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("https://opengameart.org/sites/default/files/space-tiled%20background-256x256%20by%20alpha%20rats_0.png");
+  background-position: center;
+  background-repeat: repeat;
+}
+
+/* aside */
+
+.wrapper > aside .row .column {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/* footer */
+
+.wrapper > footer .row .column {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ############# SPACING ############# */
+
+/* header */
+
+.wrapper > header .row {
+  padding: 1rem 1rem;
+}
+
+.wrapper > header .row .column {
+  gap: 1rem;
+}
+
+/* nav */
+
+.wrapper > nav .row .column .main-menu .menu-item a {
+  padding: 0.5rem 1rem;
+}
+
+@media (width >=1280px) {
+  .wrapper > nav .row .column .main-menu {
+    gap: 2rem;
+  }
+
+  .wrapper > nav .row .column .main-menu .menu-item a {
+    padding: 1rem 1rem;
+  }
+}
+
+/* main */
+
+.wrapper > main .row:not(.hero) {
+  padding: 2rem 1rem;
+}
+
+/* aside */
+
+.wrapper > aside .row {
+  padding: 1rem 1rem;
+}
+
+.wrapper > aside .row .column {
+  gap: 1rem;
+}
+
+/* footer */
+
+.wrapper > footer .row {
+  padding: 1rem 1rem;
+}
+
+.wrapper > footer .row .column {
+  gap: 1rem;
+}
+
+/* ############# BLOG ############# */
+
+.wrapper > main .row .column .box-blog {
+  width: 320px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 1rem;
+}
+
+@media (width >=768px) {
+  .wrapper > main .row .column .box-blog {
+    width: calc(640px + 1rem);
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+}
+
+@media (width >=1024px) {
+  .wrapper > main .row .column .box-blog {
+    width: calc(960px + 2rem);
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+}
+
+.wrapper > main .row .column .box-blog .blog-post-item {
+  width: 320px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.wrapper > main .row .column .box-blog .blog-post-item .post-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.wrapper > main .row .column .box-blog .blog-post-item .post-content {
+  width: 100%;
+  padding: 1rem;
+}
+
+.wrapper > main .row .column .box-blog-pagination {
+  width: 320px;
+  margin: 2rem auto 0 auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (width >=768px) {
+  .wrapper > main .row .column .box-blog-pagination {
+    width: calc(640px + 1rem);
+    margin: 2rem auto 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (width >=1024px) {
+  .wrapper > main .row .column .box-blog-pagination {
+    width: calc(960px + 2rem);
+    margin: 2rem auto 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}
+
+.wrapper > main .row .column .box-blog-pagination a,
+.wrapper > main .row .column .box-blog-pagination span {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+}
+
+.wrapper > main .row .column article.blog-article::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.wrapper > main .row .column article.blog-article img {
+  display: none;
+}
+
+@media (width >=768px) {
+  .wrapper > main .row .column article.blog-article img {
+    display: block;
+    float: left;
+    width: 320px;
+    height: auto;
+    object-fit: cover;
+    margin: 0 2rem 2rem 0;
+  }
+}

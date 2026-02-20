@@ -3,3 +3,5 @@
 ## Themes
 
 ### Folder Structure
+
+### Snippets

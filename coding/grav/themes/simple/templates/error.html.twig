@@ -1,0 +1,13 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block main %}
+    <main>
+        <div class="row">
+            <div class="column">
+                {% block error %}
+                    {% include 'modular/error.module.html.twig' %}
+                {% endblock %}
+            </div>
+        </div>
+    </main>
+{% endblock main %}  

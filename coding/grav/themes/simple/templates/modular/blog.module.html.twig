@@ -1,0 +1,81 @@
+{# --- get all posts recursively --- #}
+{% set collection = page.collection({items: {'@page.descendants': '/blog'}, order: {'by': 'date', 'dir': 'desc'}}) %}
+{% set perPage = 3 %}
+
+{# --- get current page from query string --- #}
+{% set currentPage = uri.query('page')|default(1)|int %}
+{% set totalItems = collection|length %}
+{% set totalPages = (totalItems / perPage)|round(0, 'ceil') %}
+{% set start = (currentPage - 1) * perPage %}
+{% set paginated = collection|slice(start, perPage) %}
+
+{# --- date format --- #}
+{% set dateformat = admin.page.dateformat ?: config.system.pages.dateformat.short ?: "F d, Y" %}
+
+{# --- content --- #}
+<h1>{{ page.title|e }}</h1>
+
+<div class="box-blog">
+    {% for post in paginated %}
+        <div class="blog-post-item">
+            {# --- Featured Image --- #}
+            {% set image = post.media[post.header.header_image] ?? post.media.images|first %}
+            {% if image %}
+                <div class="post-image">
+                    {{ image.cropZoom(320,180).html|raw }}
+                </div>
+            {% endif %}
+
+            <div class="post-content">
+                {# --- Title --- #}
+                <div class="post-title">
+                    {{ post.title|e }}
+                </div>
+
+                {# --- Date --- #}
+                <div class="post-date">
+                    {{ post.date|date(dateformat)|e }}
+                </div>
+
+                {# --- Excerpt --- #}
+                <div class="post-excerpt">
+                    {{ post.summary(150)|raw }}
+                </div>
+
+                {# --- URL (visible link) --- #}
+                <div class="post-url">
+                    <a href="{{ post.url|e }}">read more</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>No posts found.</p>
+    {% endfor %}
+</div>
+
+{# --- Pagination --- #}
+{% if totalPages > 1 %}
+<div class="box-blog-pagination">
+
+    {% if currentPage > 1 %}
+        <a href="{{ page.url }}?page={{ currentPage - 1 }}">
+            &laquo; Previous
+        </a>
+    {% endif %}
+
+    {% for i in 1..totalPages %}
+        {% if i == currentPage %}
+            <span class="current">{{ i }}</span>
+        {% else %}
+            <a href="{{ page.url }}?page={{ i }}">{{ i }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if currentPage < totalPages %}
+        <a href="{{ page.url }}?page={{ currentPage + 1 }}">
+            Next &raquo;
+        </a>
+    {% endif %}
+
+</div>
+{% endif %}

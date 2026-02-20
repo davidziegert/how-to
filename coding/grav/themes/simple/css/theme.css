@@ -1,0 +1,270 @@
+/* fonts  */
+
+body {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  letter-spacing: normal;
+  line-height: 150%;
+
+  font-family: system-ui;
+}
+
+@media (width >=1280px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+.hero-title {
+  font-size: 2.44rem;
+  letter-spacing: -1.5%;
+  line-height: 120%;
+  font-weight: bold;
+  text-wrap: balance;
+}
+
+.post-title {
+  font-size: 1.25rem;
+  letter-spacing: -0.75%;
+  line-height: 150%;
+  font-weight: bold;
+  margin-bottom: 1.25rem;
+  text-wrap: balance;
+}
+
+.post-date {
+  font-size: small;
+  font-style: italic;
+}
+
+main h6 {
+  font-size: 1.25rem;
+  letter-spacing: -0.75%;
+  line-height: 150%;
+  font-weight: bold;
+  margin: 1.25rem 0;
+  text-wrap: balance;
+}
+
+main h5 {
+  font-size: 1.56rem;
+  letter-spacing: -1%;
+  line-height: 140%;
+  font-weight: bold;
+  margin: 1.25rem 0;
+  text-wrap: balance;
+}
+
+main h4 {
+  font-size: 1.95rem;
+  letter-spacing: -1.25%;
+  line-height: 130%;
+  font-weight: bold;
+  margin: 1.25rem 0;
+  text-wrap: balance;
+}
+
+main h3 {
+  font-size: 2.44rem;
+  letter-spacing: -1.5%;
+  line-height: 120%;
+  font-weight: bold;
+  margin: 1.5rem 0;
+  text-wrap: balance;
+}
+
+main h2 {
+  font-size: 3.05rem;
+  letter-spacing: -1.75%;
+  line-height: 110%;
+  font-weight: bold;
+  margin: 1.5rem 0;
+  text-wrap: balance;
+}
+
+main h1 {
+  font-size: 3.81rem;
+  letter-spacing: -2%;
+  line-height: 100%;
+  font-weight: bold;
+  margin: 0 0 1.5rem 0;
+  text-wrap: balance;
+  text-align: center;
+}
+
+main article.blog-article h1 {
+  text-align: left;
+}
+
+a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+:root {
+  --background: #190629;
+  --headline: #fcfbfd;
+  --text: #f6f4f8;
+
+  --border: #a469bc;
+  --box: #8e44ac;
+
+  --primary: #d4a017;
+  --secondary: #eac527;
+}
+
+/* mobile */
+
+@media (0px <=width <=1279px) {
+  html,
+  body,
+  .wrapper {
+    background-color: var(--background);
+    color: var(--text);
+  }
+
+  /* header */
+
+  .wrapper > header {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* nav */
+
+  .wrapper > nav {
+    background-color: var(--box);
+    color: var(--text);
+  }
+
+  .wrapper > nav .row .column .main-menu .menu-item a {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* main */
+
+  .wrapper > main {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .wrapper > main .row.hero {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* aside */
+
+  .wrapper > aside {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* footer */
+
+  .wrapper > footer {
+    background-color: var(--box);
+    color: var(--text);
+  }
+}
+
+/* non-mobile */
+
+@media (width >=1280px) {
+  html,
+  body,
+  .wrapper {
+    background-color: var(--background);
+    color: var(--text);
+  }
+
+  /* nav */
+
+  .wrapper > nav {
+    background-color: var(--box);
+    color: var(--text);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .wrapper > nav .row .column .main-menu .menu-item a:hover {
+    color: var(--secondary);
+  }
+
+  /* main */
+
+  .wrapper > main {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .wrapper > main .row.hero {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .wrapper > main a {
+    color: var(--primary);
+  }
+
+  /* aside */
+
+  .wrapper > aside {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* footer */
+
+  .wrapper > footer {
+    background-color: var(--box);
+    color: var(--text);
+  }
+}
+
+/* ############# BLOG ############# */
+
+.wrapper > main .row .column .box-blog .blog-post-item {
+  background-color: var(--box);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.wrapper > main .row .column .box-blog .blog-post-item .post-content .post-date {
+  color: var(--primary);
+}
+
+.wrapper > main .row .column .box-blog-pagination a,
+.wrapper > main .row .column .box-blog-pagination span {
+  background-color: var(--box);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+}
+
+.wrapper > main .row .column .box-blog-pagination a:hover,
+.wrapper > main .row .column .box-blog-pagination span:hover {
+  background-color: var(--primary);
+  color: var(--background);
+  border: 1px solid var(--secondary);
+  border-radius: 5px;
+}
+
+.wrapper > main .row .column .box-blog-pagination .current {
+  background-color: var(--primary);
+  color: var(--background);
+  border: 1px solid var(--secondary);
+  border-radius: 5px;
+}
+
+.wrapper > main .row .column .box-blog-pagination .current:hover {
+  background-color: var(--primary);
+  color: var(--background);
+  border: 1px solid var(--secondary);
+  pointer-events: none;
+}
+
+.wrapper > main .row .column article.blog-article img {
+  border: 1px solid var(--border);
+}

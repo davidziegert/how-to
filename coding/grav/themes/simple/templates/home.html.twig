@@ -1,0 +1,20 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block main %}
+    <main>
+        <div class="row hero">
+            <div class="column">
+                {% block hero %}
+                    {% include 'modular/hero.module.html.twig' %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                {% block content %}
+                    {{ page.content|raw }}
+                {% endblock content %}
+            </div>
+        </div>
+    </main>
+{% endblock main %}  

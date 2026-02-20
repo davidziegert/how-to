@@ -1,0 +1,74 @@
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+
+<!doctype html>
+<html lang="{{ (grav.language.getActive ?: theme_config.default_lang)|e }}">
+  <head>
+    {% block head %}
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {% include 'partials/metadata.html.twig' %}
+
+        <!-- Title Tag -->
+        <title>{% if header.title %}{{ header.title|e }} | {% endif %}{{ site.title|e }}</title>
+
+        <!-- FavIcons -->
+        <link rel="icon" type="image/x-icon" href="{{ url('theme://images/favicon.svg') }}" />
+        <link rel="canonical" href="{{ page.url(true, true)|e }}" />
+    {% endblock head %}
+
+    <!-- Print -->
+    <link rel="stylesheet" href="{{ url('theme://css/print.css') }}" media="print" />
+
+    <!-- Styles -->
+    {% block stylesheets %}
+        {% do assets.addCss('theme://css/reset.css', 100) %}
+        {% do assets.addCss('theme://css/skeleton.css', 99) %}
+        {% do assets.addCss('theme://css/style.css', 98) %}
+        {% do assets.addCss('theme://css/theme.css', 97) %}
+    {% endblock %}
+
+    {% block javascripts %}
+        {% do assets.addJs('https://code.jquery.com/jquery-4.0.0.min.js', 100) %}
+    {% endblock %}
+
+    {% block assets deferred %}
+        {{ assets.css()|raw }}
+        {{ assets.js()|raw }}
+    {% endblock %}
+  </head>
+  <body class="{% block body_classes %}{{ body_classes }}{% endblock %}">
+    <div class="wrapper">
+        {% block header %}
+            {% include 'partials/header.html.twig' %}
+        {% endblock %}
+        {% block nav %}
+            {% include 'partials/nav.html.twig' %}
+        {% endblock %}
+
+        {% block main %}
+            <main>
+                <div class="row">
+                    <div class="column">
+                        <h1>{{ page.title|e }}</h1>
+                        {% block content %}
+                            {{ page.content|raw }}
+                        {% endblock content %}
+                    </div>
+                </div>
+            </main>
+        {% endblock main %}        
+
+        {% block aside %}
+            {% include 'partials/aside.html.twig' %}
+        {% endblock %}
+        {% block footer %}
+            {% include 'partials/footer.html.twig' %}
+        {% endblock %}
+
+        <!-- Scripts -->
+        {% block bottom %}
+            {{ assets.js('bottom')|raw }}
+        {% endblock %}
+    </body>
+</html>
