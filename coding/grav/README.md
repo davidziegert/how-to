@@ -59,10 +59,10 @@ metadata:
 #### themename.yaml
 
 ```yaml
-enabled: true                                       # Enables or disables the theme
-default_lang: en                                    # Fallback language if not defined elsewhere
+enabled: true # Enables or disables the theme
+default_lang: en # Fallback language if not defined elsewhere
 dropdown:
-  enabled: true                                     # Enables dropdown navigation in menu
+  enabled: true # Enables dropdown navigation in menu
 ```
 
 #### themename.php
@@ -126,153 +126,167 @@ form:
 #### base.html.twig
 
 ```twig
-
-
-{# ===== HEAD SECTION ===== #}
-
-{# Get active theme configuration #}
 {% set theme_config = attribute(config.themes, config.system.pages.theme) %}
 
-{# Output active language (fallback to theme default) #}
-{{ (grav.language.getActive ?: theme_config.default_lang)|e }}
+<!doctype html>
+<html lang="{{ (grav.language.getActive ?: theme_config.default_lang)|e }}">
+  <head>
+    {% block head %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="{{ page.url(true, true)|e }}" />
+        {% include 'partials/metadata.html.twig' %}
 
-{% block head %}
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="{{ site.title }}" />
+        <meta property="og:description" content="{{ site.description }}" />
+        <meta property="og:image" content="{{ url('theme://images/favicon.svg') }}" />
+        <meta property="og:site_name" content="{{ site.title }}" />
+        <meta property="og:url" content="{{ page.url(true, true) }}" />
 
-    {# Include meta tags (description, keywords, etc.) #}
-    {% include 'partials/metadata.html.twig' %}
+        <!-- Title Tag -->
+        <title>{% if header.title %}{{ header.title|e }} | {% endif %}{{ site.title|e }}</title>
 
-    {# Page title logic: If page has custom title → use it, otherwise fallback to site title #}
-    {% if header.title %}{{ header.title|e }} | {% endif %}{{ site.title|e }}
+        <!-- FavIcons -->
+        <link rel="icon" type="image/x-icon" href="{{ url('theme://images/favicon.svg') }}" />
+    {% endblock head %}
 
-    {# Favicon path (theme stream) #}
-    {{ url('theme://images/favicon.svg') }}
+    <!-- Print -->
+    <link rel="stylesheet" href="{{ url('theme://css/print.css') }}" media="print" />
 
-    {# Canonical URL for SEO #}
-    {{ page.url(true, true)|e }}
+    <!-- Styles -->
+    {% block stylesheets %}
+        {% do assets.addCss('theme://css/reset.css', 100) %}
+        {% do assets.addCss('theme://css/skeleton.css', 99) %}
+        {% do assets.addCss('theme://css/style.css', 98) %}
+        {% do assets.addCss('theme://css/theme.css', 97) %}
+    {% endblock %}
 
-{% endblock head %}
+    {% block javascripts %}
+        {% do assets.addJs('https://code.jquery.com/jquery-4.0.0.min.js', 100) %}
+    {% endblock %}
 
+    {% block assets deferred %}
+        {{ assets.css()|raw }}
+        {{ assets.js()|raw }}
+    {% endblock %}
+  </head>
+  <body class="{% block body_classes %}{{ body_classes }}{% endblock %}">
+    <div class="wrapper">
+        {% block header %}
+            {% include 'partials/header.html.twig' %}
+        {% endblock %}
+        {% block nav %}
+            {% include 'partials/nav.html.twig' %}
+        {% endblock %}
 
-{# Print CSS file for print media #}
-{{ url('theme://css/print.css') }}
+        {% block main %}
+            <main>
+                <div class="row">
+                    <div class="column">
+                        <h1>{{ page.title|e }}</h1>
+                        {% block content %}
+                            {{ page.content|raw }}
+                        {% endblock content %}
+                    </div>
+                </div>
+            </main>
+        {% endblock main %}
 
+        {% block aside %}
+            {% include 'partials/aside.html.twig' %}
+        {% endblock %}
+        {% block footer %}
+            {% include 'partials/footer.html.twig' %}
+        {% endblock %}
 
-{# ===== ASSET SECTION ===== #}
-
-{% block stylesheets %}
-    {# Register stylesheets with Grav Asset Manager Priority controls load order (higher loads first) #}
-    {% do assets.addCss('theme://css/reset.css', 100) %}
-    {% do assets.addCss('theme://css/skeleton.css', 99) %}
-    {% do assets.addCss('theme://css/style.css', 98) %}
-    {% do assets.addCss('theme://css/theme.css', 97) %}
-{% endblock %}
-
-{% block javascripts %}
-    {# Register JavaScript files #}
-    {% do assets.addJs('https://code.jquery.com/jquery-4.0.0.min.js', 100) %}
-{% endblock %}
-
-{% block assets deferred %}
-    {# Output registered CSS and JS #}
-    {{ assets.css()|raw }}
-    {{ assets.js()|raw }}
-{% endblock %}
-
-{# ===== BODY SECTION ===== #}
-
-{# Body class block (can be extended by child templates) #}
-{% block body_classes %}{{ body_classes }}{% endblock %}
-
-{# Include header partial #}
-{% block header %}
-    {% include 'partials/header.html.twig' %}
-{% endblock %}
-
-{# Include navigation partial #}
-{% block nav %}
-    {% include 'partials/nav.html.twig' %}
-{% endblock %}
-
-{# Main content block #}
-{% block main %}
-    {{ page.title }}
-
-    {% block content %}
-        {{ page.content|raw }}
-    {% endblock content %}
-{% endblock main %}
-
-{# Include sidebar (optional) #}
-{% block aside %}
-    {% include 'partials/aside.html.twig' %}
-{% endblock %}
-
-{# Include footer partial #}
-{% block footer %}
-    {% include 'partials/footer.html.twig' %}
-{% endblock %}
-
-{# Bottom JS (for deferred scripts) #}
-{% block bottom %}
-    {{ assets.js('bottom')|raw }}
-{% endblock %}
+        <!-- Scripts -->
+        {% block bottom %}
+            {{ assets.js('bottom')|raw }}
+        {% endblock %}
+    </body>
+</html>
 ```
 
 #### header.html.twig
 
 ```twig
-# Logo Path
-{{ url('theme://images/logo.svg')|e }}
-
-# Website title
-{{ site.title }}
+<header>
+    <div class="row">
+        <div class="column">
+            <div class="box-logo">
+                <img class="header-logo" id="header-logo" src="{{ url('theme://images/logo.svg')|e }}" alt="image loading" loading="lazy" />
+            </div>
+            <div class="box-title">
+                <span class="header-title">{{ site.title }}</span>
+            </div>
+        </div>
+    </div>
+</header>
 ```
 
 #### nav.html.twig
 
 ```twig
-{# Loop through visible top-level pages #}
-{% for page in pages.children %}
+<nav id="nav">
+    <div class="row">
+        <div class="column">
+            <menu class="main-menu">
+                {% for page in pages.children %}
+                    {% if page.visible %}
+                        {% set current_page = (page.active or page.activeChild) ? 'current_page_item' : '' %}
+                        {% if page.children.count > 0 %}
+                            <li class="menu-item menu-item-has-children {{ current_page }}"><a href="{{ page.url }}">{{ page.menu }}</a>
+                            <ul class="sub-menu">
+                                {{ _self.loop(page) }}
+                            </ul>
+                        {% else %}
+                            <li class="menu-item {{ current_page }}"><a href="{{ page.url }}">{{ page.menu }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </main>
+        </div>
+    </div>
+</nav>
+```
 
-    {% if page.visible %}
+#### aside.html.twig
 
-        {# Add class if page is active or parent of active page #}
-        {% set current_page = (page.active or page.activeChild) ? 'current_page_item' : '' %}
+```twig
+<aside>
+    <div class="row">
+        <div class="column">
+            {% block error %}
+                {% include 'modular/search.module.html.twig' %}
+            {% endblock %}
+        </div>
+    </div>
+</aside>
+```
 
-        {% if page.children.count > 0 %}
-            {# Dropdown menu item #}
-            <li class="menu-item menu-item-has-children {{ current_page }}">
-                <a href="{{ page.url }}">{{ page.menu }}</a>
+#### search.module.html.twig
 
-                <ul class="sub-menu">
-                    {{ _self.loop(page) }}
-                </ul>
-            </li>
-        {% else %}
-            {# Single-level menu item #}
-            <li class="menu-item {{ current_page }}">
-                <a href="{{ page.url }}">{{ page.menu }}</a>
-            </li>
-        {% endif %}
-
-    {% endif %}
-{% endfor %}
+```twig
+<div class="box-search">
+    <form method="get" action="./search">
+        <input type="text" name="q" value="" placeholder="..." />
+        <button type="submit">Search</button>
+    </form>
+</div>
 ```
 
 #### default.html.twig
 
 ```twig
-# Load base.html.twig
 {% extends 'partials/base.html.twig' %}
 ```
 
 #### error.html.twig
 
 ```twig
-# Load base.html.twig
 {% extends 'partials/base.html.twig' %}
 
-# Override the main block
 {% block main %}
     <main>
         <div class="row">
@@ -283,34 +297,34 @@ form:
             </div>
         </div>
     </main>
-{% endblock main %} 
+{% endblock main %}
 ```
 
 #### error.module.html.twig
 
 ```twig
-# Error response code
-{{ 'ERROR'|t }} {{ page.header.http_response_code }}
-
-# Link to start page
-{{ base_url }}
+<div class="box-error">
+    <h1>{{ 'ERROR'|t }} {{ page.header.http_response_code }}</h1>
+    <p>Sorry, but we can't find the page you are looking for.</p>
+    <a href="{{ base_url }}" rel="nofollow">Go Back</a>
+</div>
 ```
 
 #### home.html.twig
 
 ```twig
-# Load base.html.twig
 {% extends 'partials/base.html.twig' %}
 
-# Override the main block
 {% block main %}
     <main>
-        <div class="row">
+        <div class="row hero">
             <div class="column">
                 {% block hero %}
                     {% include 'modular/hero.module.html.twig' %}
                 {% endblock %}
             </div>
+        </div>
+        <div class="row">
             <div class="column">
                 {% block content %}
                     {{ page.content|raw }}
@@ -318,16 +332,22 @@ form:
             </div>
         </div>
     </main>
-{% endblock main %} 
+{% endblock main %}
+```
+
+#### hero.module.html.twig
+
+```twig
+<div class="box-hero">
+    <span class="hero-title">Hero</span>
+</div>
 ```
 
 #### blog.html.twig
 
 ```twig
-# Load base.html.twig
 {% extends 'partials/base.html.twig' %}
 
-# Override the main block
 {% block main %}
     <main>
         <div class="row">
@@ -338,24 +358,24 @@ form:
             </div>
         </div>
     </main>
-{% endblock main %} 
+{% endblock main %}
 ```
 
 #### blog.module.html.twig
 
 ```twig
-{# Get blog posts from /blog recursively, ordered by date DESC #}
+{# --- get all posts recursively --- #}
 {% set collection = page.collection({items: {'@page.descendants': '/blog'}, order: {'by': 'date', 'dir': 'desc'}}) %}
-
-{# Pagination settings #}
 {% set perPage = 3 %}
+
+{# --- get current page from query string --- #}
 {% set currentPage = uri.query('page')|default(1)|int %}
 {% set totalItems = collection|length %}
 {% set totalPages = (totalItems / perPage)|round(0, 'ceil') %}
 {% set start = (currentPage - 1) * perPage %}
 {% set paginated = collection|slice(start, perPage) %}
 
-{# Date format (Admin → System → Pages fallback) #}
+{# --- date format --- #}
 {% set dateformat = admin.page.dateformat ?: config.system.pages.dateformat.short ?: "F d, Y" %}
 
 {# --- content --- #}
@@ -436,21 +456,76 @@ form:
     <main>
         <div class="row">
             <div class="column">
+                {# --- Title --- #}
+                <h1>{{ page.title|e }}</h1>
+
+                {# --- Article --- #}
                 <article class="blog-article">
-                    {# --- Featured Image --- #}
-                    {% set image = page.media[page.header.header_image] ?? page.media.images|first %}
-                    {% if image %}
-                        {{ image.cropZoom(640,360).html|raw }}
-                    {% endif %}
-
-                    {# --- Title --- #}
-                    <h1>{{ page.title|e }}</h1>
-
-                    {# --- Content --- #}
-                    {% block content %}
-                        {{ page.content|raw }}
-                    {% endblock content %}
+                    <div class="blog-article-left">
+                        {# --- Featured Image --- #}
+                        {% set image = page.media[page.header.header_image] ?? page.media.images|first %}
+                        {% if image %}
+                            {{ image.cropZoom(640,360).html|raw }}
+                        {% endif %}
+                    </div>
+                    <div class="blog-article-right">
+                        {# --- Content --- #}
+                        {% block content %}
+                            {{ page.content|raw }}
+                        {% endblock content %}
+                    </div>
                 </article>
+            </div>
+        </div>
+    </main>
+{% endblock main %}
+```
+
+#### search.html.twig
+
+```twig
+{% extends 'partials/base.html.twig' %}
+
+{% block main %}
+    <main>
+        <div class="row">
+            <div class="column">
+
+                {# --- Search query --- #}
+                {% set query = uri.query('q') %}
+                {% set results = [] %}
+
+                {# --- Title --- #}
+                <h1>Search Results for: "{{ query }}"</h1>
+
+                {# --- Search results --- #}
+                {% if query %}
+                    {% set searchTerm = query|trim|lower %}
+
+                    {% for p in grav.pages.all() %}
+                        {% if p.published and p.template != 'search' %}
+
+                            {% set title = p.title|lower %}
+                            {% set content = p.content|striptags|lower %}
+
+                            {% if searchTerm in title or searchTerm in content %}
+                                {% set results = results|merge([p]) %}
+                            {% endif %}
+
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if results|length > 0 %}
+                        <p>Found on pages:</p>
+                        <ul>
+                            {% for p in results %}
+                                <li><a href="{{ p.url }}">{{ p.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No results found.</p>
+                    {% endif %}
+                {% endif %}
             </div>
         </div>
     </main>

@@ -1,0 +1,13 @@
+Title: Titel der Webseite
+
+----
+
+Subtitle: ggf. der Untertitel, sonst löschen
+
+----
+
+Author: Max Mustermann
+
+----
+
+Keywords: Stichwörter für die SEO

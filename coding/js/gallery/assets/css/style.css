@@ -65,6 +65,12 @@ body,
     columns: 1;
   }
 
+  .wrapper > main .row .column .grid-gallery .item {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
   .wrapper > main .row .column .grid-gallery .item img {
     height: 100%;
     width: 100%;
@@ -79,6 +85,12 @@ body,
 
   .wrapper > main .row .column .masonry-gallery {
     columns: 320px;
+  }
+
+  .wrapper > main .row .column .masonry-gallery .item {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .wrapper > main .row .column .masonry-gallery .item:hover > img {
@@ -120,6 +132,12 @@ body,
     columns: 2;
   }
 
+  .wrapper > main .row .column .grid-gallery .item {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
   .wrapper > main .row .column .grid-gallery .item img {
     height: 100%;
     width: 100%;
@@ -134,6 +152,12 @@ body,
 
   .wrapper > main .row .column .masonry-gallery {
     columns: 320px;
+  }
+
+  .wrapper > main .row .column .masonry-gallery .item {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .wrapper > main .row .column .masonry-gallery .item:hover > img {
@@ -175,6 +199,12 @@ body,
     columns: 3;
   }
 
+  .wrapper > main .row .column .grid-gallery .item {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
   .wrapper > main .row .column .grid-gallery .item img {
     height: 100%;
     width: 100%;
@@ -189,6 +219,12 @@ body,
 
   .wrapper > main .row .column .masonry-gallery {
     columns: 320px;
+  }
+
+  .wrapper > main .row .column .masonry-gallery .item {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .wrapper > main .row .column .masonry-gallery .item:hover > img {
@@ -230,6 +266,12 @@ body,
     columns: 4;
   }
 
+  .wrapper > main .row .column .grid-gallery .item {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
   .wrapper > main .row .column .grid-gallery .item img {
     height: 100%;
     width: 100%;
@@ -244,6 +286,12 @@ body,
 
   .wrapper > main .row .column .masonry-gallery {
     columns: 320px;
+  }
+
+  .wrapper > main .row .column .masonry-gallery .item {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .wrapper > main .row .column .masonry-gallery .item:hover > img {

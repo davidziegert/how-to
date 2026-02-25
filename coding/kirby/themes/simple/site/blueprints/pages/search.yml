@@ -1,0 +1,12 @@
+title: Search Site
+
+columns:
+  main:
+    width: 3/3
+    sections:
+      fields:
+        type: fields
+        fields:
+          text:
+            type: textarea
+            size: huge

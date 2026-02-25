@@ -4,20 +4,24 @@
     <main>
         <div class="row">
             <div class="column">
+                {# --- Title --- #}
+                <h1>{{ page.title|e }}</h1>
+
+                {# --- Article --- #}
                 <article class="blog-article">
-                    {# --- Featured Image --- #}
-                    {% set image = page.media[page.header.header_image] ?? page.media.images|first %}
-                    {% if image %}
-                        {{ image.cropZoom(640,360).html|raw }}
-                    {% endif %}
-
-                    {# --- Title --- #}
-                    <h1>{{ page.title|e }}</h1>
-
-                    {# --- Content --- #}
-                    {% block content %}
-                        {{ page.content|raw }}
-                    {% endblock content %}
+                    <div class="blog-article-left">
+                        {# --- Featured Image --- #}
+                        {% set image = page.media[page.header.header_image] ?? page.media.images|first %}
+                        {% if image %}
+                            {{ image.cropZoom(640,360).html|raw }}
+                        {% endif %}
+                    </div>
+                    <div class="blog-article-right">
+                        {# --- Content --- #}
+                        {% block content %}
+                            {{ page.content|raw }}
+                        {% endblock content %}
+                    </div>
                 </article>
             </div>
         </div>

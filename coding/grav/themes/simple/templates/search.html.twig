@@ -1,0 +1,46 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block main %}
+    <main>
+        <div class="row">
+            <div class="column">
+
+                {# --- Search query --- #}
+                {% set query = uri.query('q') %}
+                {% set results = [] %}
+
+                {# --- Title --- #}
+                <h1>Search Results for: "{{ query }}"</h1>
+
+                {# --- Search results --- #}
+                {% if query %}
+                    {% set searchTerm = query|trim|lower %}
+
+                    {% for p in grav.pages.all() %}
+                        {% if p.published and p.template != 'search' %}
+
+                            {% set title = p.title|lower %}
+                            {% set content = p.content|striptags|lower %}
+
+                            {% if searchTerm in title or searchTerm in content %}
+                                {% set results = results|merge([p]) %}
+                            {% endif %}
+
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if results|length > 0 %}
+                        <p>Found on pages:</p>
+                        <ul>
+                            {% for p in results %}
+                                <li><a href="{{ p.url }}">{{ p.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No results found.</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </main>
+{% endblock main %}

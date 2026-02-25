@@ -1,0 +1,13 @@
+Title: Title of the Webseite
+
+----
+
+Subtitle: if necessary the subtitle, otherwise delete
+
+----
+
+Author: Max Mustermann
+
+----
+
+Keywords: Keywords for SEO

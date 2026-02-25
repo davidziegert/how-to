@@ -1096,6 +1096,9 @@ body,
 
   .wrapper > main .row .column .box-brands .item {
     margin-bottom: 1rem;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .wrapper > main .row .column .box-brands .item img {
@@ -1127,6 +1130,9 @@ body,
 
   .wrapper > main .row .column .box-brands .item {
     margin-bottom: 1rem;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .wrapper > main .row .column .box-brands .item img {
@@ -1158,6 +1164,9 @@ body,
 
   .wrapper > main .row .column .box-brands .item {
     margin-bottom: 2rem;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .wrapper > main .row .column .box-brands .item img {
@@ -1189,6 +1198,9 @@ body,
 
   .wrapper > main .row .column .box-brands .item {
     margin-bottom: 2rem;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .wrapper > main .row .column .box-brands .item img {

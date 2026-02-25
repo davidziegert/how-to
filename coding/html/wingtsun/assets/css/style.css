@@ -1078,6 +1078,7 @@ body,
 @media (0px <=width <=1023px) {
   .wrapper > main .row .column .box-gallery {
     columns: 320px;
+
     gap: 1rem;
     margin-bottom: 1rem;
   }
@@ -1086,6 +1087,7 @@ body,
 @media (width >=1024px) {
   .wrapper > main .row .column .box-gallery {
     columns: 320px;
+
     gap: 2rem;
     margin-bottom: 1rem;
   }
@@ -1093,10 +1095,16 @@ body,
 
 .wrapper > main .row .column .box-gallery .instagram {
   height: 850px;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .wrapper > main .row .column .box-gallery figure {
   position: relative;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 main figure img {
@@ -1127,6 +1135,7 @@ main figure video {
 @media (0px <=width <=767px) {
   .wrapper > main .row .column .box-videos {
     columns: 1;
+
     gap: 1rem;
     margin-bottom: 1rem;
   }
@@ -1135,6 +1144,7 @@ main figure video {
 @media (width >=768px) {
   .wrapper > main .row .column .box-videos {
     columns: 2;
+
     gap: 2rem;
     margin-bottom: 1rem;
   }
