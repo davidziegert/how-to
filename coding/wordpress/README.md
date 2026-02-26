@@ -218,6 +218,21 @@ add_filter('rest_endpoints', function ($endpoints) {
     unset($endpoints['/wp/v2/users'], $endpoints['/wp/v2/users/(?P<id>[\d]+)']);
     return $endpoints;
 });
+
+/* **************************** */
+/* Block WP-JSON Users Endpoint */
+/* **************************** */
+
+add_filter('rest_endpoints', function ($endpoints) {
+    unset($endpoints['/wp/v2/users'], $endpoints['/wp/v2/users/(?P<id>[\d]+)']);
+    return $endpoints;
+});
+
+add_filter('xmlrpc_methods', function ($methods) {
+    unset($methods['wp.getUsersBlogs']);
+    unset($methods['system.multicall']);
+    return $methods;
+});
 ```
 
 ##### header.php

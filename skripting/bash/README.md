@@ -1564,9 +1564,8 @@ create_MYSSQL_User
 install_Grav () {
 
     # Download Grav
-    wget https://getgrav.org/download/core/grav-admin/latest -O grav-admin.zip
-    unzip grav-admin.zip -d /var/www/html
-    mv /var/www/html/grav-admin /var/www/html/grav
+    wget https://getgrav.org/download/core/grav-admin/latest -O grav.zip
+    unzip grav.zip -d /var/www/html
 
     # Ownership and Permissions
     chown -R www-data:www-data /var/www/html
@@ -1675,6 +1674,27 @@ install_Grav () {
 
     EOF
 
+    # Protect Admin-Panel Path
+    FILE="/etc/apache2/sites-available/000-default.conf"
+
+    if ! grep -q "<Location /admin>" "$FILE"; then
+        sudo sed -i '/ErrorLog[[:space:]]\+\${APACHE_LOG_DIR}\/error\.log/i \
+        <Location /admin>\
+            Require ip 192.168.1.0/24\
+        </Location>\n' "$FILE"
+        echo "Block inserted."
+    else
+        echo "Block already exists. Skipping."
+    fi
+
+    # Change Document Root
+    sudo sed -i \
+    -e 's|^\([[:space:]]*\)DocumentRoot /var/www/html/|\1DocumentRoot /var/www/html/grav/|' \
+    -e 's|^\([[:space:]]*\)<Directory /var/www/html/>|\1<Directory /var/www/html/grav/>|' \
+    /etc/apache2/sites-available/000-default.conf
+
+    systemctl reload apache2
+
     echo "############# GRAV INSTALLED #############"
 }
 
@@ -1703,10 +1723,92 @@ install_Wordpress () {
     # Apply permissions
     mysql -e "FLUSH PRIVILEGES;"
 
+    systemctl reload apache2
+
     echo "############# WORDPRESS INSTALLED #############"
 }
 
 install_Wordpress
 ```
 
-#### xxxxxx
+```bash
+#!/bin/bash
+
+# Harden Wordpress
+after_install_Wordpress () {
+
+    # Edit wp-config.php
+    echo "" >> wp-config.php
+    echo "/* Disable File Editing */" >> wp-config.php
+    echo "define('DISALLOW_FILE_EDIT', true);" >> wp-config.php
+    echo "" >> wp-config.php
+    echo "/* Enable Automatic Updates */" >> wp-config.php
+    echo "define('WP_AUTO_UPDATE_CORE', true);" >> wp-config.php
+
+    # Protect wp-config.php
+    chmod 600 /var/www/html/wordpress/wp-config.php
+
+    # Protect Admin-Panel Path
+    FILE="/etc/apache2/sites-available/000-default.conf"
+
+    if ! grep -q "<Location /wp-admin>" "$FILE"; then
+        sudo sed -i '/ErrorLog[[:space:]]\+\${APACHE_LOG_DIR}\/error\.log/i \
+        <Location /wp-admin>\
+            Require ip 192.168.1.0/24\
+        </Location>\n' "$FILE"
+        echo "Block inserted."
+    else
+        echo "Block already exists. Skipping."
+    fi
+
+    # Change Document Root
+    sudo sed -i \
+    -e 's|^\([[:space:]]*\)DocumentRoot /var/www/html/|\1DocumentRoot /var/www/html/wordpress/|' \
+    -e 's|^\([[:space:]]*\)<Directory /var/www/html/>|\1<Directory /var/www/html/wordpress/>|' \
+    /etc/apache2/sites-available/000-default.conf
+
+    systemctl reload apache2
+
+    echo "############# WORDPRESS HARDENED #############"
+}
+
+after_install_Wordpress
+```
+
+#### KIRBY CMS
+
+```bash
+#!/bin/bash
+
+# Install Kirby
+install_Kirby () {
+
+    # Download Kirby
+    wget https://github.com/getkirby/kirby/archive/refs/tags/5.3.1.zip -O kirby.zip
+    unzip kirby.zip -d /var/www/html
+
+    # Protect Admin-Panel Path
+    FILE="/etc/apache2/sites-available/000-default.conf"
+
+    if ! grep -q "<Location /panel>" "$FILE"; then
+        sudo sed -i '/ErrorLog[[:space:]]\+\${APACHE_LOG_DIR}\/error\.log/i \
+        <Location /panel>\
+            Require ip 192.168.1.0/24\
+        </Location>\n' "$FILE"
+        echo "Block inserted."
+    else
+        echo "Block already exists. Skipping."
+    fi
+
+    # Change Document Root
+    sudo sed -i \
+    -e 's|^\([[:space:]]*\)DocumentRoot /var/www/html/|\1DocumentRoot /var/www/html/kirby/|' \
+    -e 's|^\([[:space:]]*\)<Directory /var/www/html/>|\1<Directory /var/www/html/kirby/>|' \
+    /etc/apache2/sites-available/000-default.conf
+
+    systemctl reload apache2
+
+    echo "############# KIRBY INSTALLED #############"
+}
+install_Kirby
+```
