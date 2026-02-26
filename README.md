@@ -8,7 +8,6 @@
         - [PHP](./coding/php/README.md)
     - Content Management Systeme (CMS)
         - [WordPress](./coding/wordpress/README.md)
-        - [TYPO3](./coding/typo3/README.md)
         - [Grav](./coding/grav/README.md)
         - [Kirby](./coding/kirby/README.md)
     - [Python](./coding/python/README.md)
@@ -16,7 +15,9 @@
 
 - Skripting
     - [Bash](./skripting/bash/README.md)
+    - [cmd](./skripting/cmd/README.md)    
     - [PowerShell](./skripting/powershell/README.md)
+    - [Bzshh](./skripting/zsh/README.md)
 
 - Server & Infrastruktur
     - Virtualisierung
@@ -70,6 +71,8 @@
     - [MongoDB](./database/mongodb/README.md)
 
 - IT-Recht, Datenschutz & Compliance
+  - Datenmanagement
+    - [DSGVO](./compliance/datamanagement/README.md)
   - Datenschutz
     - [DSGVO](./compliance/dsgvo/README.md)
   - IT-Sicherheit
