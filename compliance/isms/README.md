@@ -21,7 +21,6 @@ Ein ISMS (Information Security Management System) nach ISO 27001 ist ein struktu
 - IRP-Bezug: Benennung der Rollen und Verantwortlichen für Sicherheitsvorfälle.
 - Beispiel: CISO, IT-Security-Team, Abteilungsleiter und Kommunikationsverantwortliche werden klar definiert.
 
-
 ## 3. Risikomanagement
 
 - Identifikation von Risiken für Informationssicherheit.
@@ -34,11 +33,11 @@ Ein ISMS (Information Security Management System) nach ISO 27001 ist ein struktu
 ## 4. Sicherheitskontrollen / Maßnahmen
 
 - Basierend auf ISO 27001 Annex A: z. B.
-    - Zugangskontrolle & Identitätsmanagement
-    - Verschlüsselung von Daten
-    - Backup- und Recovery-Prozesse
-    - Physische Sicherheit (Serverräume)
-    - Sicherheit von Netzwerken und Endgeräten
+  - Zugangskontrolle & Identitätsmanagement
+  - Verschlüsselung von Daten
+  - Backup- und Recovery-Prozesse
+  - Physische Sicherheit (Serverräume)
+  - Sicherheit von Netzwerken und Endgeräten
 
 - IRP-Bezug: Technische Maßnahmen, die im Plan beschrieben sind, wie z. B. Isolation von Servern, Aktivierung von Firewalls oder Wiederherstellung von Backups.
 - Beispiel: Automatische Trennung eines kompromittierten Netzwerkteils laut Plan.
@@ -57,10 +56,10 @@ Ein ISMS (Information Security Management System) nach ISO 27001 ist ein struktu
 - Dokumentation und Lessons Learned für zukünftige Prävention.
 
 - IRP-Bezug: Kern des Abschnitts – der Incident Response Plan beschreibt die Schritte bei jedem Sicherheitsvorfall:
-    - Erkennen / Melden
-    - Analyse / Eindämmung
-    - Kommunikation intern / extern
-    - Wiederherstellung und Lessons Learned
+  - Erkennen / Melden
+  - Analyse / Eindämmung
+  - Kommunikation intern / extern
+  - Wiederherstellung und Lessons Learned
 
 ## 7. Überwachung & Audit
 
@@ -69,9 +68,9 @@ Ein ISMS (Information Security Management System) nach ISO 27001 ist ein struktu
 - Incident Response Plan
 
 - IRP-Bezug: Nachbearbeitung von Vorfällen:
-    - Wurden die Schritte korrekt durchgeführt?
-    - Dokumentation der Wirksamkeit des Plans
-    - Ableitung von Verbesserungen
+  - Wurden die Schritte korrekt durchgeführt?
+  - Dokumentation der Wirksamkeit des Plans
+  - Ableitung von Verbesserungen
 
 ## 8. Kontinuierliche Verbesserung (PDCA-Zyklus)
 
@@ -86,6 +85,7 @@ Ein ISMS (Information Security Management System) nach ISO 27001 ist ein struktu
 ## Zusammenfassung
 
 Ein ISMS nach ISO 27001 ist kein einmaliges Projekt, sondern ein kontinuierlicher Prozess, der:
+
 - Risiken systematisch identifiziert und reduziert
 - Richtlinien, Kontrollen und Prozesse implementiert
 - Mitarbeitende einbindet und schult

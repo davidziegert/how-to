@@ -9,7 +9,12 @@
   body {
     background-color: #fff;
     color: #000;
-    font-family: Constantia, Palatino, Book Antiqua, Palatino Linotype, serif;
+    font-family:
+      Constantia,
+      Palatino,
+      Book Antiqua,
+      Palatino Linotype,
+      serif;
     line-height: 1.5;
   }
   blockquote code {
@@ -63,7 +68,7 @@
     content: " (" attr(datetime) ")";
   }
   q:after {
-    content: "\201D"" (" attr(cite) ")";
+    content: "\201D" " (" attr(cite) ")";
   }
   canvas,
   html:after,
@@ -93,7 +98,12 @@
   samp,
   tt,
   var {
-    font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
+    font-family:
+      Courier New,
+      Courier,
+      Lucida Sans Typewriter,
+      Lucida Typewriter,
+      monospace;
     font-size: 0.8em;
   }
   h1 {

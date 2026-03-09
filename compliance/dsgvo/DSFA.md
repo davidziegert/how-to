@@ -10,12 +10,14 @@ DSFA durch: Datenschutzbeauftragter IT & Projektleiter HR
 Zweck: Automatisierte Analyse von Bewerbungsunterlagen zur Unterstützung der Personalauswahl.
 
 Verarbeitete Daten:
+
 - Name, Adresse, Telefonnummer, E-Mail
 - Lebenslaufdaten: Bildung, Berufserfahrung, Qualifikationen
 - Optional: Motivationsschreiben, Zeugnisse, Zertifikate
 - Sensible Daten: Bewerbungsfotos, Angaben zu Behinderungen (nur wenn freiwillig)
 
 Beteiligte Systeme:
+
 - Bewerbermanagement-Software (Cloud-basiert)
 - KI-Analyse-Modul (lokal gehostet, pseudonymisierte Daten)
 - Backup- und Archivsysteme
@@ -27,27 +29,30 @@ Beteiligte Systeme:
 - Ergebnisse dienen nur internen HR-Entscheidungen.
 
 Maßnahmen:
+
 - Zugriff nur für HR-Team.
 - Kein Export der Daten an externe Parteien.
 
 ## 3. Bewertung der Risiken für die Rechte und Freiheiten der Betroffenen
 
-| Risiko | Beschreibung | Eintrittswahrscheinlichkeit | Schwere | Gesamtrisikoeinschätzung |
-| :--- | :--- | :--- | :--- | :--- |
-| Unbefugter Zugriff | Externe Hacker oder interne unautorisierte Zugriffe | Mittel | Hoch | Hoch |
-| Fehlinterpretation durch KI | Diskriminierung von Bewerbern | Mittel | Hoch | Hoch |
-| Datenverlust | Technisches Versagen / Backup-Fehler | Niedrig | Mittel | Mittel |
-| Zweckentfremdung | Verwendung der Daten für andere HR-Prozesse | Niedrig | Mittel | Mittel |
+| Risiko                      | Beschreibung                                        | Eintrittswahrscheinlichkeit | Schwere | Gesamtrisikoeinschätzung |
+| :-------------------------- | :-------------------------------------------------- | :-------------------------- | :------ | :----------------------- |
+| Unbefugter Zugriff          | Externe Hacker oder interne unautorisierte Zugriffe | Mittel                      | Hoch    | Hoch                     |
+| Fehlinterpretation durch KI | Diskriminierung von Bewerbern                       | Mittel                      | Hoch    | Hoch                     |
+| Datenverlust                | Technisches Versagen / Backup-Fehler                | Niedrig                     | Mittel  | Mittel                   |
+| Zweckentfremdung            | Verwendung der Daten für andere HR-Prozesse         | Niedrig                     | Mittel  | Mittel                   |
 
 ## 4. Maßnahmen zur Risikominderung
 
 Technische Maßnahmen:
+
 - Verschlüsselung der Daten in Transit und im Ruhezustand
 - Rollenbasierte Zugriffssteuerung
 - Regelmäßige Sicherheitsupdates
 - Backup- und Restore-Tests
 
 Organisatorische Maßnahmen:
+
 - Datenschutzschulungen für HR-Mitarbeiter
 - Protokollierung aller Datenzugriffe
 - KI-Modell auditiert auf Bias / Diskriminierung

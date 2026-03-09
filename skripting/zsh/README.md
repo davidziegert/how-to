@@ -5,50 +5,149 @@
 ### Command Overview
 
 ```zsh
-passwd                                          # create or update passwords for existing users
-whoami                                          # get the active username
+# ---------------------------
+# Session / Terminal Control
+# ---------------------------
+ssh                 # Secure Shell: connect to a remote system
+exit                # Exit the current shell session
+clear               # Clear the terminal display
+history             # Show previously executed commands
+alias               # Create command shortcuts
+open                # Open files or applications from the terminal
+
+# ---------------------------
+# Navigation
+# ---------------------------
+pwd                 # Print the current working directory
+ls                  # List directory contents
+cd                  # Change directory
+
+# ---------------------------
+# File & Directory Management
+# ---------------------------
+touch               # Create an empty file
+mkdir               # Create a directory
+rmdir               # Remove an empty directory
+cp                  # Copy files or directories
+mv                  # Move or rename files
+rm                  # Delete files or directories
+ln                  # Create hard or symbolic links
+
+# ---------------------------
+# Viewing & Editing Files
+# ---------------------------
+cat                 # Display file contents in the terminal
+less                # View file contents page by page
+head                # Display the first lines of a file
+tail                # Display the last lines of a file
+nano                # Simple terminal text editor
+vim                 # Advanced terminal text editor
+echo                # Print text to the terminal or into files
+
+# ---------------------------
+# File Comparison & Processing
+# ---------------------------
+cmp                 # Compare two files byte by byte
+diff                # Show differences between two files
+comm                # Compare two sorted files
+sort                # Sort lines of text files
+grep                # Search text for patterns
+awk                 # Pattern scanning and text processing
+
+# ---------------------------
+# File Search & Permissions
+# ---------------------------
+find                # Search for files and directories
+chmod               # Change file permissions
+chown               # Change file ownership
+chgrp               # Change group ownership
+
+# ---------------------------
+# Compression & Archiving
+# ---------------------------
+tar                 # Create or extract archive files
+zip                 # Compress files into a zip archive
+unzip               # Extract zip archives
+gzip                # Compress files using gzip
+gunzip              # Decompress gzip files
+
+# ---------------------------
+# Networking
+# ---------------------------
+curl                # Transfer data to/from a server
+ping                # Test connectivity to a host
+traceroute          # Show the network path to a destination
+ifconfig            # Display network interfaces (legacy)
+netstat             # Show network connections and statistics
+scutil --dns        # Display DNS configuration
+ssh-keygen          # Generate SSH keys
+
+# ---------------------------
+# User Management
+# ---------------------------
+whoami              # Display current user
+id                  # Display user and group IDs
+dscl                # Directory Service command-line tool
+passwd              # Change user password
+sudo                # Execute commands with elevated privileges
+su                  # Switch user identity
+
+# ---------------------------
+# Package Management
+# ---------------------------
+brew                # Homebrew package manager
+port                # MacPorts package manager (if installed)
+
+# ---------------------------
+# System Information
+# ---------------------------
+uname               # Show system information
+sw_vers             # Display macOS version
+system_profiler     # Detailed hardware and system info
+top                 # Show running processes
+htop                # Advanced interactive process viewer (if installed)
+vm_stat             # Display memory usage
+df                  # Show disk space usage
+
+# ---------------------------
+# Process Management
+# ---------------------------
+ps                  # List running processes
+top                 # Real-time process viewer
+kill                # Terminate a process by PID
+pkill               # Terminate processes by name
+killall             # Kill processes by name
+
+# ---------------------------
+# System Services
+# ---------------------------
+launchctl           # Manage macOS services and daemons
+
+# ---------------------------
+# File Systems
+# ---------------------------
+mount               # Mount file systems
+diskutil            # Disk and volume management
+hdiutil             # Manage disk images (.dmg files)
+
+# ---------------------------
+# Help & Documentation
+# ---------------------------
+man                 # Manual pages for commands
+whatis              # Short command descriptions
+which               # Show the location of a command
+
+# ---------------------------
+# System Power
+# ---------------------------
+reboot               # Restart the system
+shutdown             # Shut down the system
+pmset sleepnow       # Put the Mac to sleep
 ```
 
 ```zsh
-cd                                              # command to navigate through directories
-ls                                              # command to list directories
-pwd                                             # print working directory
-cp                                              # copying files
-mv                                              # move or rename files
-ditto                                           # copying files and directories, and preserves specific file attributes, permissions, and other metadata
-df -h                                           # display disk filesystem information
-diff                                            # find the difference between two files
-```
-
-```zsh
-ping                                            # resolves the domain name into an IP address and starts sending ICMP packages to the destination IP
-ifconfig                                        # display network interfaces and IP addresses
-traceroute                                      # trace all the network hops to reach the destination
-dig                                             # query the Domain Name System (DNS) to retrieve information about a server
-```
-
-```zsh
-say                                             # converts text to speech
-pbcopy                                          # takes any text from its standard input and copies it to the system clipboard
-caffeinate                                      # prevents the system from going to sleep while it is running
-nano                                            # editor
-man                                             # manual pages for all commands
-open                                            # opens a file (or a folder or URL)
-grep                                            # search for a string within an output
-awk                                             # search through text files by columns/tabs
-ps                                              # display active processes
-top                                             # view active processes live with their system usage
-kill                                            # kill active processes by process ID or name
-which $SHELL                                    # shows what shell you are using
-uptime                                          # displays the length of time the computer has been running since the last restart
-qlmanage                                        # allows you to generate previews
-curl                                            # enables you to connect to and transfer data with a remote server
-history                                         # displays a list of previously executed commands
-shutdown -h now                                 # shutdown the machine now
-shutdown -r now                                 # restart the machine now
-```
-
-```zsh
+# ---------------------------
 # show the wifi password
+# ---------------------------
 security find-generic-password -ga "YourWiFiName" | grep "password:"
 ```

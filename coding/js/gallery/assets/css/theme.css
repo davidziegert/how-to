@@ -33,14 +33,14 @@ h1 {
 }
 
 :root {
-  --background: #F4CE14;
+  --background: #f4ce14;
   --headline: #000000;
-  --text: #45474B;
+  --text: #45474b;
 
-  --border: #45474B;
-  --box: #F5F7F8;
+  --border: #45474b;
+  --box: #f5f7f8;
 
-  --primary: #495E57;
+  --primary: #495e57;
 }
 
 html,

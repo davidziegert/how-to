@@ -5,6 +5,7 @@
 Die Datenschutz-Grundverordnung (DSGVO) ist eine EU-Verordnung zum Schutz personenbezogener Daten. Sie gilt seit dem 25. Mai 2018 unmittelbar in allen EU-Mitgliedstaaten und betrifft jedes Unternehmen, das personenbezogene Daten von Personen in der EU verarbeitet – unabhängig vom Unternehmenssitz.
 
 Ziele:
+
 - Schutz der Grundrechte und -freiheiten natürlicher Personen
 - Einheitliche Datenschutzstandards in der EU
 - Stärkung der Betroffenenrechte
@@ -18,6 +19,7 @@ Daten dürfen nur auf einer gültigen Rechtsgrundlage verarbeitet werden (z. B. 
 
 Praxisbeispiel (IT-Abteilung):
 Ein CRM-System darf Kundendaten nur speichern, wenn:
+
 - ein Vertrag besteht oder
 - eine dokumentierte Einwilligung vorliegt.
 
@@ -26,6 +28,7 @@ Ein CRM-System darf Kundendaten nur speichern, wenn:
 Daten dürfen nur für festgelegte, eindeutige Zwecke verarbeitet werden.
 
 Praxisbeispiel:
+
 - E-Mail-Adressen aus einer Supportanfrage dürfen nicht automatisch für Marketing verwendet werden.
 
 ### 2.3 Datenminimierung
@@ -33,6 +36,7 @@ Praxisbeispiel:
 Nur so viele Daten erheben wie nötig.
 
 Praxisbeispiel:
+
 - Ein Download-Formular benötigt keine Telefonnummer, wenn sie nicht erforderlich ist.
 
 ### 2.4 Speicherbegrenzung
@@ -40,6 +44,7 @@ Praxisbeispiel:
 Daten dürfen nicht unbegrenzt gespeichert werden.
 
 Praxisbeispiel:
+
 - Automatische Löschroutinen im ERP-System nach 10 Jahren für steuerrelevante Dokumente.
 
 ### 2.5 Integrität und Vertraulichkeit
@@ -51,6 +56,7 @@ Technische und organisatorische Maßnahmen (TOM) sind verpflichtend. (siehe Punk
 Personenbezogene Daten sind alle Informationen, die sich auf eine identifizierte oder identifizierbare Person beziehen.
 
 Beispiele:
+
 - Name, Adresse
 - IP-Adresse
 - Geräte-ID
@@ -58,19 +64,22 @@ Beispiele:
 - Bewerberdaten
 - Kundennummer (wenn rückführbar)
 - Besonders sensible Daten (Art. 9 DSGVO):
-    - Gesundheitsdaten
-    - Religionszugehörigkeit
-    - Biometrische Daten
+  - Gesundheitsdaten
+  - Religionszugehörigkeit
+  - Biometrische Daten
 
 IT-Beispiel:
+
 - Ein Logfile mit IP-Adresse + Zeitstempel = personenbezogen.
 
 ## 4. Rollen: Verantwortlicher vs. Auftragsverarbeiter
 
 ### Verantwortlicher
+
 Bestimmt Zweck und Mittel der Verarbeitung.
 
 Beispiel:
+
 - Ein Online-Shop-Betreiber.
 
 ### Auftragsverarbeiter
@@ -78,10 +87,11 @@ Beispiel:
 Verarbeitet Daten im Auftrag.
 
 Beispiel:
+
 - Cloud-Hosting-Anbieter wie
-    - Amazon Web Services
-    - Microsoft Azure
-    - Google Cloud
+  - Amazon Web Services
+  - Microsoft Azure
+  - Google Cloud
 
 → Erfordert Auftragsverarbeitungsvertrag (AVV).
 
@@ -118,6 +128,7 @@ Betroffene können verlangen:
 
 IT-Praxis:
 Unternehmen müssen Daten aus:
+
 - CRM
 - ERP
 - Ticketsystem
@@ -129,10 +140,11 @@ zusammenführen können.
 ### 7.2 Recht auf Löschung („Recht auf Vergessenwerden“)
 
 Praxisbeispiel:
+
 - Ein ehemaliger Nutzer verlangt Löschung:
-    - Account deaktivieren
-    - Daten aus Produktivsystem löschen
-    - Archiv- und Testsysteme berücksichtigen
+  - Account deaktivieren
+  - Daten aus Produktivsystem löschen
+  - Archiv- und Testsysteme berücksichtigen
 
 ### 7.3 Recht auf Datenübertragbarkeit
 
@@ -147,13 +159,16 @@ Dokumentationsbeispiel siehe [hier](./DSFA.md)
 ## 9. Datenschutzverletzungen (Data Breach)
 
 Meldepflicht:
+
 - binnen 72 Stunden an die Aufsichtsbehörde
 - ggf. Information der Betroffenen
 
 Praxisfall:
+
 - Ein falsch konfigurierter S3-Bucket speichert Kundendaten öffentlich zugänglich.
 
 Konsequenzen:
+
 - Incident-Analyse
 - Meldung
 - Dokumentation
@@ -172,11 +187,13 @@ Bis zu: 20 Mio. € oder 4 % des weltweiten Jahresumsatzes
 - Pseudonymisierung
 
 Beispiel:
+
 - Ein neues Kundenportal speichert nur Hashwerte statt Klartext-IDs.
 
 ### 11.2 Cloud-Nutzung
 
 Checkliste:
+
 - AVV abgeschlossen?
 - Serverstandort EU?
 - Verschlüsselung aktiv?
@@ -191,6 +208,7 @@ Checkliste:
 ### 11.4 IT-Support
 
 Ticket-System:
+
 - Keine unnötigen Screenshots mit sensiblen Daten
 - Protokollierung von Zugriffen
 
@@ -199,6 +217,7 @@ Ticket-System:
 Die Verarbeitung personenbezogener Daten in der Forschung erfordert besondere Sorgfalt, insbesondere bei sensiblen Daten (z. B. Gesundheitsdaten, Genomdaten, psychologische Daten). Ziel ist, Forschungsfortschritt zu ermöglichen, ohne die Rechte der Betroffenen zu verletzen.
 
 Praxisbeispiele:
+
 - Pseudonymisierung und Anonymisierung
 - Originaldaten werden pseudonymisiert (z. B. durch ID-Nummern ersetzt) oder anonymisiert, bevor sie für Analysen genutzt werden.
 
@@ -257,12 +276,14 @@ Beispiel: Ein Labor implementiert tägliche Backups, die verschlüsselt und vers
 Die DSGVO ist kein reines „Rechts-Thema“, sondern ein IT-Kernthema.
 
 Moderne Datenschutz-Compliance bedeutet:
+
 - Sicherheit technisch umsetzen
 - Prozesse dokumentieren
 - Transparenz schaffen
 - Risiken aktiv managen
 
 Unternehmen, die Datenschutz strategisch in ihre IT-Architektur integrieren, profitieren langfristig durch:
+
 - Vertrauen der Kunden
 - Weniger Sicherheitsvorfälle
 - Bessere Datenqualität

@@ -3,7 +3,7 @@ main a {
 }
 
 main a:hover,
-main a:focus {
+main a:focus-visible {
   text-decoration: none;
 }
 
@@ -91,11 +91,15 @@ main details > :nth-child(2) {
 }
 
 main dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1rem;
   margin-bottom: 1rem;
 }
 
 main dl dd {
   font-style: italic;
+  margin: 0;
 }
 
 main dl dd::after {
@@ -107,10 +111,7 @@ main dl dd::before {
 }
 
 main dl dt {
-  clear: left;
-  float: left;
   font-weight: 700;
-  margin-right: 0.5rem;
 }
 
 main dl dt::after {
@@ -202,27 +203,18 @@ main form button {
   width: 100%;
 }
 
-main form button:hover {
+main form button:hover,
+main form button:focus-visible {
   opacity: 0.75;
 }
 
 main form fieldset {
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   border: 1px solid currentColor;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   gap: 1rem;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
   justify-content: flex-start;
   margin-bottom: 1rem;
   padding: 1rem;
@@ -232,9 +224,9 @@ main form fieldset:last-of-type {
   margin-bottom: 0;
 }
 
-main form input {
+main form input:not([type="checkbox"]):not([type="radio"]) {
   display: block;
-  accent-color: currentColor;
+  width: 100%;
 }
 
 main form input[type="button"] {
@@ -245,13 +237,12 @@ main form input[type="button"] {
   text-align: center;
   width: 100%;
 }
-
-main form input[type="button"]:hover {
+main form input[type="button"]:hover,
+main form input[type="button"]:focus-visible {
   opacity: 0.75;
 }
 
 main form input[type="checkbox"] {
-  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   border: 1px solid currentColor;
@@ -262,7 +253,8 @@ main form input[type="checkbox"] {
 }
 
 main form input[type="checkbox"]:checked {
-  background: currentColor;
+  accent-color: currentColor;
+  appearance: auto;
 }
 
 main form input[type="checkbox"]:disabled {
@@ -271,7 +263,6 @@ main form input[type="checkbox"]:disabled {
 }
 
 main form input[type="color"] {
-  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   cursor: crosshair;
@@ -330,7 +321,8 @@ main form input[type="radio"] {
 }
 
 main form input[type="radio"]:checked {
-  background: currentColor;
+  accent-color: currentColor;
+  appearance: auto;
 }
 
 main form input[type="radio"]:disabled {
@@ -364,7 +356,8 @@ main form input[type="range"]::-webkit-slider-thumb {
   width: 2rem;
 }
 
-main form input[type="range"]:hover {
+main form input[type="range"]:hover,
+main form input[type="range"]:focus-visible {
   opacity: 0.75;
 }
 
@@ -381,7 +374,8 @@ main form input[type="reset"] {
   width: 100%;
 }
 
-main form input[type="reset"]:hover {
+main form input[type="reset"]:hover,
+main form input[type="reset"]:focus-visible {
   opacity: 0.75;
 }
 
@@ -400,7 +394,8 @@ main form input[type="submit"] {
   width: 100%;
 }
 
-main form input[type="submit"]:hover {
+main form input[type="submit"]:hover,
+main form input[type="submit"]:focus-visible {
   opacity: 0.75;
 }
 
@@ -534,11 +529,18 @@ main sup {
   vertical-align: super;
 }
 
+main .responsive-table {
+  overflow-x: auto;
+}
+
+main .responsive-table table {
+  width: 100%;
+}
+
 main table {
   border-collapse: collapse;
   font-size: 0.75rem !important;
   margin-bottom: 1rem;
-  overflow-x: auto;
   width: 100%;
 }
 

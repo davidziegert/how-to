@@ -7,6 +7,7 @@
 Die NIS2-Richtlinie (Network and Information Security 2) ist die Weiterentwicklung der ersten NIS-Richtlinie der EU. Sie zielt darauf ab, die Cybersicherheit in kritischen Sektoren zu verbessern und einen einheitlichen Sicherheitsstandard in der EU zu etablieren.
 
 Wichtige Eckpunkte:
+
 - Inkrafttreten: Januar 2023 (EU-weite Umsetzung bis 2025)
 - Ziel: Schutz kritischer Infrastrukturen vor Cyberangriffen
 - Geltungsbereich: Energie, Transport, Gesundheitswesen, digitale Dienste, öffentliche Verwaltung, IT-Dienstleister, Finanzsektor
@@ -28,11 +29,12 @@ NIS2 unterscheidet zwischen wesentlichen und wichtigen Einrichtungen, die unters
 - Einführung eines IT-Sicherheitsmanagementsystems (ISMS)
 - Regelmäßige Risikobewertungen
 - Schutzmaßnahmen für:
-    - Netzwerke
-    - Informationssysteme
-    - Cloud-Dienste
+  - Netzwerke
+  - Informationssysteme
+  - Cloud-Dienste
 
 Praxisbeispiel:
+
 - Ein mittelständisches Softwareunternehmen führt monatlich Penetrationstests und eine Inventarisierung aller Server durch, um Schwachstellen frühzeitig zu erkennen.
 
 ### 3.2 Sicherheitsmaßnahmen
@@ -43,6 +45,7 @@ Praxisbeispiel:
 - Sicherheitsupdates & Patch-Management
 
 Praxisbeispiel:
+
 - Ein Krankenhaus stellt sicher, dass Patientendaten verschlüsselt übertragen werden, regelmäßig Updates eingespielt werden und Mitarbeiter Zwei-Faktor-Authentifizierung nutzen.
 
 ### 3.3 Meldung von Sicherheitsvorfällen
@@ -51,6 +54,7 @@ Praxisbeispiel:
 - Zusammenarbeit mit nationalen Computer Emergency Response Teams (CERTs)
 
 Praxisbeispiel:
+
 - Ein IT-Dienstleister entdeckt Ransomware auf einem Kundensystem und meldet den Vorfall innerhalb eines Tages an das nationale CERT.
 
 ### 3.4 Lieferketten-Sicherheit
@@ -59,17 +63,18 @@ Praxisbeispiel:
 - Anforderungen an Cloud-Provider, Softwarehersteller und externe Dienstleister
 
 Praxisbeispiel:
+
 - Ein Finanzunternehmen prüft alle Software-Lieferanten auf Sicherheitsstandards, bevor neue Anwendungen in Produktion gehen.
 
 ## 4. Umsetzung im Arbeitsalltag
 
-| Bereich | Praktisches Beispiel |
-| :--- | :--- |
+| Bereich           | Praktisches Beispiel                                                                                                                |
+| :---------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
 | E-Mail-Sicherheit | Mitarbeiter erhalten Schulungen zum Erkennen von Phishing-Mails,<br>eingehende E-Mails werden durch eine Security Gateway gefiltert |
-| IT-Infrastruktur | Regelmäßige Updates von Betriebssystemen und Datenbanken,<br>Netzwerksegmentierung zur Isolation kritischer Systeme |
-| Backup & Recovery | Tägliche Backups in verschlüsselten Cloud-Speichern,<br>regelmäßige Wiederherstellungstests |
-| Cloud-Dienste | Multi-Faktor-Authentifizierung,<br>SLA mit Sicherheitsklauseln für Cloud-Provider |
-| Incident Response | Einrichtung eines Notfallplans mit klaren Verantwortlichkeiten,<br>Durchführung von jährlichen Simulationen von Cyberangriffen |
+| IT-Infrastruktur  | Regelmäßige Updates von Betriebssystemen und Datenbanken,<br>Netzwerksegmentierung zur Isolation kritischer Systeme                 |
+| Backup & Recovery | Tägliche Backups in verschlüsselten Cloud-Speichern,<br>regelmäßige Wiederherstellungstests                                         |
+| Cloud-Dienste     | Multi-Faktor-Authentifizierung,<br>SLA mit Sicherheitsklauseln für Cloud-Provider                                                   |
+| Incident Response | Einrichtung eines Notfallplans mit klaren Verantwortlichkeiten,<br>Durchführung von jährlichen Simulationen von Cyberangriffen      |
 
 ## 5. Kontrolle und Sanktionen
 
@@ -78,6 +83,7 @@ Praxisbeispiel:
 - Unternehmen müssen Compliance nachweisen
 
 Praxisbeispiel:
+
 - Ein Energieversorger wird geprüft, ob er NIS2-konforme IT-Sicherheitsrichtlinien und Vorfallberichte nachweisen kann.
 
 ## 6. Vorteile für Unternehmen
