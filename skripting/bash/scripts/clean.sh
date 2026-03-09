@@ -22,14 +22,13 @@ check_root() {
 #  Clean the host
 # ──────────────────────────────────────────────
 do_clean() {
-    echo -e "########################## \n"
+    echo -e "######### MEMORY ######### \n"
     free -h
+    echo -e "\n"
     echo -e "########################## \n"
 
     # Clean apt cache
-    apt clean -y -qq
-    apt -s clean -y -qq
-    apt clean all -y -qq
+    apt clean
     echo -e "${OK} APT CLEAN ############## \n"
 
     # Remove obsolete packages
@@ -38,58 +37,27 @@ do_clean() {
 
     # Remove unused packages
     apt autoremove -y -qq
+    echo -e "\n"
     echo -e "${OK} AUTOREMOVE ############# \n"
 
-
-
-
-
-
-
-
-
-
-    # Remove Log files older 60 days
-    find /var/log/ -type f -name "*.gz" -mtime +60 rm -f {} +
-    echo -e "${OK} LOG CLEAN ############## \n"
-
     # Remove Thumbnail Cache
-    rm -rf ~/.cache/thumbnails/*
+    for dir in /home/*/.cache/thumbnails /root/.cache/thumbnails; do
+        rm -rf "${dir:?}"/*
+    done
     echo -e "${OK} THUMBS CACHE CLEAN ##### \n"
 
     # Empty trash
-    rm -rf /home/*/.local/share/Trash/*/**
-    rm -rf /root/.local/share/Trash/*/**
+    rm -rf /home/*/.local/share/Trash/{files,info}/*
+    rm -rf /root/.local/share/Trash/{files,info}/*
     echo -e "${OK} TRASH CLEAN ############ \n"
 
+    # Remove Log files older 90 days
+    find /var/log/ -type f -name "*.gz" -mtime +90 -exec rm -f {} +
+    echo -e "${OK} LOG CLEAN ############## \n"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    echo -e "########################## \n"
+    echo -e "######### MEMORY ######### \n"
     free -h
+    echo -e "\n"
     echo -e "########################## \n"
 }
 
