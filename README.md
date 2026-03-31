@@ -14,44 +14,30 @@
   - [C# (.NET)](./coding/c#/README.md)
 
 - Skripting
-  - [Bash](./skripting/bash/README.md)
+  - [bash](./skripting/bash/README.md)
   - [cmd](./skripting/cmd/README.md)
   - [PowerShell](./skripting/powershell/README.md)
-  - [Bzshh](./skripting/zsh/README.md)
+  - [zsh](./skripting/zsh/README.md)
 
 - Server & Infrastruktur
   - Virtualisierung
-    - [VMware ESXi](./server/vmware/README.md)
-    - [Microsoft Hyper-V](./server/hyper-v/README.md)
-    - [Proxmox VE](./server/proxmox/README.md)
+    - [VMware ESXi](./server/virtual/vmware/README.md)
+    - [Microsoft Hyper-V](./server/virtual/hyper-v/README.md)
+    - [Proxmox VE](./server/virtual/proxmox/README.md)
   - Betriebssysteme (Server)
-    - Linux (Ubuntu)
-      - Installation
-      - Konfiguration
-      - Systemdienste & Daemons
-        - systemd
-        - ssh
-        - cron
-        - ntpd
-    - Windows Server
-      - Installation
-      - Konfiguration
-      - Systemdienste & Daemons
-      - Web- & Anwendungsdienste
+    - [Linux (Ubuntu)](./server/os/linux/README.md)
+      - [Services](./server/os/linux/SERVICES.md)
+      - [Applications](./server/os/linux/APPS.md)
+    - [Windows Server](./server/os/windows/README.md)
   - Containerisierung
-    - [Docker](./server/tools/docker/README.md)
+    - [Docker](./server/container/docker/README.md)
   - Automatisierung & Konfigurationsmanagement
-    - [Ansible](./server/tools/ansible/README.md)
+    - [Ansible](./server/automation/ansible/README.md)
   - Monitoring & Logging
-    - [Checkmk](./server/tools/checkmk/README.md)
-    - [Prometheus](./server/tools/prometheus/README.md)
-    - [Grafana](./server/tools/grafana/README.md)
-  - Web- & Anwendungsdienste
-    - Webserver
-      - Apache
-      - Nginx
-      - Caddy
-    - PHP
+    - [Checkmk](./server/monitoring/checkmk/README.md)
+    - [Cockpit](./server/monitoring/cockpit/README.md)
+    - [Prometheus](./server/monitoring/prometheus/README.md)
+    - [Grafana](./server/monitoring/grafana/README.md)
 
 - Desktop & Client-Systeme
   - [Linux (Ubuntu)](./desktop/linux/README.md)

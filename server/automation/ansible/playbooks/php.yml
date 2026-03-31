@@ -1,0 +1,34 @@
+---
+- hosts: ubuntu
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: TASK-1 - Install dependencies for adding PPAs
+      ansible.builtin.apt:
+        name: software-properties-common
+        state: present
+
+    - name: TASK-2 - Add PPA for PHP
+      ansible.builtin.apt_repository:
+        repo: ppa:ondrej/php
+        state: present
+        update_cache: yes
+
+    - name: TASK-3 - Install PHP and related modules
+      ansible.builtin.apt:
+        name:
+          - php
+          - php-mysql
+          - php-cli
+          - php-common
+          - php-mbstring
+          - php-xml
+          - php-json
+          - php-curl
+        state: latest
+
+    - name: TASK-4 - Restart Apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
