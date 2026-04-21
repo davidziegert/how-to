@@ -99,10 +99,12 @@ install_r() {
         return 1
     fi
 
-    # English keyboard
-    locale-gen en_US.UTF-8
-    # German keyboard
-    #locale-gen de_DE.UTF-8
+    # Ensure the locales package is installed:
+    sudo apt install -y locales
+    # Generate the English (US) locale:
+    sudo locale-gen en_US.UTF-8
+    # Generate the German (DE) locale:
+    sudo locale-gen de_DE.UTF-8
 
     # Installing Quarto
     local file="/tmp/quarto-linux-amd64.deb"

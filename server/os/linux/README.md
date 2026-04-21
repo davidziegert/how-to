@@ -476,6 +476,17 @@ sudo ufw status numbered
 sudo systemctl status fail2ban
 ```
 
+## Password Asterix
+
+```bash
+sudo visudo
+```
+
+```
+# Locate the line that reads Defaults env_reset and modify it to include pwfeedback
+Defaults env_reset,pwfeedback
+```
+
 ## CleanUp
 
 ```bash

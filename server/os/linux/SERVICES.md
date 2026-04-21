@@ -2,7 +2,7 @@
 
 ## Applications
 
-### MOTD
+### MOTD (figlet)
 
 ```bash
 sudo apt install -y figlet
@@ -14,6 +14,78 @@ sudo nano /etc/update-motd.d/99-custom
 #!/bin/bash
 printf "You're connected to: \n"
 figlet "$(hostname -s)"
+```
+
+### MOTD (landscape-sysinfo)
+
+```bash
+sudo apt install -y landscape-common
+sudo nano /etc/update-motd.d/50-custom-sysinfo
+```
+
+```
+#!/bin/bash
+clear
+
+ORANGE="\e[33m"
+RESET="\e[0m"
+
+print_line() {
+    width=20
+    printf "%-*s %s\n" "$width" "$1" "$2"
+}
+
+printf "${ORANGE}"
+printf "\n"
+printf "╔════════════════════════════════════════════╗ \n"
+printf "║ \n"
+printf "║ System Info — $(date '+%a %d %b %Y  %H:%M:%S') \n"
+printf "║ \n"
+printf "║ \n"
+
+# Hostname
+HOST=$(hostname)
+print_line "║ Hostname:" "$HOST"
+
+# IP Address
+IP=$(hostname -I | awk '{print $1}')
+print_line "║ IP Address:" "$IP"
+
+# Uptime
+UPTIME=$(uptime -p | sed 's/up //')
+print_line "║ Uptime:" "$UPTIME"
+
+# CPU Usage
+CPU=$(top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8 "%"}')
+print_line "║ CPU Usage:" "$CPU"
+
+# Memory Usage
+MEM_USED=$(free -h | awk '/Mem:/ {print $3}')
+MEM_TOTAL=$(free -h | awk '/Mem:/ {print $2}')
+print_line "║ Memory Usage:" "$MEM_USED | $MEM_TOTAL"
+
+# Disk Usage (/)
+DISK=$(df -h / | awk 'NR==2 {print $3 " | " $2 " (" $5 ")"}')
+print_line "║ Disk Usage:" "$DISK"
+
+# Available Updates
+if command -v apt >/dev/null 2>&1; then
+    UPDATES=$(apt list --upgradable 2>/dev/null | grep -c upgradable)
+    print_line "║ Updates:" "$UPDATES"
+else
+    print_line "║ Updates:" "N/A"
+fi
+
+printf "║ \n"
+printf "╚════════════════════════════════════════════╝ \n"
+printf "\n"
+printf "${RESET}"
+```
+
+```bash
+sudo chmod +x /etc/update-motd.d/50-custom-sysinfo
+sudo chmod -x /etc/update-motd.d/50-landscape-sysinfo
+sudo run-parts /etc/update-motd.d/
 ```
 
 ### Samba
