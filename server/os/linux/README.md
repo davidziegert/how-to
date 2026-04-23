@@ -382,7 +382,7 @@ sudo nano /etc/host.conf
 
 ```
 order bind,hosts
-nospoof on
+multi on
 ```
 
 ```bash
