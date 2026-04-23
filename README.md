@@ -28,6 +28,7 @@
     - [Linux (Ubuntu)](./server/os/linux/README.md)
       - [Services](./server/os/linux/SERVICES.md)
       - [Applications](./server/os/linux/APPS.md)
+      - [CIS Hardening Level 1](./server/os/linux/CISLVL1.md)
     - [Windows Server](./server/os/windows/README.md)
   - Containerisierung
     - [Docker](./server/container/docker/README.md)
