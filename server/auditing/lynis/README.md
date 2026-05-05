@@ -1,0 +1,3 @@
+# Lynis
+
+## Installation

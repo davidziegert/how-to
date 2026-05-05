@@ -400,7 +400,7 @@ sudo systemctl restart irqbalance 2>/dev/null || true
 sudo apt install -y ufw
 
 # Create log file (note: likely typo, should be ufw.log)
-sudo touch /var/log/uwf.log
+sudo touch /var/log/ufw.log
 
 # Deny all incoming connections by default
 sudo ufw default deny incoming

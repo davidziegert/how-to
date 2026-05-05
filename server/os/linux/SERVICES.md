@@ -2,6 +2,136 @@
 
 ## Applications
 
+### MOTD (fastfetch)
+
+```bash
+sudo add-apt-repository ppa:zhangsongcui3371/fastfetch
+sudo apt update
+sudo apt install fastfetch
+sudo fastfetch --gen-config
+sudo nano /root/.config/fastfetch/config.jsonc
+```
+
+```json
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+
+  "logo": {
+    "type": "auto",
+    "width": 30,
+    "padding": {
+      "top": 0,
+      "left": 2,
+      "right": 1
+    }
+  },
+
+  "modules": [
+    {
+      "type": "custom",
+      "format": "┌─────────────────────────Hardware─────────────────────────┐",
+      "outputColor": "red"
+    },
+    {
+      "type": "host",
+      "key": "│ Host",
+      "keyColor": "red"
+    },
+    {
+      "type": "localip",
+      "key": "│ IP",
+      "keyColor": "red"
+    },
+    {
+      "type": "cpu",
+      "key": "│ CPU",
+      "keyColor": "red"
+    },
+    {
+      "type": "memory",
+      "key": "│ RAM",
+      "keyColor": "red",
+      "showPeCoreCount": true
+    },
+    {
+      "type": "disk",
+      "key": "│ Disk",
+      "keyColor": "red",
+      "showPeCoreCount": true
+    },
+    {
+      "type": "custom",
+      "format": "└──────────────────────────────────────────────────────────┘",
+      "outputColor": "red"
+    },
+
+    "break",
+
+    {
+      "type": "custom",
+      "format": "┌─────────────────────────Software─────────────────────────┐",
+      "outputColor": "green"
+    },
+    {
+      "type": "os",
+      "key": "│ OS",
+      "keyColor": "green"
+    },
+    {
+      "type": "kernel",
+      "key": "│ Kernel",
+      "keyColor": "green"
+    },
+    {
+      "type": "packages",
+      "key": "│ Packages",
+      "keyColor": "green"
+    },
+    {
+      "type": "terminal",
+      "key": "│ Terminal",
+      "keyColor": "green"
+    },
+    {
+      "type": "shell",
+      "key": "│ Shell",
+      "keyColor": "green"
+    },
+    {
+      "type": "custom",
+      "format": "└──────────────────────────────────────────────────────────┘",
+      "outputColor": "green"
+    },
+
+    "break",
+
+    {
+      "type": "custom",
+      "format": "┌──────────────────────Miscellaneous───────────────────────┐",
+      "outputColor": "yellow"
+    },
+    {
+      "type": "uptime",
+      "key": "│ Uptime",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "datetime",
+      "key": "│ Date & Time",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "custom",
+      "format": "└──────────────────────────────────────────────────────────┘",
+      "outputColor": "yellow"
+    },
+
+    "break",
+    "break"
+  ]
+}
+```
+
 ### MOTD (figlet)
 
 ```bash

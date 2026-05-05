@@ -39,6 +39,8 @@
     - [Cockpit](./server/monitoring/cockpit/README.md)
     - [Prometheus](./server/monitoring/prometheus/README.md)
     - [Grafana](./server/monitoring/grafana/README.md)
+  - Auditing
+    - [Lynis](./server/auditing/lynis/README.md)
 
 - Desktop & Client-Systeme
   - [Linux (Ubuntu)](./desktop/linux/README.md)
